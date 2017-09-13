@@ -17,6 +17,13 @@ export class UserActions {
     };
   }
 
+  static LOGIN = '[User] Login';
+  login(): Action {
+    return {
+      type: UserActions.LOGIN
+    };
+  }
+  
   static LOGOUT = '[User] Logout';
   logout(): Action {
     return {

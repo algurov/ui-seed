@@ -11,6 +11,11 @@ export class UserService extends RequestBase {
     super(http);
   }
 
+  login(): Observable<string> {
+      return this.http.get(`${API_BASE_URL}/login`, this.optionsNoPre)
+      .map(res => res.text());
+  }
+
   logout(): Observable<string> {
     return this.http.get(`${API_BASE_URL}/logout`, this.optionsNoPre)
       .map(res => res.text());

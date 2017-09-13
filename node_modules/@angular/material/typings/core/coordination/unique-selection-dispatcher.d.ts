@@ -1,3 +1,10 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { Optional } from '@angular/core';
 export declare type UniqueSelectionDispatcherListener = (id: string, name: string) => void;
 /**
@@ -17,10 +24,15 @@ export declare class UniqueSelectionDispatcher {
      * @param name Name of the item.
      */
     notify(id: string, name: string): void;
-    /** Listen for future changes to item selection. */
-    listen(listener: UniqueSelectionDispatcherListener): void;
+    /**
+     * Listen for future changes to item selection.
+     * @return Function used to deregister listener
+     **/
+    listen(listener: UniqueSelectionDispatcherListener): () => void;
 }
+/** @docs-private */
 export declare function UNIQUE_SELECTION_DISPATCHER_PROVIDER_FACTORY(parentDispatcher: UniqueSelectionDispatcher): UniqueSelectionDispatcher;
+/** @docs-private */
 export declare const UNIQUE_SELECTION_DISPATCHER_PROVIDER: {
     provide: typeof UniqueSelectionDispatcher;
     deps: Optional[][];

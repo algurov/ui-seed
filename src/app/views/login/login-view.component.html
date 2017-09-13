@@ -1,0 +1,77 @@
+<div fxLayout="column" class="main-container">
+  <div fxLayout="row" fxFlex="30%" class="header">
+    <div fxFlex="45%"></div>
+    <i class="header-icon md-light material-icons">face</i>
+    <div fxFlex="45%"></div>
+  </div>
+  <div fxLayout="row" fxFlex="70%">
+    <div fxLayout="row" fxFlex="100%">
+      <div fxFlex="30%"></div>
+      <div fxLayout="column" fxFlex="50%">
+        <md-tab-group (selectChange)="setSelectedTab($event)"  fxFlex="60%" fxFlexOffset="5%">
+          <md-tab label="{{stringService.get('LOGIN_TITLE')}}">
+            <div fxLayout="column">
+              <form [formGroup]="loginForm" fxFlexOffset="10%" (ngSubmit)="login()">
+                <div fxLayout="column">
+                  <md-form-field fxFlex>
+                    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+                    <input formControlName="login" mdInput placeholder=
+                    "{{stringService.get('LOGIN_FIELD_TITLE')}}"/>
+                  </md-form-field>
+                  <md-form-field fxFlex>
+                    <md-error>{{stringService.get('WRONG_EMAIL_ERROR')}}</md-error>
+                    <input formControlName="password" type="password" mdInput placeholder=
+                    "{{stringService.get('PASSWORD')}}"/>
+                  </md-form-field>
+                </div>
+                <button #loginSubmit type="submit" style="visibility: hidden;"></button>
+              </form>
+            </div>
+          </md-tab>
+          <md-tab label="{{stringService.get('REGISTRATION_TITLE')}}">
+            <form [formGroup]="registrationForm" fxLayout="column">
+              <md-form-field fxFlex="100%" class="field">
+                <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+                <input formControlName="login" mdInput placeholder=
+                "{{stringService.get('LOGIN_FIELD_TITLE')}}"/>
+              </md-form-field>
+              <md-form-field fxFlex="100%" class="field">
+                <md-error>{{stringService.get('WRONG_EMAIL_ERROR')}}</md-error>
+                <input formControlName="email" mdInput placeholder=
+                "{{stringService.get('EMAIL')}}"/>
+              </md-form-field>
+              <md-form-field fxFlex="100%" class="field">
+                <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+                <input type="password" formControlName="password" mdInput placeholder=
+                "{{stringService.get('PASSWORD')}}"/>
+              </md-form-field>
+              <md-form-field fxFlex="100%" class="field">
+                <md-error>{{stringService.get('PASSWORD_MISMATCH_ERROR')}}</md-error>
+                <input type="password" formControlName="passwordConfirm" mdInput placeholder=
+                "{{stringService.get('CONFIRM_PASSWORD')}}"/>
+              </md-form-field>
+              <button #registrationSubmit type="submit" style="visibility: hidden;"></button>
+            </form>
+          </md-tab>
+          <md-tab label="{{stringService.get('FORGOT_TITLE')}}">
+            <div fxLayout="column">
+              <form [formGroup]="forgotForm" fxLayout="column" fxFlexOffset="15%">
+                <md-form-field fxFlex="100%" class="field">
+                  <md-error>{{stringService.get('WRONG_EMAIL_ERROR')}}</md-error>
+                  <input formControlName="email" mdInput placeholder=
+                  "{{stringService.get('EMAIL')}}"/>
+                </md-form-field>
+                <button #forgotSubmit type="submit" style="visibility: hidden;"></button>
+              </form>
+            </div>
+          </md-tab>
+         </md-tab-group>
+         <form fxFlex="nogrow" fxFlexOffset="0%" fxLayout="column">
+           <button class="field login-button" fxFlex="grow" color="primary" md-button
+           (click)="buttonClicked()">{{getButtonTitle()}}</button>
+         </form>
+       </div>
+       <div fxFlex="30%"></div>
+     </div>
+    </div>
+    </div>

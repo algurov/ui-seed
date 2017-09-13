@@ -1,7 +1,15 @@
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
 import { AnimationTriggerMetadata } from '@angular/animations';
 /**
  * Below are all the animations for the md-menu component.
- * Animation duration and timing values are based on AngularJS Material.
+ * Animation duration and timing values are based on:
+ * https://material.io/guidelines/components/menus.html#menus-usage
  */
 /**
  * This animation controls the menu panel's entry and exit from the page.

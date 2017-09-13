@@ -13,5 +13,10 @@ export const views: Object[] = [
     name: 'Bad Link',
     icon: 'error',
     link: ['wronglink']
+  },
+  {
+    name: 'Login',
+    icon: 'home',
+    link: ['login']
   }
 ];
