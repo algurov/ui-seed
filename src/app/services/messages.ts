@@ -11,6 +11,8 @@ export const Messages = {
   "FORGOT_BTN": "ВОССТАНОВИТЬ ПАРОЛЬ",
   "REQUIRED_FIELD_ERROR": "Обязательное поле",
   "PASSWORD_MISMATCH_ERROR": "Пароли не совпадают",
-  "WRONG_EMAIL_ERROR": "Неверный e-mail"
+  "WRONG_EMAIL_ERROR": "Неверный e-mail",
+  "SET_PASSWORD_TITLE": "Установите новый пароль",
+  "SET_PASSWORD_BTN": "УСТАНОВИТЬ"
 
 };

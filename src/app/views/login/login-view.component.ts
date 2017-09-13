@@ -36,10 +36,10 @@ export class LoginViewComponent {
     this.registrationForm = this.fb.group({
       login: ['', Validators.required],
       email: ['', Validators.email],
-      password: ['', Validators.required],
-      passwordConfirm: ['']
+      // password: ['', Validators.required],
+      // passwordConfirm: ['']
     }, {
-      validator: PasswordValidation.MatchPassword
+      // validator: PasswordValidation.MatchPassword
     });
   }
 

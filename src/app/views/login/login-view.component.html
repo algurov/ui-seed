@@ -30,7 +30,9 @@
             </div>
           </md-tab>
           <md-tab label="{{stringService.get('REGISTRATION_TITLE')}}">
-            <form [formGroup]="registrationForm" fxLayout="column">
+            <div fxLayout="column">
+            <form [formGroup]="registrationForm" fxFlexOffset="3em" fxLayout="column">
+              <div fxLayout="column">
               <md-form-field fxFlex>
                 <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
                 <input formControlName="login" mdInput placeholder=
@@ -41,7 +43,7 @@
                 <input formControlName="email" mdInput placeholder=
                 "{{stringService.get('EMAIL')}}"/>
               </md-form-field>
-              <md-form-field>
+              <!-- <md-form-field>
                 <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
                 <input type="password" formControlName="password" mdInput placeholder=
                 "{{stringService.get('PASSWORD')}}"/>
@@ -50,9 +52,11 @@
                 <md-error>{{stringService.get('PASSWORD_MISMATCH_ERROR')}}</md-error>
                 <input type="password" formControlName="passwordConfirm" mdInput placeholder=
                 "{{stringService.get('CONFIRM_PASSWORD')}}"/>
-              </md-form-field>
+              </md-form-field> -->
               <button #registrationSubmit type="submit" style="visibility: hidden;"></button>
+            </div>
             </form>
+          </div>
           </md-tab>
           <md-tab label="{{stringService.get('FORGOT_TITLE')}}">
             <div fxLayout="column">

@@ -27,16 +27,9 @@ import { AppComponent } from './app.component';
 
 import { AppState } from './reducers';
 
-import { PanelComponent } from './widget/panel/panel.component';
-import { LoginViewComponent } from './views/login/login-view.component';
-import { MainViewComponent } from './views/main/main-view.component';
-
 @NgModule({
   declarations: [
     AppComponent,
-    PanelComponent,
-    LoginViewComponent,
-    MainViewComponent,
     APP_DECLARATIONS
   ],
   entryComponents: [APP_ENTRY_COMPONENTS],

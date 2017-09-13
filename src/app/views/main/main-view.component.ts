@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { views } from '../../app-nav-views';
 import { MOBILE } from '../../services/constants';
-import { PanelComponent } from '../../widget/panel/panel.component';
 
 @Component({
   selector: 'main-view',

@@ -11,9 +11,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { rootReducer } from './reducers';
-import { StoreDevToolsModule } from './features/store-devtools.module';
+//import { StoreDevToolsModule } from './features/store-devtools.module';
 import { UserEffects } from './user/user.effects';
-import { FlexLayoutModule } from "@angular/flex-layout";
+import { FlexLayoutModule } from '@angular/flex-layout';
+// import { PasswordViewComponent } from './views/password/password-view.component';
+// import { LoginViewComponent } from './views/login/login-view.component';
+// import { MainViewComponent } from './views/main/main-view.component';
 
 const STORE_DEV_TOOLS_IMPORTS = [];
 if (ENV === 'development' && !AOT &&
@@ -28,6 +31,9 @@ if (ENV === 'development' && !AOT &&
 ]);
 
 export const APP_IMPORTS = [
+  // LoginViewComponent,
+  // MainViewComponent,
+  // PasswordViewComponent,
   BrowserAnimationsModule,
   EffectsModule.run(UserEffects),
   MaterialModule,
@@ -37,5 +43,5 @@ export const APP_IMPORTS = [
   RouterStoreModule.connectRouter(),
   StoreModule.provideStore(rootReducer),
   STORE_DEV_TOOLS_IMPORTS,
-  StoreDevToolsModule
+  //StoreDevToolsModule
 ];
