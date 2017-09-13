@@ -13,6 +13,9 @@
 .mat-tab-label {
   min-width: 80px !important;
 }
+.tabs {
+  min-height: 290px;
+}
  .header {
    background-color: #3498DB;
  }
@@ -24,6 +27,7 @@
  .login-button {
    background-color: #3498DB;
    color: white;
+   min-height: 35px;
  }
 
  .header-icon {
