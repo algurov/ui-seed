@@ -31,7 +31,7 @@
           </md-tab>
           <md-tab label="{{stringService.get('REGISTRATION_TITLE')}}">
             <div fxLayout="column">
-            <form [formGroup]="registrationForm" fxFlexOffset="3em" fxLayout="column">
+            <form [formGroup]="registrationForm" fxFlexOffset="3em" fxLayout="column" (ngSubmit)="registration(user)">
               <div fxLayout="column">
               <md-form-field fxFlex>
                 <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>

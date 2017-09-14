@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormGroup} from '@angular
 import { PasswordValidation } from './match-password';
 import { StringService } from '../../services/string-service';
 import { UserService } from '../../user/user.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'login-view',
@@ -53,12 +54,19 @@ export class LoginViewComponent {
 
   public login() {
     if (this.loginForm.valid) {
+      let user;
+       this.userService.getById(this.loginForm.get('login')).subscribe(res => user);
+      console.log(user);
       console.log('login action');
     }
   }
 
   public registration() {
     if (this.registrationForm.valid) {
+      let user = {
+        password: this.registrationForm.get('login').value
+      };
+      this.userService.registration(user);
       console.log('regitration action');
     }
   }
