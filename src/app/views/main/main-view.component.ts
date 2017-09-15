@@ -1,6 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MainService } from '../../services/main.service';
+import { MdSidenav } from '@angular/material';
 
 @Component({
   selector: 'main-view',
@@ -10,9 +12,26 @@ import { AuthService } from '../../services/auth.service';
 })
 export class MainViewComponent {
 
-  constructor(private auth : AuthService) {}
+  @ViewChild('sidenav') side : MdSidenav;
+  sidenavShown: boolean;
+  content: boolean = true;
+  content2: boolean = false;
+  constructor(private auth : AuthService, private router: Router, private main : MainService) {
+    this.main.toggleSidenav.subscribe(value => this.toggle(value));
+  }
 
+  toggle(value) {
+    this.sidenavShown = !value;
+    this.side.toggle();
+  }
   logout() {
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
     this.auth.logout();
+  }
+  changeSidenavContent() {
+    this.content = !this.content;
+    this.content2 = !this.content2;
+    this.side.close();
   }
 }

@@ -3,11 +3,13 @@ import { StringService } from './services/string.service';
 import { DialogService } from './services/dialog.service';
 import { AuthGuard } from './services/auth.guard';
 import { AuthService } from './services/auth.service';
+import { MainService } from './services/main.service';
 
 export const APP_PROVIDERS = [
   UserService,
   StringService,
   AuthGuard,
   DialogService,
-  AuthService
+  AuthService,
+  MainService
 ];
