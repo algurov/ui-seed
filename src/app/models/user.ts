@@ -7,6 +7,5 @@ export class User{
   userFamilyName: string;
   phone: string;
   password: string;
-  roles: Array<string>;
-  constructor() {}
+  roles: Role[];
 }

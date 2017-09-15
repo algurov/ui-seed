@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import { MdInputModule, MdFormFieldModule, MdButtonModule, MdInput } from '@angular/material';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { PasswordValidation } from './match-password';
-import { StringService } from '../../services/string-service';
-import { UserService } from '../../user/user.service';
+import { StringService } from '../../services/string.service';
+import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'login-view',
@@ -19,6 +20,8 @@ export class LoginViewComponent {
   loginForm : FormGroup;
   forgotForm : FormGroup;
   registrationForm : FormGroup;
+  users: User[];
+  user: User;
 
   public selectedTab : number = this.TABS.LOGIN;
 
@@ -26,7 +29,8 @@ export class LoginViewComponent {
   @ViewChild('registrationSubmit')registrationSubmit : ElementRef;
   @ViewChild('forgotSubmit')forgotSubmit : ElementRef;
 
-  constructor(private stringService: StringService, public fb: FormBuilder, private router: Router, private userService: UserService) {
+  constructor(private stringService: StringService, public fb: FormBuilder, private router: Router, private userService: UserService,
+    private dlgService: DialogService) {
     this.loginForm = this.fb.group({
       password: ['', Validators.required],
       login: ['', Validators.required]
@@ -54,9 +58,13 @@ export class LoginViewComponent {
 
   public login() {
     if (this.loginForm.valid) {
-      let user;
-       this.userService.getById(this.loginForm.get('login')).subscribe(res => user);
-      console.log(user);
+
+       this.userService.getUserById(this.loginForm.get('login')).subscribe(
+         res => {
+           this.user = res;
+           console.log(this.users);
+         });
+
       console.log('login action');
     }
   }
@@ -66,7 +74,8 @@ export class LoginViewComponent {
       let user = {
         password: this.registrationForm.get('login').value
       };
-      this.userService.registration(user);
+      this.userService.registration(user).subscribe(data => console.log(data),
+        err => this.dlgService.showMessageDlg('Error', err));
       console.log('regitration action');
     }
   }

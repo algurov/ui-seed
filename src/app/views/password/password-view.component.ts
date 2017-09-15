@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { MdInputModule, MdFormFieldModule, MdButtonModule, MdInput } from '@angular/material';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { PasswordValidation } from '../login/match-password';
-import { StringService } from '../../services/string-service';
-import { UserService } from '../../user/user.service';
+import { StringService } from '../../services/string.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'password-view',

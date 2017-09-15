@@ -1,11 +1,13 @@
-import { UserActions } from './user/user.actions';
-import { UserService } from './user/user.service';
-import { StringService } from './services/string-service';
+import { UserService } from './services/user.service';
+import { StringService } from './services/string.service';
+import { DialogService } from './services/dialog.service';
 import { AuthGuard } from './services/auth.guard';
+import { AuthService } from './services/auth.service';
 
 export const APP_PROVIDERS = [
-  UserActions,
   UserService,
   StringService,
-  AuthGuard
+  AuthGuard,
+  DialogService,
+  AuthService
 ];

@@ -12,7 +12,7 @@ import { useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { rootReducer } from './reducers';
 //import { StoreDevToolsModule } from './features/store-devtools.module';
-import { UserEffects } from './user/user.effects';
+//import { UserEffects } from './user/user.effects';
 import { FlexLayoutModule } from '@angular/flex-layout';
 // import { PasswordViewComponent } from './views/password/password-view.component';
 // import { LoginViewComponent } from './views/login/login-view.component';
@@ -35,7 +35,7 @@ export const APP_IMPORTS = [
   // MainViewComponent,
   // PasswordViewComponent,
   BrowserAnimationsModule,
-  EffectsModule.run(UserEffects),
+  //EffectsModule.run(UserEffects),
   MaterialModule,
   ReactiveFormsModule,
   FormsModule,

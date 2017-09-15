@@ -1,7 +1,11 @@
 <div fxLayout="row" class="main-container">
-  <div fxFlex="20%" style="background-color:red;"></div>
+  <div fxFlex="20%" class="left-panel"></div>
   <div fxLayout="column" fxFlex="80%">
-    <div fxFlex="12%" style="background-color:black;"></div>
+    <div fxLayout="row" fxFlex="12%" class="toolbar">
+      <div fxFlex fxLayoutAlign="end center">
+          <button type="button" (click)="logout()">Logout</button>
+      </div>
+    </div>
     <div fxFlex="88%">
       <router-outlet></router-outlet>
     </div>
