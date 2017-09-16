@@ -1,28 +1,32 @@
 <div fxLayout="row" class="main-container">
-  <div fxFlex="5%" class="left-panel">
+  <div fxFlex="6%" class="left-panel">
     <panel></panel>
   </div>
-  <div fxFlex="1 1 95%">
-    <md-sidenav-container class="example-sidenav-fab-container">
-        <md-sidenav *ngIf="content" #sidenav mode="side" opened="true">
-            <button md-mini-fab (click)="sidenav.toggle()">close1</button>
-        </md-sidenav>
-        <md-sidenav *ngIf="content2" #sidenav mode="side" opened="true">
-            <button md-mini-fab (click)="sidenav.toggle()">close2</button>
-            sdsdfsdf
-        </md-sidenav>
-        <div fxLayout="column" class="main-container">
-          <div fxLayout="row" fxFlex="0 1 15%" class="toolbar">
-            <div fxFlex="70%">Breadcrumbs</div>
-            <div fxFlex="1 1 30%" fxLayoutAlign="end center">
-                <button type="button" (click)="logout()">Logout</button>
+  <div fxFlex="1 1 94%" fxLayout="column">
+    <md-sidenav-container fxFlex="1 1 100%" class="example-sidenav-fab-container">
+        <md-sidenav #sidenav mode="side" opened="true" class="side">
+            <div fxLayout="column" style="width:100%;">
+              <div class="toolbar-2"></div>
+              <div #content></div>
             </div>
-          </div>
-          <div fxFlex="85%">
-            <button (click)="changeSidenavContent()">magic</button>
-            <router-outlet></router-outlet>
+        </md-sidenav>
+        <div fxLayout="row" class="main-container">
+          <div fxLayout="column" fxFlex="1 1 100%">
+            <div fxLayout="row">
+              <div fxLayout="row" fxFlex="grow" class="toolbar">
+                <div fxFlex="70%">Breadcrumbs</div>
+                <div fxFlex="1 1 30%" fxLayoutAlign="end center">
+                  <button type="button" (click)="logout()">Logout</button>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="row" fxFlex="1 1 100%">
+              <div fxFlex="1 1 100%" fxLayout="column">
+                <router-outlet></router-outlet>
+              </div>
           </div>
         </div>
+      </div>
     </md-sidenav-container>
   </div>
 

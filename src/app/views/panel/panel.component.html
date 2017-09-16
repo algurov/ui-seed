@@ -1,8 +1,9 @@
 <div fxLayout="column">
   <div fxFlex="10%" class="toolbar"></div>
   <div fxFlex="90%" class="main-container">
-    <div fxLayout="column" *ngFor="let item of navViews" fxLayoutAlign="center center">
-      <div fxLayoutAlign="center none" fxFlex="100%">{{item.name}}</div>
+    <div fxLayout="column" fxLayout.xs="column" class="menu-div" *ngFor="let item of navViews"
+      mdTooltip="{{stringService.get(item.name)}}" mdTooltipPosition="right" (click)="toggleSideNav(item.name, item.items)">
+        <i class="menu-icon md-light material-icons">{{item.icon}}</i>
     </div>
   </div>
 </div>

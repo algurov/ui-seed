@@ -6,7 +6,13 @@
 }
 .toolbar {
   border-bottom: 1px solid #aaa;
-  height: 3.5em
+  height: 80px !important;
+}
+
+.toolbar-2 {
+  border-bottom: 1px solid #aaa;
+  height: 79px !important;
+
 }
 .example-sidenav-fab-container {
   width: 100%;
@@ -15,6 +21,9 @@
 
 .example-sidenav-fab-container md-sidenav {
   width: 200px;
+}
+.side {
+  background-color: #F3F5F6;
 }
 
 .example-sidenav-fab-container .mat-sidenav-content,
@@ -31,4 +40,7 @@
   position: absolute;
   right: 20px;
   bottom: 10px;
+}
+mat-drawer-content {
+  height: 5em;
 }

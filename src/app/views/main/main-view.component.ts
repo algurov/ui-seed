@@ -13,15 +13,18 @@ import { MdSidenav } from '@angular/material';
 export class MainViewComponent {
 
   @ViewChild('sidenav') side : MdSidenav;
-  sidenavShown: boolean;
-  content: boolean = true;
-  content2: boolean = false;
+  @ViewChild('content') sideContent: ElementRef;
+
+  subItems: any;
+
   constructor(private auth : AuthService, private router: Router, private main : MainService) {
     this.main.toggleSidenav.subscribe(value => this.toggle(value));
   }
 
   toggle(value) {
-    this.sidenavShown = !value;
+    this.subItems = value.arr;
+    this.sideContent.nativeElement.innerHTML = value.html;
+    console.log(value);
     this.side.toggle();
   }
   logout() {
@@ -30,8 +33,6 @@ export class MainViewComponent {
     this.auth.logout();
   }
   changeSidenavContent() {
-    this.content = !this.content;
-    this.content2 = !this.content2;
     this.side.close();
   }
 }
