@@ -25,7 +25,8 @@ url: string ='http://82.202.236.172:9999/auth-server/oauth/authorize?response_ty
       // });
       // return this.http.post(`${API_BASE_URL}/login`, data, this.options)
       // .map(res => res.text());
-     return this.http.get(this.url).map(res => res.json());
+      this.options.withCredentials = true;
+     return this.http.get(this.url, this.options).map(res => res.json());
   }
 
 //TODO
