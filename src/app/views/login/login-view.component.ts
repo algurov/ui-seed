@@ -8,6 +8,7 @@ import { StringService } from '../../services/string.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 import { DialogService } from '../../services/dialog.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'login-view',
@@ -30,7 +31,7 @@ export class LoginViewComponent {
   @ViewChild('forgotSubmit')forgotSubmit : ElementRef;
 
   constructor(private stringService: StringService, public fb: FormBuilder, private router: Router, private userService: UserService,
-    private dlgService: DialogService) {
+    private dlgService: DialogService, private auth : AuthService) {
     this.loginForm = this.fb.group({
       password: ['', Validators.required],
       login: ['', Validators.required]
@@ -59,13 +60,14 @@ export class LoginViewComponent {
   public login() {
     if (this.loginForm.valid) {
 
-      localStorage.setItem('currentUser', 'user');
-      this.router.navigate(['/main']);
-       this.userService.getUserById(this.loginForm.get('login')).subscribe(
-         res => {
-           this.user = res;
-           console.log(this.users);
-         });
+      // localStorage.setItem('currentUser', 'user');
+      // this.router.navigate(['/main']);
+      //  this.userService.getUserById(this.loginForm.get('login')).subscribe(
+      //    res => {
+      //      this.user = res;
+      //      console.log(this.users);
+      //    });
+      this.auth.login('','').subscribe(res => console.log(res));
 
       console.log('login action');
     }
