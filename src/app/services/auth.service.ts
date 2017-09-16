@@ -10,11 +10,14 @@ export class AuthService extends RequestBase {
   constructor(public http: Http) {
     super(http);
   }
- url: string = 'http://localhost:9999/auth-server/oauth/authorize?'
-+ 'response_type=code&'
- +'client_id=client_seed&'
-+ 'state%3Dclient_id%3Dclient_seed%26goto%3Dhttp%3A%2F%2Flocalhost%3A8080%2Fseed%26gotoOnFail%3Dhttp%3A%2F%2Flocalhost%3A8080%2Fseed%3A8080%2Flogout&'
-+'redirect_uri=http://localhost:9998/oauth2-consumer/authorize';
+//  url: string = 'http://'+ localhost + ':9999/auth-server/oauth/authorize?'
+// + 'response_type=code&'
+//  +'client_id=client_seed&'
+// + 'state%3Dclient_id%3Dclient_seed%26goto%3Dhttp%3A%2F%2Flocalhost%3A8080%2Fseed%26gotoOnFail%3Dhttp%3A%2F%2Flocalhost%3A8080%2Fseed%3A8080%2Flogout&'
+// +'redirect_uri=http://localhost:9998/oauth2-consumer/authorize';
+
+url: string ='http://82.202.236.172:9999/auth-server/oauth/authorize?response_type=code&client_id=client_seed&state%3Dclient_id%3Dclient_seed%26goto%3Dhttp%3A%2F%2F82%2E202%2E236%2E172%3A3000%2Fmain%26gotoOnFail%3Dhttp%3A%2F%2F82%2E202%2E236%2E172%3A3000%2Flogin&redirect_uri=http://82.202.236.172:9998/oauth2-consumer/authorize';
+
   login(userLogin: string, userPassword: string): Observable<string> {
       // let data = JSON.stringify({
       //   login: userLogin,
