@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OAuthService } from 'angular2-oauth2/oauth-service';
 
 import { views } from './app-nav-views';
 import { MOBILE } from './services/constants';
@@ -21,12 +20,8 @@ export class AppComponent {
 
   constructor(
     public route: ActivatedRoute,
-    public router: Router,
-    public oauthService : OAuthService
+    public router: Router
   ) {
-    this.oauthService.loginUrl = 'http://82.202.236.172:9999/auth-server/oauth/authorize?response_type=code&client_id=client_seed&state=сlient_id%3Dclient_seed%26goto%3Dhttp%3A%2F%2F82%2E202%2E236%2E172%3A3000%2Fmain%26gotoOnFail%3Dhttp%3A%2F%2F82%2E202%2E236%2E172%3A3000%2Flogin&redirect_uri=http://82.202.236.172:9998/oauth2-consumer/authorize';
-    console.log('trying');
-    this.oauthService.initImplicitFlow();
    }
 
   activateEvent(event) {

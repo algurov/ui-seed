@@ -59,19 +59,7 @@ export class LoginViewComponent {
 
   public login() {
     if (this.loginForm.valid) {
-
-      // localStorage.setItem('currentUser', 'user');
-      // this.router.navigate(['/main']);
-      //  this.userService.getUserById(this.loginForm.get('login')).subscribe(
-      //    res => {
-      //      this.user = res;
-      //      console.log(this.users);
-      //    });
-      this.auth.login('','').subscribe(res => {
-        console.log(res);
-        //window.location.href=res.url;
-      });
-
+      this.auth.login('','');
       console.log('login action');
     }
   }
