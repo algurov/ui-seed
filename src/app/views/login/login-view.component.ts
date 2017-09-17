@@ -67,7 +67,10 @@ export class LoginViewComponent {
       //      this.user = res;
       //      console.log(this.users);
       //    });
-      this.auth.login('','').subscribe(res => console.log(res));
+      this.auth.login('','').subscribe(res => {
+        console.log(res);
+        window.location.href=res.url;
+      });
 
       console.log('login action');
     }
