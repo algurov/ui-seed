@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { API_BASE_URL } from '../services/constants';
 import { RequestBase } from '../services/request.base';
+
 
 @Injectable()
 export class AuthService extends RequestBase {
@@ -18,7 +19,7 @@ export class AuthService extends RequestBase {
 
 url: string ='http://82.202.236.172:9999/auth-server/oauth/authorize?response_type=code&client_id=client_seed&state=сlient_id%3Dclient_seed%26goto%3Dhttp%3A%2F%2F82%2E202%2E236%2E172%3A3000%2Fmain%26gotoOnFail%3Dhttp%3A%2F%2F82%2E202%2E236%2E172%3A3000%2Flogin&redirect_uri=http://82.202.236.172:9998/oauth2-consumer/authorize';
 
-  login(userLogin: string, userPassword: string): Observable<string> {
+  login(userLogin: string, userPassword: string): Observable<Response> {
       // let data = JSON.stringify({
       //   login: userLogin,
       //   password: userPassword
@@ -26,7 +27,7 @@ url: string ='http://82.202.236.172:9999/auth-server/oauth/authorize?response_ty
       // return this.http.post(`${API_BASE_URL}/login`, data, this.options)
       // .map(res => res.text());
       this.options.withCredentials = true;
-     return this.http.get(this.url, this.options).map(res => res.json());
+     return this.http.get(this.url, this.options);
   }
 
 //TODO
