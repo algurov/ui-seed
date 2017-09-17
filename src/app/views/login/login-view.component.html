@@ -13,7 +13,7 @@
           <md-tab label="{{stringService.get('LOGIN_TITLE')}}">
             <div fxLayout="column">
               <form [formGroup]="loginForm" fxFlexOffset="3em" (ngSubmit)="login()">
-                <div fxLayout="column">
+                <!-- <div fxLayout="column">
                   <md-form-field fxFlex>
                     <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
                     <input formControlName="login" mdInput placeholder=
@@ -24,7 +24,7 @@
                     <input formControlName="password" type="password" mdInput placeholder=
                     "{{stringService.get('PASSWORD')}}"/>
                   </md-form-field>
-                </div>
+                </div> -->
                 <button #loginSubmit type="submit" style="visibility: hidden;"></button>
               </form>
             </div>

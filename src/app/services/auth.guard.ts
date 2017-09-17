@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -7,33 +8,10 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (localStorage.getItem('currentUser')) {
-            // logged in so return true
+        if (Cookie.get('at') && Cookie.get('reft')) {
             return true;
         }
-
-        // not logged in so redirect to login page with the return url
         this.router.navigate(['/login']);
         return false;
     }
-
-    // canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    //   let token = String(this.localStorage.get('token'));
-    //   if (token != null) {
-    //     return this.services.keepAlive(token)
-    //         .map(response => {
-    //             if (response.status == 'OK') {
-    //                 console.log("response OK");
-    //                 return true;
-    //             } else {
-    //                 console.log("response KO");
-    //                 this.router.navigate(['login']);
-    //                 return false;
-    //             }
-    //         });
-    //       } else {
-    //     this.router.navigate(['login']);
-    //     return false;
-    //   }
-    // }
 }

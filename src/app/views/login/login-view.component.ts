@@ -33,19 +33,15 @@ export class LoginViewComponent {
   constructor(private stringService: StringService, public fb: FormBuilder, private router: Router, private userService: UserService,
     private dlgService: DialogService, private auth : AuthService) {
     this.loginForm = this.fb.group({
-      password: ['', Validators.required],
-      login: ['', Validators.required]
+      password: [''],
+      login: ['']
     });
     this.forgotForm = this.fb.group({
       email: ['', Validators.email]
     });
     this.registrationForm = this.fb.group({
       login: ['', Validators.required],
-      email: ['', Validators.email],
-      // password: ['', Validators.required],
-      // passwordConfirm: ['']
-    }, {
-      // validator: PasswordValidation.MatchPassword
+      email: ['', Validators.email]
     });
   }
 
