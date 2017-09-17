@@ -9,7 +9,7 @@ import { PasswordViewComponent } from './views/password/password-view.component'
 import { PanelComponent } from './views/panel/panel.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'main', pathMatch: 'full'},
+  { path: '', pathMatch: 'full', component: MainViewComponent},
 
   { path: 'main', component: MainViewComponent, canActivate: [AuthGuard],
     children: [{ path: 'sub', component: LoginViewComponent}]

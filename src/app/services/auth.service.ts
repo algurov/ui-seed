@@ -4,11 +4,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { API_BASE_URL } from '../services/constants';
 import { RequestBase } from '../services/request.base';
+import { Router } from '@angular/router';
 
 
 @Injectable()
 export class AuthService extends RequestBase {
-  constructor(public http: Http) {
+  constructor(public http: Http, public router : Router) {
     super(http);
   }
 //  url: string = 'http://'+ localhost + ':9999/auth-server/oauth/authorize?'
@@ -26,6 +27,7 @@ url: string ='http://82.202.236.172:9999/auth-server/oauth/authorize?response_ty
       // });
       // return this.http.post(`${API_BASE_URL}/login`, data, this.options)
       // .map(res => res.text());
+    this.router.navigateByUrl(this.url);
       this.options.withCredentials = true;
      return this.http.get(this.url, this.options);
   }

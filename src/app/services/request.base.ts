@@ -14,7 +14,7 @@ export class RequestBase {
     withCredentials: true
   });
   constructor(public http: Http) {
-    this.headers.append('Content-Type', 'application/json');
+  //  this.headers.append('Content-Type', 'application/json');
     this.noPreFlightHeaders.append('Content-Type', 'text/plain');
   }
 }

@@ -17,7 +17,11 @@ const renderIndex = (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist/client/index.html'));
 }
 
+app.get('/sample', function(req, res) {
+    res.send('this is a sample!');
+});
 app.get('/*', renderIndex);
+
 
 let e2e;
 const ENV = process.env.npm_lifecycle_event;

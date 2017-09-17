@@ -2,7 +2,7 @@ export const menuItems = [
   {
     name: 'SETTINGS_TITLE',
     icon: 'home',
-    items: [
+    sub: [
       {
         name: 'USERS_TITLE',
         icon: 'home',
@@ -22,10 +22,12 @@ export const menuItems = [
   },
   {
     name: 'DOCUMENTS',
-    icon: 'home'
+    icon: 'home',
+    sub: []
   },
   {
     name: 'CALENDAR',
-    icon: 'home'
+    icon: 'home',
+    sub: []
   }
 ];

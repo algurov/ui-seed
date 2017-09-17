@@ -19,6 +19,9 @@ navViews: any;
 constructor(public dlgService: DialogService, public main : MainService, public stringService: StringService){
   this.navViews = menuItems;
 }
+ ngAfterContentInit() {
+    this.toggleSideNav(menuItems[0].name, menuItems[0].sub);
+ }
 
 toggleSideNav(title, items) {
   let data = {
@@ -29,13 +32,17 @@ toggleSideNav(title, items) {
 }
 
 generateHtmlForMenu(title: string, items: Array<any>): string {
+    let subRes: string = "";
+    items.forEach(it => {
+      subRes+= `<div fxFlex (click)="changeRoute('/main/` + it.link + `')">
+        <i class="md-light material-icons">` + it.icon +`</i>
+        ` + this.stringService.get(it.name) +`
+      </div>`
+    });
     let result = `<div fxLayout="column">
     <div fxFlex="10%">`+ this.stringService.get(title) +`</div>
-    <div fxFlex="90%">
-      <span *ngFor="let it of subItems" (click)="changeRoute(it.link)">
-        <md-icon>{{it.icon}}</md-icon>
-        {{stringService.get(it.name)}}
-      </span>
+    <div fxLayout="column" fxFlex="90%">
+      ` + subRes +`
     </div>
     </div>`;
     return result;

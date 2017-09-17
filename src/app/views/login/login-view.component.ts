@@ -69,7 +69,7 @@ export class LoginViewComponent {
       //    });
       this.auth.login('','').subscribe(res => {
         console.log(res);
-        window.location.href=res.url;
+        //window.location.href=res.url;
       });
 
       console.log('login action');
