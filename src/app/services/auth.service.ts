@@ -24,10 +24,9 @@ export class AuthService extends RequestBase {
     console.log(result);
     return result;
   }
-  
+
   login(userLogin: string, userPassword: string): void {
-      this.oauthService.loginUrl = this.prepareAuthLink();
-      this.oauthService.initImplicitFlow();
+      window.location.href = this.prepareAuthLink();
   }
 
 //TODO
