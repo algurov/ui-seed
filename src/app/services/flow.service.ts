@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { RequestBase } from './request.base';
 import { Router } from '@angular/router';
-import { API_BASE_URL, AUTH_SERVER_URL, AUTH_CONSUMER_URL, STATES } from './constants';
+import { SEED_BASE_URL, API_BASE_URL, AUTH_SERVER_URL, AUTH_CONSUMER_URL, STATES } from './constants';
 import { FlowResponse } from '../models/flow.response';
 import { User } from '../models/user';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
@@ -30,7 +30,7 @@ export class FlowService extends RequestBase {
   }
 
   aksNewUser(): Subscription {
-    return this.http.get(API_BASE_URL + '/seed/registration', this.createOptions()).map(res => res.json())
+    return this.http.get(SEED_BASE_URL + '/seed/registration', this.createOptions()).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
@@ -42,7 +42,7 @@ export class FlowService extends RequestBase {
     params.append('role', user.roles[0].roleName);
     let opts = this.createOptions(params);
 
-    return this.http.post(API_BASE_URL + '/seed/registration', opts).map(res => res.json())
+    return this.http.post(SEED_BASE_URL + '/seed/registration', opts).map(res => res.json())
     .subscribe(res => this.processResponce(res));
   }
 
