@@ -21,6 +21,7 @@ export class FlowService extends RequestBase {
       let header = new Headers();
       header.append('Content-Type', 'application/json (application/x-www-form-urlencoded)');
       header.append('Authorization', 'Basic ' + Cookie.get('at'));
+      header.append('Access-Control-Allow-Origin', '*');
       let flowOptions = new RequestOptions({
         headers: header,
         withCredentials: true,
