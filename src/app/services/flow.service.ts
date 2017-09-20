@@ -19,19 +19,19 @@ export class FlowService extends RequestBase {
 
   createOptions(params?): RequestOptions {
       let header = new Headers();
-      header.append('Content-Type', 'application/json (application/x-www-form-urlencoded)');
-      header.append('Authorization', 'Basic ' + Cookie.get('at'));
-      header.append('Access-Control-Allow-Origin', '*');
+      // header.append('Content-Type', 'application/x-www-form-urlencoded');
+      // header.append('Authorization', 'Basic ' + Cookie.get('at'));
+      // header.append('Access-Control-Allow-Origin', '*');
       let flowOptions = new RequestOptions({
-        headers: header,
-        withCredentials: true,
-        params: params
+        // headers: header,
+        // withCredentials: true,
+        // params: params
       });
       return flowOptions;
   }
 
   aksNewUser(): Subscription {
-    return this.http.get(SEED_BASE_URL + '/seed/registration', this.createOptions()).map(res => res.json())
+    return this.http.get(SEED_BASE_URL + '/seed/registration').map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
