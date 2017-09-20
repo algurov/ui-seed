@@ -20,6 +20,7 @@ export class PasswordViewComponent {
   constructor(private stringService: StringService, private fb: FormBuilder,
     private router: Router, private userService: UserService) {
     this.passwordForm = this.fb.group({
+      login: ['', Validators.required],
       password: ['', Validators.required],
       passwordConfirm: ['']
     }, {

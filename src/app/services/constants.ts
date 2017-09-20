@@ -4,3 +4,6 @@ export const AUTH_SERVER_BASE_URL = `http://${HOST}:9999`;
 export const AUTH_CONSUMER_BASE_URL = `http://${HOST}:9998`;
 export const AUTH_SERVER_URL: string = AUTH_SERVER_BASE_URL + '/auth-server/oauth/authorize';
 export const AUTH_CONSUMER_URL: string = AUTH_CONSUMER_BASE_URL + '/oauth2-consumer/authorize';
+export const STATES = {
+  'start_registration': '/main/user/edit'
+};

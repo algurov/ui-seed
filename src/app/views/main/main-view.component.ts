@@ -1,8 +1,10 @@
-import { Component, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, ElementRef, ViewContainerRef, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MainService } from '../../services/main.service';
 import { MdSidenav } from '@angular/material';
+import { menuItems } from '../panel/menu.items';
+import { StringService } from '../../services/string.service';
 
 @Component({
   selector: 'main-view',
@@ -14,24 +16,32 @@ export class MainViewComponent {
 
   @ViewChild('sidenav') side : MdSidenav;
   @ViewChild('content') sideContent: ElementRef;
-
+  @ViewChild('content', {read: ViewContainerRef}) target: ViewContainerRef;
+  inner: string = '';
   subItems: any;
-
-  constructor(private auth : AuthService, private router: Router, private main : MainService) {
+  selectedActivator: number = 0;
+  menuItems: Array<any> = menuItems;
+  constructor(private auth : AuthService, private router: Router, private main : MainService, private stringService: StringService) {
     this.main.toggleSidenav.subscribe(value => this.toggle(value));
   }
 
   toggle(value) {
-    this.subItems = value.arr;
-    this.sideContent.nativeElement.innerHTML = value.html;
-    console.log(value);
-    this.side.toggle();
+    if (this.selectedActivator != value.activator) {
+      this.selectedActivator = value.activator;
+      if (!this.side.opened) {
+        this.side.toggle();
+      }
+    } else {
+      this.side.toggle();
+    }
   }
+
   logout() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
     this.auth.logout();
   }
+  
   changeSidenavContent() {
     this.side.close();
   }

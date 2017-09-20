@@ -7,15 +7,20 @@ import { AuthGuard } from './services/auth.guard';
 import { MainViewComponent } from './views/main/main-view.component';
 import { PasswordViewComponent } from './views/password/password-view.component';
 import { PanelComponent } from './views/panel/panel.component';
+import { UserEditComponent } from './views/user/user.edit.component';
+import { UserListComponent } from './views/user/list/user.list.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
   { path: 'main', component: MainViewComponent, canActivate: [AuthGuard],
-    children: [{ path: 'sub', component: LoginViewComponent}]
+    children: [
+      { path: 'user', component: UserListComponent},
+      { path: 'user/edit', component: UserEditComponent}
+  ]
   },
 
-  { path: 'login', component: LoginViewComponent},
+  { path: 'login', redirectTo: 'main'},
 
   { path: 'password', component: PasswordViewComponent}
 ];

@@ -2,11 +2,12 @@ export const menuItems = [
   {
     name: 'SETTINGS_TITLE',
     icon: 'home',
+    activator: 0,
     sub: [
       {
         name: 'USERS_TITLE',
         icon: 'home',
-        link: 'users'
+        link: 'user'
       },
       {
         name: 'ROLE_TITLE',
@@ -23,11 +24,13 @@ export const menuItems = [
   {
     name: 'DOCUMENTS',
     icon: 'home',
+    activator: 1,
     sub: []
   },
   {
     name: 'CALENDAR',
     icon: 'home',
+    activator: 2,
     sub: []
   }
 ];

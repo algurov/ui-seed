@@ -2,7 +2,7 @@
   <div fxFlex="10%" class="toolbar"></div>
   <div fxFlex="90%" class="main-container">
     <div fxLayout="column" fxLayout.xs="column" class="menu-div" *ngFor="let item of navViews"
-      mdTooltip="{{stringService.get(item.name)}}" mdTooltipPosition="right" (click)="toggleSideNav(item.name, item.sub)">
+      mdTooltip="{{stringService.get(item.name)}}" mdTooltipPosition="right" (click)="toggleSideNav(item)">
         <i class="menu-icon md-light material-icons">{{item.icon}}</i>
     </div>
   </div>

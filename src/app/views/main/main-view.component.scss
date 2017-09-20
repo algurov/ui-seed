@@ -8,6 +8,9 @@
   border-bottom: 1px solid #aaa;
   height: 80px !important;
 }
+.initial {
+  display: initial!important;
+}
 
 .toolbar-2 {
   border-bottom: 1px solid #aaa;
@@ -43,4 +46,17 @@
 }
 mat-drawer-content {
   height: 5em;
+}
+.menu-box {
+  margin-top: 2em;
+}
+.menu-box-item {
+  margin-top: 1em;
+}
+.menu-box-item:hover {
+  cursor: pointer;
+  background-color: grey;
+}
+.menu-box-item:active {
+  background-color: darkgray;
 }

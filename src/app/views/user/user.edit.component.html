@@ -1,0 +1,80 @@
+<div fxLayout="column" style="margin: 2em;">
+  <div fxLayout="row" fxFlex="100%" class="header" >
+    <user-card fxFlex="1 1 100%" fxLayoutAlign="start center" [user]="currentUser" class="row-item"></user-card>
+    <div fxFlex="100%" fxLayout="column">
+      <div fxFlex></div>
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <div fxFlex ></div>
+        <button class="remove-button row-item" fxFlex="1 1 30%" md-button
+        (click)="buttonClicked()">{{stringService.get('USER_REMOVE_BTN')}}</button>
+        <button class="save-button row-item" fxFlex="1 1 30%" md-button
+        (click)="saveUser()">{{stringService.get('USER_EDIT_BTN')}}</button>
+        <div fxFlex></div>
+      </div>
+      <div fxFlex></div>
+    </div>
+  </div>
+  <div fxLayout="column" fxFlex="100%">
+    <form [formGroup]="userForm">
+      <div fxLayout="column" fxFlex="100%">
+        <div fxLayout="row">
+          <md-form-field class="row-item" fxFlex>
+            <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+            <input formControlName="userFamilyName" (ngModelChange)="updateUserFamilyName($event)" mdInput placeholder=
+            "{{stringService.get('USER_FAMILY_NAME')}}"/>
+          </md-form-field>
+          <md-form-field class="row-item" fxFlex>
+            <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+            <input formControlName="userName" (ngModelChange)="updateUserName($event)" mdInput placeholder=
+            "{{stringService.get('USER_NAME')}}"/>
+          </md-form-field>
+          <md-form-field class="row-item" fxFlex>
+            <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+            <input formControlName="userGivenName" (ngModelChange)="updateUserGivenName($event)" mdInput placeholder=
+            "{{stringService.get('USER_GIVEN_NAME')}}"/>
+          </md-form-field>
+        </div>
+        <div fxLayout="column">
+          <md-form-field fxFlex class="row-item">
+            <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+            <input formControlName="userAdress" mdInput placeholder=
+            "{{stringService.get('USER_ADRESS')}}"/>
+          </md-form-field>
+        </div>
+        <div fxLayout="column">
+          <tag-input class="pad-bot row-item" addOnBlur="true" formControlName="telephone" placeholder="{{stringService.get('ADD_TELEPHONE')}}" secondaryPlaceholder="{{stringService.get('ADD_TELEPHONE')}}"></tag-input>
+        </div>
+        <div fxLayout="row">
+          <div fxLayout="row"  fxFlex="60%">
+            <md-form-field fxFlex class="row-item">
+              <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+              <input formControlName="email" type="email" mdInput placeholder=
+              "{{stringService.get('USER_EMAIL')}}"/>
+            </md-form-field>
+            <button class="save-button row-item" disabled="true" fxFlex="1 1 30%" fxLayoutAlign="center end" md-button
+            (click)="buttonClicked()">{{stringService.get('RESET_PASS_BTN')}}</button>
+          </div>
+            <div fxFlex="40%"></div>
+        </div>
+        <div fxLayout="column">
+          <md-select class="pad-bot row-item" placeholder="{{stringService.get('SELECT_DEPARTMENT')}}">
+            <md-option *ngFor="let department of departments" [value]="department">
+              {{ department }}
+            </md-option>
+          </md-select>
+        </div>
+        <div fxLayout="column">
+          <tag-input class="pad-bot row-item" (onAdd)="updateUserProfessions($event)" addOnBlur="true" formControlName="professions" placeholder="{{stringService.get('ADD_PROFESSION')}}" secondaryPlaceholder="{{stringService.get('ADD_PROFESSION')}}"></tag-input>
+        </div>
+        <div fxLayout="column">
+          <md-select class="pad-bot row-item" multiple placeholder="{{stringService.get('SELECT_ROLE')}}">
+            <md-option *ngFor="let role of roles" [value]="role">
+              {{ role }}
+            </md-option>
+          </md-select>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>

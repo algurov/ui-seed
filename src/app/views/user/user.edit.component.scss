@@ -1,0 +1,31 @@
+.row-item {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.mat-form-field {
+  width: 100%;
+}
+.header {
+  height: 10em;
+}
+
+.save-button {
+  background-color: #3498DB;
+  color: white;
+  min-height: 35px;
+  max-width: 200px;
+}
+
+.save-button:disabled {
+  background-color: gray;
+}
+
+.remove-button {
+  background-color: red;
+  color: white;
+  min-height: 35px;
+  max-width: 200px;
+}
+.pad-bot {
+  padding-bottom: 1.25em;
+}

@@ -20,21 +20,21 @@ constructor(public dlgService: DialogService, public main : MainService, public 
   this.navViews = menuItems;
 }
  ngAfterContentInit() {
-    this.toggleSideNav(menuItems[0].name, menuItems[0].sub);
+    this.toggleSideNav(menuItems[0]);
  }
 
-toggleSideNav(title, items) {
-  let data = {
-    arr: items,
-    html: this.generateHtmlForMenu(title, items)
-  };
-  this.main.toggleSidenav.next(data);
+toggleSideNav(item) {
+  // let data = {
+  //   arr: items,
+  //   html: this.generateHtmlForMenu(item)
+  // };
+  this.main.toggleSidenav.next(item);
 }
 
 generateHtmlForMenu(title: string, items: Array<any>): string {
     let subRes: string = "";
     items.forEach(it => {
-      subRes+= `<div fxFlex (click)="changeRoute('/main/` + it.link + `')">
+      subRes+= `<div id="r" fxFlex (click)="changeRoute('/main/` + it.link + `')">
         <i class="md-light material-icons">` + it.icon +`</i>
         ` + this.stringService.get(it.name) +`
       </div>`
@@ -45,6 +45,7 @@ generateHtmlForMenu(title: string, items: Array<any>): string {
       ` + subRes +`
     </div>
     </div>`;
+    console.log(result);
     return result;
 }
 

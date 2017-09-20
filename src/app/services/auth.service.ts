@@ -29,12 +29,8 @@ export class AuthService extends RequestBase {
       window.location.href = this.prepareAuthLink();
   }
 
-//TODO
-  logout(): Observable<string> {
-    let data = JSON.stringify({
-      login: 'logged in user'
-    });
-    return this.http.post(`${API_BASE_URL}/logout`, data, this.options)
-      .map(res => res.text());
+  logout(): void {
+    window.document.cookie = '';
+
   }
 }
