@@ -24,7 +24,7 @@ export class FlowService extends RequestBase {
       header.append('Access-Control-Allow-Origin', '*');
       let flowOptions = new RequestOptions({
          headers: header,
-        // withCredentials: true,
+        withCredentials: true,
          params: params
       });
       return flowOptions;
