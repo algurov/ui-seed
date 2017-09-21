@@ -1,7 +1,6 @@
 "use strict";
 const compression = require('compression')
 const express = require('express'),
-
 path = require('path');
 
 const E2E_PORT = require('./constants').E2E_PORT;
@@ -13,7 +12,14 @@ const ROOT = path.join(path.resolve(__dirname, '..'));
 var properties = null;
 app.use(compression());
 app.use(express.static('dist/client'));
-
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*'); //<-- you can change this with a specific url like http://localhost:4200
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+});
+// Add header
 const renderIndex = (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist/client/index.html'));
 }
@@ -21,6 +27,7 @@ const renderIndex = (req, res) => {
 app.get('/login', function (req, res) {
   console.log('login');
   callProperties(res, loginPropertiesCallback);
+   return res.json({ resp: true });
 });
 app.get('/*', renderIndex);
 
@@ -58,6 +65,7 @@ function propertiesCallback(response, res) {
 
 function loginPropertiesCallback(response, res) {
   console.log(response);
+  try{
   properties = JSON.parse(response);
   var authServer = null;
   var authConsumer = null;
@@ -85,6 +93,9 @@ function loginPropertiesCallback(response, res) {
   result = result + state + '&redirect_uri=' + authConsumer + 'authorize';
   console.log(result);
   res.redirect(result);
+} catch(err) {
+  console.log(err);
+}
 }
 
 function redirectToLoginPage() {

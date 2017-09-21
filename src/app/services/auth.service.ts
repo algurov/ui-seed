@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { RequestBase } from './request.base';
 import { Router } from '@angular/router';
@@ -26,7 +26,9 @@ export class AuthService extends RequestBase {
   }
 
   login(): void {
-      this.http.get(API_BASE_URL +'/login');
+
+
+      this.http.get(API_BASE_URL +'/login').subscribe(res=>console.log(res));
       //window.location.href = this.prepareAuthLink();
   }
 
