@@ -55,9 +55,8 @@ export class FlowService extends RequestBase {
     }
     if (flowResponse.isSuccess()) {
       this.dlgService.showMessageDlg('Success', 'Action performed');
-      this.navigateToState(flowResponse.step);
       return;
-    }
+    } 
     if(this.lastFlowResponse.step != flowResponse.step) {
       this.lastFlowResponse = flowResponse;
       this.navigateToState(flowResponse.step)
