@@ -27,7 +27,6 @@ const renderIndex = (req, res) => {
 app.get('/login', function (req, res) {
   console.log('login');
   callProperties(res, loginPropertiesCallback);
-   return res.json({ resp: true });
 });
 app.get('/*', renderIndex);
 
