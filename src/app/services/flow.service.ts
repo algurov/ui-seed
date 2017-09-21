@@ -47,21 +47,22 @@ export class FlowService extends RequestBase {
     .subscribe(res => this.processResponce(res));
   }
 
-  processResponce(response: FlowResponse) {
+  processResponce(response) {
     console.log(response);
-    if (response.isError()) {
-      this.dlgService.showMessageDlg('Error ' + response.view.code, response.view.reason);
+    let flowResponse = new FlowResponse(response);
+    if (flowResponse.isError()) {
+      this.dlgService.showMessageDlg('Error ' + flowResponse.view.code, flowResponse.view.reason);
     }
-    if (response.isSuccess) {
+    if (flowResponse.isSuccess()) {
       this.dlgService.showMessageDlg('Success', 'Action performed');
-      this.router.navigateByUrl('main/user/edit');
+      this.navigateToState(flowResponse.step);
       return;
     }
-    if(this.lastFlowResponse.step != response.step) {
-      this.lastFlowResponse = response;
-      this.navigateToState(response.step)
+    if(this.lastFlowResponse.step != flowResponse.step) {
+      this.lastFlowResponse = flowResponse;
+      this.navigateToState(flowResponse.step)
     } else {
-      this.lastFlowResponse = response;
+      this.lastFlowResponse = flowResponse;
     }
 
   }
