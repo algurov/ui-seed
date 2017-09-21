@@ -72,7 +72,7 @@ function loginPropertiesCallback(response, res) {
       }
   }
 
-  authSerber = authServer.replace('localhost', HOST);
+  authServer = authServer.replace('localhost', HOST);
   authConsumer = authConsumer.replace('localhost', HOST);
   console.log(authServer);
   console.log(authConsumer);
