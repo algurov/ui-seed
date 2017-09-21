@@ -1,6 +1,8 @@
+@import '../../variables';
 .toolbar {
   border-bottom: 1px solid #aaa;
-  height: 3.5em
+  height: 3.5em;
+  background-color: $logo-back-color;
 }
 .tab-container {
   height: 200px;
@@ -25,6 +27,7 @@
 
  .main-container {
    height: 100%;
+   background-color: $main-blue-color;
  }
 
  .login-button {

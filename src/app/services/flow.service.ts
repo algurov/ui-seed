@@ -19,7 +19,7 @@ export class FlowService extends RequestBase {
 
   createOptions(params?): RequestOptions {
       let header = new Headers();
-      header.append('Content-Type', 'x-www-form-urlencoded');
+      header.append('Content-Type', 'application/x-www-form-urlencoded');
       let flowOptions = new RequestOptions({
          headers: header,
         withCredentials: true,

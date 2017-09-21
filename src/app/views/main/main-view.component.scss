@@ -1,8 +1,9 @@
+@import '../../variables';
 .main-container {
   min-height: 100%;
 }
 .left-panel {
-  background-color: #3498DB;
+  background-color: $main-blue-color;
 }
 .toolbar {
   border-bottom: 1px solid #aaa;
