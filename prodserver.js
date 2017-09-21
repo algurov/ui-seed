@@ -57,7 +57,7 @@ function propertiesCallback(response, res) {
 
 function loginPropertiesCallback(response, res) {
   properties = JSON.parse(response);
-  authServer = null;
+  var authServer = null;
   var authConsumer = null;
   console.log(properties);
   for (var i = 0, len = properties.propertySources.length; i < len; i++) {
