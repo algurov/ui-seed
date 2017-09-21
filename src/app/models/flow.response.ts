@@ -16,11 +16,16 @@ export class FlowResponse{
   }
 
   isError(): boolean {
-    if (this.view.code) {
-      return true;
+    if (this.view) {
+      if (this.view.code) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
       return false;
     }
+
   }
 
   constructor (jsonObj) {
