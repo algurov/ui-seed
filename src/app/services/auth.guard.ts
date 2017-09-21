@@ -12,8 +12,9 @@ export class AuthGuard implements CanActivate {
         if (Cookie.get('at') && Cookie.get('reft')) {
             return true;
         }
-        this.authService.prepareAuthLink();
-        window.location.href = this.authService.prepareAuthLink();
+        this.authService.login();
+        //this.router.navigateByUrl('/login');
+      //  window.location.href = this.authService.prepareAuthLink();
         //this.router.navigate(['/login']);
         return false;
     }

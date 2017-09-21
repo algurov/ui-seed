@@ -55,7 +55,7 @@ export class LoginViewComponent {
 
   public login() {
     if (this.loginForm.valid) {
-      this.auth.login('','');
+      this.auth.login();
       console.log('login action');
     }
   }

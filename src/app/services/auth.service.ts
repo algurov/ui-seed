@@ -14,19 +14,20 @@ export class AuthService extends RequestBase {
 
   prepareAuthLink(): string {
     let result = AUTH_SERVER_URL + '?response_type=code&client_id=client_seed&state=';
-    let goto = encodeURIComponent(API_BASE_URL + '/main');
-    console.log('goto    ' + goto);
-    let gotoOnFail = encodeURIComponent(API_BASE_URL + '/login');
-    console.log('gotoOnFail    ' + gotoOnFail);
-    let state = encodeURIComponent('client_id=client_seed&goto=' + goto + '&gotoOnFail=' + gotoOnFail);
-    console.log('state    ' + state);
-    result = result + state + '&redirect_uri=' + AUTH_CONSUMER_URL;
-    console.log(result);
+    // let goto = encodeURIComponent(API_BASE_URL + '/main');
+    // console.log('goto    ' + goto);
+    // let gotoOnFail = encodeURIComponent(API_BASE_URL + '/login');
+    // console.log('gotoOnFail    ' + gotoOnFail);
+    // let state = encodeURIComponent('client_id=client_seed&goto=' + goto + '&gotoOnFail=' + gotoOnFail);
+    // console.log('state    ' + state);
+    // result = result + state + '&redirect_uri=' + AUTH_CONSUMER_URL;
+    // console.log(result);
     return result;
   }
 
-  login(userLogin: string, userPassword: string): void {
-      window.location.href = this.prepareAuthLink();
+  login(): void {
+      this.http.get(API_BASE_URL +'/login');
+      //window.location.href = this.prepareAuthLink();
   }
 
   logout(): void {

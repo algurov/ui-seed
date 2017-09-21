@@ -18,9 +18,10 @@ const renderIndex = (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist/client/index.html'));
 }
 
-app.get('/external', function (req, res) {
+app.get('/login', function (req, res) {
+  console.log('login');
   callProperties(res, loginPropertiesCallback);
-})
+});
 app.get('/*', renderIndex);
 
 
@@ -56,6 +57,7 @@ function propertiesCallback(response, res) {
 }
 
 function loginPropertiesCallback(response, res) {
+  console.log(response);
   properties = JSON.parse(response);
   var authServer = null;
   var authConsumer = null;
