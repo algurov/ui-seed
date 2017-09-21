@@ -1,9 +1,17 @@
 @import '../../variables';
-.toolbar {
-  border-bottom: 1px solid #aaa;
-  height: 3.5em;
+.toolbar-left {
+  height: 80px !important;
   background-color: $logo-back-color;
+  text-align: center;
 }
+
+.toolbar-left > md-icon {
+  padding-top: 5px;
+  height: 70px;
+  width: 70px;
+  fill: white;
+}
+
 .tab-container {
   height: 200px;
 }
@@ -25,7 +33,7 @@
    background-color: #3498DB;
  }
 
- .main-container {
+ .main-container-left {
    height: 100%;
    background-color: $main-blue-color;
  }
@@ -46,5 +54,8 @@
    margin-top: 20px;
  }
  .menu-icon {
-   font-size:50px;
+   height: 25px;
+   width: 25px;
+   fill: white;
+   margin: auto;
  }

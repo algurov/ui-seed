@@ -57,7 +57,7 @@ function propertiesCallback(response, res) {
 
 function loginPropertiesCallback(response, res) {
   properties = JSON.parse(response);
-  var authServer = null;
+  authServer = null;
   var authConsumer = null;
   console.log(properties);
   for (var i = 0, len = properties.propertySources.length; i < len; i++) {
@@ -73,7 +73,8 @@ function loginPropertiesCallback(response, res) {
   }
   console.log(authServer);
   console.log(authConsumer);
-
+  authServer.replace('localhost', HOST);
+  authConsumer.replace('localhost', HOST);
   var result = authServer + 'oauth/authorize'+ '?response_type=code&client_id=client_seed&state=';
   var goto = encodeURIComponent(API_BASE_URL + '/main');
   var gotoOnFail = encodeURIComponent(API_BASE_URL + '/login');

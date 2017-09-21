@@ -15,9 +15,16 @@ import { menuItems } from './menu.items';
 export class PanelComponent {
 
 
-navViews: any;
+topViews: Array<any> = new Array();
+botViews: Array<any> = new Array();
 constructor(public dlgService: DialogService, public main : MainService, public stringService: StringService){
-  this.navViews = menuItems;
+  menuItems.forEach(item => {
+    if (item.top) {
+      this.topViews.push(item);
+    } else {
+      this.botViews.push(item);
+    }
+  });
 }
  ngAfterContentInit() {
     this.toggleSideNav(menuItems[0]);

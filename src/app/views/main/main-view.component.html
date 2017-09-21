@@ -1,6 +1,6 @@
 <div fxLayout="row" class="main-container">
   <div fxFlex="6%" class="left-panel">
-    <panel></panel>
+    <panel fxFlex></panel>
   </div>
   <div fxFlex="1 1 94%" fxLayout="column">
     <md-sidenav-container fxFlex="1 1 100%" class="example-sidenav-fab-container">
@@ -9,10 +9,11 @@
             <ng-container *ngIf="menu.activator == selectedActivator">
             <div class="toolbar-2"></div>
             <div fxLayout="column">
-            <div fxFlex="10%" fxLayoutAlign="center center">{{stringService.get(menu.name)}}</div>
+            <div fxFlex="10%" class="menu-title">{{stringService.get(menu.name)}}</div>
             <div class="menu-box" fxLayout="column" fxFlex="90%">
               <div class="menu-box-item" fxLayout="row" *ngFor="let subMenu of menu.sub" fxFlex="100%" (click)="changeRoute('/main/' + subMenu.link)">
-                <i fxFlex="20%" fxLayoutAlign="center center" class="md-light material-icons">{{subMenu.icon}}</i>
+                <!-- <i fxFlex="20%" fxLayoutAlign="center center" class="md-light material-icons">{{subMenu.icon}}</i> -->
+                <md-icon svgIcon="{{subMenu.icon}}"></md-icon>
                 <div fxLayoutAlign="start center" fxFlex="80%">{{stringService.get(subMenu.name)}}</div>
               </div>
             </div>
@@ -26,7 +27,7 @@
               <div #content [innerHtml]="inner"></div>
             </div>
         </md-sidenav> -->
-        <div fxLayout="row" fxFlex="100%" class="main-container">
+        <div fxLayout="row" fxFlex="94%" class="main-content-container">
           <div fxLayout="column" fxFlex="1 1 100%">
             <div fxLayout="row" class="initial">
               <div fxLayout="row" fxFlex="grow" class="toolbar">

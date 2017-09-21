@@ -1,9 +1,19 @@
-<div fxLayout="column">
-  <div fxFlex="10%" class="toolbar"></div>
-  <div fxFlex="90%" class="main-container">
-    <div fxLayout="column" fxLayout.xs="column" class="menu-div" *ngFor="let item of navViews"
-      mdTooltip="{{stringService.get(item.name)}}" mdTooltipPosition="right" (click)="toggleSideNav(item)">
-        <i class="menu-icon md-light material-icons">{{item.icon}}</i>
+<div fxLayout="column" fxFlex="100%">
+  <div class="toolbar-left">
+    <md-icon svgIcon="logo"></md-icon>
+  </div>
+  <div fxFlex="90%" class="main-container-left" fxLayout="column">
+    <div fxFlex="70%">
+      <div fxLayout="column" fxLayoutAlign.xs="center center" fxLayout.xs="column" class="menu-div" *ngFor="let item of topViews"
+        mdTooltip="{{stringService.get(item.name)}}" mdTooltipPosition="right" (click)="toggleSideNav(item)">
+          <md-icon class="menu-icon md-light" svgIcon="{{item.icon}}"></md-icon>
+        </div>
+    </div>
+    <div fxFlex="30%">
+      <div fxLayout="column" fxLayoutAlign="end center" fxLayoutAlign.xs="center center" fxLayout.xs="column" class="menu-div" *ngFor="let item of botViews"
+        mdTooltip="{{stringService.get(item.name)}}" mdTooltipPosition="right" (click)="toggleSideNav(item)">
+          <md-icon class="menu-icon md-light" svgIcon="{{item.icon}}"></md-icon>
+        </div>
     </div>
   </div>
 </div>

@@ -32,6 +32,10 @@ export const Messages = {
   "DEPARTMENT_TITLE": "Филиалы",
   "DOCUMENTS": "Документы",
   "CALENDAR": "Календарь",
-  "CREATE_USER_BTN": "НОВЫЙ ПОЛЬЗОВАТЕЛЬ"
+  "CREATE_USER_BTN": "НОВЫЙ ПОЛЬЗОВАТЕЛЬ",
+  "FILES": "Файлы",
+  "TASKS": "Задачи",
+  "AGENT": "Контрагенты",
+  "LOGOUT": "Выход"
 
 };
