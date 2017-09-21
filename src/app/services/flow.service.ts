@@ -19,9 +19,7 @@ export class FlowService extends RequestBase {
 
   createOptions(params?): RequestOptions {
       let header = new Headers();
-      header.append('Access-Control-Allow-Headers', 'Content-Type');
-      header.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-      header.append('Access-Control-Allow-Origin', '*');
+      header.append('Content-Type', 'x-www-form-urlencoded');
       let flowOptions = new RequestOptions({
          headers: header,
         withCredentials: true,
@@ -36,14 +34,10 @@ export class FlowService extends RequestBase {
   }
 
   sendNewUser(user: User): Subscription {
-    let params = new URLSearchParams();
-    params.append('execution', this.lastFlowResponse.execution);
-    params.append('_eventId', 'do');
-    params.append('email', user.email);
-    params.append('role', user.roles[0].roleName);
-    let opts = this.createOptions(params);
-
-    return this.http.post(SEED_BASE_URL + '/seed/registration', opts).map(res => res.json())
+    let toSend = 'execution=' + this.lastFlowResponse.execution
+     + '&_eventId=do&email=' + user.email + '&role=' + user.roles[0].roleName;
+    let opts = this.createOptions();
+    return this.http.post(SEED_BASE_URL + '/seed/registration', toSend ,opts).map(res => res.json())
     .subscribe(res => this.processResponce(res));
   }
 
