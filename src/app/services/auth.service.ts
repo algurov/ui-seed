@@ -28,7 +28,7 @@ export class AuthService extends RequestBase {
   login(): void {
 
 
-      this.http.get(API_BASE_URL +'/login').subscribe(res=>console.log(res));
+      this.http.get(API_BASE_URL +'/login-main').subscribe(res=>console.log(res));
       //window.location.href = this.prepareAuthLink();
   }
 

@@ -28,6 +28,10 @@ app.get('/login', function (req, res) {
   console.log('login');
   callProperties(res, loginPropertiesCallback);
 });
+app.get('/login-main', function (req, res) {
+  console.log('login-main');
+  callProperties(res, loginPropertiesCallbackMain);
+});
 app.get('/*', renderIndex);
 
 
@@ -91,7 +95,42 @@ function loginPropertiesCallback(response, res) {
   var state = encodeURIComponent('client_id=client_seed&goto=' + goto + '&gotoOnFail=' + gotoOnFail);
   result = result + state + '&redirect_uri=' + authConsumer + 'authorize';
   console.log(result);
-  res.redirect(result);
+  return res.redirect(result);
+} catch(err) {
+  console.log(err);
+}
+}
+
+function loginPropertiesCallbackMain(response, res) {
+  console.log(response);
+  try{
+  properties = JSON.parse(response);
+  var authServer = null;
+  var authConsumer = null;
+  console.log(properties);
+  for (var i = 0, len = properties.propertySources.length; i < len; i++) {
+      if (authServer && authConsumer) {
+        break;
+      }
+      if (properties.propertySources[i].source['authorizationServer.base.url']) {
+        authServer = properties.propertySources[i].source['authorizationServer.base.url'];
+      }
+      if (properties.propertySources[i].source['oauth2consumer.base.url']) {
+        authConsumer = properties.propertySources[i].source['oauth2consumer.base.url'];
+      }
+  }
+
+  authServer = authServer.replace('localhost', HOST);
+  authConsumer = authConsumer.replace('localhost', HOST);
+  console.log(authServer);
+  console.log(authConsumer);
+  var result = authServer + 'oauth/authorize'+ '?response_type=code&client_id=client_seed&state=';
+  var goto = encodeURIComponent(API_BASE_URL + '/main');
+  var gotoOnFail = encodeURIComponent(API_BASE_URL + '/login');
+  var state = encodeURIComponent('client_id=client_seed&goto=' + goto + '&gotoOnFail=' + gotoOnFail);
+  result = result + state + '&redirect_uri=' + authConsumer + 'authorize';
+  console.log(result);
+  return res.end(result);
 } catch(err) {
   console.log(err);
 }
