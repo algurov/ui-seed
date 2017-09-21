@@ -71,10 +71,11 @@ function loginPropertiesCallback(response, res) {
         authConsumer = properties.propertySources[i].source['oauth2consumer.base.url'];
       }
   }
+
+  authSerber = authServer.replace('localhost', HOST);
+  authConsumer = authConsumer.replace('localhost', HOST);
   console.log(authServer);
   console.log(authConsumer);
-  authServer.replace('localhost', HOST);
-  authConsumer.replace('localhost', HOST);
   var result = authServer + 'oauth/authorize'+ '?response_type=code&client_id=client_seed&state=';
   var goto = encodeURIComponent(API_BASE_URL + '/main');
   var gotoOnFail = encodeURIComponent(API_BASE_URL + '/login');
