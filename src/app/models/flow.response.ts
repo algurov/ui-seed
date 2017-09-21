@@ -31,8 +31,12 @@ export class FlowResponse{
     this.execution = jsonObj.execution;
     this.serverUrl = jsonObj.serverUrl;
     this.step = jsonObj.step;
-    this.form = new Form(jsonObj.form);
-    this.view = new View(jsonObj.view);
+    if (jsonObj.form) {
+      this.form = new Form(jsonObj.form);
+    }
+    if (jsonObj.view) {
+      this.view = new View(jsonObj.view);
+    }
   }
 }
 
