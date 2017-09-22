@@ -63,7 +63,7 @@ export class FlowService extends RequestBase {
      + this.getParameter('position', user)
      + this.getParameter('address', user)
      + this.getParameter('branchOffice', user);
-
+     console.log(toSend);
     let opts = this.createOptions();
     return this.http.post(SEED_BASE_URL + '/seed/registration', toSend ,opts).map(res => res.json())
     .subscribe(res => this.processResponce(res));
