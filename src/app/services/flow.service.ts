@@ -49,7 +49,7 @@ export class FlowService extends RequestBase {
     if (user[param] && user[param] != '') {
       return '&' + param + '=' + user[param];
     }
-    return '';
+    return '&' + param + '=';
   }
   sendNewUser(user: User): Subscription {
 
