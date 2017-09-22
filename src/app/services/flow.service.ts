@@ -33,9 +33,37 @@ export class FlowService extends RequestBase {
       .subscribe(res => this.processResponce(res));
   }
 
+  convertArrayToString(arr : Array<string>) {
+    if (arr) {
+      let result = '';
+        arr.forEach(item => {
+          result += item + ',';
+        })
+        return result.substr(0, result.length - 1);
+    } else {
+      return '';
+    }
+  }
+
+  getParameter(param: string, user: User) : string {
+    if (user[param] && user[param] != '') {
+      return '&' + param + '=' + user[param];
+    }
+    return '';
+  }
   sendNewUser(user: User): Subscription {
+
     let toSend = 'execution=' + this.lastFlowResponse.execution
-     + '&_eventId=do&email=' + user.email + '&role=' + user.roles[0].roleName;
+     + '&_eventId=do&email=' + user.email
+     + '&role=' + this.convertArrayToString(user.role)
+     + this.getParameter('userGivenName', user)
+     + this.getParameter('userSurName', user)
+     + this.getParameter('userFamilyName', user)
+     + this.getParameter('phoneNumber', user)
+     + this.getParameter('position', user)
+     + this.getParameter('address', user)
+     + this.getParameter('branchOffice', user);
+
     let opts = this.createOptions();
     return this.http.post(SEED_BASE_URL + '/seed/registration', toSend ,opts).map(res => res.json())
     .subscribe(res => this.processResponce(res));

@@ -3,12 +3,15 @@ import { Role } from './role';
 export class User{
   id: number;
   userName: string = "";
+  userSurName: string = "";
   userGivenName: string = "";
   userFamilyName: string = "";
-  phones: Array<string>;
+  phoneNumber: Array<string>;
+  address: string = "";
   password: string;
-  roles: Array<Role>;
-  professions: Array<string>;
+  role: Array<string>;
+  position: Array<string>;
+  branchOffice: Array<string>;
   email: string;
 
   public getShortName() : string {
@@ -16,11 +19,11 @@ export class User{
     if (this.userFamilyName) {
       result = result + this.userFamilyName + ' ';
     }
-    if (this.userName) {
-      result = result + this.userName[0] +'. ';
-    }
     if (this.userGivenName) {
-      result = result + this.userGivenName[0] + '.';
+      result = result + this.userGivenName[0] +'. ';
+    }
+    if (this.userSurName) {
+      result = result + this.userSurName[0] + '.';
     }
     return result;
   }

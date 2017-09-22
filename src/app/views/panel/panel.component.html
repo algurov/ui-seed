@@ -4,7 +4,7 @@
   </div>
   <div fxFlex="90%" class="main-container-left" fxLayout="column">
     <div fxFlex="70%">
-      <div fxLayout="column" fxLayoutAlign.xs="center center" fxLayout.xs="column" class="menu-div" *ngFor="let item of topViews"
+      <div fxLayout="column" fxLayout.xs="column" class="menu-div" *ngFor="let item of topViews"
         mdTooltip="{{stringService.get(item.name)}}" mdTooltipPosition="right" (click)="toggleSideNav(item)">
           <md-icon class="menu-icon md-light" svgIcon="{{item.icon}}"></md-icon>
         </div>

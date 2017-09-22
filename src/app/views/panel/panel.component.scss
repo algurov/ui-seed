@@ -52,7 +52,13 @@
  .menu-div {
    text-align: center;
    margin-top: 20px;
+   :hover {
+     cursor: pointer;
+   }
  }
+
+
+
  .menu-icon {
    height: 25px;
    width: 25px;

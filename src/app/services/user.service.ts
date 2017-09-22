@@ -59,7 +59,8 @@ export class UserService extends RequestBase {
   }
 
   getAllRoles(): Observable<Role[]> {
-    return this.http.get(`${API_BASE_URL}/user-provisioning/role`).map(res => res.json());
+    //return this.http.get(`${API_BASE_URL}/user-provisioning/role`).map(res => res.json());
+    return this.http.get(`http://82.202.236.172:8081/user-provisioning/role`).map(res => res.json());
   }
 
   createRole(role: Role): Observable<Role> {
