@@ -6,6 +6,8 @@ import { ReactiveFormsModule, FormBuilder, Validators, FormGroup} from '@angular
 import { PasswordValidation } from '../login/match-password';
 import { StringService } from '../../services/string.service';
 import { UserService } from '../../services/user.service';
+import { FlowService } from '../../services/flow.service';
+import * as bcryptjs from 'bcryptjs';
 
 @Component({
   selector: 'password-view',
@@ -18,7 +20,8 @@ export class PasswordViewComponent {
   passwordForm : FormGroup;
 
   constructor(private stringService: StringService, private fb: FormBuilder,
-    private router: Router, private userService: UserService) {
+    private router: Router, private userService: UserService,
+  private flow : FlowService) {
     this.passwordForm = this.fb.group({
       login: ['', Validators.required],
       password: ['', Validators.required],
@@ -30,7 +33,10 @@ export class PasswordViewComponent {
 
   submit() {
     if (this.passwordForm.valid) {
-      console.log('submited');
+      let login = this.passwordForm.get('login').value;
+      let pass = this.passwordForm.get('password').value;
+      pass = bcryptjs.hashSync(pass, 8);
+      this.flow.sendLoginAndPassword(login, pass);
     }
   }
 }

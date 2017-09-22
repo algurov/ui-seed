@@ -17,7 +17,7 @@ export class FlowResponse{
 
   isError(): boolean {
     if (this.view) {
-      if (this.view.code) {
+      if (this.view.code && this.view.reason) {
         return true;
       } else {
         return false;

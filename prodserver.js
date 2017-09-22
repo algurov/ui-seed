@@ -29,33 +29,6 @@ app.get('/login', function (req, res) {
   callProperties(res, loginPropertiesCallback);
 });
 
-app.get('/startRegistrationByLink', function(req, res) {
-  var email = req.query.email;
-  email = email.replace(' ', '+');
-  var code = req.query.code;
-  var link = 'http://82.202.236.172:8080/seed/registrationCompletionByLink?email=' +
-    email + '&code=' + code;
-
-  var link = 'http://82.202.236.172:8080/seed/registrationCompletionByLink?email=eyJwaG9uZU51bWJlciI6WyIxMjMzIl0sInJvbGUiOlsiQWRtaW4iXSwidXNlckZhbWlseU5hbWUiOlsi0KLRg9C80LDRgdC+0LIiXSwidXNlck5hbWUiOlsiYXJtaXR1Il0sInVzZXJHaXZlbk5hbWUiOlsi0JDRgNGC0ZHQvCJdLCJlbWFpbCI6WyIxMjNAbWFpbC5ydSJdfQ==&code=279aede2-7c14-4f47-b41f-9e3936a1f778';
-//  console.log(link);
-  var request = require('request');
-  var options = {
-    hostname: '82.202.236.172',
-    port: 8080,
-    path: '/seed/registrationCompletionByLink',
-    uri: link,
-    method: 'GET',
-    headers: {
-
-    }
-  };
-  request(link, function(error, response, body) {
-    console.log(body);
-    // let jsonBody = JSON.parse(body);
-    //req.session['success'] = 'User added successfully';
-    //res.redirect('/main');
-  });
-});
 app.get('/login-main', function (req, res) {
   console.log('login-main');
   callProperties(res, loginPropertiesCallbackMain);

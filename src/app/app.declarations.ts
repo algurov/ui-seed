@@ -8,7 +8,7 @@ import { MessageDialogComponent } from './widgets/message-dialog/message-dialog.
 import { UserEditComponent } from './views/user/user.edit.component';
 import { UserCardComponent } from './widgets/user-card/user.card.component';
 import { UserListComponent } from './views/user/list/user.list.component';
-
+import { LoadingComponent } from './widgets/loading/loading.component';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -19,5 +19,6 @@ export const APP_DECLARATIONS = [
   MessageDialogComponent,
   UserEditComponent,
   UserCardComponent,
-  UserListComponent
+  UserListComponent,
+  LoadingComponent
 ];

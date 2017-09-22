@@ -9,6 +9,7 @@ import { PasswordViewComponent } from './views/password/password-view.component'
 import { PanelComponent } from './views/panel/panel.component';
 import { UserEditComponent } from './views/user/user.edit.component';
 import { UserListComponent } from './views/user/list/user.list.component';
+import { LoadingComponent } from './widgets/loading/loading.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -19,7 +20,7 @@ export const routes: Routes = [
       { path: 'user/edit', component: UserEditComponent}
   ]
   },
-
+  { path: 'registrationCompletionByLink', component: LoadingComponent},
   { path: 'login', redirectTo: 'main'},
 
   { path: 'password', component: PasswordViewComponent}
