@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { API_BASE_URL } from '../services/constants';
+import { API_BASE_URL, PROVISIONING_BASE_URL } from '../services/constants';
 import { RequestBase } from '../services/request.base';
 import * as bcryptjs from 'bcryptjs';
 import { User } from '../models/user';
@@ -59,7 +59,7 @@ export class UserService extends RequestBase {
   }
 
   getAllRoles(): Observable<Role[]> {
-    return this.http.get(`${API_BASE_URL}/user-provisioning/role`).map(res => res.json());
+    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role`).map(res => res.json());
     //return this.http.get(`http://82.202.236.172:8081/user-provisioning/role`).map(res => res.json());
   }
 

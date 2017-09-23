@@ -26,7 +26,7 @@ constructor(public dlgService: DialogService, public stringService: StringServic
   public usrService: UserService){
   this.usrService.getAllRoles().subscribe(res => {
     this.roles = res;
-    console.log(this.rol);
+    console.log(this.roles);
   });
   this.currentUser = new User();
   this.userForm = this.fb.group({
