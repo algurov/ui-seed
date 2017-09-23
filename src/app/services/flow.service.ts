@@ -70,6 +70,12 @@ export class FlowService extends RequestBase {
 
   getParameter(param: string, user: User, body: URLSearchParams) {
     if (user[param] && user[param] != '') {
+      if(user[param] instanceof Array) {
+        if (user[param].length <= 0) {
+          body.set(param, '');
+          return;
+        }
+      }
       //return '&' + param + '=' + encodeURIComponent(user[param]);
       body.set(param, user[param]);
       return;

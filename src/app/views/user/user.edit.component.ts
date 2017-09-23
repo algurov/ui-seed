@@ -107,6 +107,7 @@ collectDataFromRoleSelect(data : Array<any>) : Array<string>{
 
 submitAction() {
   if (this.userForm.valid) {
+    this.currentUser.contact = [];
     this.currentUser.email = this.userForm.get('email').value;
     this.currentUser.role = this.collectDataFromRoleSelect(this.userForm.get('role').value);
     this.currentUser.userGivenName = this.userForm.get('userGivenName').value;
@@ -116,8 +117,11 @@ submitAction() {
     this.currentUser.phoneNumber = this.collectDataFromChipContact(this.userForm.get('phoneNumber').value);
     this.currentUser.position = this.collectDataFromChip(this.userForm.get('position').value);
     this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
-    this.currentUser.contact = this.currentUser.phoneNumber;
-    this.currentUser.contact.push({3 : this.currentUser.address}); 
+    this.currentUser.contact.concat(this.currentUser.phoneNumber);
+    if (this.currentUser.address) {
+          this.currentUser.contact.push({3 : this.currentUser.address}); 
+    }
+
     this.flow.sendNewUser(this.currentUser);
   }
 }
