@@ -117,7 +117,6 @@ submitAction() {
     this.currentUser.phoneNumber = this.collectDataFromChipContact(this.userForm.get('phoneNumber').value);
     this.currentUser.position = this.collectDataFromChip(this.userForm.get('position').value);
     this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
-    this.currentUser.contact.concat(this.currentUser.phoneNumber);
 
     this.currentUser.contact = {};
     if (this.currentUser.phoneNumber) {
