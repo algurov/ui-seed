@@ -66,7 +66,7 @@ export class FlowService extends RequestBase {
 
   getParameter(param: string, user: User): string {
     if (user[param] && user[param] != '') {
-      return '&' + param + '=' + encodeURIComponent(user[param]);
+      return '&' + param + '=' + user[param];
     }
     return '&' + param + '=';
   }
