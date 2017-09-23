@@ -114,13 +114,13 @@ submitAction() {
     this.currentUser.userFamilyName = this.userForm.get('userFamilyName').value;
     this.currentUser.userSurName = this.userForm.get('userSurName').value;
     this.currentUser.address = this.userForm.get('address').value;
-    this.currentUser.phoneNumber = this.collectDataFromChipContact(this.userForm.get('phoneNumber').value);
+    this.currentUser.phoneNumber = this.collectDataFromChip(this.userForm.get('phoneNumber').value);
     this.currentUser.position = this.collectDataFromChip(this.userForm.get('position').value);
     this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
 
     this.currentUser.contact = {};
     if (this.currentUser.phoneNumber) {
-      this.currentUser.contact['1'] = this.currentUser.phoneNumber;
+      this.currentUser.contact['1'] = this.currentUser.phoneNumber[0];
     }
     if (this.currentUser.address) {
           this.currentUser.contact['3'] = this.currentUser.address;
