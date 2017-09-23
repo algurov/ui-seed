@@ -36,7 +36,7 @@ export class FlowService extends RequestBase {
   }
 
   sendLoginAndPassword(login: string, password: string): Subscription {
-    let toSend = 'execution=' + this.lastFlowResponse.execution + '&_eventId=save&login=' + login + '&password=' + password;
+    let toSend = 'execution=' + this.lastFlowResponse.execution + '&_eventId=save&login=' + encodeURIComponent(login) + '&password=' + encodeURIComponent(password);
     let email = window.localStorage.getItem('email');
     let code = window.localStorage.getItem('code');
     window.localStorage.removeItem('email');
@@ -66,7 +66,7 @@ export class FlowService extends RequestBase {
 
   getParameter(param: string, user: User): string {
     if (user[param] && user[param] != '') {
-      return '&' + param + '=' + user[param];
+      return '&' + param + '=' + encodeURIComponent(user[param]);
     }
     return '&' + param + '=';
   }
