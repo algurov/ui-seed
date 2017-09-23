@@ -112,7 +112,7 @@ export class FlowService extends RequestBase {
     // console.log(toSend);
 
     let opts = this.createOptions(body);
-    return this.http.post(SEED_BASE_URL + '/seed/registration', body).map(res => res.json())
+    return this.http.post(SEED_BASE_URL + '/seed/registration', opts).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
