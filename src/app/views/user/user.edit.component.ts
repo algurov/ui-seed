@@ -69,6 +69,18 @@ submitForm() {
   this.submitBtn.nativeElement.click();
 }
 
+collectDataFromChipContact(data: Array<any>) : Array<any> {
+  if (data) {
+    let result = new Array<any>();
+    data.forEach(item => {
+      result.push({1: item.value});
+    });
+  return result;
+} else {
+  return null;
+}
+}
+
 collectDataFromChip(data: Array<any>) : Array<string> {
   if (data) {
     let result = new Array<string>();
@@ -94,18 +106,20 @@ collectDataFromRoleSelect(data : Array<any>) : Array<string>{
 }
 
 submitAction() {
-  if (this.userForm.valid) {
+  //if (this.userForm.valid) {
     this.currentUser.email = this.userForm.get('email').value;
     this.currentUser.role = this.collectDataFromRoleSelect(this.userForm.get('role').value);
     this.currentUser.userGivenName = this.userForm.get('userGivenName').value;
     this.currentUser.userFamilyName = this.userForm.get('userFamilyName').value;
     this.currentUser.userSurName = this.userForm.get('userSurName').value;
     this.currentUser.address = this.userForm.get('address').value;
-    this.currentUser.phoneNumber = this.collectDataFromChip(this.userForm.get('phoneNumber').value);
+    this.currentUser.phoneNumber = this.collectDataFromChipContact(this.userForm.get('phoneNumber').value);
     this.currentUser.position = this.collectDataFromChip(this.userForm.get('position').value);
     this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
+    this.currentUser.contact = this.currentUser.phoneNumber;
+    this.currentUser.contact.push({3 : this.currentUser.address});
     this.flow.sendNewUser(this.currentUser);
-  }
+//  }
 }
 
 ngAfterContentInit() {

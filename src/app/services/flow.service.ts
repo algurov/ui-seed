@@ -76,6 +76,7 @@ export class FlowService extends RequestBase {
     //return '&' + param + '=';
     body.set(param, '');
   }
+
   sendNewUser(user: User): Subscription {
     let body = new URLSearchParams();
     body.set('execution', this.lastFlowResponse.execution);
@@ -84,10 +85,11 @@ export class FlowService extends RequestBase {
     this.getParameter('userGivenName', user, body);
     this.getParameter('userSurName', user, body);
     this.getParameter('userFamilyName', user, body);
-    this.getParameter('phoneNumber', user, body);
+    //this.getParameter('phoneNumber', user, body);
     this.getParameter('position', user, body);
-    this.getParameter('address', user, body);
+    //this.getParameter('address', user, body);
     this.getParameter('branchOffice', user, body);
+    this.getParameter('contact', user, body);
     console.log(body);
     // let toSend = 'execution=' + this.lastFlowResponse.execution
     //   + '&_eventId=do&email=' + user.email

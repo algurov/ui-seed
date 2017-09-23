@@ -12,6 +12,7 @@ export class User{
   role: Array<string>;
   position: Array<string>;
   branchOffice: Array<string>;
+  contact: Array<any>;
   email: string;
 
   public getShortName() : string {
