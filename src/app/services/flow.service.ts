@@ -72,6 +72,7 @@ export class FlowService extends RequestBase {
     if (user[param] && user[param] != '') {
       //return '&' + param + '=' + encodeURIComponent(user[param]);
       body.set(param, user[param]);
+      return;
     }
     //return '&' + param + '=';
     body.set(param, '');
