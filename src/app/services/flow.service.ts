@@ -87,7 +87,8 @@ export class FlowService extends RequestBase {
     this.getParameter('userSurName', user, body);
     this.getParameter('userFamilyName', user, body);
     //this.getParameter('phoneNumber', user, body);
-    this.getParameter('position', user, body);
+    body.set('position', '');
+    //this.getParameter('position', user, body);
     //this.getParameter('address', user, body);
     this.getParameter('branchOffice', user, body);
     this.getParameter('contact', user, body);
