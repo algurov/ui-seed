@@ -98,13 +98,7 @@ export class FlowService extends RequestBase {
     body.set('position', '');
     //this.getParameter('position', user, body);
     //this.getParameter('address', user, body);
-    let str = '';
-    for(var f in user.contact) {
-      str += f + ':' + user.contact[f] + ',';
-    }
-    str = str.substring(0, str.length - 1);
-    str = '{' + str + '}';
-    body.set('contact', str)
+    body.set('contact', JSON.stringify(user.contact));
     //this.getParameter('contact', user, body);
     console.log(body);
     // let toSend = 'execution=' + this.lastFlowResponse.execution
