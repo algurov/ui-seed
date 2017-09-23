@@ -36,14 +36,18 @@ export class FlowService extends RequestBase {
   }
 
   sendLoginAndPassword(login: string, password: string): Subscription {
-    let toSend = 'execution=' + this.lastFlowResponse.execution + '&_eventId=save&login=' + encodeURIComponent(login) + '&password=' + encodeURIComponent(password);
+    let body = new URLSearchParams();
+    body.set('execution', this.lastFlowResponse.execution);
+    body.set('login', login);
+    body.set('password', password);
+    ///let toSend = 'execution=' + this.lastFlowResponse.execution + '&_eventId=save&login=' + encodeURIComponent(login) + '&password=' + encodeURIComponent(password);
     let email = window.localStorage.getItem('email');
     let code = window.localStorage.getItem('code');
     window.localStorage.removeItem('email');
     window.localStorage.removeItem('code');
     let opts = this.createOptions();
     return this.http.post(SEED_BASE_URL + '/seed/registrationCompletionByLink?email='
-      + email + '&code=' + code, toSend, opts).map(res => res.json())
+      + email + '&code=' + code, body).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
@@ -64,27 +68,41 @@ export class FlowService extends RequestBase {
     }
   }
 
-  getParameter(param: string, user: User): string {
+  getParameter(param: string, user: User, body: URLSearchParams) {
     if (user[param] && user[param] != '') {
-      return '&' + param + '=' + encodeURIComponent(user[param]);
+      //return '&' + param + '=' + encodeURIComponent(user[param]);
+      body.set(param, user[param]);
     }
-    return '&' + param + '=';
+    //return '&' + param + '=';
+    body.set(param, '');
   }
   sendNewUser(user: User): Subscription {
+    let body = new URLSearchParams();
+    body.set('execution', this.lastFlowResponse.execution);
+    this.getParameter('email', user, body);
+    body.set('role', this.convertArrayToString(user.role));
+    this.getParameter('userGivenName', user, body);
+    this.getParameter('userSurName', user, body);
+    this.getParameter('userFamilyName', user, body);
+    this.getParameter('phoneNumber', user, body);
+    this.getParameter('position', user, body);
+    this.getParameter('address', user, body);
+    this.getParameter('branchOffice', user, body);
+    console.log(body);
+    // let toSend = 'execution=' + this.lastFlowResponse.execution
+    //   + '&_eventId=do&email=' + user.email
+    //   + '&role=' + this.convertArrayToString(user.role)
+    //   + this.getParameter('userGivenName', user)
+    //   + this.getParameter('userSurName', user)
+    //   + this.getParameter('userFamilyName', user)
+    //   + this.getParameter('phoneNumber', user)
+    //   + this.getParameter('position', user)
+    //   + this.getParameter('address', user)
+    //   + this.getParameter('branchOffice', user);
+    // console.log(toSend);
 
-    let toSend = 'execution=' + this.lastFlowResponse.execution
-      + '&_eventId=do&email=' + user.email
-      + '&role=' + this.convertArrayToString(user.role)
-      + this.getParameter('userGivenName', user)
-      + this.getParameter('userSurName', user)
-      + this.getParameter('userFamilyName', user)
-      + this.getParameter('phoneNumber', user)
-      + this.getParameter('position', user)
-      + this.getParameter('address', user)
-      + this.getParameter('branchOffice', user);
-    console.log(toSend);
-    let opts = this.createOptions();
-    return this.http.post(SEED_BASE_URL + '/seed/registration', toSend, opts).map(res => res.json())
+    let opts = this.createOptions(body);
+    return this.http.post(SEED_BASE_URL + '/seed/registration', body).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
