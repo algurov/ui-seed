@@ -36,12 +36,6 @@ export class MainViewComponent {
     }
   }
 
-  logout() {
-    localStorage.removeItem('currentUser');
-    this.router.navigate(['/login']);
-    this.auth.logout();
-  }
-  
   changeSidenavContent() {
     this.side.close();
   }

@@ -56,6 +56,7 @@ export const menuItems = [
     icon: 'logout',
     activator: 5,
     sub: [],
-    top: false
+    top: false,
+    action: 'logout'
   }
 ];

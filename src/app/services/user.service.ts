@@ -45,17 +45,18 @@ export class UserService extends RequestBase {
   }
 
   getUserById(id): Observable<User>{
-    return this.http.get(`${API_BASE_URL}/user-provisioning/user/` + id)
+    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/user/` + id)
     .map(res => res.json());
   }
 
   getAllUsers(): Observable<User[]>{
-    return this.http.get(`${API_BASE_URL}/user-provisioning/user`)
-    .map(res => res.json());
+    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/user`).map(res => res.json());
+    // return this.http.get(`${API_BASE_URL}/user-provisioning/user`)
+    // .map(res => res.json());
   }
 
   getRoleById(id): Observable<Role> {
-    return this.http.get(`${API_BASE_URL}/user-provisioning/role` + id).map(res => res.json());
+    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role` + id).map(res => res.json());
   }
 
   getAllRoles(): Observable<Role[]> {
@@ -64,7 +65,7 @@ export class UserService extends RequestBase {
   }
 
   createRole(role: Role): Observable<Role> {
-    return this.http.post(`${API_BASE_URL}/user-provisioning/role`, JSON.stringify(role), this.options)
+    return this.http.post(`${PROVISIONING_BASE_URL}/user-provisioning/role`, JSON.stringify(role), this.options)
     .map(res => res.json());
   }
 
@@ -73,8 +74,8 @@ export class UserService extends RequestBase {
     .map(res => res.json());
   }
 
-  updateUser(user: User): Observable<User> {
-    return this.http.put(`${API_BASE_URL}/user-provisioning/user/`+ user.id, JSON.stringify(user), this.options)
+  updateUser(user): Observable<User> {
+    return this.http.put(`${PROVISIONING_BASE_URL}/user-provisioning/user/`+ user.id, JSON.stringify(user), this.options)
     .map(res => res.json());
   }
 
@@ -94,7 +95,7 @@ export class UserService extends RequestBase {
   }
 
   deleteUserById(id) {
-    this.http.delete(`${API_BASE_URL}/user-provisioning/user/` + id);
+    this.http.delete(`${PROVISIONING_BASE_URL}/user-provisioning/user/` + id);
   }
 
   deleteUser(user: User) {

@@ -1,6 +1,8 @@
+import { Serializable } from './serializable';
+
 const SUCCESS = 'success';
 
-export class FlowResponse{
+export class FlowResponse implements Serializable<FlowResponse>{
   execution: string;
   view: View;
   form: Form;
@@ -32,6 +34,10 @@ export class FlowResponse{
       this.fillObj(jsonObj);
   }
 
+  deserialize(input) {
+    return this;
+  }
+
   fillObj(jsonObj) {
     this.execution = jsonObj.execution;
     this.serverUrl = jsonObj.serverUrl;
@@ -45,7 +51,7 @@ export class FlowResponse{
   }
 }
 
-export class View {
+export class View implements Serializable<View>{
   reason: string;
   code: number;
   nextSendAfter: number;
@@ -59,9 +65,16 @@ export class View {
   constructor(jsonObj) {
     this.fillObj(jsonObj);
   }
+
+  deserialize(input) {
+    this.code = input.code;
+    this.reason = input.reason;
+    this.nextSendAfter = input.nextSendAfter;
+    return this;
+  }
 }
 
-export class Form {
+export class Form implements Serializable<Form>{
   name: string;
   fields: any;
   errors: any;
@@ -74,5 +87,12 @@ export class Form {
 
   constructor(jsonObj) {
     this.fillObj(jsonObj);
+  }
+
+  deserialize(input) {
+    this.errors = input.errors;
+    this.fields = input.fields;
+    this.name = input.name;
+    return this;
   }
 }

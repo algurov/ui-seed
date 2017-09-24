@@ -2,9 +2,11 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { DialogService } from '../../services/dialog.service';
 import { MainService } from '../../services/main.service';
+import { AuthService } from '../../services/auth.service';
 import { StringService } from '../../services/string.service';
 import { MdSidenav } from '@angular/material';
 import { menuItems } from './menu.items';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'panel',
@@ -17,7 +19,8 @@ export class PanelComponent {
 
 topViews: Array<any> = new Array();
 botViews: Array<any> = new Array();
-constructor(public dlgService: DialogService, public main : MainService, public stringService: StringService){
+constructor(public dlgService: DialogService, public main : MainService, public stringService: StringService,
+  public router : Router, public auth : AuthService){
   menuItems.forEach(item => {
     if (item.top) {
       this.topViews.push(item);
@@ -56,8 +59,16 @@ generateHtmlForMenu(title: string, items: Array<any>): string {
     return result;
 }
 
-showDlg() {
-      this.dlgService.showMessageDlg('My title', 'My message');
+performAction(item) {
+  switch(item.action) {
+    case 'logout': this.logout(); break;
+  }
+}
+
+logout() {
+  localStorage.removeItem('currentUser');
+  this.router.navigate(['/login']);
+  this.auth.logout();
 }
 
 }

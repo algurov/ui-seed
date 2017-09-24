@@ -9,6 +9,7 @@ import { UserEditComponent } from './views/user/user.edit.component';
 import { UserCardComponent } from './widgets/user-card/user.card.component';
 import { UserListComponent } from './views/user/list/user.list.component';
 import { LoadingComponent } from './widgets/loading/loading.component';
+import { TableComponent } from './widgets/table/table.component';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -20,5 +21,6 @@ export const APP_DECLARATIONS = [
   UserEditComponent,
   UserCardComponent,
   UserListComponent,
-  LoadingComponent
+  LoadingComponent,
+  TableComponent
 ];

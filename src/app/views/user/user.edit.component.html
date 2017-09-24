@@ -5,8 +5,8 @@
       <div fxFlex></div>
       <div fxLayout="row" fxLayoutAlign="space-around center">
         <div fxFlex ></div>
-        <button class="remove-button row-item" fxFlex="1 1 30%" md-button
-        (click)="buttonClicked()">{{stringService.get('USER_REMOVE_BTN')}}</button>
+        <button class="remove-button row-item" fxFlex="1 1 30%" md-button *ngIf="id"
+        (click)="removeUser(id)">{{stringService.get('USER_REMOVE_BTN')}}</button>
         <button class="save-button row-item" fxFlex="1 1 30%" md-button
         (click)="submitForm()">{{stringService.get('USER_EDIT_BTN')}}</button>
         <div fxFlex></div>
@@ -51,13 +51,13 @@
               <input formControlName="email" type="email" mdInput placeholder=
               "{{stringService.get('USER_EMAIL')}}"/>
             </md-form-field>
-            <button class="save-button row-item" disabled="true" fxFlex="1 1 30%" fxLayoutAlign="center end" md-button
-            (click)="buttonClicked()">{{stringService.get('RESET_PASS_BTN')}}</button>
+            <button *ngIf="id" class="save-button row-item" fxFlex="1 1 30%" fxLayoutAlign="center end" md-button
+            (click)="resetPassword()">{{stringService.get('RESET_PASS_BTN')}}</button>
           </div>
             <div fxFlex="40%"></div>
         </div>
         <div fxLayout="column">
-          <md-select formControlName="branchOffice" class="pad-bot row-item" placeholder="{{stringService.get('SELECT_DEPARTMENT')}}">
+          <md-select formControlName="branchOffice" disabled="true" class="pad-bot row-item" placeholder="{{stringService.get('SELECT_DEPARTMENT')}}">
             <md-option *ngFor="let department of departments" [value]="department">
               {{ department }}
             </md-option>
@@ -67,8 +67,8 @@
           <tag-input class="pad-bot row-item" (onAdd)="updateUserProfessions($event)" addOnBlur="true" formControlName="position" placeholder="{{stringService.get('ADD_PROFESSION')}}" secondaryPlaceholder="{{stringService.get('ADD_PROFESSION')}}"></tag-input>
         </div>
         <div fxLayout="column">
-          <md-select formControlName="role" class="pad-bot row-item" multiple placeholder="{{stringService.get('SELECT_ROLE')}}">
-            <md-option *ngFor="let role of roles" [value]="role">
+          <md-select [(ngModel)]="selectedRoles" formControlName="role" class="pad-bot row-item" multiple placeholder="{{stringService.get('SELECT_ROLE')}}">
+            <md-option *ngFor="let role of roles" [value]="role.id">
               {{ role.roleName }}
             </md-option>
           </md-select>

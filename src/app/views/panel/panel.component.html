@@ -11,7 +11,7 @@
     </div>
     <div fxFlex="30%">
       <div fxLayout="column" fxLayoutAlign="end center" fxLayoutAlign.xs="center center" fxLayout.xs="column" class="menu-div" *ngFor="let item of botViews"
-        mdTooltip="{{stringService.get(item.name)}}" mdTooltipPosition="right" (click)="toggleSideNav(item)">
+        mdTooltip="{{stringService.get(item.name)}}" mdTooltipPosition="right" (click)="item.action? performAction(item) : toggleSideNav(item)">
           <md-icon class="menu-icon md-light" svgIcon="{{item.icon}}"></md-icon>
         </div>
     </div>

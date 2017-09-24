@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { SEED_BASE_URL, API_BASE_URL, AUTH_SERVER_URL, AUTH_CONSUMER_URL, STATES } from './constants';
 import { FlowResponse } from '../models/flow.response';
 import { User } from '../models/user';
+import { UserToSend } from '../views/user/user.edit.component';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { DialogService } from './dialog.service';
 
@@ -55,7 +56,7 @@ export class FlowService extends RequestBase {
   }
 
   aksNewUser(): Subscription {
-    return this.http.get(SEED_BASE_URL+ '/seed/registration', this.createOptions()).map(res => res.json())
+    return this.http.get(SEED_BASE_URL + '/seed/registration', this.createOptions()).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
@@ -71,7 +72,7 @@ export class FlowService extends RequestBase {
     }
   }
 
-  getParameter(param: string, user: User, body: URLSearchParams) {
+  getParameter(param: string, user: UserToSend, body: URLSearchParams) {
     if (user[param] && user[param] != '') {
       if(user[param] instanceof Array) {
         if (user[param].length <= 0) {
@@ -87,45 +88,20 @@ export class FlowService extends RequestBase {
     body.set(param, '');
   }
 
-  sendNewUser(user: User): Subscription {
+  sendNewUser(user: UserToSend): Subscription {
     let body = new URLSearchParams();
     body.set('execution', this.lastFlowResponse.execution);
     body.set('_eventId', 'do');
     this.getParameter('email', user, body);
-    //body.set('email', 'qq@qq');
-    body.set('role', this.convertArrayToString(user.role));
+    body.set('role', user.role);
     this.getParameter('userSurName', user, body);
     this.getParameter('userGivenName', user, body);
     this.getParameter('userFamilyName', user, body);
-    this.getParameter('branchOffice', user, body);
-    //this.getParameter('phoneNumber', user, body);
-    //body.set('userSurName', '');
-    // body.set('userGivenName', '');
-    // body.set('userFamilyName', '');
-    // body.set('branchOffice', '');
-    //body.set('position', '');
+    body.set('branchOffice', '');
     this.getParameter('position', user, body);
-    //this.getParameter('address', user, body);
-    let str = '';
-    for(var f in user.contact) {
-      str += f + ':' + user.contact[f] + ',';
-    }
-    str = str.substring(0, str.length - 1);
-    str = '{' + str + '}';
-    body.set('contact', str);
-    //this.getParameter('contact', user, body);
+    body.set('contact', user.contact);
+
     console.log(body);
-    // let toSend = 'execution=' + this.lastFlowResponse.execution
-    //   + '&_eventId=do&email=' + user.email
-    //   + '&role=' + this.convertArrayToString(user.role)
-    //   + this.getParameter('userGivenName', user)
-    //   + this.getParameter('userSurName', user)
-    //   + this.getParameter('userFamilyName', user)
-    //   + this.getParameter('phoneNumber', user)
-    //   + this.getParameter('position', user)
-    //   + this.getParameter('address', user)
-    //   + this.getParameter('branchOffice', user);
-    // console.log(toSend);
     console.log(body.toString());
 
     let opts = this.createOptions(body);
@@ -153,6 +129,7 @@ export class FlowService extends RequestBase {
     }
     if (flowResponse.isSuccess()) {
       this.dlgService.showMessageDlg('Success', 'Action performed');
+      this.navigateToState(this.lastFlowResponse.step + '_success');
       return;
     }
     if (this.lastFlowResponse) {

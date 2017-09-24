@@ -8,3 +8,10 @@
 .save-button:disabled {
   background-color: gray;
 }
+
+.list-item {
+  border-bottom: solid 2px;
+  :hover {
+    cursor: pointer;
+  }
+}

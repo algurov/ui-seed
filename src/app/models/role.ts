@@ -1,11 +1,24 @@
 import { User } from './user';
+import { Serializable } from './serializable';
 
-export class Role {
+export class Role implements Serializable<Role>{
   roleName: string;
   id: number;
   users: User[];
 
-  constructor(name: string){
-    this.roleName = name;
+  constructor() {}
+
+  deserialize(input) {
+    let users = new Array<User>();
+
+    this.id = input.id;
+    this.roleName = input.roleName;
+    if (input.users) {
+      input.users.forEach(item => {
+        let user = new User().deserialize(item);
+        this.users.push(user);
+      });
+    }
+    return this;
   }
 }
