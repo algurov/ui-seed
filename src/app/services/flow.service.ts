@@ -50,7 +50,7 @@ export class FlowService extends RequestBase {
   headers.append('Content-Type',
      'application/x-www-form-urlencoded');
     return this.http.post(SEED_BASE_URL + '/seed/registrationCompletionByLink?email='
-      + email + '&code=' + code, body.toSting(), {headers:headers, withCredentials: true}).map(res => res.json())
+      + email + '&code=' + code, body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
