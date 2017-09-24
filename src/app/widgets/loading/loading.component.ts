@@ -22,7 +22,7 @@ ngOnInit() {
   var code = this.router.parseUrl(this.router.url).queryParams['code'];
   window.localStorage.setItem('email', email);
   window.localStorage.setItem('code', code);
-  this.flow.startRegistartion(email, code);
+  this.flow.startRegistartion(this.router.url);
 
 }
 

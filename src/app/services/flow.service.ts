@@ -29,8 +29,8 @@ export class FlowService extends RequestBase {
     return flowOptions;
   }
 
-  startRegistartion(email, code): Subscription {
-    return this.http.get(SEED_BASE_URL + '/seed/registrationCompletionByLink?code=' + code, this.createOptions())
+  startRegistartion(code): Subscription {
+    return this.http.get(SEED_BASE_URL + '/seed'+ code, this.createOptions())
       .map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
@@ -49,8 +49,7 @@ export class FlowService extends RequestBase {
     let headers = new Headers();
   headers.append('Content-Type',
      'application/x-www-form-urlencoded');
-    return this.http.post(SEED_BASE_URL + '/seed/registrationCompletionByLink?email='
-      + email + '&code=' + code, body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
+    return this.http.post(SEED_BASE_URL + '/seed/registrationCompletionByLink?code=' + code, body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
