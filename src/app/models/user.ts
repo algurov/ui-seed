@@ -11,7 +11,7 @@ export class User implements Serializable<User>{
   userFamilyName: string = "";
   password: string;
   roles: Array<Role> = new Array<Role>();
-  roleId : Array<number> = new Array<number>();
+  //roleId : Array<number> = new Array<number>();
   position: Array<string> = new Array<string>();
   branchOffice: BranchOffice;
   contact: Array<Contact> = new Array<Contact>();
@@ -42,7 +42,7 @@ export class User implements Serializable<User>{
 
   addRole(role : Role) {
     this.roles.push(role);
-    this.roleId.push(role.id);
+  //  this.roleId.push(role.id);
   }
 
   getRolesId() : Array<number> {
@@ -99,7 +99,7 @@ export class User implements Serializable<User>{
     if (input.role) {
       input.role.forEach(item => {
         this.roles.push(new Role().deserialize(item));
-        this.roleId.push(+item.id);
+        //this.roleId.push(+item.id);
       })
     }
     if (input.contact) {

@@ -251,7 +251,7 @@ export class UserToSend {
     this.userFamilyName = user.userFamilyName;
     this.branchOffice = user.branchOffice.id + '';
     this.position = this.stringArrayToString(user.position);
-    this.role = this.numberArrayToString(user.roleId);
+    this.role = this.objectArrayToIdString(user.roles);
     this.contact = this.contactArrayToString(user.contact);
     return this;
   }
