@@ -11,7 +11,6 @@ export class User implements Serializable<User>{
   userFamilyName: string = "";
   password: string;
   roles: Array<Role> = new Array<Role>();
-  //roleId : Array<number> = new Array<number>();
   position: Array<string> = new Array<string>();
   branchOffice: BranchOffice;
   contact: Array<Contact> = new Array<Contact>();

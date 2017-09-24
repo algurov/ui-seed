@@ -30,7 +30,7 @@ export class FlowService extends RequestBase {
   }
 
   startRegistartion(email, code): Subscription {
-    return this.http.get(SEED_BASE_URL + '/seed/registrationCompletionByLink?&code=' + code, this.createOptions())
+    return this.http.get(SEED_BASE_URL + '/seed/registrationCompletionByLink?code=' + code, this.createOptions())
       .map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
