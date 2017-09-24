@@ -46,8 +46,11 @@ export class FlowService extends RequestBase {
     window.localStorage.removeItem('email');
     window.localStorage.removeItem('code');
     let opts = this.createOptions();
+    let headers = new Headers();
+  headers.append('Content-Type',
+     'application/x-www-form-urlencoded');
     return this.http.post(SEED_BASE_URL + '/seed/registrationCompletionByLink?email='
-      + email + '&code=' + code, body).map(res => res.json())
+      + email + '&code=' + code, body.toSting(), {headers:headers, withCredentials: true}).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
