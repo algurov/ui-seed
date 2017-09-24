@@ -51,7 +51,7 @@ export class FlowService extends RequestBase {
     headers.append('Content-Type',
      'application/x-www-form-urlencoded');
      headers.append('Access-Control-Allow-Origin', '*');
-    return this.http.post(SEED_BASE_URL  + '/seed/registrationCompletionByLink?code=' + code, body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
+    return this.http.post(SEED_BASE_URL + '/seed/registrationCompletionByLink', body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
