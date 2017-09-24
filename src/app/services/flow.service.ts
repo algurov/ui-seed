@@ -30,7 +30,7 @@ export class FlowService extends RequestBase {
   }
 
   startRegistartion(code): Subscription {
-    return this.http.get(SEED_BASE_URL + '/seed'+ code, this.createOptions())
+    return this.http.get('http://82.202.236.172:8080'+ '/seed'+ code, this.createOptions())
       .map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
@@ -38,6 +38,7 @@ export class FlowService extends RequestBase {
   sendLoginAndPassword(login: string, password: string): Subscription {
     let body = new URLSearchParams();
     body.set('execution', this.lastFlowResponse.execution);
+    body.set('_eventId', 'save');
     body.set('login', login);
     body.set('password', password);
     ///let toSend = 'execution=' + this.lastFlowResponse.execution + '&_eventId=save&login=' + encodeURIComponent(login) + '&password=' + encodeURIComponent(password);
@@ -47,9 +48,10 @@ export class FlowService extends RequestBase {
     window.localStorage.removeItem('code');
     let opts = this.createOptions();
     let headers = new Headers();
-  headers.append('Content-Type',
+    headers.append('Content-Type',
      'application/x-www-form-urlencoded');
-    return this.http.post(SEED_BASE_URL + '/seed/registrationCompletionByLink?code=' + code, body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
+     headers.append('Access-Control-Allow-Origin', '*');
+    return this.http.post('http://82.202.236.172:8080' + '/seed/registrationCompletionByLink?code=' + code, body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
