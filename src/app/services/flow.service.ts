@@ -52,7 +52,7 @@ export class FlowService extends RequestBase {
   }
 
   aksNewUser(): Subscription {
-    return this.http.get(SEED_BASE_URL + '/seed/registration', this.createOptions()).map(res => res.json())
+    return this.http.get(SEED_BASE_URL+ '/seed/registration', this.createOptions()).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
@@ -88,20 +88,20 @@ export class FlowService extends RequestBase {
     let body = new URLSearchParams();
     body.set('execution', this.lastFlowResponse.execution);
     body.set('_eventId', 'do');
-    //this.getParameter('email', user, body);
-    body.set('email', user.email);
+    this.getParameter('email', user, body);
+    //body.set('email', 'qq@qq');
     body.set('role', this.convertArrayToString(user.role));
-    // this.getParameter('userSurName', user, body);
-    // this.getParameter('userGivenName', user, body);
-    // this.getParameter('userFamilyName', user, body);
-    // this.getParameter('branchOffice', user, body);
+    this.getParameter('userSurName', user, body);
+    this.getParameter('userGivenName', user, body);
+    this.getParameter('userFamilyName', user, body);
+    this.getParameter('branchOffice', user, body);
     //this.getParameter('phoneNumber', user, body);
-    body.set('userSurName', '');
-    body.set('userGivenName', '');
-    body.set('userFamilyName', '');
-    body.set('branchOffice', '');
-    body.set('position', '');
-    //this.getParameter('position', user, body);
+    //body.set('userSurName', '');
+    // body.set('userGivenName', '');
+    // body.set('userFamilyName', '');
+    // body.set('branchOffice', '');
+    //body.set('position', '');
+    this.getParameter('position', user, body);
     //this.getParameter('address', user, body);
     let str = '';
     for(var f in user.contact) {
@@ -109,7 +109,7 @@ export class FlowService extends RequestBase {
     }
     str = str.substring(0, str.length - 1);
     str = '{' + str + '}';
-    body.set('contact', '');
+    body.set('contact', str);
     //this.getParameter('contact', user, body);
     console.log(body);
     // let toSend = 'execution=' + this.lastFlowResponse.execution
@@ -124,11 +124,12 @@ export class FlowService extends RequestBase {
     //   + this.getParameter('branchOffice', user);
     // console.log(toSend);
     console.log(body.toString());
-    let opts = this.createOptions();
+
+    let opts = this.createOptions(body);
     let headers = new Headers();
   headers.append('Content-Type',
      'application/x-www-form-urlencoded');
-    return this.http.post(SEED_BASE_URL + '/seed/registration', body.toString(), {headers: headers}).map(res => res.json())
+    return this.http.post(SEED_BASE_URL + '/seed/registration',body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
