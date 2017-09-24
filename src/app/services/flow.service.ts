@@ -88,17 +88,28 @@ export class FlowService extends RequestBase {
     let body = new URLSearchParams();
     body.set('execution', this.lastFlowResponse.execution);
     body.set('_eventId', 'do');
-    this.getParameter('email', user, body);
+    //this.getParameter('email', user, body);
+    body.set('email', user.email);
     body.set('role', this.convertArrayToString(user.role));
-    this.getParameter('userSurName', user, body);
-    this.getParameter('userGivenName', user, body);
-    this.getParameter('userFamilyName', user, body);
-    this.getParameter('branchOffice', user, body);
+    // this.getParameter('userSurName', user, body);
+    // this.getParameter('userGivenName', user, body);
+    // this.getParameter('userFamilyName', user, body);
+    // this.getParameter('branchOffice', user, body);
     //this.getParameter('phoneNumber', user, body);
+    body.set('userSurName', '');
+    body.set('userGivenName', '');
+    body.set('userFamilyName', '');
+    body.set('branchOffice', '');
     body.set('position', '');
     //this.getParameter('position', user, body);
     //this.getParameter('address', user, body);
-    body.set('contact', JSON.stringify(user.contact));
+    let str = '';
+    for(var f in user.contact) {
+      str += f + ':' + user.contact[f] + ',';
+    }
+    str = str.substring(0, str.length - 1);
+    str = '{' + str + '}';
+    body.set('contact', '');
     //this.getParameter('contact', user, body);
     console.log(body);
     // let toSend = 'execution=' + this.lastFlowResponse.execution
