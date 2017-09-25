@@ -6,7 +6,8 @@ import { AuthService } from '../../services/auth.service';
 import { StringService } from '../../services/string.service';
 import { MdSidenav } from '@angular/material';
 import { menuItems } from './menu.items';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Component({
   selector: 'panel',
@@ -66,8 +67,9 @@ performAction(item) {
 }
 
 logout() {
+  Cookie.deleteAll();
   window.document.cookie = '';
-  this.router.navigate(['/login']);
+  this.router.navigateByUrl('/login');
   this.auth.logout();
 }
 
