@@ -54,9 +54,11 @@ export class FlowResponse implements Serializable<FlowResponse>{
 export class View implements Serializable<View>{
   reason: string;
   code: number;
+  error: string;
   nextSendAfter: number;
 
   fillObj(jsonObj) {
+    this.error = jsonObj.error;
     this.reason = jsonObj.reason;
     this.code = jsonObj.code;
     this.nextSendAfter = jsonObj.nextSendAfter;
@@ -67,6 +69,7 @@ export class View implements Serializable<View>{
   }
 
   deserialize(input) {
+    this.error = input.error;
     this.code = input.code;
     this.reason = input.reason;
     this.nextSendAfter = input.nextSendAfter;

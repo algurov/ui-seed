@@ -117,7 +117,7 @@ export class FlowService extends RequestBase {
     let flowResponse = new FlowResponse(response);
     if (flowResponse.step == 'fail') {
       if (flowResponse.view) {
-        this.dlgService.showMessageDlg('Error ' + flowResponse.view.code, flowResponse.view.reason);
+        this.dlgService.showMessageDlg('Error ', flowResponse.view.error);
       } else {
         this.dlgService.showMessageDlg('Error', 'Something went wrong');
       }
@@ -125,7 +125,7 @@ export class FlowService extends RequestBase {
       return;
     }
     if (flowResponse.isError()) {
-      this.dlgService.showMessageDlg('Error ' + flowResponse.view.code, flowResponse.view.reason);
+      this.dlgService.showMessageDlg('Error', flowResponse.view.error);
     }
     if (flowResponse.isSuccess()) {
       //this.dlgService.showMessageDlg('Success', 'Action performed');

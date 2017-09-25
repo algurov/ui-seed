@@ -68,8 +68,8 @@ performAction(item) {
 }
 
 logout() {
-  Cookie.deleteAll();
-  window.document.cookie = '';
+  //Cookie.deleteAll();
+  //window.document.cookie = '';
   this.auth.logout().subscribe(res => {
     window.location.href = API_BASE_URL;
   });
