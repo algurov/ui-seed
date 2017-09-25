@@ -66,6 +66,7 @@ performAction(item) {
 }
 
 logout() {
+  window.document.cookie = '';
   this.router.navigate(['/login']);
   this.auth.logout();
 }
