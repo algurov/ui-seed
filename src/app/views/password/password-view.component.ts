@@ -8,6 +8,7 @@ import { StringService } from '../../services/string.service';
 import { UserService } from '../../services/user.service';
 import { FlowService } from '../../services/flow.service';
 import * as bcryptjs from 'bcryptjs';
+import { Md5 } from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'password-view',
@@ -35,7 +36,8 @@ export class PasswordViewComponent {
     if (this.passwordForm.valid) {
       let login = this.passwordForm.get('login').value;
       let pass = this.passwordForm.get('password').value;
-      pass = bcryptjs.hashSync(pass, 8);
+      //pass = bcryptjs.hashSync(pass, 8);
+      pass = Md5.hashStr(pass);
       this.flow.sendLoginAndPassword(login, pass);
     }
   }

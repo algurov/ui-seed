@@ -17,6 +17,6 @@ export class AuthService extends RequestBase {
   }
 
   logout(): void {
-    window.document.cookie = '';
+    this.http.post(AUTH_SERVER_URL +'/auth-server/logout', {}, {withCredentials: true}).subscribe(res=>console.log('Logged out'));
   }
 }

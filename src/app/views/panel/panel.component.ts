@@ -66,7 +66,6 @@ performAction(item) {
 }
 
 logout() {
-  localStorage.removeItem('currentUser');
   this.router.navigate(['/login']);
   this.auth.logout();
 }

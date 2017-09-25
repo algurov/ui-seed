@@ -226,7 +226,7 @@ resetPassword() {
   this.dlgService.showMessageDlg('Not implemented', 'Reset password');
 }
 removeUser(id) {
-  this.dlgService.showMessageDlg('Not implemented', 'Remove action');
+  this.usrService.deleteUserById(this.currentUser.id);
 }
 
 ngAfterContentInit() {
