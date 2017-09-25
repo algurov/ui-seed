@@ -50,6 +50,11 @@ export class UserService extends RequestBase {
     .map(res => res.json());
   }
 
+  getUserByIdFull(id): Observable<User>{
+    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/user/` + id +'/full')
+    .map(res => res.json());
+  }
+
   getAllUsers(): Observable<User[]>{
     return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/user`).map(res => res.json());
     // return this.http.get(`${API_BASE_URL}/user-provisioning/user`)

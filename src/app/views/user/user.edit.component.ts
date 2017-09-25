@@ -79,7 +79,7 @@ ngOnInit() {
   this.route.params.subscribe(params => {
       if (params['id']) {
         this.id = +params['id'];
-       this.usrService.getUserById(this.id).subscribe(res=> {
+       this.usrService.getUserByIdFull(this.id).subscribe(res=> {
          console.log(res);
          this.currentUser = new User().deserialize(res);
          this.fillForm(this.currentUser);
