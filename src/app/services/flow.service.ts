@@ -10,11 +10,13 @@ import { User } from '../models/user';
 import { UserToSend } from '../views/user/user.edit.component';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { DialogService } from './dialog.service';
+import { MdSnackBar } from '@angular/material';
 
 @Injectable()
 export class FlowService extends RequestBase {
   lastFlowResponse: FlowResponse;
-  constructor(public http: Http, public router: Router, public dlgService: DialogService) {
+  constructor(public http: Http, public router: Router, public dlgService: DialogService,
+  public snackBar: MdSnackBar) {
     super(http);
   }
 
@@ -128,7 +130,11 @@ export class FlowService extends RequestBase {
       this.dlgService.showMessageDlg('Error', flowResponse.view.error);
     }
     if (flowResponse.isSuccess()) {
+
       //this.dlgService.showMessageDlg('Success', 'Action performed');
+      this.snackBar.open('Success', '', {
+      duration: 2000,
+      });
       let navigateTo = this.lastFlowResponse.step + '_success';
       this.lastFlowResponse = null;
       this.navigateToState(navigateTo);
