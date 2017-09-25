@@ -8,6 +8,7 @@ import { MdSidenav } from '@angular/material';
 import { menuItems } from './menu.items';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { API_BASE_URL } from '../../services/constants';
 
 @Component({
   selector: 'panel',
@@ -69,8 +70,9 @@ performAction(item) {
 logout() {
   Cookie.deleteAll();
   window.document.cookie = '';
-  this.router.navigateByUrl('/');
-  this.auth.logout();
+  this.auth.logout().subscribe(res => {
+    window.location.href = API_BASE_URL;
+  });
 }
 
 }

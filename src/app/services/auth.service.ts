@@ -16,9 +16,9 @@ export class AuthService extends RequestBase {
       this.http.get(API_BASE_URL +'/login-main').subscribe(res=>window.location.href = res.text());
   }
 
-  logout(): void {
+  logout() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.http.post(AUTH_SERVER_BASE_URL +'/auth-server/logout', {}, {withCredentials: true}).subscribe(res=>console.log('Logged out'));
+     return this.http.post(AUTH_SERVER_BASE_URL +'/auth-server/logout', {}, {withCredentials: true});
   }
 }
