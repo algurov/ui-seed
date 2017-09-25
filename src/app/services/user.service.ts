@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 import { API_BASE_URL, PROVISIONING_BASE_URL } from '../services/constants';
 import { RequestBase } from '../services/request.base';
@@ -10,7 +11,7 @@ import { Role } from '../models/role';
 
 @Injectable()
 export class UserService extends RequestBase {
-  constructor(public http: Http) {
+  constructor(public http: Http, public router : Router) {
     super(http);
   }
 
@@ -95,7 +96,9 @@ export class UserService extends RequestBase {
   }
 
   deleteUserById(id) {
-    this.http.delete(`${PROVISIONING_BASE_URL}/user-provisioning/user/` + id);
+    this.http.delete(`${PROVISIONING_BASE_URL}/user-provisioning/user/` + id).subscribe(res => {console.log(res);
+      this.router.navigateByUrl('/main/user')
+    });
   }
 
   deleteUser(user: User) {
