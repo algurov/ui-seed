@@ -97,7 +97,7 @@ export class UserService extends RequestBase {
 
   deleteUserById(id) {
     this.http.delete(`${PROVISIONING_BASE_URL}/user-provisioning/user/` + id).subscribe(res => {console.log(res);
-      this.router.navigateByUrl('/main/user')
+      this.router.navigateByUrl('/main/user');
     });
   }
 

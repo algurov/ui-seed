@@ -69,7 +69,7 @@ performAction(item) {
 logout() {
   Cookie.deleteAll();
   window.document.cookie = '';
-  this.router.navigateByUrl('/login');
+  this.router.navigateByUrl('/');
   this.auth.logout();
 }
 

@@ -11,9 +11,9 @@ export class User implements Serializable<User>{
   userFamilyName: string = "";
   password: string;
   roles: Array<Role> = new Array<Role>();
-  position: Array<string> = new Array<string>();
+  positionList: Array<string> = new Array<string>();
   branchOffice: BranchOffice;
-  contact: Array<Contact> = new Array<Contact>();
+  contacts: Array<Contact> = new Array<Contact>();
   email: string;
 
   toSend() {
@@ -22,8 +22,14 @@ export class User implements Serializable<User>{
       userName: this.userName,
       userGivenName: this.userGivenName,
       userFamilyName: this.userFamilyName,
-      userSurName: this.userSurName
-    }
+      userSurName: this.userSurName,
+      email: this.email,
+      roles : this.roles,
+      contacts: this.contacts,
+      positionList: this.positionList,
+      branchOffice: null
+
+    };
   }
   public getShortName() : string {
     let result = '';
@@ -55,8 +61,8 @@ export class User implements Serializable<User>{
   }
 
   getAddress(): string {
-    if (this.contact) {
-      this.contact.forEach(item => {
+    if (this.contacts) {
+      this.contacts.forEach(item => {
         if (item.contactType == 3) {
           return item.address;
         }
@@ -67,8 +73,8 @@ export class User implements Serializable<User>{
 
   getPositions() : any {
     let result = [];
-    if (this.position) {
-      this.position.forEach(item => {
+    if (this.positionList) {
+      this.positionList.forEach(item => {
         result.push({display: item, value: item});
       });
     }
@@ -77,8 +83,8 @@ export class User implements Serializable<User>{
 
   getPhones(): any {
     let result = [];
-    if (this.contact) {
-      this.contact.forEach(item => {
+    if (this.contacts) {
+      this.contacts.forEach(item => {
         if (item.contactType == 1) {
           result.push({display: item.address, value: item.address});
         }
@@ -94,7 +100,7 @@ export class User implements Serializable<User>{
       this.branchOffice = new BranchOffice().deserialize(input.branchOffice);
     }
     this.email = input.email;
-    this.position = input.position;
+    this.positionList = input.position;
     if (input.role) {
       input.role.forEach(item => {
         this.roles.push(new Role().deserialize(item));
@@ -103,7 +109,7 @@ export class User implements Serializable<User>{
     }
     if (input.contact) {
       input.contact.forEach(item => {
-        this.contact.push(new Contact().deserialize(item));
+        this.contacts.push(new Contact().deserialize(item));
       });
     }
     this.userFamilyName = input.userFamilyName;

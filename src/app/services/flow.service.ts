@@ -128,8 +128,10 @@ export class FlowService extends RequestBase {
       this.dlgService.showMessageDlg('Error ' + flowResponse.view.code, flowResponse.view.reason);
     }
     if (flowResponse.isSuccess()) {
-      this.dlgService.showMessageDlg('Success', 'Action performed');
-      this.navigateToState(this.lastFlowResponse.step + '_success');
+      //this.dlgService.showMessageDlg('Success', 'Action performed');
+      let navigateTo = this.lastFlowResponse.step + '_success';
+      this.lastFlowResponse = null;
+      this.navigateToState(navigateTo);
       return;
     }
     if (this.lastFlowResponse) {

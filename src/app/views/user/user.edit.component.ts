@@ -49,7 +49,7 @@ constructor(public dlgService: DialogService, public stringService: StringServic
     userFamilyName: [''],
     userGivenName: [''],
     address: [''],
-    email: ['', Validators.email],
+    email: [null, Validators.compose([Validators.required, Validators.email])],
     phoneNumber: [''],
     position: [''],
     role: ['', Validators.required],
@@ -124,14 +124,14 @@ updateUserGivenName(event) {
 }
 
 addProfession(item) {
-  this.currentUser.position.push(item);
+  this.currentUser.positionList.push(item);
 }
 
 updateUserProfessions(event) {
-  this.currentUser.position = [];
+  this.currentUser.positionList = [];
 let data : Array<any> = this.userForm.get('position').value;
   data.forEach(item => this.addProfession(item.value));
-  console.log(this.currentUser.position);
+  console.log(this.currentUser.positionList);
 }
 
 submitForm() {
@@ -182,28 +182,28 @@ lookupRoles(arr: Array<number>) : Array<Role> {
 }
 
 submitAction() {
-  if (true || this.userForm.valid) {
-    this.currentUser.contact = new Array<Contact>();
+  if (this.userForm.valid) {
+    this.currentUser.contacts = new Array<Contact>();
 
     this.currentUser.email = this.userForm.get('email').value;
     this.currentUser.roles = this.lookupRoles(this.userForm.get('role').value);
     this.currentUser.userGivenName = this.userForm.get('userGivenName').value;
     this.currentUser.userFamilyName = this.userForm.get('userFamilyName').value;
     this.currentUser.userSurName = this.userForm.get('userSurName').value;
-    this.currentUser.position = this.collectDataFromChip(this.userForm.get('position').value);
+    this.currentUser.positionList = this.collectDataFromChip(this.userForm.get('position').value);
     this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
 
     let address = this.userForm.get('address').value;
     let phoneNumber = this.collectDataFromChip(this.userForm.get('phoneNumber').value);
 
-    this.currentUser.contact = new Array<Contact>();
+    this.currentUser.contacts = new Array<Contact>();
     if (phoneNumber) {
       phoneNumber.forEach(item => {
         let contact : Contact = new Contact();
         contact.address = item;
         //TODO enum
         contact.contactType = 1;
-        this.currentUser.contact.push(contact);
+        this.currentUser.contacts.push(contact);
       });
     }
     if (address) {
@@ -211,11 +211,11 @@ submitAction() {
         contact.address = address;
         //TODO enum
         contact.contactType = 3;
-        this.currentUser.contact.push(contact);
+        this.currentUser.contacts.push(contact);
     }
     if (this.id) {
       //this.dlgService.showMessageDlg('Not implemented', 'Update action');
-      this.usrService.updateUser(this.currentUser).subscribe(res=>console.log(res));
+      this.usrService.updateUser(this.currentUser.toSend()).subscribe(res=>console.log(res));
     } else {
       this.flow.sendNewUser(new UserToSend().buildFromUser(this.currentUser));
     }
@@ -226,7 +226,11 @@ resetPassword() {
   this.dlgService.showMessageDlg('Not implemented', 'Reset password');
 }
 removeUser(id) {
-  this.usrService.deleteUserById(this.currentUser.id);
+  this.dlgService.showConfirm('Удаление пользователя', 'Вы уверены, что хотите удалить пользователя?')
+  .subscribe(res => {if (res) {
+    this.usrService.deleteUserById(this.currentUser.id);}
+  });
+
 }
 
 ngAfterContentInit() {
@@ -250,9 +254,9 @@ export class UserToSend {
     this.userSurName = user.userSurName;
     this.userFamilyName = user.userFamilyName;
     this.branchOffice = user.branchOffice.id + '';
-    this.position = this.stringArrayToString(user.position);
+    this.position = this.stringArrayToString(user.positionList);
     this.role = this.objectArrayToIdString(user.roles);
-    this.contact = this.contactArrayToString(user.contact);
+    this.contact = this.contactArrayToString(user.contacts);
     return this;
   }
 

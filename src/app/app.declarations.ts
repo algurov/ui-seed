@@ -10,6 +10,7 @@ import { UserCardComponent } from './widgets/user-card/user.card.component';
 import { UserListComponent } from './views/user/list/user.list.component';
 import { LoadingComponent } from './widgets/loading/loading.component';
 import { TableComponent } from './widgets/table/table.component';
+import { ConfirmDialog } from './widgets/confirm.dialog';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -22,5 +23,6 @@ export const APP_DECLARATIONS = [
   UserCardComponent,
   UserListComponent,
   LoadingComponent,
-  TableComponent
+  TableComponent,
+  ConfirmDialog
 ];

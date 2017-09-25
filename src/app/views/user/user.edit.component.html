@@ -64,7 +64,7 @@
           </md-select>
         </div>
         <div fxLayout="column">
-          <tag-input class="pad-bot row-item" (onAdd)="updateUserProfessions($event)" addOnBlur="true" formControlName="position" placeholder="{{stringService.get('ADD_PROFESSION')}}" secondaryPlaceholder="{{stringService.get('ADD_PROFESSION')}}"></tag-input>
+          <tag-input class="pad-bot row-item" disabled="true" (onAdd)="updateUserProfessions($event)" addOnBlur="true" formControlName="position" placeholder="{{stringService.get('ADD_PROFESSION')}}" secondaryPlaceholder="{{stringService.get('ADD_PROFESSION')}}"></tag-input>
         </div>
         <div fxLayout="column">
           <md-select [(ngModel)]="selectedRoles" formControlName="role" class="pad-bot row-item" multiple placeholder="{{stringService.get('SELECT_ROLE')}}">
