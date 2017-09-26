@@ -30,7 +30,7 @@
         </div>
         <div class="nav-bar__filler"></div>
         <div class="nav-bar__item" *ngFor="let item of botViews" mdTooltipPosition="right" mdTooltip="{{stringService.get(item.name)}}"
-              (click)="toggleSideNav(item)">
+              (click)="item.action? performAction(item): toggleSideNav(item)">
           <i class="icon-icon_{{item.icon}}"></i>
         </div>
         <!-- <div class="nav-bar__item"><i class="icon-icon_docs"></i></div>

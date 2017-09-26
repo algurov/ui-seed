@@ -11,7 +11,7 @@ export class User implements Serializable<User>{
   userFamilyName: string = "";
   password: string;
   roles: Array<Role> = new Array<Role>();
-  positions: Array<string> = new Array<string>();
+  positions: Array<any> = new Array<any>();
   branchOffice: BranchOffice;
   contacts: Array<Contact> = new Array<Contact>();
   email: string;
@@ -76,7 +76,7 @@ export class User implements Serializable<User>{
     let result = [];
     if (this.positions) {
       this.positions.forEach(item => {
-        result.push({display: item, value: item});
+        result.push({display: item.name, value: item.name});
       });
     }
     return result;
@@ -101,6 +101,7 @@ export class User implements Serializable<User>{
       this.branchOffice = new BranchOffice().deserialize(input.branchOffice);
     }
     this.email = input.email;
+
     this.positions = input.positions;
     if (input.roles) {
       input.roles.forEach(item => {
