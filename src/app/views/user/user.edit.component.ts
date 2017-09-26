@@ -123,7 +123,7 @@ addProfession(item) {
 updateUserProfessions(event) {
   this.currentUser.positions = [];
 let data : Array<any> = this.userForm.get('position').value;
-  data.forEach(item => this.addProfession(item.value));
+  data.forEach(item => this.addProfession({ name:item.value }));
   console.log(this.currentUser.positions);
 }
 

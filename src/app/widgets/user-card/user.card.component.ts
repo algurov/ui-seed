@@ -11,8 +11,6 @@ import { User } from '../../models/user';
 export class UserCardComponent {
 
 @Input('user') user: User;
-userImage: string = "https://image.flaticon.com/teams/slug/freepik.jpg";
-userProfession: string = "Lead";
 constructor(public stringService: StringService){
 
 }
