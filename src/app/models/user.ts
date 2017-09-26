@@ -6,12 +6,12 @@ import { BranchOffice } from './branch.office';
 export class User implements Serializable<User>{
   id: number;
   userName: string = "";
-  userSurName: string = "";
+  userSecondName: string = "";
   userGivenName: string = "";
   userFamilyName: string = "";
   password: string;
   roles: Array<Role> = new Array<Role>();
-  positionList: Array<string> = new Array<string>();
+  positions: Array<string> = new Array<string>();
   branchOffice: BranchOffice;
   contacts: Array<Contact> = new Array<Contact>();
   email: string;
@@ -22,11 +22,11 @@ export class User implements Serializable<User>{
       userName: this.userName,
       userGivenName: this.userGivenName,
       userFamilyName: this.userFamilyName,
-      userSurName: this.userSurName,
+      userSecondName: this.userSecondName,
       email: this.email,
       roles : this.roles,
       contacts: this.contacts,
-      positionList: this.positionList,
+      positions: this.positions,
       branchOffice: null
 
     };
@@ -39,8 +39,8 @@ export class User implements Serializable<User>{
     if (this.userGivenName) {
       result = result + this.userGivenName[0] +'. ';
     }
-    if (this.userSurName) {
-      result = result + this.userSurName[0] + '.';
+    if (this.userSecondName) {
+      result = result + this.userSecondName[0] + '.';
     }
     return result;
   }
@@ -73,8 +73,8 @@ export class User implements Serializable<User>{
 
   getPositions() : any {
     let result = [];
-    if (this.positionList) {
-      this.positionList.forEach(item => {
+    if (this.positions) {
+      this.positions.forEach(item => {
         result.push({display: item, value: item});
       });
     }
@@ -100,22 +100,22 @@ export class User implements Serializable<User>{
       this.branchOffice = new BranchOffice().deserialize(input.branchOffice);
     }
     this.email = input.email;
-    this.positionList = input.position;
-    if (input.role) {
-      input.role.forEach(item => {
+    this.positions = input.position;
+    if (input.roles) {
+      input.roles.forEach(item => {
         this.roles.push(new Role().deserialize(item));
         //this.roleId.push(+item.id);
       })
     }
-    if (input.contact) {
-      input.contact.forEach(item => {
+    if (input.contacts) {
+      input.contacts.forEach(item => {
         this.contacts.push(new Contact().deserialize(item));
       });
     }
     this.userFamilyName = input.userFamilyName;
     this.userName = input.userName;
     this.userGivenName = input.userGivenName;
-    this.userSurName = input.userSurName;
+    this.userSecondName = input.userSecondName;
     return this;
   }
 }

@@ -38,14 +38,33 @@ constructor(public dlgService: DialogService, public stringService: StringServic
     // role1.id = 2;
     // role1.roleName = 'Пользователь';
     // this.roles.push(role1);
-  this.usrService.getAllRoles().subscribe(res => {
-    res.forEach(item => {
-      this.roles.push(new Role().deserialize(item));
-    });
-  });
+
+  this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.id = +params['id'];
+       this.usrService.getUserByIdFull(this.id).subscribe(res=> {
+         console.log(res);
+         this.currentUser = new User().deserialize(res);
+         //this.fillForm(this.currentUser);
+         this.usrService.getAllRoles().subscribe(res => {
+           res.forEach(item => {
+             this.roles.push(new Role().deserialize(item));
+             this.fillForm(this.currentUser);
+           });
+         });
+       });
+     } else {
+       this.usrService.getAllRoles().subscribe(res => {
+         res.forEach(item => {
+           this.roles.push(new Role().deserialize(item));
+         });
+       });
+     }
+   }
+   );
   this.currentUser = new User();
   this.userForm = this.fb.group({
-    userSurName: [''],
+    userSecondName: [''],
     userFamilyName: [''],
     userGivenName: [''],
     address: [''],
@@ -57,57 +76,31 @@ constructor(public dlgService: DialogService, public stringService: StringServic
   });
 
 }
+
+
 fillForm(user : User) {
    this.currentUser = user;
    this.userForm.get('userFamilyName').setValue(user.userFamilyName);
    this.userForm.get('userGivenName').setValue(user.userGivenName);
-   this.userForm.get('userSurName').setValue(user.userSurName);
+   this.userForm.get('userSecondName').setValue(user.userSecondName);
    this.userForm.get('address').setValue(user.getAddress());
    this.userForm.get('phoneNumber').setValue(user.getPhones());
    this.userForm.get('email').setValue(user.email);
    //TODO list set
    //this.userForm.get('branchOffice').setValue(user.branchOffice);
    this.userForm.get('position').setValue(user.getPositions());
-   //this.userForm.get('role').setValue(user.role);
+   //this.userForm.get('role').setValue(user.roles);
    user.roles.forEach(item => {
      this.selectedRoles.push(item.id);
    });
 
 
 }
+ngAfterViewChecked() {
+
+}
 ngOnInit() {
-  this.route.params.subscribe(params => {
-      if (params['id']) {
-        this.id = +params['id'];
-       this.usrService.getUserByIdFull(this.id).subscribe(res=> {
-         console.log(res);
-         this.currentUser = new User().deserialize(res);
-         this.fillForm(this.currentUser);
-       });
-      // let testUser = new User();
-      // testUser.userGivenName = 'Alex';
-      // testUser.userFamilyName = 'Gurov';
-      // testUser.userSurName = 'Volodimirovich';
-      // let address = new Contact();
-      // address.contactType = 3;
-      // address.address = 'Hua Hin';
-      // testUser.contact.push(address);
-      // let phone = new Contact();
-      // phone.address = '90894432';
-      // phone.contactType = 1;
-      // testUser.contact.push(phone);
-      // testUser.email = 'test@test';
-      // testUser.branchOffice = new BranchOffice().deserialize({id: 32, fullName: 'Filial', shortName:'Fil'});
-      // testUser.position.push('director');
-      // let rol = new Role();
-      // rol.id = 1;
-      // rol.roleName = 'Admin';
-      // testUser.addRole(rol);
-      //
-      // this.fillForm(testUser);
-     }
-   }
-   );
+
 
 }
 
@@ -120,18 +113,18 @@ updateUserName(event) {
 }
 
 updateUserGivenName(event) {
-  this.currentUser.userSurName = event;
+  this.currentUser.userSecondName = event;
 }
 
 addProfession(item) {
-  this.currentUser.positionList.push(item);
+  this.currentUser.positions.push(item);
 }
 
 updateUserProfessions(event) {
-  this.currentUser.positionList = [];
+  this.currentUser.positions = [];
 let data : Array<any> = this.userForm.get('position').value;
   data.forEach(item => this.addProfession(item.value));
-  console.log(this.currentUser.positionList);
+  console.log(this.currentUser.positions);
 }
 
 submitForm() {
@@ -182,6 +175,7 @@ lookupRoles(arr: Array<number>) : Array<Role> {
 }
 
 submitAction() {
+
   if (this.userForm.valid) {
     this.currentUser.contacts = new Array<Contact>();
 
@@ -189,8 +183,8 @@ submitAction() {
     this.currentUser.roles = this.lookupRoles(this.userForm.get('role').value);
     this.currentUser.userGivenName = this.userForm.get('userGivenName').value;
     this.currentUser.userFamilyName = this.userForm.get('userFamilyName').value;
-    this.currentUser.userSurName = this.userForm.get('userSurName').value;
-    this.currentUser.positionList = this.collectDataFromChip(this.userForm.get('position').value);
+    this.currentUser.userSecondName = this.userForm.get('userSecondName').value;
+    this.currentUser.positions = this.collectDataFromChip(this.userForm.get('position').value);
     this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
 
     let address = this.userForm.get('address').value;
@@ -215,7 +209,7 @@ submitAction() {
     }
     if (this.id) {
       //this.dlgService.showMessageDlg('Not implemented', 'Update action');
-      this.usrService.updateUser(this.currentUser.toSend()).subscribe(res=>console.log(res));
+      this.usrService.updateUser(this.currentUser.toSend()).subscribe(res=>this.dlgService.showNotification('Пользователь обновлен'));
     } else {
       this.flow.sendNewUser(new UserToSend().buildFromUser(this.currentUser));
     }
@@ -233,15 +227,12 @@ removeUser(id) {
 
 }
 
-ngAfterContentInit() {
-}
-
 }
 
 export class UserToSend {
   email: string;
   userGivenName: string;
-  userSurName: string;
+  userSecondName: string;
   userFamilyName: string;
   role: string;
   contact: string;
@@ -251,10 +242,10 @@ export class UserToSend {
   buildFromUser(user: User) {
     this.email = user.email;
     this.userGivenName = user.userGivenName;
-    this.userSurName = user.userSurName;
+    this.userSecondName = user.userSecondName;
     this.userFamilyName = user.userFamilyName;
     this.branchOffice = user.branchOffice.id + '';
-    this.position = this.stringArrayToString(user.positionList);
+    this.position = this.stringArrayToString(user.positions);
     this.role = this.objectArrayToIdString(user.roles);
     this.contact = this.contactArrayToString(user.contacts);
     return this;

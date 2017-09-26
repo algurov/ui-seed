@@ -3,10 +3,12 @@ import { Observable } from 'rxjs/Rx';
 import { MessageDialogComponent } from '../widgets/message-dialog/message-dialog.component';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { ConfirmDialog } from '../widgets/confirm.dialog';
+import { MdSnackBar } from '@angular/material';
+
 @Injectable()
 export class DialogService {
 
-  constructor(public dialog: MdDialog) {
+  constructor(public dialog: MdDialog, public snackBar: MdSnackBar) {
   }
 
   showMessageDlg(title: string, message: string) {
@@ -16,6 +18,11 @@ export class DialogService {
     cmp.message = message;
   }
 
+  showNotification(message: string) {
+    this.snackBar.open(message, '', {
+      duration: 2000,
+    });
+  }
   showConfirm(title: string, message: string) : Observable<boolean> {
     let dialogRef: MdDialogRef<ConfirmDialog>;
 

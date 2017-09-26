@@ -9,5 +9,7 @@ export const AUTH_CONSUMER_URL: string = AUTH_CONSUMER_BASE_URL + '/oauth2-consu
 export const STATES = {
   'start_registration': '/main/user/add',
   'start_registration_success' : '/main/user',
-  'request_data' : '/password'
+  'request_data' : '/password',
+  'request_data_success' : '/login',
+  'request_data_fail' : '/login'
 };

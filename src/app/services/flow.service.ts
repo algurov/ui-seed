@@ -10,13 +10,13 @@ import { User } from '../models/user';
 import { UserToSend } from '../views/user/user.edit.component';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { DialogService } from './dialog.service';
-import { MdSnackBar } from '@angular/material';
+
+
 
 @Injectable()
 export class FlowService extends RequestBase {
   lastFlowResponse: FlowResponse;
-  constructor(public http: Http, public router: Router, public dlgService: DialogService,
-  public snackBar: MdSnackBar) {
+  constructor(public http: Http, public router: Router, public dlgService: DialogService) {
     super(http);
   }
 
@@ -96,7 +96,7 @@ export class FlowService extends RequestBase {
     body.set('_eventId', 'do');
     this.getParameter('email', user, body);
     body.set('role', user.role);
-    this.getParameter('userSurName', user, body);
+    this.getParameter('userSecondName', user, body);
     this.getParameter('userGivenName', user, body);
     this.getParameter('userFamilyName', user, body);
     body.set('branchOffice', '');
@@ -123,7 +123,9 @@ export class FlowService extends RequestBase {
       } else {
         this.dlgService.showMessageDlg('Error', 'Something went wrong');
       }
-      this.lastFlowResponse = flowResponse;
+      let navigateTo = this.lastFlowResponse.step + '_fail';
+      this.lastFlowResponse = null;
+      this.navigateToState(navigateTo);
       return;
     }
     if (flowResponse.isError()) {
@@ -131,10 +133,7 @@ export class FlowService extends RequestBase {
     }
     if (flowResponse.isSuccess()) {
 
-      //this.dlgService.showMessageDlg('Success', 'Action performed');
-      this.snackBar.open('Success', '', {
-      duration: 2000,
-      });
+      this.dlgService.showNotification('Операция успешна')
       let navigateTo = this.lastFlowResponse.step + '_success';
       this.lastFlowResponse = null;
       this.navigateToState(navigateTo);

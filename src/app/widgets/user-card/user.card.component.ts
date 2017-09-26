@@ -22,8 +22,8 @@ getUserShortName() : string {
 }
 
 getUserProfession() : string {
-  if (this.user.positionList) {
-      return this.user.positionList.toString();
+  if (this.user.positions) {
+      return this.user.positions.toString();
   } else {
     return '';
   }
