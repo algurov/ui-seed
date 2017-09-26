@@ -12,16 +12,23 @@ export class DialogService {
   }
 
   showMessageDlg(title: string, message: string) {
-    let dlg = this.dialog.open(MessageDialogComponent);
-    let cmp = dlg.componentInstance;
-    cmp.title = title;
-    cmp.message = message;
+    setTimeout(() => {
+      let dlg = this.dialog.open(MessageDialogComponent);
+      let cmp = dlg.componentInstance;
+      cmp.title = title;
+      cmp.message = message;
+    }, 1000);
+    // let dlg = this.dialog.open(MessageDialogComponent);
+    // let cmp = dlg.componentInstance;
+    // cmp.title = title;
+    // cmp.message = message;
   }
 
   showNotification(message: string) {
-    this.snackBar.open(message, '', {
+    setTimeout(()=>{ this.snackBar.open(message, '', {
       duration: 2000,
-    });
+    }); }, 1000);
+
   }
   showConfirm(title: string, message: string) : Observable<boolean> {
     let dialogRef: MdDialogRef<ConfirmDialog>;

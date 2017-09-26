@@ -136,7 +136,7 @@ export class FlowService extends RequestBase {
     }
     if (flowResponse.isSuccess()) {
 
-      //this.dlgService.showNotification('Операция успешна')
+      this.dlgService.showNotification('Операция успешна')
       let navigateTo = this.lastFlowResponse.step + '_success';
       this.lastFlowResponse = null;
       this.navigateToState(navigateTo);
