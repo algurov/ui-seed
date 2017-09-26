@@ -1,10 +1,10 @@
 <div fxLayout="row" class="main-container">
-  <div fxFlex="6%" class="left-panel">
-    <panel fxFlex></panel>
+  <div class="left-panel">
+    <panel></panel>
   </div>
-  <div fxFlex="1 1 94%" fxLayout="column">
-    <md-sidenav-container fxFlex="1 1 100%" class="example-sidenav-fab-container">
-        <md-sidenav #sidenav mode="side" class="side" fxLayout="column">
+  <div fxFlex="1 1 100%" fxLayout="column">
+    <!-- <md-sidenav-container fxFlex="1 1 100%" class="example-sidenav-fab-container"> -->
+        <!-- <md-sidenav #sidenav mode="side" class="side" fxLayout="column">
           <div *ngFor="let menu of menuItems" fxLayout="column" style="width: 100%;">
             <ng-container *ngIf="menu.activator == selectedActivator">
             <div class="toolbar-2"></div>
@@ -13,14 +13,14 @@
             <div class="menu-box" fxLayout="column" fxFlex="90%">
               <div class="menu-box-item" fxLayout="row" *ngFor="let subMenu of menu.sub" fxFlex="100%" (click)="changeRoute('/main/' + subMenu.link)">
                 <!-- <i fxFlex="20%" fxLayoutAlign="center center" class="md-light material-icons">{{subMenu.icon}}</i> -->
-                <md-icon svgIcon="{{subMenu.icon}}"></md-icon>
+                <!-- <md-icon svgIcon="{{subMenu.icon}}"></md-icon>
                 <div fxLayoutAlign="start center" fxFlex="80%">{{stringService.get(subMenu.name)}}</div>
               </div>
             </div>
           </div>
         </ng-container>
           </div>
-        </md-sidenav>
+        </md-sidenav> -->
         <!-- <md-sidenav #sidenav mode="side" opened="true" class="side">
             <div fxLayout="column" style="width:100%;">
               <div class="toolbar-2"></div>
@@ -44,7 +44,7 @@
           </div>
         </div>
       </div>
-    </md-sidenav-container>
+    <!-- </md-sidenav-container> -->
   </div>
 
   </div>

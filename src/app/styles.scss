@@ -42,10 +42,10 @@ html, body {
   min-height: 100%;
   margin: 0;
   padding: 0;
-  font-family: $primary-font;
+  font-family: 'PT Sans', sans-serif;
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px; 
+  line-height: 20px;
 }
 
 pre {
@@ -170,3 +170,80 @@ ul, ol {
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0; }
+
+  //new
+
+  @font-face {
+    font-family: 'icomoon';
+    src:  url('assets/fonts/icomoon.eot?vw3xt7');
+    src:  url('assets/fonts/icomoon.eot?vw3xt7#iefix') format('embedded-opentype'),
+      url('assets/fonts/icomoon.ttf?vw3xt7') format('truetype'),
+      url('assets/fonts/icomoon.woff?vw3xt7') format('woff'),
+      url('assets/fonts/icomoon.svg?vw3xt7#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  [class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .icon-icon_arrow-down:before {
+    content: "\e90e";
+  }
+  .icon-icon_logo-small:before {
+    content: "\e90d";
+  }
+  .icon-icon_agent:before {
+    content: "\e900";
+  }
+  .icon-icon_docs:before {
+    content: "\e901";
+  }
+  .icon-icon_files:before {
+    content: "\e902";
+  }
+  .icon-icon_location:before {
+    content: "\e903";
+  }
+  .icon-icon_logo:before {
+    content: "\e904";
+  }
+  .icon-icon_logout:before {
+    content: "\e905";
+  }
+  .icon-icon_photo .path1:before {
+    content: "\e906";
+    color: rgb(231, 236, 237);
+  }
+  .icon-icon_photo .path2:before {
+    content: "\e907";
+    margin-left: -1em;
+    color: rgb(85, 96, 128);
+  }
+  .icon-icon_role:before {
+    content: "\e908";
+  }
+  .icon-icon_settings:before {
+    content: "\e909";
+  }
+  .icon-icon_task:before {
+    content: "\e90a";
+  }
+  .icon-icon_taxonomy:before {
+    content: "\e90b";
+  }
+  .icon-icon_user:before {
+    content: "\e90c";
+  }

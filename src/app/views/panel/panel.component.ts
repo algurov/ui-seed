@@ -21,6 +21,7 @@ export class PanelComponent {
 
 topViews: Array<any> = new Array();
 botViews: Array<any> = new Array();
+selectedItem: any;
 constructor(public dlgService: DialogService, public main : MainService, public stringService: StringService,
   public router : Router, public auth : AuthService){
   menuItems.forEach(item => {
@@ -30,9 +31,13 @@ constructor(public dlgService: DialogService, public main : MainService, public 
       this.botViews.push(item);
     }
   });
+  this.selectedItem = this.botViews[0];
+}
+changeSelectedItem(item) {
+  this.router.navigate([item.link]);
 }
  ngAfterContentInit() {
-    this.toggleSideNav(menuItems[0]);
+    //this.toggleSideNav(menuItems[0]);
  }
 
 toggleSideNav(item) {
@@ -40,7 +45,8 @@ toggleSideNav(item) {
   //   arr: items,
   //   html: this.generateHtmlForMenu(item)
   // };
-  this.main.toggleSidenav.next(item);
+  this.selectedItem = item;
+  //this.main.toggleSidenav.next(item);
 }
 
 generateHtmlForMenu(title: string, items: Array<any>): string {

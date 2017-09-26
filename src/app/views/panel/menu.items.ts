@@ -36,17 +36,22 @@ export const menuItems = [
       {
         name: 'USERS_TITLE',
         icon: 'user',
-        link: 'user'
+        link: 'main/user'
       },
       {
         name: 'ROLE_TITLE',
         icon: 'role',
-        link: 'roles'
+        link: 'main/roles'
       },
       {
         name: 'DEPARTMENT_TITLE',
         icon: 'location',
-        link: 'locations'
+        link: 'main/locations'
+      },
+      {
+        name: 'TAXONOMY_TITLE',
+        icon: 'taxonomy',
+        link: 'main/taxonomy'
       }
     ]
   },

@@ -1,4 +1,4 @@
-<div fxLayout="column" fxFlex="100%">
+<!-- <div fxLayout="column" fxFlex="100%">
   <div class="toolbar-left">
     <md-icon svgIcon="logo"></md-icon>
   </div>
@@ -16,4 +16,58 @@
         </div>
     </div>
   </div>
+</div> -->
+
+<div class="nav">
+    <div class="nav__logo">
+        <i class="icon-icon_logo-small"></i>
+    </div>
+
+    <div class="nav__bar nav-bar">
+        <div class="nav-bar__item" *ngFor="let item of topViews" mdTooltipPosition="right" mdTooltip="{{stringService.get(item.name)}}"
+              (click)="toggleSideNav(item)">
+          <i class="icon-icon_{{item.icon}}"></i>
+        </div>
+        <div class="nav-bar__filler"></div>
+        <div class="nav-bar__item" *ngFor="let item of botViews" mdTooltipPosition="right" mdTooltip="{{stringService.get(item.name)}}"
+              (click)="toggleSideNav(item)">
+          <i class="icon-icon_{{item.icon}}"></i>
+        </div>
+        <!-- <div class="nav-bar__item"><i class="icon-icon_docs"></i></div>
+        <div class="nav-bar__item"><i class="icon-icon_files"></i></div>
+        <div class="nav-bar__item"><i class="icon-icon_task"></i></div>
+        <div class="nav-bar__item"><i class="icon-icon_agent"></i></div>
+        <div class="nav-bar__filler"></div>
+        <div class="nav-bar__item"><i class="icon-icon_settings"></i></div>
+        <div class="nav-bar__item"><i class="icon-icon_logout"></i></div> -->
+    </div>
+</div>
+
+<div class="context">
+    <div class="context__branch">
+        Казанский филиал ФГУП «Центр оценки качества зерна»
+    </div>
+
+    <div class="context__links">
+        <div (click)="changeSelectedItem(item)" class="context-link" *ngFor="let item of selectedItem.sub">
+          <i class="icon-icon_{{item.icon}} context-link__icon"></i>
+          <span class="context-link__label">{{stringService.get(item.name)}}</span>
+        </div>
+        <!-- <div class="context-link">
+            <i class="icon-icon_user context-link__icon"></i>
+            <span class="context-link__label">Пользователи</span>
+        </div>
+        <div class="context-link">
+            <i class="icon-icon_role context-link__icon"></i>
+            <span class="context-link__label">Роли</span>
+        </div>
+        <div class="context-link">
+            <i class="icon-icon_location context-link__icon"></i>
+            <span class="context-link__label">Филиалы</span>
+        </div>
+        <div class="context-link">
+            <i class="icon-icon_taxonomy context-link__icon"></i>
+            <span class="context-link__label">Справочники</span>
+        </div> -->
+    </div>
 </div>
