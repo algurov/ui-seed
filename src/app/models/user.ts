@@ -31,6 +31,17 @@ export class User implements Serializable<User>{
 
     };
   }
+
+  public getUserProfessionName() : string {
+    let result = '';
+    if (this.positions) {
+      this.positions.forEach(item => {
+        result += item.name + ', ';
+      });
+      result = result.substring(0, result.length - 2);
+    }
+    return result;
+  }
   public getShortName() : string {
     let result = '';
     if (this.userFamilyName) {

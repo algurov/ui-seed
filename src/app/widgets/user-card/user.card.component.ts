@@ -22,20 +22,7 @@ getUserShortName() : string {
 }
 
 getUserProfession() : string {
-  if (this.user.positions) {
-      return this.user.positions.toString();
-  } else {
-    return '';
+  return this.user.getUserProfessionName();
   }
-
-}
-
-ngAfterContentInit() {
-
-}
-
-ngAfterInit() {
-
-}
 
 }
