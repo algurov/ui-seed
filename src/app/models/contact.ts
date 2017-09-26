@@ -2,7 +2,7 @@ import { Serializable } from './serializable';
 
 export class Contact implements Serializable<Contact> {
   address: string;
-  contactType: number;
+  contactType: string;
   id: number;
 
   deserialize(input) {

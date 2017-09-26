@@ -7,7 +7,7 @@ import { MdSnackBar } from '@angular/material';
 
 @Injectable()
 export class DialogService {
-
+  block: boolean = false;
   constructor(public dialog: MdDialog, public snackBar: MdSnackBar) {
   }
 

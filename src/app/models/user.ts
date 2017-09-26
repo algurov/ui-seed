@@ -61,14 +61,15 @@ export class User implements Serializable<User>{
   }
 
   getAddress(): string {
+    let result = '';
     if (this.contacts) {
       this.contacts.forEach(item => {
-        if (item.contactType == 3) {
-          return item.address;
+        if (item.contactType == 'ADDRESS') {
+          result = item.address;
         }
       });
     }
-    return '';
+    return result;
   }
 
   getPositions() : any {
@@ -85,7 +86,7 @@ export class User implements Serializable<User>{
     let result = [];
     if (this.contacts) {
       this.contacts.forEach(item => {
-        if (item.contactType == 1) {
+        if (item.contactType == 'MOBILE_PHONE') {
           result.push({display: item.address, value: item.address});
         }
       });

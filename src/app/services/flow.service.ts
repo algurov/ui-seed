@@ -58,6 +58,7 @@ export class FlowService extends RequestBase {
   }
 
   aksNewUser(): Subscription {
+    this.dlgService.block = true;
     return this.http.get(SEED_BASE_URL + '/seed/registration', this.createOptions()).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
@@ -91,6 +92,7 @@ export class FlowService extends RequestBase {
   }
 
   sendNewUser(user: UserToSend): Subscription {
+    this.dlgService.block = true;
     let body = new URLSearchParams();
     body.set('execution', this.lastFlowResponse.execution);
     body.set('_eventId', 'do');
@@ -116,6 +118,7 @@ export class FlowService extends RequestBase {
 
   processResponce(response) {
     console.log(response);
+    this.dlgService.block = false;
     let flowResponse = new FlowResponse(response);
     if (flowResponse.step == 'fail') {
       if (flowResponse.view) {
@@ -150,12 +153,10 @@ export class FlowService extends RequestBase {
       this.lastFlowResponse = flowResponse;
       this.navigateToState(flowResponse.step)
     }
-
-
   }
 
   navigateToState(state) {
-    this.router.navigateByUrl(this.getRouteByState(state));
+    this.router.navigate([this.getRouteByState(state)]);
   }
 
   getRouteByState(state): string {

@@ -19,7 +19,7 @@ export class FlowResponse implements Serializable<FlowResponse>{
 
   isError(): boolean {
     if (this.view) {
-      if (this.view.code && this.view.reason) {
+      if (this.view.code || this.view.error) {
         return true;
       } else {
         return false;

@@ -196,7 +196,7 @@ submitAction() {
         let contact : Contact = new Contact();
         contact.address = item;
         //TODO enum
-        contact.contactType = 1;
+        contact.contactType = 'MOBILE_PHONE';
         this.currentUser.contacts.push(contact);
       });
     }
@@ -204,12 +204,13 @@ submitAction() {
         let contact : Contact = new Contact();
         contact.address = address;
         //TODO enum
-        contact.contactType = 3;
+        contact.contactType = 'ADDRESS';
         this.currentUser.contacts.push(contact);
     }
     if (this.id) {
       //this.dlgService.showMessageDlg('Not implemented', 'Update action');
-      this.usrService.updateUser(this.currentUser.toSend()).subscribe(res=>this.dlgService.showNotification('Пользователь обновлен'));
+      this.dlgService.block = true;
+      this.usrService.updateUser(this.currentUser.toSend()).subscribe(res=>{this.dlgService.block = false; this.dlgService.showNotification('Пользователь обновлен')});
     } else {
       this.flow.sendNewUser(new UserToSend().buildFromUser(this.currentUser));
     }
@@ -258,7 +259,7 @@ export class UserToSend {
         result += item.toString() + ','
       });
       result = result.substring(0, result.length - 1);
-      result = '{' + result + '}';
+      // result = '{' + result + '}';
     }
     return result;
   }

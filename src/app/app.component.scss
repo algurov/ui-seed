@@ -1,3 +1,19 @@
 #my-page-card {
   min-height: 100%;
 }
+.blocker {
+  position: absolute;
+  display: block;
+  top: 0;
+  left:0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(220, 220, 220, 0.5);
+  text-align: center;
+}
+.spinner {
+  top: 50%;
+  left: 50%;
+  position:absolute;
+}

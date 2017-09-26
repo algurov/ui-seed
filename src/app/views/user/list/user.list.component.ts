@@ -25,6 +25,7 @@ export class UserListComponent {
     public stringService: StringService,
     public flow: FlowService,
     public userService : UserService) {
+      this.flow.lastFlowResponse = null;
       this.userService.getAllUsers().subscribe(res=> {
         res.forEach(item => {
           this.users.push(new User().deserialize(item))

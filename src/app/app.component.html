@@ -21,3 +21,6 @@
 </md-sidenav-container>
 <my-store-devtools *ngIf="showMonitor"></my-store-devtools>-->
 <router-outlet (activate)="activateEvent($event)" (deactivate)="deactivateEvent($event)"></router-outlet>
+<div class="blocker" *ngIf="dlgService.block">
+  <md-spinner class="spinner"></md-spinner>
+</div>
