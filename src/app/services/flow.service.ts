@@ -126,9 +126,13 @@ export class FlowService extends RequestBase {
       } else {
         this.dlgService.showMessageDlg('Error', 'Something went wrong');
       }
-      let navigateTo = this.lastFlowResponse.step + '_fail';
-      this.lastFlowResponse = null;
-      this.navigateToState(navigateTo);
+      if (this.lastFlowResponse) {
+        let navigateTo = this.lastFlowResponse.step + '_fail';
+        this.lastFlowResponse = null;
+        this.navigateToState(navigateTo);
+      } else {
+        this.navigateToState('request_data_fail');
+      }
       return;
     }
     if (flowResponse.isError()) {
