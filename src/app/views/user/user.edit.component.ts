@@ -210,7 +210,7 @@ submitAction() {
     if (this.id) {
       //this.dlgService.showMessageDlg('Not implemented', 'Update action');
       this.dlgService.block = true;
-      this.usrService.updateUser(this.currentUser.toSend()).subscribe(res=>{this.dlgService.block = false; this.dlgService.showNotification('Пользователь обновлен')});
+      this.usrService.updateUser(this.currentUser.toSend()).subscribe(res=>{this.dlgService.block = false;});
     } else {
       this.flow.sendNewUser(new UserToSend().buildFromUser(this.currentUser));
     }

@@ -53,7 +53,7 @@ export class FlowResponse implements Serializable<FlowResponse>{
 
 export class View implements Serializable<View>{
   reason: string;
-  code: number;
+  code: string;
   error: string;
   nextSendAfter: number;
 
