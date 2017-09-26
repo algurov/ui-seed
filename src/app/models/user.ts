@@ -101,7 +101,7 @@ export class User implements Serializable<User>{
       this.branchOffice = new BranchOffice().deserialize(input.branchOffice);
     }
     this.email = input.email;
-    this.positions = input.position;
+    this.positions = input.positions;
     if (input.roles) {
       input.roles.forEach(item => {
         this.roles.push(new Role().deserialize(item));
