@@ -155,6 +155,18 @@ collectDataFromChip(data: Array<any>) : Array<string> {
 }
 }
 
+collectPositionsDataFromChip(data: Array<any>) : Array<any> {
+  if (data) {
+    let result = new Array<any>();
+    data.forEach(item => {
+      result.push({name :item.value});
+    });
+  return result;
+} else {
+  return null;
+}
+}
+
 collectDataFromRoleSelect(data : Array<any>) : Array<string>{
   if (data) {
     let result = new Array<string>();
@@ -184,7 +196,7 @@ submitAction() {
     this.currentUser.userGivenName = this.userForm.get('userGivenName').value;
     this.currentUser.userFamilyName = this.userForm.get('userFamilyName').value;
     this.currentUser.userSecondName = this.userForm.get('userSecondName').value;
-    this.currentUser.positions = this.collectDataFromChip(this.userForm.get('position').value);
+    this.currentUser.positions = this.collectPositionsDataFromChip(this.userForm.get('position').value);
     this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
 
     let address = this.userForm.get('address').value;
@@ -246,7 +258,7 @@ export class UserToSend {
     this.userSecondName = user.userSecondName;
     this.userFamilyName = user.userFamilyName;
     this.branchOffice = user.branchOffice.id + '';
-    this.position = this.stringArrayToString(user.positions);
+    this.position = this.objectArrayToNameString(user.positions);
     this.role = this.objectArrayToIdString(user.roles);
     this.contact = this.contactArrayToString(user.contacts);
     return this;
@@ -262,6 +274,17 @@ export class UserToSend {
       // result = '{' + result + '}';
     }
     return result;
+  }
+
+  objectArrayToNameString(arr: Array<any>) : string {
+      let result = '';
+      if (arr) {
+        arr.forEach(item => {
+          result += item.name + ',';
+        });
+        result = result.substr(0, result.length - 1);
+        return result;
+      }
   }
 
   objectArrayToIdString(arr: Array<any>) : string {
