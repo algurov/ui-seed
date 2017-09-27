@@ -2,7 +2,7 @@
   <div class="left-panel">
     <panel></panel>
   </div>
-  <div fxFlex="1 1 100%" fxLayout="column">
+  <div class="main">
     <!-- <md-sidenav-container fxFlex="1 1 100%" class="example-sidenav-fab-container"> -->
         <!-- <md-sidenav #sidenav mode="side" class="side" fxLayout="column">
           <div *ngFor="let menu of menuItems" fxLayout="column" style="width: 100%;">
@@ -27,22 +27,19 @@
               <div #content [innerHtml]="inner"></div>
             </div>
         </md-sidenav> -->
-        <div fxLayout="row" fxFlex="94%" class="main-content-container">
-          <div fxLayout="column" fxFlex="1 1 100%">
-            <div fxLayout="row" class="initial">
-              <div fxLayout="row" fxFlex="grow" class="toolbar">
-                <div fxFlex="70%">Breadcrumbs</div>
-                <div fxFlex="1 1 30%" fxLayoutAlign="end center">
+        <div class="main-content-container">
+              <div class="toolbar">
+                <div class="toolbar__bread">Breadcrumbs</div>
+                <div class="toolbar__card">
                   <!--currentUser card will be here-->
                 </div>
               </div>
-            </div>
-            <div fxLayout="row" fxFlex="1 1 100%">
-              <div fxFlex="1 1 100%" fxLayout="column" style="margin-bottom: 10px;">
+            <div>
+              <div style="margin-bottom: 10px;">
                 <router-outlet></router-outlet>
               </div>
           </div>
-        </div>
+
       </div>
     <!-- </md-sidenav-container> -->
   </div>

@@ -31,6 +31,31 @@ export class FlowService extends RequestBase {
     return flowOptions;
   }
 
+  startPasswordRecover() {
+    //TODO send start password recover
+    //this.dlgService.block = true;
+    // return this.http.get(SEED_BASE_URL + '/seed/registration', this.createOptions()).map(res => res.json())
+    //   .subscribe(res => this.processResponce(res));
+  }
+
+  sendEmailRecover(email) {
+
+  }
+  
+  sendPasswordRecover(password) {
+    let body = new URLSearchParams();
+    body.set('execution', this.lastFlowResponse.execution);
+    body.set('_eventId', 'save');
+    body.set('password', password);
+    let headers = new Headers();
+    headers.append('Content-Type',
+     'application/x-www-form-urlencoded');
+     headers.append('Access-Control-Allow-Origin', '*');
+     //TODO send password recover to server
+    // return this.http.post(SEED_BASE_URL + '/seed/registrationCompletionByLink', body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
+    //   .subscribe(res => this.processResponce(res));
+  }
+
   startRegistartion(code): Subscription {
     return this.http.get(SEED_BASE_URL + '/seed'+ code, this.createOptions())
       .map(res => res.json())

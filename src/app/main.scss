@@ -23,3 +23,9 @@ my-app:empty + .loading h1 {
     text-align: center;
     transform: translate(0, -50%);
 }
+
+.seed-button {
+  background-color: $main-blue-color;
+  color: white !important;
+  min-height: 35px;
+}

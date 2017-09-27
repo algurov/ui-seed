@@ -2,7 +2,9 @@
 /* This file is for importing 3rd party styles  */
 
 @import 'variables';
+
 @import '@angular/material/theming';
+
 // Plus imports for other components in your app.
 
 // Include the base styles for Angular Material core. We include this here so that you only
@@ -20,6 +22,10 @@ $warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $theme: mat-light-theme($primary, $accent, $warn);
+$button-primary-color-alt:  unquote("rgb(#{$palette-light-blue-700})");
+$button-hover-color-alt: unquote("rgb(#{$palette-light-blue-900})");
+$button-active-color-alt: unquote("rgb(#{$palette-light-blue-900})");
+$button-focus-color-alt: unquote("rgb(#{$palette-light-blue-900})");
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component

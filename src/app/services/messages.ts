@@ -40,5 +40,8 @@ export const Messages = {
   "LOGO_TITLE_1": "ФГБУ",
   "LOGO_TITLE_2": "«Федеральный центр оценки безопасности",
   "LOGO_TITLE_3": "и качества зерна и продуктов его переработки»",
-  "TAXONOMY_TITLE": "Справочники"
+  "TAXONOMY_TITLE": "Справочники",
+  "RECOVER_PASSWORD_TITLE": 'Установите новый пароль',
+  "SEND_BTN": "Отправить",
+  "RECOVER_PASSWORD_EMAIL_TITLE": "Укажите почту"
 };

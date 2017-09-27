@@ -10,6 +10,8 @@ import { PanelComponent } from './views/panel/panel.component';
 import { UserEditComponent } from './views/user/user.edit.component';
 import { UserListComponent } from './views/user/list/user.list.component';
 import { LoadingComponent } from './widgets/loading/loading.component';
+import { PasswordRecoverComponent } from './views/password/password-recover.component';
+import { PasswordEmailComponent } from './views/password/password-email.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -24,5 +26,7 @@ export const routes: Routes = [
   { path: 'registrationCompletionByLink', component: LoadingComponent},
   { path: 'login', redirectTo: 'main'},
 
-  { path: 'password', component: PasswordViewComponent}
+  { path: 'password', component: PasswordViewComponent},
+  { path: 'password-recover', component: PasswordRecoverComponent},
+  { path: 'password-email', component: PasswordEmailComponent}
 ];

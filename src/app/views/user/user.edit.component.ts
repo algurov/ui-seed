@@ -86,7 +86,7 @@ fillForm(user : User) {
    this.userForm.get('address').setValue(user.getAddress());
    this.userForm.get('phoneNumber').setValue(user.getPhones());
    this.userForm.get('email').setValue(user.email);
-   //TODO list set
+   //TODO branchOffice fillForm
    //this.userForm.get('branchOffice').setValue(user.branchOffice);
    this.userForm.get('position').setValue(user.getPositions());
    //this.userForm.get('role').setValue(user.roles);

@@ -11,6 +11,9 @@ import { UserListComponent } from './views/user/list/user.list.component';
 import { LoadingComponent } from './widgets/loading/loading.component';
 import { TableComponent } from './widgets/table/table.component';
 import { ConfirmDialog } from './widgets/confirm.dialog';
+import { PasswordRecoverComponent } from './views/password/password-recover.component';
+import { PasswordHeader } from './views/password/password-header';
+import { PasswordEmailComponent } from './views/password/password-email.component';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -24,5 +27,8 @@ export const APP_DECLARATIONS = [
   UserListComponent,
   LoadingComponent,
   TableComponent,
-  ConfirmDialog
+  ConfirmDialog,
+  PasswordRecoverComponent,
+  PasswordHeader,
+  PasswordEmailComponent
 ];
