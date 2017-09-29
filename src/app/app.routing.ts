@@ -17,7 +17,7 @@ import { PasswordEmailComponent } from './views/password/password-email.componen
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
-  { path: 'main', component: MainViewComponent, //canActivate: [AuthGuard],
+  { path: 'main', component: MainViewComponent, canActivate: [AuthGuard],
     children: [
       { path: 'user', component: UserListComponent},
       { path: 'user/edit/:id', component: UserEditComponent},
