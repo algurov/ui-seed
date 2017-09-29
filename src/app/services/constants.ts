@@ -15,7 +15,7 @@ export const STATES = {
   'startPasswordRecovery' : '/password-email',
   'startPasswordRecovery_success': '/login',
   'startPasswordRecovery_fail': '/login',
-  'passwordResetByLink' : '/password-recover',
+  'passwordResetByLink' : '/password-recovery',
   'passwordResetByLink_success' : '/login',
   'passwordResetByLink_fail' : '/login',
   'fail' : '/login'
