@@ -27,7 +27,7 @@ export class PasswordEmailComponent {
   submit() {
     if (this.emailForm.valid) {
       let email = this.emailForm.get('email').value;
-      this.flow.sendEmailRecover(email);
+      this.flow.sendEmailRecovery(email);
     }
   }
 }

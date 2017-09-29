@@ -11,5 +11,8 @@ export const STATES = {
   'start_registration_success' : '/main/user',
   'request_data' : '/password',
   'request_data_success' : '/login',
-  'request_data_fail' : '/login'
+  'request_data_fail' : '/login',
+  'enter_email' : '/password-email',
+  'enter_email_success': '/login',
+  'enter_email_fail': '/login'
 };

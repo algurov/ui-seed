@@ -14,6 +14,7 @@ import { ConfirmDialog } from './widgets/confirm.dialog';
 import { PasswordRecoverComponent } from './views/password/password-recover.component';
 import { PasswordHeader } from './views/password/password-header';
 import { PasswordEmailComponent } from './views/password/password-email.component';
+import { PasswordFlowComponent } from './widgets/loading/password.flow.component';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -30,5 +31,6 @@ export const APP_DECLARATIONS = [
   ConfirmDialog,
   PasswordRecoverComponent,
   PasswordHeader,
-  PasswordEmailComponent
+  PasswordEmailComponent,
+  PasswordFlowComponent
 ];

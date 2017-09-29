@@ -247,10 +247,10 @@ export class UserToSend {
   userGivenName: string;
   userSecondName: string;
   userFamilyName: string;
-  role: string;
+  roles: string;
   contact: string;
   branchOffice: string;
-  position: string;
+  positions: string;
 
   buildFromUser(user: User) {
     this.email = user.email;
@@ -258,19 +258,32 @@ export class UserToSend {
     this.userSecondName = user.userSecondName;
     this.userFamilyName = user.userFamilyName;
     this.branchOffice = user.branchOffice.id + '';
-    this.position = this.objectArrayToNameString(user.positions);
-    this.role = this.objectArrayToIdString(user.roles);
+    this.positions = this.objectArrayToNameString(user.positions);
+    this.roles = this.objectArrayToIdString('roles',user.roles);
     this.contact = this.contactArrayToString(user.contacts);
     return this;
   }
 
   contactArrayToString(arr: Array<Contact>): string {
     let result = '';
+    let mobilePhones = new Array<String>();
+    let address = '';
     if (arr) {
       arr.forEach(item => {
-        result += item.toString() + ','
+        if (item.contactType == 'MOBILE_PHONE') {
+          mobilePhones.push(item.address);
+        }
+        if (item.contactType == "ADDRESS") {
+          address = item.address;
+        }
+        // result += item.toString() + ','
       });
-      result = result.substring(0, result.length - 1);
+      let obj = {
+        MOBILE_PHONE: mobilePhones,
+        ADDRESS: address
+      };
+      result = JSON.stringify(obj);
+    //  result = result.substring(0, result.length - 1);
       // result = '{' + result + '}';
     }
     return result;
@@ -278,23 +291,31 @@ export class UserToSend {
 
   objectArrayToNameString(arr: Array<any>) : string {
       let result = '';
+      let resArr = new Array<string>();
       if (arr) {
         arr.forEach(item => {
-          result += item.name + ',';
+          resArr.push(item.name);
+          //result += item.name + ',';
         });
-        result = result.substr(0, result.length - 1);
+        result = JSON.stringify({positions: resArr});
+        //result = result.substr(0, result.length - 1);
         return result;
       }
   }
 
-  objectArrayToIdString(arr: Array<any>) : string {
+  objectArrayToIdString(title: string, arr: Array<any>) : string {
       let result = '';
+      let resArr = new Array<number>();
       if (arr) {
         arr.forEach(item => {
-          result += item.id + ',';
+          resArr.push(item.id);
+          //result += item.id + ',';
         });
-        result = result.substr(0, result.length - 1);
+        //result = result.substr(0, result.length - 1);
+        //result = '{' + title +':[' + result  + ']}';
+        result = JSON.stringify({roles : resArr });
         return result;
+
       }
   }
 

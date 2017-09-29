@@ -8,6 +8,7 @@ export class FlowResponse implements Serializable<FlowResponse>{
   form: Form;
   serverUrl: string;
   step: string;
+  errors: Array<any>;
 
   isSuccess(): boolean {
     if (this.step == SUCCESS) {
@@ -17,6 +18,19 @@ export class FlowResponse implements Serializable<FlowResponse>{
     }
   }
 
+  // isError(): boolean {
+  //   if (this.view) {
+  //     if (this.view.code || this.view.error) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } else {
+  //     return false;
+  //   }
+  //
+  // }
+
   isError(): boolean {
     if (this.view) {
       if (this.view.code || this.view.error) {
@@ -24,10 +38,26 @@ export class FlowResponse implements Serializable<FlowResponse>{
       } else {
         return false;
       }
-    } else {
-      return false;
     }
+    if (this.errors && this.errors.length > 0) {
+      return true;
+    }
+    return false;
+  }
 
+  getError() : string {
+    if (this.view) {
+      return this.view.code? this.view.code + ' ' : ''
+        + this.view.error? this.view.error : '';
+    }
+    if (this.errors.length > 0) {
+      let error = '';
+      this.errors.forEach(item => {
+        error += item.message + ' ';
+      });
+      return error;
+    }
+    return ''
   }
 
   constructor (jsonObj) {
@@ -47,6 +77,9 @@ export class FlowResponse implements Serializable<FlowResponse>{
     }
     if (jsonObj.view) {
       this.view = new View(jsonObj.view);
+    }
+    if (jsonObj.errors) {
+      this.errors = jsonObj.errors;
     }
   }
 }

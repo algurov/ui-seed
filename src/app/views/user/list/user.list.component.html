@@ -6,11 +6,7 @@
     <div fxFlex="10%" style="margin-top: 50px;">
       Список пользователей
     </div>
-    <md-list fxFlex=90% style="margin-top: 50px;">
-      <div class="list-item" md-list-item *ngFor="let user of users" (click)="editUser(user)" fxLayout="row">
-        <div fxFlex>{{user.id}}</div>
-        <div fxFlex>{{user.userName}}</div>
-      </div>
-    </md-list>
+    <table style="width: 100%;" [data]="userService.getAllUsers()" [displayedColumns]="displayedColumns">
+    </table>
   </div>
 </div>

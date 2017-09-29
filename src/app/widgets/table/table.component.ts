@@ -6,6 +6,7 @@ import { UserService } from '../../services/user.service';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'table',
@@ -13,16 +14,17 @@ import 'rxjs/add/observable/of';
   templateUrl: './table.component.html'
 })
 export class TableComponent {
-  @Input() data: User[];
-  displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new ExampleDataSource(this.data);
-}
 
-export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  constructor(private userService: UserService, private router: Router){}
+  @Input() data: Observable<User[]>;
+  @Input() displayedColumns;
+
+  dataSource = new ExampleDataSource(this.data, this.userService);
+
+   clickRow(row){
+     this.router.navigate(['/main/user/edit', row.id]);
+   }
+
 }
 
 // const data: Element[] = [
@@ -56,15 +58,15 @@ export interface Element {
  */
 export class ExampleDataSource extends DataSource<any> {
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  data: User[];
-  constructor(data: User[]) {
+  data: Observable<User[]>;
+  constructor(data: Observable<User[]>, private userService: UserService) {
     super();
     this.data = data;
   }
 
   connect(): Observable<User[]> {
     console.log(this.data);
-    return Observable.of(this.data);
+    return this.userService.getAllUsers();
   }
 
   disconnect() {}

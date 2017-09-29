@@ -18,6 +18,7 @@ import { FlowResponse } from '../../../models/flow.response';
 })
 
 export class UserListComponent {
+  displayedColumns = ['id', 'name', 'positions', 'mail'];
   users: Array<User> = new Array<User>();
   constructor( public router: Router,
     public dlgService: DialogService,

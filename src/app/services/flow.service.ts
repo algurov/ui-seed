@@ -31,17 +31,25 @@ export class FlowService extends RequestBase {
     return flowOptions;
   }
 
-  startPasswordRecover() {
-    //TODO send start password recover
-    //this.dlgService.block = true;
-    // return this.http.get(SEED_BASE_URL + '/seed/registration', this.createOptions()).map(res => res.json())
-    //   .subscribe(res => this.processResponce(res));
+  startPasswordRecovery() {
+    this.dlgService.block = true;
+    return this.http.get(SEED_BASE_URL + '/seed/startPasswordRecovery', this.createOptions()).map(res => res.json())
+      .subscribe(res => this.processResponce(res));
   }
 
-  sendEmailRecover(email) {
-
+  sendEmailRecovery(email) {
+    let body = new URLSearchParams();
+    body.set('execution', this.lastFlowResponse.execution);
+    body.set('_eventId', 'next');
+    body.set('email', email);
+    let headers = new Headers();
+    headers.append('Content-Type',
+     'application/x-www-form-urlencoded');
+     headers.append('Access-Control-Allow-Origin', '*');
+    return this.http.post(SEED_BASE_URL + '/seed/startPasswordRecovery', body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
+      .subscribe(res => this.processResponce(res));
   }
-  
+
   sendPasswordRecover(password) {
     let body = new URLSearchParams();
     body.set('execution', this.lastFlowResponse.execution);
@@ -122,13 +130,13 @@ export class FlowService extends RequestBase {
     body.set('execution', this.lastFlowResponse.execution);
     body.set('_eventId', 'do');
     this.getParameter('email', user, body);
-    body.set('role', user.role);
+    body.set('roles', user.roles);
     this.getParameter('userSecondName', user, body);
     this.getParameter('userGivenName', user, body);
     this.getParameter('userFamilyName', user, body);
-    body.set('branchOffice', '');
-    this.getParameter('position', user, body);
-    body.set('contact', user.contact);
+    body.set('branchOffices', '');
+    this.getParameter('positions', user, body);
+    body.set('contacts', user.contact);
 
     console.log(body);
     console.log(body.toString());
@@ -161,7 +169,8 @@ export class FlowService extends RequestBase {
       return;
     }
     if (flowResponse.isError()) {
-      this.dlgService.showMessageDlg('Error', flowResponse.view.error);
+      //this.dlgService.showMessageDlg('Error', flowResponse.view.error);
+      this.dlgService.showMessageDlg('Error', flowResponse.getError());
     }
     if (flowResponse.isSuccess()) {
 
