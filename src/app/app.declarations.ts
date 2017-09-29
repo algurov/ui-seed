@@ -15,6 +15,8 @@ import { PasswordRecoverComponent } from './views/password/password-recover.comp
 import { PasswordHeader } from './views/password/password-header';
 import { PasswordEmailComponent } from './views/password/password-email.component';
 import { PasswordFlowComponent } from './widgets/loading/password.flow.component';
+import { SetPasswordFlowComponent } from './widgets/loading/set.password.component';
+
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -32,5 +34,6 @@ export const APP_DECLARATIONS = [
   PasswordRecoverComponent,
   PasswordHeader,
   PasswordEmailComponent,
-  PasswordFlowComponent
+  PasswordFlowComponent,
+  SetPasswordFlowComponent
 ];

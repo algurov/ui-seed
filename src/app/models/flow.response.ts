@@ -18,6 +18,9 @@ export class FlowResponse implements Serializable<FlowResponse>{
     }
   }
 
+  getFlowName() {
+    return this.serverUrl.substring(this.serverUrl.lastIndexOf('/') + 1, this.serverUrl.length);
+  }
   // isError(): boolean {
   //   if (this.view) {
   //     if (this.view.code || this.view.error) {

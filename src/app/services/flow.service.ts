@@ -50,6 +50,12 @@ export class FlowService extends RequestBase {
       .subscribe(res => this.processResponce(res));
   }
 
+  startPasswordResetByLink(link) {
+    return this.http.get(SEED_BASE_URL + '/seed'+ link, this.createOptions())
+      .map(res => res.json())
+      .subscribe(res => this.processResponce(res));
+  }
+
   sendPasswordRecover(password) {
     let body = new URLSearchParams();
     body.set('execution', this.lastFlowResponse.execution);
@@ -59,9 +65,8 @@ export class FlowService extends RequestBase {
     headers.append('Content-Type',
      'application/x-www-form-urlencoded');
      headers.append('Access-Control-Allow-Origin', '*');
-     //TODO send password recover to server
-    // return this.http.post(SEED_BASE_URL + '/seed/registrationCompletionByLink', body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
-    //   .subscribe(res => this.processResponce(res));
+    return this.http.post(SEED_BASE_URL + '/seed/passwordResetByLink', body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
+      .subscribe(res => this.processResponce(res));
   }
 
   startRegistartion(code): Subscription {
@@ -160,11 +165,11 @@ export class FlowService extends RequestBase {
         this.dlgService.showMessageDlg('Error', 'Something went wrong');
       }
       if (this.lastFlowResponse) {
-        let navigateTo = this.lastFlowResponse.step + '_fail';
+        let navigateTo = this.lastFlowResponse.getFlowName() + '_fail';
         this.lastFlowResponse = null;
         this.navigateToState(navigateTo);
       } else {
-        this.navigateToState('request_data_fail');
+        this.navigateToState('fail');
       }
       return;
     }
@@ -175,7 +180,7 @@ export class FlowService extends RequestBase {
     if (flowResponse.isSuccess()) {
 
       this.dlgService.showNotification('Операция успешна')
-      let navigateTo = this.lastFlowResponse.step + '_success';
+      let navigateTo = this.lastFlowResponse.getFlowName() + '_success';
       this.lastFlowResponse = null;
       this.navigateToState(navigateTo);
       return;
@@ -183,13 +188,13 @@ export class FlowService extends RequestBase {
     if (this.lastFlowResponse) {
       if (this.lastFlowResponse.step != flowResponse.step) {
         this.lastFlowResponse = flowResponse;
-        this.navigateToState(flowResponse.step)
+        this.navigateToState(flowResponse.getFlowName());
       } else {
         this.lastFlowResponse = flowResponse;
       }
     } else {
       this.lastFlowResponse = flowResponse;
-      this.navigateToState(flowResponse.step)
+      this.navigateToState(flowResponse.getFlowName());
     }
   }
 

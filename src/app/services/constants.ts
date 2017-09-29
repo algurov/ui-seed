@@ -7,12 +7,16 @@ export const AUTH_CONSUMER_BASE_URL = `http://${HOST}:9998`;
 export const AUTH_SERVER_URL: string = AUTH_SERVER_BASE_URL + '/auth-server/oauth/authorize';
 export const AUTH_CONSUMER_URL: string = AUTH_CONSUMER_BASE_URL + '/oauth2-consumer/authorize';
 export const STATES = {
-  'start_registration': '/main/user/add',
-  'start_registration_success' : '/main/user',
-  'request_data' : '/password',
-  'request_data_success' : '/login',
-  'request_data_fail' : '/login',
-  'enter_email' : '/password-email',
-  'enter_email_success': '/login',
-  'enter_email_fail': '/login'
+  'registration': '/main/user/add',
+  'registration_success' : '/main/user',
+  'registrationCompletionByLink' : '/password',
+  'registrationCompletionByLink_success' : '/login',
+  'registrationCompletionByLink_fail' : '/login',
+  'startPasswordRecovery' : '/password-email',
+  'startPasswordRecovery_success': '/login',
+  'startPasswordRecovery_fail': '/login',
+  'passwordResetByLink' : '/password-recover',
+  'passwordResetByLink_success' : '/login',
+  'passwordResetByLink_fail' : '/login',
+  'fail' : '/login'
 };
