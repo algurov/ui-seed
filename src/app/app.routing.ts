@@ -18,7 +18,7 @@ import { SetPasswordFlowComponent } from './widgets/loading/set.password.compone
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
-  { path: 'main', component: MainViewComponent, //canActivate: [AuthGuard],
+  { path: 'main', component: MainViewComponent, canActivate: [AuthGuard],
     children: [
       { path: 'user', component: UserListComponent},
       { path: 'user/edit/:id', component: UserEditComponent},
