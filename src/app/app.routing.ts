@@ -19,7 +19,7 @@ import { AgentListComponent } from './views/agent/list/agent.list.component';
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
-  { path: 'main', component: MainViewComponent, //canActivate: [AuthGuard],
+  { path: 'main', component: MainViewComponent, canActivate: [AuthGuard],
     children: [
       { path: 'user', component: UserListComponent},
       { path: 'user/edit/:id', component: UserEditComponent},
