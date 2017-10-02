@@ -43,5 +43,19 @@ export const Messages = {
   "TAXONOMY_TITLE": "Справочники",
   "RECOVER_PASSWORD_TITLE": 'Установите новый пароль',
   "SEND_BTN": "Отправить",
-  "RECOVER_PASSWORD_EMAIL_TITLE": "Укажите почту"
+  "RECOVER_PASSWORD_EMAIL_TITLE": "Укажите почту",
+
+  "PHISICS": "Физические лица",
+  "GROUP": "Юридические лица",
+  "ADD_AGENT": "Новый контрагент",
+  "ADD_AGENT_DIALOG_TITLE": "Контрагент",
+  "SELECT_AGENT_TYPE": "Тип контрагента",
+  "DOCUMENT_NUMBER": "Номер документа",
+  "SELECT_DOCUMENT_TYPE": "Тип документа",
+  "AGENT_ADDRESS": "Адрес",
+  "AGENT_FAX": "Факс",
+  "GIVEN_BY": "Выдан",
+  "AGENT_TITLE": "Наименование",
+  "AGENT_SAVE": "СОХРАНИТЬ",
+  "AGENT_ADD": "ДОБАВИТЬ"
 };

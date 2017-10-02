@@ -14,15 +14,17 @@ import { PasswordFlowComponent } from './widgets/loading/password.flow.component
 import { PasswordRecoverComponent } from './views/password/password-recover.component';
 import { PasswordEmailComponent } from './views/password/password-email.component';
 import { SetPasswordFlowComponent } from './widgets/loading/set.password.component';
+import { AgentListComponent } from './views/agent/list/agent.list.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
-  { path: 'main', component: MainViewComponent, canActivate: [AuthGuard],
+  { path: 'main', component: MainViewComponent, //canActivate: [AuthGuard],
     children: [
       { path: 'user', component: UserListComponent},
       { path: 'user/edit/:id', component: UserEditComponent},
-      { path: 'user/add', component: UserEditComponent}
+      { path: 'user/add', component: UserEditComponent},
+      { path: 'agent', component: AgentListComponent}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

@@ -46,6 +46,9 @@ toggleSideNav(item) {
   //   html: this.generateHtmlForMenu(item)
   // };
   this.selectedItem = item;
+  if (item.link) {
+    this.router.navigate([item.link]);
+  }
   //this.main.toggleSidenav.next(item);
 }
 
@@ -70,7 +73,12 @@ generateHtmlForMenu(title: string, items: Array<any>): string {
 performAction(item) {
   switch(item.action) {
     case 'logout': this.logout(); break;
+    case 'add-agent': this.addAgent(); break;
   }
+}
+
+addAgent() {
+  this.dlgService.showAddAgentDialog();
 }
 
 logout() {

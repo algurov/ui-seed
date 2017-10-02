@@ -86,27 +86,33 @@
  }
 
  .nav-bar {
-
+   
    &__item {
        font-size: 30px;
        line-height: 80px;
        text-align: center;
        cursor: pointer;
-       :hover {
-         background: #0277BD;
-       }
 
        .icon-icon_logout {
-         margin-left: 4px;
+
        }
    }
 
+   &__bottom {
+     position: fixed;
+     bottom: 0;
+   }
    &__filler {
-     height: 200px;
+
    }
 
  }
-.nav-bar__item :hover{background: #0277BD;}
+.nav-bar__item i {
+  padding: 25px 25px;
+}
+.nav-bar__item :hover{
+  background: #0277BD;
+}
  .context {
      width: 280px;
      margin-left: 80px;

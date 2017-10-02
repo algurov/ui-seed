@@ -23,8 +23,27 @@ export const menuItems = [
   {
     name: 'AGENT',
     icon: 'agent',
+    link: 'main/agent',
     activator: 4,
-    sub: [],
+    sub: [
+      {
+        name: 'PHISICS',
+        icon: 'user',
+        link: 'main/agent/phisics'
+      },
+      {
+        name: 'GROUP',
+        icon: 'group',
+        link: 'main/agent/group'
+      }
+    ],
+    actions: [
+      {
+        name: 'ADD_AGENT',
+        action: 'add-agent'
+
+      }
+    ],
     top: true
   },
   {

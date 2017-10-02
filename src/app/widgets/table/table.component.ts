@@ -14,17 +14,22 @@ import { Router } from '@angular/router';
   templateUrl: './table.component.html'
 })
 export class TableComponent {
+  cols = [];
+  constructor(private stringService: StringService, private router: Router){
 
-  constructor(private userService: UserService, private router: Router){}
-  @Input() data: Observable<User[]>;
+  }
   @Input() displayedColumns;
-
-  dataSource = new ExampleDataSource(this.data, this.userService);
+  @Input() dataSource;
 
    clickRow(row){
      this.router.navigate(['/main/user/edit', row.id]);
    }
 
+   ngOnInit() {
+     this.displayedColumns.forEach(item => {
+       this.cols.push(item.column);
+     });
+   }
 }
 
 // const data: Element[] = [
@@ -56,18 +61,3 @@ export class TableComponent {
  * altered, the observable should emit that new set of data on the stream. In our case here,
  * we return a stream that contains only one set of data that doesn't change.
  */
-export class ExampleDataSource extends DataSource<any> {
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  data: Observable<User[]>;
-  constructor(data: Observable<User[]>, private userService: UserService) {
-    super();
-    this.data = data;
-  }
-
-  connect(): Observable<User[]> {
-    console.log(this.data);
-    return this.userService.getAllUsers();
-  }
-
-  disconnect() {}
-}

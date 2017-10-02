@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { FlowService } from '../../../services/flow.service';
 import { User } from '../../../models/user';
 import { FlowResponse } from '../../../models/flow.response';
+import {Observable} from 'rxjs/Observable';
+import {DataSource} from '@angular/cdk/collections';
 
 
 @Component({
@@ -18,8 +20,11 @@ import { FlowResponse } from '../../../models/flow.response';
 })
 
 export class UserListComponent {
-  displayedColumns = ['id', 'name', 'positions', 'mail'];
+  //displayedColumns = ['id', 'userFamilyName', 'userGivenName', 'email'];
+  displayedColumns = [{column: 'id', title: 'ID'}, {column: 'userFamilyName', title: 'USER_FAMILY_NAME'},
+                      {column: 'userGivenName', title: 'USER_GIVEN_NAME'}, {column:'email', title:'USER_EMAIL'}];
   users: Array<User> = new Array<User>();
+  dataSource: ExampleDataSource;
   constructor( public router: Router,
     public dlgService: DialogService,
     public main : MainService,
@@ -32,7 +37,7 @@ export class UserListComponent {
           this.users.push(new User().deserialize(item))
         });
       });
-
+      this.dataSource = new ExampleDataSource(this.userService);
       //this.users.push(new User().deserialize({id: 33, userName: 'login'}));
   }
   ngAfterInit() {
@@ -45,4 +50,19 @@ export class UserListComponent {
     this.router.navigate(['/main/user/edit', user.id]);
   }
 
+}
+
+export class ExampleDataSource extends DataSource<any> {
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  data: Observable<any>;
+  constructor(private userService: UserService) {
+    super();
+  }
+
+  connect(): Observable<User[]> {
+    //return this.data;
+    return this.userService.getAllUsers();
+  }
+
+  disconnect() {}
 }

@@ -16,7 +16,9 @@ import { PasswordHeader } from './views/password/password-header';
 import { PasswordEmailComponent } from './views/password/password-email.component';
 import { PasswordFlowComponent } from './widgets/loading/password.flow.component';
 import { SetPasswordFlowComponent } from './widgets/loading/set.password.component';
-
+import { AddAgentComponent } from './views/agent/add.agent.component';
+import { AgentListComponent } from './views/agent/list/agent.list.component';
+import { AddAgentDialog } from './views/agent/add.agent.dialog';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -35,5 +37,8 @@ export const APP_DECLARATIONS = [
   PasswordHeader,
   PasswordEmailComponent,
   PasswordFlowComponent,
-  SetPasswordFlowComponent
+  SetPasswordFlowComponent,
+  AddAgentComponent,
+  AgentListComponent,
+  AddAgentDialog
 ];
