@@ -8,9 +8,9 @@
       <md-cell *mdCellDef="let element"> {{element[column.column]}} </md-cell>
     </ng-container>
     <!-- Position Column -->
-    <!-- <ng-container mdColumnDef="id">
-      <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.id}} </md-cell>
+    <!-- <ng-container mdColumnDef="actions">
+      <md-header-cell *mdHeaderCellDef> {{stringService.get('ACTIONS')}} </md-header-cell>
+      <md-cell *mdCellDef="let element"> <button (click)="clickRow(row)">button</button> </md-cell>
     </ng-container> -->
 
     <!-- Name Column -->
@@ -30,8 +30,15 @@
       <md-header-cell *mdHeaderCellDef> Почта </md-header-cell>
       <md-cell *mdCellDef="let element"> {{element.email}} </md-cell>
     </ng-container> -->
+    <ng-container mdColumnDef="actions">
+    <md-header-cell *mdHeaderCellDef> </md-header-cell>
+    <md-cell *mdCellDef="let element" >
+      <md-icon mdTooltip="Удалить" mdTooltipPosition="above" *ngIf="remove" (click)="deleteRow(element)" class="action-icon">delete</md-icon>
+      <md-icon mdTooltip="Редактировать" mdTooltipPosition="above" (click)="editRow(element)" class="action-icon">mode_edit</md-icon>
+    </md-cell>
+</ng-container>
 
     <md-header-row *mdHeaderRowDef="cols"></md-header-row>
-    <md-row class="table-row" *mdRowDef="let row; columns: cols;" (click)="clickRow(row)"></md-row>
+    <md-row class="table-row" *mdRowDef="let row; columns: cols;"></md-row>
   </md-table>
 </div>

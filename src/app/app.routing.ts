@@ -14,7 +14,7 @@ import { PasswordFlowComponent } from './widgets/loading/password.flow.component
 import { PasswordRecoverComponent } from './views/password/password-recover.component';
 import { PasswordEmailComponent } from './views/password/password-email.component';
 import { SetPasswordFlowComponent } from './widgets/loading/set.password.component';
-import { AgentListComponent } from './views/agent/list/agent.list.component';
+import { PartnerListComponent } from './views/partner/list/partner.list.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -24,7 +24,7 @@ export const routes: Routes = [
       { path: 'user', component: UserListComponent},
       { path: 'user/edit/:id', component: UserEditComponent},
       { path: 'user/add', component: UserEditComponent},
-      { path: 'agent', component: AgentListComponent}
+      { path: 'agent', component: PartnerListComponent}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

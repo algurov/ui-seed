@@ -7,6 +7,9 @@ import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { Router } from '@angular/router';
+import { DialogService } from '../../services/dialog.service';
+import { PartnerService } from '../../services/partner.service';
+import { MainService } from '../../services/main.service';
 
 @Component({
   selector: 'table',
@@ -15,20 +18,28 @@ import { Router } from '@angular/router';
 })
 export class TableComponent {
   cols = [];
-  constructor(private stringService: StringService, private router: Router){
+  constructor(private stringService: StringService, private router: Router, private dlgService: DialogService,
+      private partnerService: PartnerService, private mainService: MainService){
 
   }
   @Input() displayedColumns;
   @Input() dataSource;
+  @Input() edit;
+  @Input() remove;
 
-   clickRow(row){
-     this.router.navigate(['/main/user/edit', row.id]);
+   editRow(row){
+     this.edit(row);
+   }
+
+   deleteRow(row) {
+     this.remove(row);
    }
 
    ngOnInit() {
      this.displayedColumns.forEach(item => {
        this.cols.push(item.column);
      });
+     this.cols.push('actions');
    }
 }
 

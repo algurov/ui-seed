@@ -19,21 +19,9 @@ export class MainViewComponent {
   @ViewChild('content', {read: ViewContainerRef}) target: ViewContainerRef;
   inner: string = '';
   subItems: any;
-  selectedActivator: number = 0;
   menuItems: Array<any> = menuItems;
   constructor(private auth : AuthService, private router: Router, private main : MainService, private stringService: StringService) {
-    this.main.toggleSidenav.subscribe(value => this.toggle(value));
-  }
-
-  toggle(value) {
-    if (this.selectedActivator != value.activator) {
-      this.selectedActivator = value.activator;
-      if (!this.side.opened) {
-        this.side.toggle();
-      }
-    } else {
-      this.side.toggle();
-    }
+  
   }
 
   changeSidenavContent() {

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DialogService } from '../../services/dialog.service';
 import { StringService } from '../../services/string.service';
 import { FlowService } from '../../services/flow.service';
-import { Form, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Form, FormGroup, FormBuilder, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
 import { User } from '../../models/user';
 import { Role } from '../../models/role';
 import { Contact } from '../../models/contact';
@@ -77,9 +77,9 @@ constructor(public dlgService: DialogService, public stringService: StringServic
 
 }
 
-
 fillForm(user : User) {
    this.currentUser = user;
+   this.selectedRoles = new Array<number>();
    this.userForm.get('userFamilyName').setValue(user.userFamilyName);
    this.userForm.get('userGivenName').setValue(user.userGivenName);
    this.userForm.get('userSecondName').setValue(user.userSecondName);
@@ -89,11 +89,12 @@ fillForm(user : User) {
    //TODO branchOffice fillForm
    //this.userForm.get('branchOffice').setValue(user.branchOffice);
    this.userForm.get('position').setValue(user.getPositions());
-   //this.userForm.get('role').setValue(user.roles);
+  // this.userForm.get('role').setValue(user.roles);
    user.roles.forEach(item => {
      this.selectedRoles.push(item.id);
    });
-
+   console.log('fill    ' + this.selectedRoles);
+   //this.userForm.get('role').updateValueAndValidity();
 
 }
 ngAfterViewChecked() {

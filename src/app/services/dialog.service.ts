@@ -4,7 +4,7 @@ import { MessageDialogComponent } from '../widgets/message-dialog/message-dialog
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { ConfirmDialog } from '../widgets/confirm.dialog';
 import { MdSnackBar } from '@angular/material';
-import { AddAgentDialog } from '../views/agent/add.agent.dialog';
+import { AddPartnerDialog } from '../views/partner/add.partner.dialog';
 
 @Injectable()
 export class DialogService {
@@ -20,10 +20,16 @@ export class DialogService {
   }
 
   showAddAgentDialog() {
-    let dlg = this.dialog.open(AddAgentDialog);
+    let dlg = this.dialog.open(AddPartnerDialog);
     let cmp = dlg.componentInstance;
   }
-  
+
+  showEditAgentDialog(partner) {
+    let dlg = this.dialog.open(AddPartnerDialog);
+    let cmp = dlg.componentInstance;
+    cmp.partner = partner;
+  }
+
   showNotification(message: string) {
      this.snackBar.open(message, '', {
       duration: 2000,

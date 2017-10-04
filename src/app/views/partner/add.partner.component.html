@@ -1,0 +1,50 @@
+<div class="content">
+  <form [formGroup]="partnerForm" (ngSubmit)="submitAction()" class="content__form">
+  <div class="content__form-header">
+    <md-select class="form-header__item" formControlName="partnerType" placeholder="{{stringService.get('SELECT_AGENT_TYPE')}}">
+      <md-option *ngFor="let type of types" [value]="type.value">
+        {{ type.title }}
+      </md-option>
+    </md-select>
+    <md-form-field class="form-header__item">
+      <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+      <input formControlName="documentNumber" mdInput placeholder=
+      "{{stringService.get('DOCUMENT_NUMBER')}}"/>
+    </md-form-field>
+    <md-select class="form-header__item" formControlName="documentType" placeholder="{{stringService.get('SELECT_DOCUMENT_TYPE')}}">
+      <md-option *ngFor="let type of docTypes" [value]="type.value">
+        {{ type.title }}
+      </md-option>
+    </md-select>
+    <button *ngIf="collapsed" md-button type="button" (click)="toggleView()" class="form-header__item add-button">{{stringService.get('AGENT_ADD')}}</button>
+    <button *ngIf="!collapsed" md-button type="submit" class="form-header__item save-button">{{stringService.get('AGENT_SAVE')}}</button>
+  </div>
+  <div *ngIf="!collapsed">
+  <md-form-field class="content__form-item">
+    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+    <input formControlName="documentIssued" mdInput placeholder=
+    "{{stringService.get('GIVEN_BY')}}"/>
+  </md-form-field>
+  <md-form-field class="content__form-item">
+    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+    <input formControlName="name" mdInput placeholder=
+    "{{stringService.get('AGENT_TITLE')}}"/>
+  </md-form-field>
+  <md-form-field class="content__form-item">
+    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+    <input formControlName="address" mdInput placeholder=
+    "{{stringService.get('AGENT_ADDRESS')}}"/>
+  </md-form-field>
+  <md-form-field class="content__form-item">
+    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+    <input formControlName="contactPhones" mdInput placeholder=
+    "{{stringService.get('ADD_TELEPHONE')}}"/>
+  </md-form-field>
+  <md-form-field class="content__form-item">
+    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
+    <input formControlName="fax" mdInput placeholder=
+    "{{stringService.get('AGENT_FAX')}}"/>
+  </md-form-field>
+</div>
+</form>
+</div>

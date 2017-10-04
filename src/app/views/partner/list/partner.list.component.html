@@ -1,0 +1,11 @@
+<div fxLayout="column">
+  <div fxLayout="column">
+  </div>
+  <div fxLayout="column">
+    <div fxFlex="10%" style="margin-top: 50px;">
+      Список контрагентов
+    </div>
+    <table style="width: 100%;" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [remove]="deletePartner" [edit]="editPartner">
+    </table>
+  </div>
+</div>

@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 import { FlowService } from '../../../services/flow.service';
 import { User } from '../../../models/user';
 import { FlowResponse } from '../../../models/flow.response';
-import {Observable} from 'rxjs/Observable';
-import {DataSource} from '@angular/cdk/collections';
+import { Observable } from 'rxjs/Observable';
+import { DataSource } from '@angular/cdk/collections';
 
 
 @Component({
@@ -46,6 +46,7 @@ export class UserListComponent {
   newUser() {
     this.flow.aksNewUser();
   }
+
   editUser(user) {
     this.router.navigate(['/main/user/edit', user.id]);
   }

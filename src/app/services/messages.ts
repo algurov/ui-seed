@@ -57,5 +57,9 @@ export const Messages = {
   "GIVEN_BY": "Выдан",
   "AGENT_TITLE": "Наименование",
   "AGENT_SAVE": "СОХРАНИТЬ",
-  "AGENT_ADD": "ДОБАВИТЬ"
+  "AGENT_ADD": "ДОБАВИТЬ",
+  "PARTNER_NAME": "Наименование",
+  "PARTNER_TYPE": "Тип контрагента",
+  "PARTNER_DOC_NUMBER": "Номер документа"
+
 };
