@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DialogService } from '../../../services/dialog.service';
 import { MainService } from '../../../services/main.service';
+import { StringService } from '../../../services/string.service';
 
 @Component({
   templateUrl: './partner.list.component.html',
@@ -17,7 +18,7 @@ export class PartnerListComponent {
   dataSource : PartnerDataSource;
   partnerDb: PartnerDataBase;
   constructor(private partnerService : PartnerService, public dlgService: DialogService,
-      public mainService: MainService) {
+      public mainService: MainService, public stringService: StringService) {
     this.partnerDb = new PartnerDataBase(partnerService, dlgService);
     this.dataSource = new PartnerDataSource(this.partnerDb);
     mainService.partnerAdded.subscribe(item => this.addPartner(item));

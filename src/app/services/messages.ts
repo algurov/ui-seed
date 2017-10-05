@@ -60,6 +60,8 @@ export const Messages = {
   "AGENT_ADD": "ДОБАВИТЬ",
   "PARTNER_NAME": "Наименование",
   "PARTNER_TYPE": "Тип контрагента",
-  "PARTNER_DOC_NUMBER": "Номер документа"
+  "PARTNER_DOC_NUMBER": "Номер документа",
+  "FILTER_NAME": "Поиск по наименованию",
+  "FILTER_NUMBER": "Поиск по номеру"
 
 };

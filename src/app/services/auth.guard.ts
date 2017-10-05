@@ -3,6 +3,7 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { AuthService } from './auth.service';
 
+
 @Injectable()
 export class AuthGuard implements CanActivate {
 
@@ -10,9 +11,15 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (Cookie.get('at') && Cookie.get('reft')) {
-            return true;
+            this.authService.me(Cookie.get('at')).subscribe(res => {
+              if (res.id) {
+                return true;
+              }
+            });
+        } else {
+          this.authService.login();
+          return false;
         }
-        this.authService.login();
-        return false;
+
     }
 }
