@@ -19,6 +19,7 @@ import { SetPasswordFlowComponent } from './widgets/loading/set.password.compone
 import { AddPartnerComponent } from './views/partner/add.partner.component';
 import { PartnerListComponent } from './views/partner/list/partner.list.component';
 import { AddPartnerDialog } from './views/partner/add.partner.dialog';
+import { BreadcrumbComponent } from './widgets/breadcrumb/breadcrumb.component';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -40,5 +41,6 @@ export const APP_DECLARATIONS = [
   SetPasswordFlowComponent,
   AddPartnerComponent,
   PartnerListComponent,
-  AddPartnerDialog
+  AddPartnerDialog,
+  BreadcrumbComponent
 ];

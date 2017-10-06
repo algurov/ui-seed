@@ -1,9 +1,9 @@
-<div fxLayout="column">
-  <div fxLayout="column">
+<div>
+  <div>
     <button md-button class="save-button" (click)="newUser()">{{stringService.get('CREATE_USER_BTN')}}</button>
   </div>
-  <div fxLayout="column">
-    <div fxFlex="10%" style="margin-top: 50px;">
+  <div>
+    <div>
       Список пользователей
     </div>
     <table style="width: 100%;" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [edit]="editUser">

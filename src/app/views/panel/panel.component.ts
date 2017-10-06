@@ -82,10 +82,10 @@ addAgent() {
 }
 
 logout() {
-  Cookie.deleteAll();
-  window.document.cookie = '';
   this.auth.logout().subscribe(res => {
-    window.location.href = API_BASE_URL;
+    Cookie.deleteAll();
+    window.document.cookie = '';
+    this.router.navigate(['main']);
   });
 }
 

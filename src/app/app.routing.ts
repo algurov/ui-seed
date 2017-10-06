@@ -19,12 +19,12 @@ import { PartnerListComponent } from './views/partner/list/partner.list.componen
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
-  { path: 'main', component: MainViewComponent, canActivate: [AuthGuard],
+  { path: 'main', component: MainViewComponent, canActivate: [AuthGuard], data: {breadcrumb: 'Кабинет'},
     children: [
-      { path: 'user', component: UserListComponent},
+      { path: 'user', component: UserListComponent,  data: {breadcrumb: 'Пользователи'}},
       { path: 'user/edit/:id', component: UserEditComponent},
       { path: 'user/add', component: UserEditComponent},
-      { path: 'agent', component: PartnerListComponent}
+      { path: 'agent', component: PartnerListComponent,  data: {breadcrumb: 'Контрагенты'}}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

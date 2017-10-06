@@ -41,7 +41,6 @@ export const menuItems = [
       {
         name: 'ADD_AGENT',
         action: 'add-agent'
-
       }
     ],
     top: true

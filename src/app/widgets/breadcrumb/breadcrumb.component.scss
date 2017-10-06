@@ -1,0 +1,19 @@
+.breadcrumb {
+  margin: 30px;
+
+  &__item {
+    float: left;
+
+    &-content {
+      float:left;
+      cursor: pointer;
+      font-weight: bold;
+      color: #546E7A;
+    }
+    &-divider {
+      float: left;
+      margin: 0px 10px;
+      color: #546E7A;
+    }
+  }
+}
