@@ -5,6 +5,7 @@ import { MainService } from '../../services/main.service';
 import { MdSidenav } from '@angular/material';
 import { menuItems } from '../panel/menu.items';
 import { StringService } from '../../services/string.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'main-view',
@@ -21,7 +22,7 @@ export class MainViewComponent {
   subItems: any;
   menuItems: Array<any> = menuItems;
   constructor(private auth : AuthService, private router: Router, private main : MainService, private stringService: StringService) {
-  
+
   }
 
   changeSidenavContent() {

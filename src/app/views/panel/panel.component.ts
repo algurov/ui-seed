@@ -84,7 +84,6 @@ addAgent() {
 logout() {
   Cookie.deleteAll();
   window.document.cookie = '';
-  window.location.href = API_BASE_URL;
   this.auth.logout().subscribe(res => {
     window.location.href = API_BASE_URL;
   });

@@ -7,7 +7,14 @@
               <div class="toolbar">
                 <div class="toolbar__bread">Breadcrumbs</div>
                 <div class="toolbar__card">
-                  <!--currentUser card will be here-->
+                  <div class="toolbar__card-icon">
+                    <md-icon svgIcon="photo" class="photo"></md-icon>
+                    <!-- <i class="icon-icon_photo"></i> -->
+                  </div>
+                  <div class="toolbar__card-content">
+                    <div>{{auth.getShortName()}}</div>
+                    <div>Current partner</div>
+                  </div>
                 </div>
               </div>
             <div>

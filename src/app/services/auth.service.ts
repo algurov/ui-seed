@@ -8,6 +8,7 @@ import { API_BASE_URL, AUTH_SERVER_URL, AUTH_CONSUMER_URL, AUTH_SERVER_BASE_URL,
 
 @Injectable()
 export class AuthService extends RequestBase {
+  loggedIn = null;
   constructor(public http: Http, public router : Router, public oauthService : OAuthService) {
     super(http);
   }
@@ -19,20 +20,36 @@ export class AuthService extends RequestBase {
   logout() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-     return this.http.post(AUTH_SERVER_BASE_URL +'/auth-server/logout', {}, {withCredentials: true});
+     return this.http.post(AUTH_SERVER_BASE_URL +'/auth-server/logout', {}, this.options);
   }
 
   me(at) {
-
-    let header = new Headers();
+    let header = new Headers({'Authorization':'Bearer ' + at});
     header.append('Authorization', 'Bearer ' + at);
-    let flowOptions = new RequestOptions({
+    let options = new RequestOptions({
       headers: header,
       withCredentials: true,
       body: ''
     });
+    return this.http.get(SEED_BASE_URL + '/seed/me', options);//.map(res => res.json())
+    // .subscribe(res => this.loggedIn = res);
+  }
 
-console.log(flowOptions);
-    return this.http.get(SEED_BASE_URL + '/seed/me', flowOptions).map(res => res.json());
+  tryLogin(at) {
+    this.me(at).map(res => res.json()).catch(err => {this.loggedIn = null; return Observable.of(false)}).subscribe(res => this.loggedIn = res);
+  }
+
+  getShortName() {
+      let result = '';
+      if (this.loggedIn.userFamilyName) {
+        result = result + this.loggedIn.userFamilyName + ' ';
+      }
+      if (this.loggedIn.userGivenName) {
+        result = result + this.loggedIn.userGivenName[0] +'. ';
+      }
+      if (this.loggedIn.userSecondName) {
+        result = result + this.loggedIn.userSecondName[0] + '.';
+      }
+      return result;
   }
 }

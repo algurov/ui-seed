@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
 export class RequestBase {
@@ -15,6 +16,7 @@ export class RequestBase {
   });
   constructor(public http: Http) {
     this.headers.append('Content-Type', 'application/json');
+    this.headers.append('Authorization', 'Bearer ' + Cookie.get('at'));
     this.noPreFlightHeaders.append('Content-Type', 'text/plain');
   }
 }

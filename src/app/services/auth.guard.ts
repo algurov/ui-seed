@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { AuthService } from './auth.service';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -11,14 +12,15 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (Cookie.get('at') && Cookie.get('reft')) {
-            this.authService.me(Cookie.get('at')).subscribe(res => {
-              if (res.id) {
+          this.authService.tryLogin(Cookie.get('at'));
+          return this.authService.me(Cookie.get('at')).map(res => {
+              if (res) {
                 return true;
               }
             });
         } else {
           this.authService.login();
-          return false;
+          return Observable.of(false);
         }
 
     }

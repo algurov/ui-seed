@@ -88,3 +88,27 @@ mat-drawer-content {
   width: 100%;
   padding: 0 20px;
 }
+
+.toolbar {
+
+  &__bread {
+    float: left;
+  }
+  &__card {
+    padding: 20px;
+    float: right;
+    width: 160px;
+
+    &-content {
+      padding-left: 50px;
+    }
+  }
+  &__card-icon {
+    float: left;
+  }
+}
+
+.photo {
+  height: 36px !important;
+  width: 36px !important;
+}
