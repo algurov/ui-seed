@@ -14,13 +14,21 @@
                     <!-- <i class="icon-icon_photo"></i> -->
                   </div>
                   <div class="toolbar__card-content">
-                    <div>{{auth.getShortName()}}</div>
-                    <div>Current partner</div>
+                    <div>{{authService.getShortName()}}</div>
+                    <div>
+                      <md-select #partnerSelect [ngModel]="selectedPartnerId" (ngModelChange)="partnerChange($event)" class="toolbar__card-select" floatPlaceholder="never" placeholder="{{stringService.get('SELECT_PARTNER')}}">
+                        <md-option *ngFor="let partner of partners" [value]="partner.id">
+                          {{ partner.name }}
+                        </md-option>
+                      </md-select>
+                    </div>
                   </div>
                 </div>
               </div>
             <div>
               <div style="margin-bottom: 10px;">
+                user: {{authService.getLoggedIn().id}}
+                partner: {{selectedPartnerId}}
                 <router-outlet></router-outlet>
               </div>
           </div>

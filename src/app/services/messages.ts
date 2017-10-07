@@ -62,6 +62,8 @@ export const Messages = {
   "PARTNER_TYPE": "Тип контрагента",
   "PARTNER_DOC_NUMBER": "Номер документа",
   "FILTER_NAME": "Поиск по наименованию",
-  "FILTER_NUMBER": "Поиск по номеру"
+  "FILTER_NUMBER": "Поиск по номеру",
+  "SELECT_PARTNER": "Контрагент",
+  "ID": "Id"
 
 };

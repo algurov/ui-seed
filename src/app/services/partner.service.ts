@@ -4,10 +4,12 @@ import { Observable } from 'rxjs/Observable';
 import { SEED_BASE_URL } from '../services/constants';
 import { RequestBase } from '../services/request.base';
 import { Partner } from '../models/partner';
+import { MainService } from './main.service';
 
 @Injectable()
 export class PartnerService extends RequestBase {
-  constructor(public http: Http) {
+
+  constructor(public http: Http, private mainService: MainService) {
     super(http);
   }
 
@@ -22,7 +24,7 @@ export class PartnerService extends RequestBase {
   }
 
   updatePartner(partner: Partner): Observable<Partner> {
-    return this.http.put(`${SEED_BASE_URL}/seed/partner/` + partner.id, partner, this.options)
+    return this.http.put(`${SEED_BASE_URL}/seed/partner`, partner, this.options)
     .map(res => res.json());
   }
 

@@ -55,6 +55,7 @@ export class PartnerListComponent {
   }
 
   editPartner(partner) {
+    this.partnerService.getPartnerById(partner.id).subscribe(res=>console.log(res));
     this.dlgService.showEditAgentDialog(partner);
     console.log(partner);
   }

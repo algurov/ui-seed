@@ -149,8 +149,11 @@ export class FlowService extends RequestBase {
 
     let opts = this.createOptions(body);
     let headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + Cookie.get('at'));
+
   headers.append('Content-Type',
      'application/x-www-form-urlencoded');
+
     return this.http.post(SEED_BASE_URL + '/seed/registration',body.toString(), {headers:headers, withCredentials: true}).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }

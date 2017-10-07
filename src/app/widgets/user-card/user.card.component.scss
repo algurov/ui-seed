@@ -3,6 +3,17 @@
 }
 
 .photo {
-  height: 100px;
-  width: 100px;
+  height: 100px!important;
+  width: 100px!important;
+}
+
+.card {
+  &__icon {
+    float: left;
+  }
+
+  &__content {
+    float: left;
+    padding-left: 10px;
+  }
 }

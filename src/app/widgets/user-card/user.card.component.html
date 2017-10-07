@@ -1,12 +1,9 @@
-<div fxLayout="row" fxFlex>
-  <div fxFlex="25%">
+<div class="card">
+  <div class="card__icon">
     <md-icon svgIcon="photo" class="photo"></md-icon>
-    <!-- <img [src]="userImage" heigth=100 width=100 class="img-circle"/> -->
   </div>
-  <div fxFlex="80%" fxLayout="column">
-    <div fxFlex="100%" fxLayout="column">
-        <div fxFlex fxLayoutAlign="start none"><h5>{{getUserShortName()}}</h5></div>
-        <div fxFlex fxLayoutAlign="start none">{{getUserProfession()}}</div>
+    <div class="card__content">
+        <div><h5>{{getUserShortName()}}</h5></div>
+        <div>{{getUserProfession()}}</div>
     </div>
-  </div>
 </div>

@@ -102,10 +102,20 @@ mat-drawer-content {
     &-content {
       padding-left: 50px;
     }
+
+    &-select {
+      padding-top: 0px!important;
+      width: 120px!important;
+    }
+
+    &-select .mat-select-underline {
+      display:none;
+    }
   }
   &__card-icon {
     float: left;
   }
+
 }
 
 .photo {

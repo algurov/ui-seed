@@ -14,6 +14,13 @@ export class AuthService extends RequestBase {
     super(http);
   }
 
+  getLoggedIn() {
+    if (this.loggedIn) {
+      return this.loggedIn;
+    } else {
+      return null;
+    }
+  }
   login(): void {
       this.http.get(API_BASE_URL +'/api/v1/login/url').subscribe(res=>window.location.href = res.text());
   }

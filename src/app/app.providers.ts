@@ -7,6 +7,7 @@ import { MainService } from './services/main.service';
 import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { FlowService } from './services/flow.service';
 import { PartnerService } from './services/partner.service';
+import { SettingsService } from './services/settings.service';
 
 export const APP_PROVIDERS = [
   UserService,
@@ -17,5 +18,6 @@ export const APP_PROVIDERS = [
   MainService,
   OAuthService,
   FlowService,
-  PartnerService
+  PartnerService,
+  SettingsService
 ];

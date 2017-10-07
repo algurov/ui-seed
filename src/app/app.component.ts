@@ -6,6 +6,8 @@ import { MOBILE } from './services/constants';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MdIconRegistry } from '@angular/material';
 import { DialogService } from './services/dialog.service';
+import { MainService } from './services/main.service';
+import { SettingsService } from './services/settings.service';
 
 @Component({
   selector: 'my-app',
@@ -27,7 +29,9 @@ export class AppComponent {
     public router: Router,
     public iconReg: MdIconRegistry,
     public sanitizer: DomSanitizer,
-    public dlgService : DialogService
+    public dlgService : DialogService,
+    public mainService: MainService,
+    public SettingsService: SettingsService
   ) {
     iconReg.addSvgIcon('agent', sanitizer.bypassSecurityTrustResourceUrl('../assets/icon/icon_agent.svg'))
     .addSvgIcon('docs', sanitizer.bypassSecurityTrustResourceUrl('../assets/icon/icon_docs.svg'))
