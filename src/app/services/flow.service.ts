@@ -34,7 +34,10 @@ export class FlowService extends RequestBase {
 
   startPasswordRecovery() {
     this.dlgService.block = true;
-    return this.http.get(SEED_BASE_URL + '/seed/startPasswordRecovery', this.createOptions()).map(res => res.json())
+    let headers = new Headers();
+    headers.append('Content-Type',
+     'application/x-www-form-urlencoded');
+    return this.http.get(SEED_BASE_URL + '/seed/startPasswordRecovery', {headers:headers, withCredentials: true}).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 
@@ -52,7 +55,10 @@ export class FlowService extends RequestBase {
   }
 
   startPasswordResetByLink(link) {
-    return this.http.get(SEED_BASE_URL + '/seed'+ link, this.createOptions())
+    let headers = new Headers();
+    headers.append('Content-Type',
+     'application/x-www-form-urlencoded');
+    return this.http.get(SEED_BASE_URL + '/seed'+ link, {headers:headers, withCredentials: true})
       .map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
@@ -71,7 +77,10 @@ export class FlowService extends RequestBase {
   }
 
   startRegistartion(code): Subscription {
-    return this.http.get(SEED_BASE_URL + '/seed'+ code, this.createOptions())
+    let headers = new Headers();
+    headers.append('Content-Type',
+     'application/x-www-form-urlencoded');
+    return this.http.get(SEED_BASE_URL + '/seed'+ code, {headers:headers, withCredentials: true})
       .map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
