@@ -15,16 +15,19 @@ import { PasswordRecoverComponent } from './views/password/password-recover.comp
 import { PasswordEmailComponent } from './views/password/password-email.component';
 import { SetPasswordFlowComponent } from './widgets/loading/set.password.component';
 import { PartnerListComponent } from './views/partner/list/partner.list.component';
+import { TaxonomyAllListComponent } from './views/taxonomy/taxonomy.all.list.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
-  { path: 'main', component: MainViewComponent, canActivate: [AuthGuard], data: {breadcrumb: 'Кабинет'},
+  { path: 'main', component: MainViewComponent, canActivate: [AuthGuard],
+    data: {breadcrumb: 'Кабинет'},
     children: [
       { path: 'user', component: UserListComponent,  data: {breadcrumb: 'Пользователи'}},
       { path: 'user/edit/:id', component: UserEditComponent},
       { path: 'user/add', component: UserEditComponent},
-      { path: 'agent', component: PartnerListComponent,  data: {breadcrumb: 'Контрагенты'}}
+      { path: 'agent', component: PartnerListComponent,  data: {breadcrumb: 'Контрагенты'}},
+      { path: 'taxonomy', component: TaxonomyAllListComponent, data: {breadcrumb: 'Справочники'}}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

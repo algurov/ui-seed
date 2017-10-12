@@ -20,6 +20,7 @@ import { AddPartnerComponent } from './views/partner/add.partner.component';
 import { PartnerListComponent } from './views/partner/list/partner.list.component';
 import { AddPartnerDialog } from './views/partner/add.partner.dialog';
 import { BreadcrumbComponent } from './widgets/breadcrumb/breadcrumb.component';
+import { TaxonomyAllListComponent } from './views/taxonomy/taxonomy.all.list.component';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -42,5 +43,6 @@ export const APP_DECLARATIONS = [
   AddPartnerComponent,
   PartnerListComponent,
   AddPartnerDialog,
-  BreadcrumbComponent
+  BreadcrumbComponent,
+  TaxonomyAllListComponent
 ];
