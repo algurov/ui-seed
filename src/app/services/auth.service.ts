@@ -31,8 +31,8 @@ export class AuthService extends RequestBase {
 
   logout() {
     let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
     headers.append('Authorization', 'Basic Y2xpZW50X3NlZWQ6c2VjcmV0');
+    headers.append('Access-Control-Allow-Origin', '*');
     let options = new RequestOptions({
       headers: headers,
       withCredentials: true
@@ -42,7 +42,6 @@ export class AuthService extends RequestBase {
 
   me(at) {
     let header = new Headers({'Authorization':'Bearer ' + at});
-    header.append('Authorization', 'Bearer ' + at);
     let options = new RequestOptions({
       headers: header,
       withCredentials: true,

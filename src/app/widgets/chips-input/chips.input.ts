@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 import { MatChipInputEvent } from '@angular/material';
 import { StringService } from '../../services/string.service';
 
@@ -13,6 +13,7 @@ const ENTER = 13;
   styleUrls: ['./chips.input.scss']
 })
 export class ChipsInput {
+  @ViewChild('field') field : ElementRef;
   @Input() items : Array<any>;
   @Input('title') title: string;
   @Output() onRemove = new EventEmitter<any>();
@@ -22,6 +23,7 @@ export class ChipsInput {
   selectable: boolean = true;
   removable: boolean = true;
   addOnBlur: boolean = true;
+
   // Enter, comma
   separatorKeysCodes = [COMMA, ENTER];
 
@@ -51,5 +53,13 @@ export class ChipsInput {
       this.items.splice(index, 1);
       this.onRemove.emit(this.items);
     }
+  }
+
+  click() {
+    this.field.nativeElement.focus();
+  }
+
+  setPlaceholder() {
+    this.field.nativeElement.placeholder = this.getTitle();
   }
 }

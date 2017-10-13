@@ -1,14 +1,14 @@
-<mat-form-field class="container">
+<mat-form-field class="container" (click)="click()" (onBlur)="setPlaceholder()">
   <mat-chip-list matPrefix #chipList>
-    <mat-chip *ngFor="let item of items" [selectable]="selectable"
+    <mat-chip *ngFor="let item of items"
              [removable]="removable" (remove)="remove(item)">
       {{item}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
-  <input matInput placeholder="{{getTitle()}}"
+  <input matInput #field placeholder="{{getTitle()}}"
          [matChipInputFor]="chipList"
          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
          [matChipInputAddOnBlur]="addOnBlur"
-         (matChipInputTokenEnd)="add($event)" />
+         (matChipInputTokenEnd)="add($event)"/>
 </mat-form-field>
