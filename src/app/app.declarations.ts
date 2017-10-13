@@ -21,6 +21,7 @@ import { PartnerListComponent } from './views/partner/list/partner.list.componen
 import { AddPartnerDialog } from './views/partner/add.partner.dialog';
 import { BreadcrumbComponent } from './widgets/breadcrumb/breadcrumb.component';
 import { TaxonomyAllListComponent } from './views/taxonomy/taxonomy.all.list.component';
+import { ChipsInput } from './widgets/chips-input/chips.input';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -44,5 +45,6 @@ export const APP_DECLARATIONS = [
   PartnerListComponent,
   AddPartnerDialog,
   BreadcrumbComponent,
-  TaxonomyAllListComponent
+  TaxonomyAllListComponent,
+  ChipsInput
 ];

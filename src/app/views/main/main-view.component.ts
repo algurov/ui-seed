@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, ViewChild, ElementRef, ViewContainerRef, 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { MainService } from '../../services/main.service';
-import { MdSelect} from '@angular/material';
+import { MatSelect} from '@angular/material';
 import { menuItems } from '../panel/menu.items';
 import { StringService } from '../../services/string.service';
 import { User } from '../../models/user';
@@ -18,7 +18,7 @@ import { SettingsService } from '../../services/settings.service';
 })
 export class MainViewComponent {
 
-  @ViewChild('partnerSelect') partnerSelect : MdSelect;
+  @ViewChild('partnerSelect') partnerSelect : MatSelect;
   @ViewChild('content') sideContent: ElementRef;
   @ViewChild('content', {read: ViewContainerRef}) target: ViewContainerRef;
   inner: string = '';
@@ -36,8 +36,8 @@ export class MainViewComponent {
 
   refreshPartners() {
     this.partners = new Array<Partner>();
-    this.partnerService.getPartnerList(1,10).subscribe(res => {
-      res.forEach(item => {
+    this.partnerService.getPartnerList().subscribe(res => {
+      res.content.forEach(item => {
         this.partners.push(new Partner().deserialize(item));
       });
     });

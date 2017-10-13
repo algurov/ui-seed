@@ -81,6 +81,7 @@ export class UserService extends RequestBase {
   }
 
   updateUser(user): Observable<User> {
+    console.log(user);
     return this.http.put(`${PROVISIONING_BASE_URL}/user-provisioning/user/`+ user.id, JSON.stringify(user), this.options)
     .map(res => res.json());
   }

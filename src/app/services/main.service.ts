@@ -13,4 +13,6 @@ export class MainService {
   public partnerSelectedForUser: EventEmitter<any> = new EventEmitter<any>();
   public populateSettings: EventEmitter<any> = new EventEmitter<any>();
 
+  public menuActionPerformed: EventEmitter<any> = new EventEmitter<any>();
+
 }

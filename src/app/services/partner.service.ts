@@ -18,9 +18,25 @@ export class PartnerService extends RequestBase {
       .map(res => res.json());
   }
 
-  getPartnerList(page, number): Observable<Partner[]> {
-    return this.http.get(`${SEED_BASE_URL}/seed/partner?page=`+ page + '&size='+ number, this.options)
+  getPartnerList(): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/partner`, this.options)
     .map(res => res.json());
+  }
+
+  getPartnerByDocumentNumber(number): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/partner?documentNumber=` + number, this.options)
+    .map(res => res.json());
+  }
+
+  searchPartnersByParams(params : Array<any>): Observable<any> {
+      let paramString = '';
+      params.forEach(item => {
+        paramString += item.field + '=' + item.value + '&';
+      });
+      if (paramString.length > 0) {
+        paramString = paramString.substring(0, paramString.length - 1);
+      }
+      return this.http.get(`${SEED_BASE_URL}/seed/partner?` + paramString, this.options).map(res => res.json());
   }
 
   updatePartner(partner: Partner): Observable<Partner> {

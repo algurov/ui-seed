@@ -1,7 +1,7 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdInputModule, MdFormFieldModule, MdButtonModule, MdInput } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatButtonModule, MatInput } from '@angular/material';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { StringService } from '../../services/string.service';
 import { FlowService } from '../../services/flow.service';

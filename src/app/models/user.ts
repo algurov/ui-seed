@@ -17,6 +17,10 @@ export class User implements Serializable<User>{
   email: string;
 
   toSend() {
+    let positionsToSend = [];
+    this.positions.forEach(item => {
+      positionsToSend.push({name: item});
+    });
     return {
       id: this.id,
       userName: this.userName,
@@ -26,7 +30,7 @@ export class User implements Serializable<User>{
       email: this.email,
       roles : this.roles,
       contacts: this.contacts,
-      positions: this.positions,
+      positions: positionsToSend,
       branchOffice: null
 
     };
@@ -36,7 +40,12 @@ export class User implements Serializable<User>{
     let result = '';
     if (this.positions) {
       this.positions.forEach(item => {
-        result += item.name + ', ';
+        if (item.name) {
+          result += item.name + ', ';
+        } else {
+          result += item + ', '
+        }
+
       });
       result = result.substring(0, result.length - 2);
     }
@@ -87,7 +96,7 @@ export class User implements Serializable<User>{
     let result = [];
     if (this.positions) {
       this.positions.forEach(item => {
-        result.push({display: item.name, value: item.name});
+        result.push(item.name);
       });
     }
     return result;
@@ -98,7 +107,7 @@ export class User implements Serializable<User>{
     if (this.contacts) {
       this.contacts.forEach(item => {
         if (item.contactType == 'MOBILE_PHONE') {
-          result.push({display: item.address, value: item.address});
+          result.push(item.address);
         }
       });
     }

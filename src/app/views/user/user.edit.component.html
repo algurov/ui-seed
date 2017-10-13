@@ -5,9 +5,9 @@
       <div fxFlex></div>
       <div fxLayout="row" fxLayoutAlign="space-around center">
         <div fxFlex ></div>
-        <button class="remove-button row-item" fxFlex="1 1 30%" md-button *ngIf="id"
+        <button class="remove-button row-item" fxFlex="1 1 30%" mat-button *ngIf="id"
         (click)="removeUser(id)">{{stringService.get('USER_REMOVE_BTN')}}</button>
-        <button class="save-button row-item" fxFlex="1 1 30%" md-button
+        <button class="save-button row-item" fxFlex="1 1 30%" mat-button
         (click)="submitForm()">{{stringService.get('USER_EDIT_BTN')}}</button>
         <div fxFlex></div>
       </div>
@@ -18,61 +18,63 @@
     <form [formGroup]="userForm" (ngSubmit)="submitAction()">
       <div fxLayout="column" fxFlex="100%">
         <div fxLayout="row">
-          <md-form-field class="row-item" fxFlex>
-            <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-            <input formControlName="userFamilyName" (ngModelChange)="updateUserFamilyName($event)" mdInput placeholder=
+          <mat-form-field class="row-item" fxFlex>
+            <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+            <input formControlName="userFamilyName" (ngModelChange)="updateUserFamilyName($event)" matInput placeholder=
             "{{stringService.get('USER_FAMILY_NAME')}}"/>
-          </md-form-field>
-          <md-form-field class="row-item" fxFlex>
-            <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-            <input formControlName="userGivenName" (ngModelChange)="updateUserName($event)" mdInput placeholder=
+          </mat-form-field>
+          <mat-form-field class="row-item" fxFlex>
+            <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+            <input formControlName="userGivenName" (ngModelChange)="updateUserName($event)" matInput placeholder=
             "{{stringService.get('USER_NAME')}}"/>
-          </md-form-field>
-          <md-form-field class="row-item" fxFlex>
-            <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-            <input formControlName="userSecondName" (ngModelChange)="updateUserGivenName($event)" mdInput placeholder=
+          </mat-form-field>
+          <mat-form-field class="row-item" fxFlex>
+            <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+            <input formControlName="userSecondName" (ngModelChange)="updateUserGivenName($event)" matInput placeholder=
             "{{stringService.get('USER_GIVEN_NAME')}}"/>
-          </md-form-field>
+          </mat-form-field>
         </div>
         <div fxLayout="column">
-          <md-form-field fxFlex class="row-item">
-            <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-            <input formControlName="address" mdInput placeholder=
+          <mat-form-field fxFlex class="row-item">
+            <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+            <input formControlName="address" matInput placeholder=
             "{{stringService.get('USER_ADRESS')}}"/>
-          </md-form-field>
+          </mat-form-field>
         </div>
-        <div fxLayout="column">
-          <tag-input class="pad-bot row-item" addOnBlur="true" formControlName="phoneNumber" placeholder="{{stringService.get('ADD_TELEPHONE')}}" secondaryPlaceholder="{{stringService.get('ADD_TELEPHONE')}}"></tag-input>
-        </div>
+        <!-- <div fxLayout="column"> -->
+        <input-chips [items]="selectedPhones" (onRemove)="updateUserPhones($event)" (onAdd)="updateUserPhones($event)" title="ADD_TELEPHONE"></input-chips>
+          <!-- <tag-input class="pad-bot row-item" addOnBlur="true" formControlName="phoneNumber" placeholder="{{stringService.get('ADD_TELEPHONE')}}" secondaryPlaceholder="{{stringService.get('ADD_TELEPHONE')}}"></tag-input> -->
+        <!-- </div> -->
         <div fxLayout="row">
           <div fxLayout="row"  fxFlex="60%">
-            <md-form-field fxFlex class="row-item">
-              <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-              <input formControlName="email" type="email" mdInput placeholder=
+            <mat-form-field fxFlex class="row-item">
+              <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+              <input formControlName="email" type="email" matInput placeholder=
               "{{stringService.get('USER_EMAIL')}}"/>
-            </md-form-field>
-            <button *ngIf="false" class="save-button row-item" fxFlex="1 1 30%" fxLayoutAlign="center end" md-button
+            </mat-form-field>
+            <button *ngIf="false" class="save-button row-item" fxFlex="1 1 30%" fxLayoutAlign="center end" mat-button
             (click)="resetPassword()">{{stringService.get('RESET_PASS_BTN')}}</button>
           </div>
             <div fxFlex="40%"></div>
         </div>
-        <div fxLayout="column">
-          <md-select formControlName="branchOffice" disabled="true" class="pad-bot row-item" placeholder="{{stringService.get('SELECT_DEPARTMENT')}}">
-            <md-option *ngFor="let department of departments" [value]="department">
+        <mat-form-field class="row-item" fxFlex>
+          <mat-select formControlName="branchOffice" disabled="true" placeholder="{{stringService.get('SELECT_DEPARTMENT')}}">
+            <mat-option *ngFor="let department of departments" [value]="department">
               {{ department }}
-            </md-option>
-          </md-select>
-        </div>
-        <div fxLayout="column">
-          <tag-input class="pad-bot row-item" (onRemove)="updateUserProfessions($event)" (onAdd)="updateUserProfessions($event)" addOnBlur="true" formControlName="position" placeholder="{{stringService.get('ADD_PROFESSION')}}" secondaryPlaceholder="{{stringService.get('ADD_PROFESSION')}}"></tag-input>
-        </div>
-        <div fxLayout="column">
-          <md-select [(ngModel)]="selectedRoles" formControlName="role" class="pad-bot row-item" multiple placeholder="{{stringService.get('SELECT_ROLE')}}">
-            <md-option *ngFor="let role of roles" [value]="role.id">
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <div fxLayout="column"> -->
+        <input-chips [items]="selectedPositions" (onRemove)="updateUserProfessions($event)" (onAdd)="updateUserProfessions($event)" title="ADD_PROFESSION"></input-chips>
+          <!-- <tag-input class="pad-bot row-item" (onRemove)="updateUserProfessions($event)" (onAdd)="updateUserProfessions($event)" addOnBlur="true" formControlName="position" placeholder="{{stringService.get('ADD_PROFESSION')}}" secondaryPlaceholder="{{stringService.get('ADD_PROFESSION')}}"></tag-input> -->
+        <!-- </div> -->
+        <mat-form-field class="row-item" fxFlex>
+          <mat-select [(ngModel)]="selectedRoles" formControlName="role" multiple placeholder="{{stringService.get('SELECT_ROLE')}}">
+            <mat-option *ngFor="let role of roles" [value]="role.id">
               {{ role.roleName }}
-            </md-option>
-          </md-select>
-        </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
       </div>
       <button #submitBtn type="submit" style="visibility: hidden;"></button>

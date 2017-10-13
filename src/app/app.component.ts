@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { views } from './app-nav-views';
 import { MOBILE } from './services/constants';
 import { DomSanitizer } from '@angular/platform-browser';
-import { MdIconRegistry } from '@angular/material';
+import { MatIconRegistry } from '@angular/material';
 import { DialogService } from './services/dialog.service';
 import { MainService } from './services/main.service';
 import { SettingsService } from './services/settings.service';
@@ -14,7 +14,7 @@ import { SettingsService } from './services/settings.service';
   styleUrls: ['main.scss', './app.component.scss'],
   templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None,
-  viewProviders: [MdIconRegistry]
+  viewProviders: [MatIconRegistry]
 })
 export class AppComponent {
   showMonitor = (ENV === 'development' && !AOT &&
@@ -27,7 +27,7 @@ export class AppComponent {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    public iconReg: MdIconRegistry,
+    public iconReg: MatIconRegistry,
     public sanitizer: DomSanitizer,
     public dlgService : DialogService,
     public mainService: MainService,

@@ -22,6 +22,8 @@ export class UserEditComponent implements OnInit{
 userForm : FormGroup;
 currentUser: User;
 id: number;
+selectedPositions = [];
+selectedPhones = [];
 selectedRoles: Array<number> = new Array<number>();
 roles: Array<Role> = new Array<Role>();// = [{roleName:'Администратор', id: 1}, {roleName: 'Пользователь', id: 2}];
 departments: Array<string> = ['Филиал 1', 'Филиал2'];
@@ -84,11 +86,13 @@ fillForm(user : User) {
    this.userForm.get('userGivenName').setValue(user.userGivenName);
    this.userForm.get('userSecondName').setValue(user.userSecondName);
    this.userForm.get('address').setValue(user.getAddress());
-   this.userForm.get('phoneNumber').setValue(user.getPhones());
+   //this.userForm.get('phoneNumber').setValue(user.getPhones());
    this.userForm.get('email').setValue(user.email);
    //TODO branchOffice fillForm
    //this.userForm.get('branchOffice').setValue(user.branchOffice);
-   this.userForm.get('position').setValue(user.getPositions());
+   //this.userForm.get('position').setValue(user.getPositions());
+   this.selectedPositions = user.getPositions();
+   this.selectedPhones = user.getPhones();
   // this.userForm.get('role').setValue(user.roles);
    user.roles.forEach(item => {
      this.selectedRoles.push(item.id);
@@ -121,11 +125,15 @@ addProfession(item) {
   this.currentUser.positions.push(item);
 }
 
-updateUserProfessions(event) {
-  this.currentUser.positions = [];
-let data : Array<any> = this.userForm.get('position').value;
-  data.forEach(item => this.addProfession({ name:item.value }));
-  console.log(this.currentUser.positions);
+updateUserPhones(items) {
+  this.selectedPhones = items;
+}
+updateUserProfessions(items) {
+  this.currentUser.positions = items;
+  this.selectedPositions = items;
+  // let data : Array<any> = this.userForm.get('position').value;
+  // data.forEach(item => this.addProfession({ name:item.value }));
+  // console.log(this.currentUser.positions);
 }
 
 submitForm() {
@@ -197,11 +205,11 @@ submitAction() {
     this.currentUser.userGivenName = this.userForm.get('userGivenName').value;
     this.currentUser.userFamilyName = this.userForm.get('userFamilyName').value;
     this.currentUser.userSecondName = this.userForm.get('userSecondName').value;
-    this.currentUser.positions = this.collectPositionsDataFromChip(this.userForm.get('position').value);
+    this.currentUser.positions = this.selectedPositions;//this.collectPositionsDataFromChip(this.userForm.get('position').value);
     this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
 
     let address = this.userForm.get('address').value;
-    let phoneNumber = this.collectDataFromChip(this.userForm.get('phoneNumber').value);
+    let phoneNumber = this.selectedPhones; //this.collectDataFromChip(this.userForm.get('phoneNumber').value);
 
     this.currentUser.contacts = new Array<Contact>();
     if (phoneNumber) {
@@ -295,7 +303,7 @@ export class UserToSend {
       let resArr = new Array<string>();
       if (arr) {
         arr.forEach(item => {
-          resArr.push(item.name);
+          resArr.push(item);
           //result += item.name + ',';
         });
         result = JSON.stringify({positions: resArr});

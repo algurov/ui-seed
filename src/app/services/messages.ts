@@ -64,6 +64,7 @@ export const Messages = {
   "FILTER_NAME": "Поиск по наименованию",
   "FILTER_NUMBER": "Поиск по номеру",
   "SELECT_PARTNER": "Контрагент",
-  "ID": "Id"
+  "ID": "Id",
+  "PARTNER_EXISTS": "Контрагент с этими данными уже существует в системе"
 
 };

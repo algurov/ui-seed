@@ -141,6 +141,7 @@ export class FlowService extends RequestBase {
 
   sendNewUser(user: UserToSend): Subscription {
     this.dlgService.block = true;
+    console.log(user);
     let body = new URLSearchParams();
     body.set('execution', this.lastFlowResponse.execution);
     body.set('_eventId', 'do');

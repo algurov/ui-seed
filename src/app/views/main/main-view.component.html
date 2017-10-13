@@ -10,25 +10,23 @@
                 </div>
                 <div class="toolbar__card">
                   <div class="toolbar__card-icon">
-                    <md-icon svgIcon="photo" class="photo"></md-icon>
+                    <mat-icon svgIcon="photo" class="photo"></mat-icon>
                     <!-- <i class="icon-icon_photo"></i> -->
                   </div>
                   <div class="toolbar__card-content">
                     <div>{{authService.getShortName()}}</div>
                     <div>
-                      <md-select #partnerSelect [ngModel]="selectedPartnerId" (ngModelChange)="partnerChange($event)" class="toolbar__card-select" floatPlaceholder="never" placeholder="{{stringService.get('SELECT_PARTNER')}}">
-                        <md-option *ngFor="let partner of partners" [value]="partner.id">
+                      <mat-select #partnerSelect [ngModel]="selectedPartnerId" (ngModelChange)="partnerChange($event)" class="toolbar__card-select" floatPlaceholder="never" placeholder="{{stringService.get('SELECT_PARTNER')}}">
+                        <mat-option *ngFor="let partner of partners" [value]="partner.id">
                           {{ partner.name }}
-                        </md-option>
-                      </md-select>
+                        </mat-option>
+                      </mat-select>
                     </div>
                   </div>
                 </div>
               </div>
             <div>
               <div style="margin-bottom: 10px;">
-                user: {{authService.getLoggedIn().id}}
-                partner: {{selectedPartnerId}}
                 <router-outlet></router-outlet>
               </div>
           </div>

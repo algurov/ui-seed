@@ -20,12 +20,13 @@ import { APP_DECLARATIONS } from './app.declarations';
 import { APP_ENTRY_COMPONENTS } from './app.entry-components';
 import { APP_IMPORTS } from './app.imports';
 import { APP_PROVIDERS } from './app.providers';
-
+import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
 import { routes } from './app.routing';
 
 import { AppComponent } from './app.component';
 
 import { AppState } from './reducers';
+import { SeedMaterialModule } from './seed.material.module';
 
 @NgModule({
   declarations: [
@@ -36,13 +37,14 @@ import { AppState } from './reducers';
   imports: [
     CommonModule,
     HttpModule,
+    SeedMaterialModule,
     APP_IMPORTS,
     IdlePreloadModule.forRoot(), // forRoot ensures the providers are only created once
     RouterModule.forRoot(routes, { useHash: false, preloadingStrategy: IdlePreload }),
   ],
   bootstrap: [AppComponent],
   exports: [AppComponent],
-  providers: [APP_PROVIDERS]
+  providers: [APP_PROVIDERS, {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
 })
 
 export class AppModule {

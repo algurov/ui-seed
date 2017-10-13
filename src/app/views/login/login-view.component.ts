@@ -1,7 +1,7 @@
 
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdInputModule, MdFormFieldModule, MdButtonModule, MdInput } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatButtonModule, MatInput } from '@angular/material';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { PasswordValidation } from './match-password';
 import { StringService } from '../../services/string.service';

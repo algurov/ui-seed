@@ -29,12 +29,12 @@ export const menuItems = [
       {
         name: 'PHISICS',
         icon: 'user',
-        link: 'main/agent/phisics'
+        action: 'PERSONAL_FILTER'
       },
       {
         name: 'GROUP',
         icon: 'group',
-        link: 'main/agent/group'
+        action: 'GROUP_FILTER'
       }
     ],
     actions: [

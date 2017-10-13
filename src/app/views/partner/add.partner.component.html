@@ -1,50 +1,55 @@
 <div class="content">
   <form [formGroup]="partnerForm" (ngSubmit)="submitAction()" class="content__form">
   <div class="content__form-header">
-    <md-select class="form-header__item" formControlName="partnerType" placeholder="{{stringService.get('SELECT_AGENT_TYPE')}}">
-      <md-option *ngFor="let type of types" [value]="type.value">
+    <mat-form-field class="form-header__item">
+    <mat-select formControlName="partnerType" placeholder="{{stringService.get('SELECT_AGENT_TYPE')}}">
+      <mat-option *ngFor="let type of types" [value]="type.value">
         {{ type.title }}
-      </md-option>
-    </md-select>
-    <md-form-field class="form-header__item">
-      <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-      <input formControlName="documentNumber" mdInput placeholder=
+      </mat-option>
+    </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form-header__item">
+      <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+      <input formControlName="documentNumber" matInput placeholder=
       "{{stringService.get('DOCUMENT_NUMBER')}}"/>
-    </md-form-field>
-    <md-select class="form-header__item" formControlName="documentType" placeholder="{{stringService.get('SELECT_DOCUMENT_TYPE')}}">
-      <md-option *ngFor="let type of docTypes" [value]="type.value">
+    </mat-form-field>
+    <mat-form-field class="form-header__item">
+    <mat-select formControlName="documentType" placeholder="{{stringService.get('SELECT_DOCUMENT_TYPE')}}">
+      <mat-option *ngFor="let type of docTypes" [value]="type.value">
         {{ type.title }}
-      </md-option>
-    </md-select>
-    <button *ngIf="collapsed" md-button type="button" (click)="toggleView()" class="form-header__item add-button">{{stringService.get('AGENT_ADD')}}</button>
-    <button *ngIf="!collapsed" md-button type="submit" class="form-header__item save-button">{{stringService.get('AGENT_SAVE')}}</button>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    <button *ngIf="collapsed" mat-button type="button" (click)="toggleView()" class="form-header__item add-button">{{stringService.get('AGENT_ADD')}}</button>
+    <button *ngIf="!collapsed" mat-button type="submit" class="form-header__item save-button">{{stringService.get('AGENT_SAVE')}}</button>
   </div>
+  <div *ngIf="showNotification" class="form-header__notification">{{stringService.get('PARTNER_EXISTS')}}</div>
   <div *ngIf="!collapsed">
-  <md-form-field class="content__form-item">
-    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-    <input formControlName="documentIssued" mdInput placeholder=
+  <mat-form-field class="content__form-item">
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input formControlName="documentIssued" matInput placeholder=
     "{{stringService.get('GIVEN_BY')}}"/>
-  </md-form-field>
-  <md-form-field class="content__form-item">
-    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-    <input formControlName="name" mdInput placeholder=
+  </mat-form-field>
+  <mat-form-field class="content__form-item">
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input formControlName="name" matInput placeholder=
     "{{stringService.get('AGENT_TITLE')}}"/>
-  </md-form-field>
-  <md-form-field class="content__form-item">
-    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-    <input formControlName="address" mdInput placeholder=
+  </mat-form-field>
+  <mat-form-field class="content__form-item">
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input formControlName="address" matInput placeholder=
     "{{stringService.get('AGENT_ADDRESS')}}"/>
-  </md-form-field>
-  <md-form-field class="content__form-item">
-    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-    <input formControlName="contactPhones" mdInput placeholder=
+  </mat-form-field>
+  <mat-form-field class="content__form-item">
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input formControlName="contactPhones" matInput placeholder=
     "{{stringService.get('ADD_TELEPHONE')}}"/>
-  </md-form-field>
-  <md-form-field class="content__form-item">
-    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-    <input formControlName="fax" mdInput placeholder=
+  </mat-form-field>
+  <mat-form-field class="content__form-item">
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input formControlName="fax" matInput placeholder=
     "{{stringService.get('AGENT_FAX')}}"/>
-  </md-form-field>
+  </mat-form-field>
 </div>
 </form>
 </div>

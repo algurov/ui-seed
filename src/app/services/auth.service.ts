@@ -35,8 +35,7 @@ export class AuthService extends RequestBase {
     headers.append('Authorization', 'Basic Y2xpZW50X3NlZWQ6c2VjcmV0');
     let options = new RequestOptions({
       headers: headers,
-      withCredentials: true,
-      body: ''
+      withCredentials: true
     });
      return this.http.post(AUTH_SERVER_BASE_URL +'/auth-server/oauth/token/revokeById/' + Cookie.get('at'), {}, options);
   }

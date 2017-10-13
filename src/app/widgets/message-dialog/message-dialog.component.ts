@@ -1,5 +1,5 @@
 import { Component, Inject, Input } from '@angular/core';
-import { MdDialogRef, MdDialog, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'messge-dlg',
@@ -9,8 +9,8 @@ export class MessageDialogComponent {
   @Input() title: string;
   @Input() message: string;
   constructor(
-    public dialogRef: MdDialogRef<MessageDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<MessageDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();

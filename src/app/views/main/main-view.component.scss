@@ -29,7 +29,7 @@
   height: 100%;
 }
 
-.example-sidenav-fab-container md-sidenav {
+.example-sidenav-fab-container mat-sidenav {
   width: 200px;
 }
 .side {
@@ -37,7 +37,7 @@
 }
 
 .example-sidenav-fab-container .mat-sidenav-content,
-.example-sidenav-fab-container md-sidenav {
+.example-sidenav-fab-container mat-sidenav {
   display: flex;
   overflow: visible;
 }
@@ -70,7 +70,7 @@ mat-drawer-content {
   margin-top: 1em;
   color: $menu-item-icon-color;
 }
-.menu-box-item > md-icon {
+.menu-box-item > mat-icon {
   margin: 0.5em;
   height: 16px;
   width: 16px;

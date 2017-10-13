@@ -3,7 +3,7 @@ import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { DialogService } from '../../services/dialog.service';
 import { MainService } from '../../services/main.service';
 import { StringService } from '../../services/string.service';
-import { MdSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material';
 import { FlowService } from '../../services/flow.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 

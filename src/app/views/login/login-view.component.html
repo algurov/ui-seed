@@ -9,71 +9,71 @@
       <div fxFlex="30%"></div>
       <div fxLayout="column" fxFlex="50%">
         <div fxFlex="0 1 60%" fxFlexOffset="5%">
-        <md-tab-group class="tabs" (selectChange)="setSelectedTab($event)"  >
-          <md-tab label="{{stringService.get('LOGIN_TITLE')}}">
+        <mat-tab-group class="tabs" (selectChange)="setSelectedTab($event)"  >
+          <mat-tab label="{{stringService.get('LOGIN_TITLE')}}">
             <div fxLayout="column">
               <form [formGroup]="loginForm" fxFlexOffset="3em" (ngSubmit)="login()">
                 <!-- <div fxLayout="column">
-                  <md-form-field fxFlex>
-                    <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-                    <input formControlName="login" mdInput placeholder=
+                  <mat-form-field fxFlex>
+                    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+                    <input formControlName="login" matInput placeholder=
                     "{{stringService.get('LOGIN_FIELD_TITLE')}}"/>
-                  </md-form-field>
-                  <md-form-field fxFlex>
-                    <md-error>{{stringService.get('WRONG_EMAIL_ERROR')}}</md-error>
-                    <input formControlName="password" type="password" mdInput placeholder=
+                  </mat-form-field>
+                  <mat-form-field fxFlex>
+                    <mat-error>{{stringService.get('WRONG_EMAIL_ERROR')}}</mat-error>
+                    <input formControlName="password" type="password" matInput placeholder=
                     "{{stringService.get('PASSWORD')}}"/>
-                  </md-form-field>
+                  </mat-form-field>
                 </div> -->
                 <button #loginSubmit type="submit" style="visibility: hidden;"></button>
               </form>
             </div>
-          </md-tab>
-          <md-tab label="{{stringService.get('REGISTRATION_TITLE')}}">
+          </mat-tab>
+          <mat-tab label="{{stringService.get('REGISTRATION_TITLE')}}">
             <div fxLayout="column">
             <form [formGroup]="registrationForm" fxFlexOffset="3em" fxLayout="column" (ngSubmit)="registration(user)">
               <div fxLayout="column">
-              <md-form-field fxFlex>
-                <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-                <input formControlName="login" mdInput placeholder=
+              <mat-form-field fxFlex>
+                <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+                <input formControlName="login" matInput placeholder=
                 "{{stringService.get('LOGIN_FIELD_TITLE')}}"/>
-              </md-form-field>
-              <md-form-field fxFlex>
-                <md-error>{{stringService.get('WRONG_EMAIL_ERROR')}}</md-error>
-                <input formControlName="email" mdInput placeholder=
+              </mat-form-field>
+              <mat-form-field fxFlex>
+                <mat-error>{{stringService.get('WRONG_EMAIL_ERROR')}}</mat-error>
+                <input formControlName="email" matInput placeholder=
                 "{{stringService.get('EMAIL')}}"/>
-              </md-form-field>
-              <!-- <md-form-field>
-                <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-                <input type="password" formControlName="password" mdInput placeholder=
+              </mat-form-field>
+              <!-- <mat-form-field>
+                <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+                <input type="password" formControlName="password" matInput placeholder=
                 "{{stringService.get('PASSWORD')}}"/>
-              </md-form-field>
-              <md-form-field>
-                <md-error>{{stringService.get('PASSWORD_MISMATCH_ERROR')}}</md-error>
-                <input type="password" formControlName="passwordConfirm" mdInput placeholder=
+              </mat-form-field>
+              <mat-form-field>
+                <mat-error>{{stringService.get('PASSWORD_MISMATCH_ERROR')}}</mat-error>
+                <input type="password" formControlName="passwordConfirm" matInput placeholder=
                 "{{stringService.get('CONFIRM_PASSWORD')}}"/>
-              </md-form-field> -->
+              </mat-form-field> -->
               <button #registrationSubmit type="submit" style="visibility: hidden;"></button>
             </div>
             </form>
           </div>
-          </md-tab>
-          <md-tab label="{{stringService.get('FORGOT_TITLE')}}">
+          </mat-tab>
+          <mat-tab label="{{stringService.get('FORGOT_TITLE')}}">
             <div fxLayout="column">
               <form [formGroup]="forgotForm" fxLayout="column" fxFlexOffset="5em">
-                <md-form-field fxFlex>
-                  <md-error>{{stringService.get('WRONG_EMAIL_ERROR')}}</md-error>
-                  <input formControlName="email" mdInput placeholder=
+                <mat-form-field fxFlex>
+                  <mat-error>{{stringService.get('WRONG_EMAIL_ERROR')}}</mat-error>
+                  <input formControlName="email" matInput placeholder=
                   "{{stringService.get('EMAIL')}}"/>
-                </md-form-field>
+                </mat-form-field>
                 <button #forgotSubmit type="submit" style="visibility: hidden;"></button>
               </form>
             </div>
-          </md-tab>
-         </md-tab-group>
+          </mat-tab>
+         </mat-tab-group>
        </div>
          <div fxLayout="column">
-           <button class="login-button" fxFlex="0 1 100%" color="primary" md-button
+           <button class="login-button" fxFlex="0 1 100%" color="primary" mat-button
            (click)="buttonClicked()">{{getButtonTitle()}}</button>
          </div>
        </div>

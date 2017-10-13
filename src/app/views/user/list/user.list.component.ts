@@ -4,7 +4,7 @@ import { DialogService } from '../../../services/dialog.service';
 import { MainService } from '../../../services/main.service';
 import { UserService } from '../../../services/user.service';
 import { StringService } from '../../../services/string.service';
-import { MdSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material';
 import { Router } from '@angular/router';
 import { FlowService } from '../../../services/flow.service';
 import { User } from '../../../models/user';

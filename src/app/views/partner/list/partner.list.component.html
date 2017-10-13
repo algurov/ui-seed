@@ -1,13 +1,13 @@
 <div class="partner">
   <div class="partner__filters">
-    <md-form-field class="partner__filters-item">
-      <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-      <input mdInput placeholder="{{stringService.get('FILTER_NAME')}}"/>
-    </md-form-field>
-    <md-form-field class="partner__filters-item">
-      <md-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</md-error>
-      <input mdInput placeholder="{{stringService.get('FILTER_NUMBER')}}"/>
-    </md-form-field>
+    <mat-form-field class="partner__filters-item">
+      <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+      <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (blur)="addNameFilter(nameFilter.value)" (keyup.enter)="addNameFilter(nameFilter.value)" />
+    </mat-form-field>
+    <mat-form-field class="partner__filters-item">
+      <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+      <input matInput #numberFilter placeholder="{{stringService.get('FILTER_NUMBER')}}" (blur)="addNumberFilter(numberFilter.value)" (keyup.enter)="addNumberFilter(numberFilter.value)"/>
+    </mat-form-field>
   </div>
   <div class="partner__table">
     <table style="width: 100%;" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [remove]="deletePartner" [edit]="editPartner">

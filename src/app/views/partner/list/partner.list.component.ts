@@ -17,6 +17,7 @@ export class PartnerListComponent {
   allPartners: Array<Partner> = new Array<Partner>();
   dataSource : PartnerDataSource;
   partnerDb: PartnerDataBase;
+  filterParams: Array<any> = new Array<any>();
   constructor(private partnerService : PartnerService, public dlgService: DialogService,
       public mainService: MainService, public stringService: StringService) {
     this.partnerDb = new PartnerDataBase(partnerService, dlgService);
@@ -24,6 +25,53 @@ export class PartnerListComponent {
     mainService.partnerAdded.subscribe(item => this.addPartner(item));
     mainService.partnerUpdated.subscribe(item => this.updatePartner(item));
     mainService.partnerDeleted.subscribe(item => this.removePartner(item));
+    mainService.menuActionPerformed.subscribe(item => this.menuActionPerformed(item));
+  }
+
+  menuActionPerformed(item) {
+    switch(item) {
+      case 'PERSONAL_FILTER':
+      let index = this.filterParams.findIndex(item => item.field == 'partnerType')
+      if (index == -1) {
+        this.filterParams.push({field:'partnerType', value: 'PERSON'});
+      } else {
+        this.filterParams[index] = {field:'partnerType', value: 'PERSON'};
+      }
+       break;
+      case 'GROUP_FILTER':
+      let _index = this.filterParams.findIndex(item => item.field == 'partnerType')
+      if (_index == -1) {
+        this.filterParams.push({field:'partnerType', value: 'ORGANIZATION'});
+      } else {
+        this.filterParams[_index] = {field:'partnerType', value: 'ORGANIZATION'};
+      }
+      break;
+    }
+    this.searchPartners(this.filterParams);
+  }
+
+  addNumberFilter(number) {
+    let index = this.filterParams.findIndex(item => item.field == 'documentNumber')
+    if (index == -1) {
+      this.filterParams.push({field:'documentNumber', value: number});
+    } else {
+      this.filterParams[index] = {field:'documentNumber', value: number};
+    }
+    this.searchPartners(this.filterParams);
+  }
+
+  addNameFilter(name) {
+    let index = this.filterParams.findIndex(item => item.field == 'name')
+    if (index == -1) {
+      this.filterParams.push({field:'name', value: name});
+    } else {
+      this.filterParams[index] = {field:'name', value: name};
+    }
+    this.searchPartners(this.filterParams);
+  }
+
+  searchPartners(params) {
+    this.partnerDb.changeSearch(params);
   }
 
   addPartner(item) {
@@ -65,13 +113,24 @@ export class PartnerDataBase {
   dataChange: BehaviorSubject<Partner[]> = new BehaviorSubject<Partner[]>([]);
   get data(): Partner[] { return this.dataChange.value; }
 
-  constructor(partnerService, dlgService : DialogService) {
+  constructor(public partnerService, public dlgService : DialogService) {
     dlgService.block = true;
-    partnerService.getPartnerList(1,10).subscribe(res => {
-      res.forEach(item => {
+    partnerService.getPartnerList().subscribe(res => {
+      res.content.forEach(item => {
         this.addPartner(item);
       });
       dlgService.block = false;
+    });
+  }
+
+  changeSearch(params) {
+    this.dataChange.next([]);
+    this.dlgService.block = true;
+    this.partnerService.searchPartnersByParams(params).subscribe(res => {
+      res.content.forEach(item => {
+        this.addPartner(item);
+      });
+      this.dlgService.block = false;
     });
   }
 

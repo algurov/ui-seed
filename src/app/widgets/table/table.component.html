@@ -1,44 +1,44 @@
 <div class="example-container mat-elevation-z8">
-  <md-table #table [dataSource]="dataSource">
+  <mat-table #table [dataSource]="dataSource">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
-    <ng-container *ngFor="let column of displayedColumns" [mdColumnDef]="column.column">
-      <md-header-cell *mdHeaderCellDef> {{stringService.get(column.title)}} </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element[column.column]}} </md-cell>
+    <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column.column">
+      <mat-header-cell *matHeaderCellDef> {{stringService.get(column.title)}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element[column.column]}} </mat-cell>
     </ng-container>
     <!-- Position Column -->
-    <!-- <ng-container mdColumnDef="actions">
-      <md-header-cell *mdHeaderCellDef> {{stringService.get('ACTIONS')}} </md-header-cell>
-      <md-cell *mdCellDef="let element"> <button (click)="clickRow(row)">button</button> </md-cell>
+    <!-- <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> {{stringService.get('ACTIONS')}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <button (click)="clickRow(row)">button</button> </mat-cell>
     </ng-container> -->
 
     <!-- Name Column -->
-    <!-- <ng-container mdColumnDef="name">
-      <md-header-cell *mdHeaderCellDef> Фамилия </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.userFamilyName}} </md-cell>
+    <!-- <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Фамилия </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userFamilyName}} </mat-cell>
     </ng-container> -->
 
     <!-- Weight Column -->
-    <!-- <ng-container mdColumnDef="positions">
-      <md-header-cell *mdHeaderCellDef> Имя </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.userGivenName}} </md-cell>
+    <!-- <ng-container matColumnDef="positions">
+      <mat-header-cell *matHeaderCellDef> Имя </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.userGivenName}} </mat-cell>
     </ng-container> -->
 
     <!-- Color Column -->
-    <!-- <ng-container mdColumnDef="mail">
-      <md-header-cell *mdHeaderCellDef> Почта </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.email}} </md-cell>
+    <!-- <ng-container matColumnDef="mail">
+      <mat-header-cell *matHeaderCellDef> Почта </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
     </ng-container> -->
-    <ng-container mdColumnDef="actions">
-    <md-header-cell *mdHeaderCellDef> </md-header-cell>
-    <md-cell *mdCellDef="let element" >
-      <md-icon mdTooltip="Удалить" mdTooltipPosition="above" *ngIf="remove" (click)="deleteRow(element)" class="action-icon">delete</md-icon>
-      <md-icon mdTooltip="Редактировать" mdTooltipPosition="above" (click)="editRow(element)" class="action-icon">mode_edit</md-icon>
-    </md-cell>
+    <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-cell *matCellDef="let element" >
+      <mat-icon matTooltip="Удалить" matTooltipPosition="above" *ngIf="remove" (click)="deleteRow(element)" class="action-icon">delete</mat-icon>
+      <mat-icon matTooltip="Редактировать" matTooltipPosition="above" (click)="editRow(element)" class="action-icon">mode_edit</mat-icon>
+    </mat-cell>
 </ng-container>
 
-    <md-header-row *mdHeaderRowDef="cols"></md-header-row>
-    <md-row class="table-row" *mdRowDef="let row; columns: cols;"></md-row>
-  </md-table>
+    <mat-header-row *matHeaderRowDef="cols"></mat-header-row>
+    <mat-row class="table-row" *matRowDef="let row; columns: cols;"></mat-row>
+  </mat-table>
 </div>

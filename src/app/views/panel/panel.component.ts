@@ -4,7 +4,7 @@ import { DialogService } from '../../services/dialog.service';
 import { MainService } from '../../services/main.service';
 import { AuthService } from '../../services/auth.service';
 import { StringService } from '../../services/string.service';
-import { MdSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material';
 import { menuItems } from './menu.items';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
@@ -74,6 +74,8 @@ performAction(item) {
   switch(item.action) {
     case 'logout': this.logout(); break;
     case 'add-agent': this.addAgent(); break;
+    case 'PERSONAL_FILTER': this.main.menuActionPerformed.emit(item.action); break;
+    case 'GROUP_FILTER': this.main.menuActionPerformed.emit(item.action); break;
   }
 }
 

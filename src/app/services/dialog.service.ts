@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { MessageDialogComponent } from '../widgets/message-dialog/message-dialog.component';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ConfirmDialog } from '../widgets/confirm.dialog';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { AddPartnerDialog } from '../views/partner/add.partner.dialog';
 
 @Injectable()
 export class DialogService {
   block: boolean = false;
-  constructor(public dialog: MdDialog, public snackBar: MdSnackBar) {
+  constructor(public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
 
   showMessageDlg(title: string, message: string) {
@@ -37,7 +37,7 @@ export class DialogService {
 
   }
   showConfirm(title: string, message: string) : Observable<boolean> {
-    let dialogRef: MdDialogRef<ConfirmDialog>;
+    let dialogRef: MatDialogRef<ConfirmDialog>;
 
         dialogRef = this.dialog.open(ConfirmDialog);
         dialogRef.componentInstance.title = title;

@@ -2,7 +2,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IdlePreload, IdlePreloadModule } from '@angularclass/idle-preload';
-import { MaterialModule } from '@angular/material';
+//import { MaterialModule } from '@angular/material';
 
 import { EffectsModule } from '@ngrx/effects';
 import { RouterStoreModule } from '@ngrx/router-store';
@@ -13,7 +13,7 @@ import { useLogMonitor } from '@ngrx/store-log-monitor';
 import { rootReducer } from './reducers';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { TagInputModule } from 'ng2-tag-input';
+//import { TagInputModule } from 'ng2-tag-input';
 
 
 const STORE_DEV_TOOLS_IMPORTS = [];
@@ -32,10 +32,10 @@ export const APP_IMPORTS = [
   // LoginViewComponent,
   // MainViewComponent,
   // PasswordViewComponent,
-  TagInputModule,
+  //TagInputModule,
   BrowserAnimationsModule,
   //EffectsModule.run(UserEffects),
-  MaterialModule,
+//  MaterialModule,
   ReactiveFormsModule,
   FormsModule,
   FlexLayoutModule,
