@@ -45,6 +45,10 @@ export class AddPartnerComponent {
     }
   }
   toggleView() {
+    if (this.partnerForm.get('documentNumber').value == '') {
+      this.collapsed = !this.collapsed;
+      return;
+    }
     this.partnerService.getPartnerByDocumentNumber(this.partnerForm.get('documentNumber').value).subscribe(res => {
       if(res.numberOfElements > 0) {
         this.showNotification = true;

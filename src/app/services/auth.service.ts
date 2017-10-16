@@ -32,16 +32,20 @@ export class AuthService extends RequestBase {
   logout() {
     let headers = new Headers();
     headers.append('Authorization', 'Basic Y2xpZW50X3NlZWQ6c2VjcmV0');
-    headers.append('Access-Control-Allow-Origin', '*');
     let options = new RequestOptions({
       headers: headers,
       withCredentials: true
     });
-     return this.http.post(AUTH_SERVER_BASE_URL +'/auth-server/oauth/token/revokeById/' + Cookie.get('at'), {}, options);
+
+    let at = Cookie.get('at');
+    Cookie.deleteAll();
+     return this.http.post(AUTH_SERVER_BASE_URL +'/auth-server/oauth/token/revokeById/' + at, {}, options);
   }
 
   me(at) {
+    console.log('test');
     let header = new Headers({'Authorization':'Bearer ' + at});
+    header.set('Content-Type', 'application/html');
     let options = new RequestOptions({
       headers: header,
       withCredentials: true,
@@ -61,7 +65,9 @@ export class AuthService extends RequestBase {
       };
       return;
     }
-    this.me(at).map(res => res.json()).catch(err => {this.loggedIn = null; return Observable.of(false)}).subscribe(res => {this.loggedIn = res; console.log(this.loggedIn)});
+    this.me(at).map(res => res.json())
+      .catch(err => {this.loggedIn = null; return Observable.of(false)})
+        .subscribe(res => {this.loggedIn = res; console.log(this.loggedIn)});
   }
 
   getShortName() {

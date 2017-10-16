@@ -74,8 +74,8 @@ performAction(item) {
   switch(item.action) {
     case 'logout': this.logout(); break;
     case 'add-agent': this.addAgent(); break;
-    case 'PERSONAL_FILTER': this.main.menuActionPerformed.emit(item.action); break;
-    case 'GROUP_FILTER': this.main.menuActionPerformed.emit(item.action); break;
+    case 'PERSONAL_FILTER': this.main.menuActionPerformed.emit(item.action);break;
+    case 'GROUP_FILTER': break;
   }
 }
 
@@ -87,7 +87,7 @@ logout() {
   this.auth.logout().subscribe(res => {
     Cookie.deleteAll();
     window.document.cookie = '';
-    this.router.navigate(['main']);
+    this.auth.login();
   });
 }
 
