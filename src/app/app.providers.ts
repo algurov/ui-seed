@@ -8,6 +8,7 @@ import { OAuthService } from 'angular2-oauth2/oauth-service';
 import { FlowService } from './services/flow.service';
 import { PartnerService } from './services/partner.service';
 import { SettingsService } from './services/settings.service';
+import { TaxonomyService } from './services/taxonomy.service';
 
 export const APP_PROVIDERS = [
   UserService,
@@ -19,5 +20,6 @@ export const APP_PROVIDERS = [
   OAuthService,
   FlowService,
   PartnerService,
-  SettingsService
+  SettingsService,
+  TaxonomyService
 ];

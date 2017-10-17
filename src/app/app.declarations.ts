@@ -22,6 +22,9 @@ import { AddPartnerDialog } from './views/partner/add.partner.dialog';
 import { BreadcrumbComponent } from './widgets/breadcrumb/breadcrumb.component';
 import { TaxonomyAllListComponent } from './views/taxonomy/taxonomy.all.list.component';
 import { ChipsInput } from './widgets/chips-input/chips.input';
+import { TaxonomyComponent } from './views/taxonomy/taxonomy.component/taxonomy.component';
+import { TaxonomyItemComponent } from './views/taxonomy/taxonomy.item/taxonomy.item.component';
+import { AddTaxonomyDialog } from './views/taxonomy/add.taxonomy.dialog';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -46,5 +49,8 @@ export const APP_DECLARATIONS = [
   AddPartnerDialog,
   BreadcrumbComponent,
   TaxonomyAllListComponent,
-  ChipsInput
+  ChipsInput,
+  TaxonomyComponent,
+  TaxonomyItemComponent,
+  AddTaxonomyDialog
 ];

@@ -16,6 +16,8 @@ import { PasswordEmailComponent } from './views/password/password-email.componen
 import { SetPasswordFlowComponent } from './widgets/loading/set.password.component';
 import { PartnerListComponent } from './views/partner/list/partner.list.component';
 import { TaxonomyAllListComponent } from './views/taxonomy/taxonomy.all.list.component';
+import { TaxonomyComponent } from './views/taxonomy/taxonomy.component/taxonomy.component';
+import { TaxonomyItemComponent } from './views/taxonomy/taxonomy.item/taxonomy.item.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -27,7 +29,9 @@ export const routes: Routes = [
       { path: 'user/edit/:id', component: UserEditComponent},
       { path: 'user/add', component: UserEditComponent},
       { path: 'agent', component: PartnerListComponent,  data: {breadcrumb: 'Контрагенты'}},
-      { path: 'taxonomy', component: TaxonomyAllListComponent, data: {breadcrumb: 'Справочники'}}
+      { path: 'taxonomy', component: TaxonomyAllListComponent, data: {breadcrumb: 'Справочники'}},
+      { path: 'taxonomy/:tax', component: TaxonomyItemComponent}
+
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

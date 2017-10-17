@@ -6,7 +6,7 @@ import { UserService } from '../../services/user.service';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from '../../services/dialog.service';
 import { PartnerService } from '../../services/partner.service';
 import { MainService } from '../../services/main.service';
@@ -19,7 +19,7 @@ import { MainService } from '../../services/main.service';
 export class TableComponent {
   cols = [];
   constructor(private stringService: StringService, private router: Router, private dlgService: DialogService,
-      private partnerService: PartnerService, private mainService: MainService){
+      private partnerService: PartnerService, private mainService: MainService, private route: ActivatedRoute){
 
   }
   @Input() displayedColumns;

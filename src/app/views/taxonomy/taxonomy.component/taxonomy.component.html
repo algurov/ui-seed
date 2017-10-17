@@ -1,0 +1,16 @@
+<div class="content">
+  <form [formGroup]="taxonomyForm" class="content__form">
+    <mat-form-field class="content__form-item" *ngFor="let item of fullTaxonomy.columns">
+      <ng-container *ngIf="item.type == 'link'">
+          <mat-select matSelect [formControlName]="item.name" [placeholder]="item.title">
+            <mat-option *ngFor="let opt of item.options" [value]="opt.id">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
+      </ng-container>
+      <ng-container *ngIf="item.type != 'link'">
+        <input matInput [formControlName]="item.name" [placeholder]="item.title" />
+      </ng-container>
+    </mat-form-field>
+  </form>
+</div>

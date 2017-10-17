@@ -65,6 +65,7 @@ export const Messages = {
   "FILTER_NUMBER": "Поиск по номеру",
   "SELECT_PARTNER": "Контрагент",
   "ID": "Id",
-  "PARTNER_EXISTS": "Контрагент с этими данными уже существует в системе"
-
+  "PARTNER_EXISTS": "Контрагент с этими данными уже существует в системе",
+  "NAME": "Наименование",
+  "ADD_TAXONOMY_DIALOG_TITLE": "Запись справочника"
 };

@@ -10,13 +10,15 @@ import { User } from '../models/user';
 import { UserToSend } from '../views/user/user.edit.component';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { DialogService } from './dialog.service';
+import { AuthService } from './auth.service';
 
 
 
 @Injectable()
 export class FlowService extends RequestBase {
   lastFlowResponse: FlowResponse;
-  constructor(public http: Http, public router: Router, public dlgService: DialogService) {
+  constructor(public http: Http, public router: Router, public dlgService: DialogService,
+    public auth: AuthService) {
     super(http);
   }
 
@@ -38,6 +40,20 @@ export class FlowService extends RequestBase {
     headers.append('Content-Type',
      'application/x-www-form-urlencoded');
     return this.http.get(SEED_BASE_URL + '/seed/startPasswordRecovery', {headers:headers, withCredentials: true}).map(res => res.json())
+      .subscribe(res => this.processResponce(res));
+  }
+
+  resetPassword(uid) {
+    let appendUid = '';
+    if (this.auth.loggedIn.id != uid) {
+      appendUid += '?uid=' + uid;
+    }
+    this.dlgService.block = true;
+    let headers = new Headers();
+    headers.append('Content-Type',
+     'application/x-www-form-urlencoded');
+     headers.append('Authorization', 'Bearer ' + Cookie.get('at'));
+    return this.http.get(SEED_BASE_URL + '/seed/startPasswordRecovery' + appendUid, {headers:headers, withCredentials: true}).map(res => res.json())
       .subscribe(res => this.processResponce(res));
   }
 

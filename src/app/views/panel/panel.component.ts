@@ -75,7 +75,7 @@ performAction(item) {
     case 'logout': this.logout(); break;
     case 'add-agent': this.addAgent(); break;
     case 'PERSONAL_FILTER': this.main.menuActionPerformed.emit(item.action);break;
-    case 'GROUP_FILTER': break;
+    case 'GROUP_FILTER': this.main.menuActionPerformed.emit(item.action); break;
   }
 }
 

@@ -239,8 +239,12 @@ submitAction() {
 }
 
 resetPassword() {
-  this.dlgService.showMessageDlg('Not implemented', 'Reset password');
+  this.dlgService.showConfirm('Сброс пароля', 'Вы уверены, что хотите сбросить пароль?')
+  .subscribe(res => {if (res) {
+    this.flow.resetPassword(this.currentUser.id);}
+  });
 }
+
 removeUser(id) {
   this.dlgService.showConfirm('Удаление пользователя', 'Вы уверены, что хотите удалить пользователя?')
   .subscribe(res => {if (res) {

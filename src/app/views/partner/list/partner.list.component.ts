@@ -99,7 +99,8 @@ export class PartnerListComponent {
     });
   }
   ngOnInit() {
-
+    this.filterParams = [];
+    //this.searchPartners(this.filterParams);
   }
 
   editPartner(partner) {
@@ -142,7 +143,13 @@ export class PartnerDataBase {
 
   updatePartner(item) {
     const copiedData = this.data.slice();
-    copiedData.find(one => one.id == item.id).deserialize(item);
+    let found = copiedData.find(one => one.id == item.id);
+    if (found) {
+      found.deserialize(item);
+    } else {
+        copiedData.push(new Partner().deserialize(item));
+    }
+  //  copiedData.find(one => one.id == item.id).deserialize(item);
     this.dataChange.next(copiedData);
   }
 

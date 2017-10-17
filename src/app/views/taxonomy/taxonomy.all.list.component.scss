@@ -1,0 +1,14 @@
+.list {
+  margin-top:10px;
+  color: #546E7A;
+
+  &__item {
+    padding: 10px 10px;
+    border-bottom: solid 1px #aaa;
+    cursor: pointer;
+  }
+}
+
+.list__item:hover {
+    background: #ECEFF1;
+}
