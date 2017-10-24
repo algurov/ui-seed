@@ -21,7 +21,7 @@ export class AddPartnerComponent {
   showNotification: boolean = false;
   collapsed: boolean = true;
   types = [{title: 'Юридическое лицо', value: 'ORGANIZATION'}, {title: 'Физическое лицо', value: 'PERSON'}];
-  docTypes = [{title: 'ИНН', value: 'INN'}, {title: 'Другое', value: 'OTHER'}];
+  docTypes = [{title: 'ИНН', value: 'INN'}, {title: 'Паспорт', value: 'PASSPORT'}];
   constructor(private stringService: StringService, private fb: FormBuilder,
       private partnerService: PartnerService, public mainService: MainService,
       private dlgService: DialogService) {

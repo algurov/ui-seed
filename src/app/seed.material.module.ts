@@ -5,6 +5,7 @@ import { MatAutocompleteModule } from '@angular/material';
 import { MatButtonToggleModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material';
+import { MatDatepickerModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
 import { MatListModule } from '@angular/material';
 import { MatGridListModule } from '@angular/material';
@@ -25,7 +26,7 @@ import { MatSnackBarModule } from '@angular/material';
 import { MatTabsModule } from '@angular/material';
 import { MatToolbarModule } from '@angular/material';
 import { MatTooltipModule } from '@angular/material';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatNativeDateModule } from '@angular/material';
 
 const MATERIAL_MODULES = [
   CommonModule,
@@ -45,7 +46,8 @@ const MATERIAL_MODULES = [
   MatTabsModule,
   MatToolbarModule,
   MatTableModule,
-
+  MatDatepickerModule,
+  MatNativeDateModule,
   // These modules include providers.
   CompatibilityModule,
   MatButtonToggleModule,

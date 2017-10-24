@@ -26,7 +26,7 @@ export class TaxonomyItemComponent {
           this.fullTaxonomy = this.taxonomyService.getTaxonomy(this.taxonomy);
           console.log(this.fullTaxonomy);
            this.fullTaxonomy.columns.forEach(item => {
-             if(item.name == 'name' || item.name == 'fullName' || item.name == 'fullNameRu') {
+             if(item.name == 'name' || item.name == 'fullName' || item.name == 'fullNameRu' || item.name == 'titleRu') {
                this.displayedColumns.push({column: item.name, title: 'NAME'});
              }
            });

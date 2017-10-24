@@ -1,0 +1,22 @@
+<div class="developer">
+  <button class="developer-button" mat-raised-button (click)="addItem()">ДОБАВИТЬ ИЗГОТОВИТЕЛЯ</button>
+
+  <div *ngFor="let developer of developers">
+    <div style="float: right;"><mat-icon (click)="removeItem(developer)">close</mat-icon></div>
+    <div style="float: left; width: 100%;">
+      <div style="float: left; width: 50%">
+        <seed-select-field code="partner" placeholder="Изготовитель" [data]="data"></seed-select-field>
+      </div>
+      <div style="float: left; width: 50%">
+        <seed-select-field code="place" placeholder="Местоположение" [data]="data"></seed-select-field>
+      </div>
+    </div>
+    <div style="float: left; width: 100%">
+      <mat-form-field floatPlaceholder="always" class="developer__field">
+        <mat-placeholder class="developer__place">Местоположение (комментарии)</mat-placeholder>
+        <input matInput />
+      </mat-form-field>
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+</div>

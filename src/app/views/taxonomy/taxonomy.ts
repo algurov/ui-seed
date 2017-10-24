@@ -1,22 +1,52 @@
 export const taxonomy = [
-  // {
-  //   name: 'countries',
-  //   columns: [
-  //     {name: 'name', type: 'string'}
-  //   ]
-  // },
-  // {
-  //   name: 'regions',
-  //   columns: [
-  //     {name: 'name', type: 'string'}
-  //   ]
-  // },
-  // {
-  //   name: 'cities',
-  //   columns: [
-  //     {name: 'name', type: 'string'}
-  //   ]
-  // },
+  {
+    title:'GoodsCategoryProperty',
+    name: 'GoodsCategoryProperty',
+    api: 'goodsCategoryProperty',
+    columns: [
+      {name: 'name', title: 'Наименование', type: 'string'}
+    ]
+  },
+  {
+    title: 'Типы исследования',
+    name: 'ResearchType',
+    api: 'researchType',
+    columns: [
+      {name: 'name', title: 'Наименование', type: 'string'}
+    ]
+  },
+  {
+    title: 'Целевые документы',
+    name: 'TargetDocuments',
+    api: 'targetDocument',
+    columns: [
+      {name: 'name', title: 'Наименование', type: 'string'}
+    ]
+  },
+  {
+    title: 'Страны',
+    name: 'Countries',
+    api: 'country',
+    columns: [
+      {name: 'titleRu',title: 'Наименование', type: 'string'}
+    ]
+  },
+  {
+    title: 'Регионы',
+    name: 'Regiones',
+    api: 'region',
+    columns: [
+      {name: 'titleRu', title: 'Наименование', type: 'string'}
+    ]
+  },
+  {
+    title: 'Города',
+    name: 'Cities',
+    api: 'city',
+    columns: [
+      {name: 'titleRu', title: 'Наименование', type: 'string'}
+    ]
+  },
   // {
   //   name: 'ProductStorages',
   //   columns: [

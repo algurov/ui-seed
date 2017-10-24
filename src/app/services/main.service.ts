@@ -15,4 +15,8 @@ export class MainService {
 
   public menuActionPerformed: EventEmitter<any> = new EventEmitter<any>();
 
+  public productParamAdded: EventEmitter<any> = new EventEmitter<any>();
+
+  public standardParameterAdded: EventEmitter<any> = new EventEmitter<any>();
+
 }

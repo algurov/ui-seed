@@ -1,0 +1,36 @@
+<div class="params">
+  <div class="params__column">
+    <mat-form-field class="params__column-item" floatPlaceholder="always">
+      <mat-placeholder class="params-placeholder" >{{stringService.get('APPLICATION_PARAMS_DOCUMNETS')}}</mat-placeholder>
+      <mat-select multiple [ngModel]="data.resultingDocuments" (change)="onTartgetDocumentsChange($event)">
+        <mat-option  *ngFor="let opt of options" [value]="opt">
+          {{opt.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="params__column-item" floatPlaceholder="always">
+      <mat-placeholder class="params-placeholder" >{{stringService.get('APPLICATION_PARAMS_RESEARCH_TYPE')}}</mat-placeholder>
+      <mat-select>
+        <ng-container *ngFor="let opt of researchTypeOptions">
+
+          <mat-option [value]="opt.id">
+            {{opt.name}}
+          </mat-option>
+          <mat-option style="padding-left: 40px;" *ngFor="let subOpt of opt.children" [value]="subOpt.id">
+            {{opt.name + ' ' + subOpt.name}}
+          </mat-option>
+
+        </ng-container>
+
+
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="params__column">
+    <mat-checkbox color="primary" class="check">{{stringService.get('APPLICATION_PARAMS_EXAMPLE')}}</mat-checkbox>
+    <mat-checkbox color="primary" class="check">{{stringService.get('APPLICATION_PARAMS_ANALYSIS')}}</mat-checkbox>
+    <mat-checkbox color="primary" class="check">{{stringService.get('APPLICATION_PARAMS_FAST')}}</mat-checkbox>
+    <mat-checkbox color="primary" class="check">{{stringService.get('APPLICATION_PARAMS_FREE')}}</mat-checkbox>
+  </div>
+  <div style="clear:both;"></div>
+</div>

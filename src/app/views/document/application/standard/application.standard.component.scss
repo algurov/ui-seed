@@ -1,0 +1,30 @@
+.standard {
+  width: 100%;
+  display: block;
+  clear:both;
+  padding: 20px 20px;
+  &-button {
+    background-color: #3498DB;
+    color: white;
+  }
+
+  &-button-link {
+    color: #3498DB;
+    text-decoration-style: dotted;
+    text-decoration-line: underline;
+  }
+
+  &__list {
+    padding-left: 20px;
+  }
+
+  &__options {
+    margin: 10px 0;
+  }
+}
+
+.tree-wrapper, .angular-tree-component {
+    overflow: auto;
+    height: 200px;
+    width: 100%;
+}

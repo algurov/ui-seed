@@ -1,0 +1,13 @@
+<h2 matDialogTitle>{{stringService.get('SELECT_PARTNER_DIALOG_TITLE')}}</h2>
+<mat-dialog-content style="min-width: 600px;">
+  <mat-form-field>
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilter(nameFilter.value)" />
+  </mat-form-field>
+  <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+  <div *ngIf="loaded">
+    <div class="list-item" *ngFor="let item of list" (click)="selectItem(item)">
+      {{item.name}}
+    </div>
+  </div>
+</mat-dialog-content>

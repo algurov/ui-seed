@@ -1,0 +1,23 @@
+.group {
+  clear:both;
+  padding: 20px 20px;
+  display: block;
+  background: #F6F8F8;
+  &__item {
+    float: left;
+    &-100 {
+      float: left;
+      width: 100%;
+    }
+    &-50 {
+      float: left;
+      width: 50%;
+    }
+    &-field {
+      width: 100%;
+    }
+    &-placeholder {
+        color: #3696D7;
+    }
+  }
+}

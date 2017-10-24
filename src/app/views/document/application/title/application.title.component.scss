@@ -1,0 +1,27 @@
+.title {
+  width: 100%;
+  display: block;
+  clear: both;
+  padding: 0 20px;
+  &__item {
+    padding: 10px 10px;
+    &-first {
+      padding: 10px 0;
+    }
+    &-label {
+      font-size: 18px;
+    }
+    &-placeholder {
+      color: #3696D7;
+    }
+  }
+
+  &__item-grow {
+    padding: 10px 10px;
+    width: 90%;
+  }
+}
+
+.title-content {
+  width: 100%;
+}

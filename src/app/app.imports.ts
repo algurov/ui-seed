@@ -13,6 +13,7 @@ import { useLogMonitor } from '@ngrx/store-log-monitor';
 import { rootReducer } from './reducers';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TreeModule } from 'angular2-tree-component';
 //import { TagInputModule } from 'ng2-tag-input';
 
 
@@ -36,6 +37,7 @@ export const APP_IMPORTS = [
   BrowserAnimationsModule,
   //EffectsModule.run(UserEffects),
 //  MaterialModule,
+  TreeModule,
   ReactiveFormsModule,
   FormsModule,
   FlexLayoutModule,

@@ -21,6 +21,6 @@ export class TaxonomyAllListComponent {
   }
 
   openTaxonomy(taxonomy) {
-    this.router.navigate(['/main/taxonomy', taxonomy]);
+    this.router.navigate(['/main/settings/taxonomy', taxonomy]);
   }
 }

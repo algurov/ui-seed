@@ -25,6 +25,28 @@ import { ChipsInput } from './widgets/chips-input/chips.input';
 import { TaxonomyComponent } from './views/taxonomy/taxonomy.component/taxonomy.component';
 import { TaxonomyItemComponent } from './views/taxonomy/taxonomy.item/taxonomy.item.component';
 import { AddTaxonomyDialog } from './views/taxonomy/add.taxonomy.dialog';
+import { DocumentListComponent } from './views/document/document.list.component';
+import { ApplicationComponent } from './views/document/application/application.component';
+import { ApplicationTitleComponent } from './views/document/application/title/application.title.component';
+import { ApplicationApplicantComponent } from './views/document/application/applicant/application.applicant.component';
+import { ApplicationDeveloperComponent } from './views/document/application/developer/application.developer.component';
+import { ApplicationReciverComponent } from './views/document/application/reciver/application.reciver.component';
+import { ApplicationParamsComponent } from './views/document/application/params/application.params.component';
+import { ApplicationProductComponent } from './views/document/application/product/application.product.component';
+import { ApplicationStandardComponent } from './views/document/application/standard/application.standard.component';
+import { ApplicationGroupComponent } from './views/document/application/group/application.group.component';
+import { TreeProductComponent } from './widgets/tree.product/tree.product.component';
+import { SettingsListComponent } from './views/settings/settings.list.component';
+import { ProductParameterComponent } from './widgets/product.parameter/product.parameter.component';
+import { ColorToggleComponent } from './widgets/product.parameter/color.toggle.component';
+import { SelectTaxonomyComponent } from './views/taxonomy/select/select.taxonomy.component';
+import { SelectTaxonomyDialog } from './views/taxonomy/select/select.taxonomy.dialog';
+import { SeedSelectField } from './widgets/seed.select.field/seed.select.field';
+import { SelectDialog } from './widgets/seed.select.field/seed.select.field';
+import { SelectPlaceDialog } from './widgets/seed.select.field/seed.select.field';
+import { SelectProductDialog } from './widgets/seed.select.field/seed.select.field';
+import { SelectStandardDialog } from './views/document/application/standard/application.standard.component';
+import { StandardField, StandardPropertyDialog } from './widgets/standard.field/standard.field';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -52,5 +74,28 @@ export const APP_DECLARATIONS = [
   ChipsInput,
   TaxonomyComponent,
   TaxonomyItemComponent,
-  AddTaxonomyDialog
+  AddTaxonomyDialog,
+  DocumentListComponent,
+  ApplicationComponent,
+  TreeProductComponent,
+  SettingsListComponent,
+  ProductParameterComponent,
+  ColorToggleComponent,
+  ApplicationTitleComponent,
+  ApplicationApplicantComponent,
+  ApplicationDeveloperComponent,
+  ApplicationReciverComponent,
+  ApplicationParamsComponent,
+  ApplicationProductComponent,
+  ApplicationStandardComponent,
+  ApplicationGroupComponent,
+  SelectTaxonomyComponent,
+  SelectTaxonomyDialog,
+  SeedSelectField,
+  SelectDialog,
+  SelectPlaceDialog,
+  SelectProductDialog,
+  SelectStandardDialog,
+  StandardField,
+  StandardPropertyDialog
 ];

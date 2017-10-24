@@ -37,6 +37,7 @@ export class PartnerListComponent {
       } else {
         this.filterParams[index] = {field:'partnerType', value: 'PERSON'};
       }
+      this.searchPartners(this.filterParams);
        break;
       case 'GROUP_FILTER':
       let _index = this.filterParams.findIndex(item => item.field == 'partnerType')
@@ -45,9 +46,14 @@ export class PartnerListComponent {
       } else {
         this.filterParams[_index] = {field:'partnerType', value: 'ORGANIZATION'};
       }
+      this.searchPartners(this.filterParams);
       break;
-    }
-    this.searchPartners(this.filterParams);
+      case 'add-agent': this.addAgent(); break;
+    }  
+  }
+
+  addAgent() {
+    this.dlgService.showAddAgentDialog();
   }
 
   addNumberFilter(number) {

@@ -36,11 +36,11 @@ export class MainViewComponent {
 
   refreshPartners() {
     this.partners = new Array<Partner>();
-    this.partnerService.getPartnerList().subscribe(res => {
+    this.partnerService.getPartnerList().subscribe(res => setTimeout(() => {
       res.content.forEach(item => {
         this.partners.push(new Partner().deserialize(item));
       });
-    });
+    }, 100));
   }
 
   partnerChange(partner) {
@@ -48,12 +48,13 @@ export class MainViewComponent {
     this.main.partnerSelectedForUser.emit(partner);
   }
 
-  ngAfterContentInit() {
+  ngOnInit() {
     this.refreshPartners();
+      this.selectedPartnerId = this.settingsService.settings.selectedPartnerId;
   }
 
   ngAfterViewInit() {
-    this.selectedPartnerId = this.settingsService.settings.selectedPartnerId;
+    //this.selectedPartnerId = this.settingsService.settings.selectedPartnerId;
   }
   changeRoute(link) {
     this.router.navigateByUrl(link);

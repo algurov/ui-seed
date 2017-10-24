@@ -18,6 +18,9 @@ import { PartnerListComponent } from './views/partner/list/partner.list.componen
 import { TaxonomyAllListComponent } from './views/taxonomy/taxonomy.all.list.component';
 import { TaxonomyComponent } from './views/taxonomy/taxonomy.component/taxonomy.component';
 import { TaxonomyItemComponent } from './views/taxonomy/taxonomy.item/taxonomy.item.component';
+import { DocumentListComponent } from './views/document/document.list.component';
+import { ApplicationComponent } from './views/document/application/application.component';
+import { SettingsListComponent } from './views/settings/settings.list.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -25,13 +28,15 @@ export const routes: Routes = [
   { path: 'main', component: MainViewComponent, canActivate: [AuthGuard],
     data: {breadcrumb: 'Кабинет'},
     children: [
-      { path: 'user', component: UserListComponent,  data: {breadcrumb: 'Пользователи'}},
-      { path: 'user/edit/:id', component: UserEditComponent},
-      { path: 'user/add', component: UserEditComponent},
+      { path: 'settings', component: SettingsListComponent, data: {breadcrumb: 'Настройки'}},
+      { path: 'settings/user', component: UserListComponent,  data: {breadcrumb: 'Пользователи'}},
+      { path: 'settings/user/edit/:id', component: UserEditComponent},
+      { path: 'settings/user/add', component: UserEditComponent},
       { path: 'agent', component: PartnerListComponent,  data: {breadcrumb: 'Контрагенты'}},
-      { path: 'taxonomy', component: TaxonomyAllListComponent, data: {breadcrumb: 'Справочники'}},
-      { path: 'taxonomy/:tax', component: TaxonomyItemComponent}
-
+      { path: 'settings/taxonomy', component: TaxonomyAllListComponent, data: {breadcrumb: 'Справочники'}},
+      { path: 'settings/taxonomy/:tax', component: TaxonomyItemComponent},
+      { path: 'document', component: DocumentListComponent, data: {breadcrumb: 'Документы'}},
+      { path: 'document/application', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

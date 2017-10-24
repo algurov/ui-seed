@@ -1,0 +1,19 @@
+<h2 matDialogTitle>{{stringService.get('SELECT_PRODUCT_DIALOG_TITLE')}}</h2>
+<mat-dialog-content style="min-width: 600px;">
+  <mat-form-field>
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input tabindex="-1" matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilter(nameFilter.value)" />
+  </mat-form-field>
+  <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+  <div *ngIf="loaded">
+    <ng-container *ngFor="let item of listToView">
+      <div class="list-item" (click)="selectItem(item)">
+        {{item.fullNameRu}}
+      </div>
+      <div (click)="selectItem(subItem)" style="padding-left: 40px;" class="list-item" *ngFor="let subItem of item.children">
+        {{subItem.fullNameRu}}
+      </div>
+    </ng-container>
+
+  </div>
+</mat-dialog-content>

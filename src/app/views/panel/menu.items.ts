@@ -3,7 +3,15 @@ export const menuItems = [
     name: 'DOCUMENTS',
     icon: 'docs',
     activator: 1,
-    sub: [],
+    link: 'main/document',
+    sub: [
+    ],
+    actions: [
+      {
+        name: 'ADD_APPLICATION',
+        action: 'ADD_APPLICATION'
+      }
+    ],
     top: true
   },
   {
@@ -48,28 +56,29 @@ export const menuItems = [
   {
     name: 'SETTINGS_TITLE',
     icon: 'settings',
+    link: 'main/settings',
     activator: 0,
     top: false,
     sub: [
       {
         name: 'USERS_TITLE',
         icon: 'user',
-        link: 'main/user'
+        link: 'main/settings/user'
       },
       {
         name: 'ROLE_TITLE',
         icon: 'role',
-        link: 'main/roles'
+        link: 'main/settings/roles'
       },
       {
         name: 'DEPARTMENT_TITLE',
         icon: 'location',
-        link: 'main/locations'
+        link: 'main/settings/locations'
       },
       {
         name: 'TAXONOMY_TITLE',
         icon: 'taxonomy',
-        link: 'main/taxonomy'
+        link: 'main/settings/taxonomy'
       }
     ]
   },

@@ -1,0 +1,19 @@
+.params {
+  padding: 20px 20px;
+  display: block;
+  &-placeholder {
+      color: #3696D7;
+  }
+  &__column {
+    float: left;
+    width: 50%;
+    &-item {
+      width: 90%;
+    }
+  }
+}
+
+.check {
+  padding: 5px 0px;
+  display: block;
+}

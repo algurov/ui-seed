@@ -1,0 +1,24 @@
+<div class="group">
+    <div class="group__item-50">
+      <seed-select-field code="partner" placeholder="{{stringService.get('APPLICATION_GROUP_STORAGE')}}" [data]="data"></seed-select-field>
+    </div>
+    <div class="group__item-50">
+      <mat-form-field class="group__item-field" floatPlaceholder="always">
+        <mat-placeholder class="group__item-placeholder">{{stringService.get('APPLICATION_GROUP_WEIGHT')}}</mat-placeholder>
+        <input matInput />
+      </mat-form-field>
+    </div>
+    <div class="group__item-100">
+      <mat-form-field class="group__item-field" floatPlaceholder="always">
+        <mat-placeholder class="group__item-placeholder">{{stringService.get('APPLICATION_GROUP_BORDER')}}</mat-placeholder>
+        <input matInput />
+      </mat-form-field>
+    </div>
+    <div class="group__item-100">
+      <mat-form-field class="group__item-field" floatPlaceholder="always">
+        <mat-placeholder class="group__item-placeholder">{{stringService.get('APPLICATION_GROUP_ADDITIONAL')}}</mat-placeholder>
+        <textarea matInput></textarea>
+      </mat-form-field>
+    </div>
+    <div style="clear: both;"></div>
+</div>

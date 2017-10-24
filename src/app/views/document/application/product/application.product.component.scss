@@ -1,0 +1,15 @@
+.product {
+  background: #F6F8F8;
+  display: block;
+  padding: 20px 20px;
+  &__column {
+    float: left;
+    width: 50%;
+    &-place {
+        color: #3696D7;
+    }
+    &-field {
+      width: 90%
+    }
+  }
+}

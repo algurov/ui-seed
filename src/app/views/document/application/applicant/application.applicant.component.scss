@@ -1,0 +1,36 @@
+.applicant {
+  display: block;
+  background: #F6F8F8;
+  padding: 20px 20px;
+  &__boxes {
+    margin-top: 2px;
+    margin-bottom: 20px;
+  }
+  &__place {
+      color: #3696D7;
+  }
+  &__placeholder {
+    color: #3696D7;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 11px;
+    line-height: 11px;
+  }
+  &__row {
+    clear:both;
+  }
+  &__left {
+    width: 50%;
+    float: left;
+    &-100 {
+      width: 100%;
+      float: left;
+    }
+  }
+  &__list {
+    padding-left: 10px;
+
+    &-grow {
+      width: 100%;
+    }
+  }
+}

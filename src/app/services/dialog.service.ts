@@ -6,6 +6,7 @@ import { ConfirmDialog } from '../widgets/confirm.dialog';
 import { MatSnackBar } from '@angular/material';
 import { AddPartnerDialog } from '../views/partner/add.partner.dialog';
 import { AddTaxonomyDialog } from '../views/taxonomy/add.taxonomy.dialog';
+import { SelectTaxonomyDialog } from '../views/taxonomy/select/select.taxonomy.dialog';
 
 @Injectable()
 export class DialogService {
@@ -36,6 +37,12 @@ export class DialogService {
     let cmp = dlg.componentInstance;
     cmp.taxonomy = taxonomy;
     cmp.taxonomyName = taxonomyName;
+  }
+
+  showSelectTaxonomyDialog(taxonomy) {
+    let dlg = this.dialog.open(SelectTaxonomyDialog);
+    let cmp = dlg.componentInstance;
+    cmp.taxonomy = taxonomy;
   }
 
   showNotification(message: string) {

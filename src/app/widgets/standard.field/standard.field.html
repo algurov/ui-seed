@@ -1,0 +1,22 @@
+<div class="standard-field">
+  <div>
+    <div class="standard-field__title">
+      {{standard.shortName}}
+    </div>
+    <mat-icon class="standard-field__icon" (click)="selectProperty()">search</mat-icon>
+    <div class="standard-field__divider"></div>
+    <mat-icon class="standard-field__close" (click)="removeStandard()">close</mat-icon>
+    <div style="clear:both;"></div>
+  </div>
+  <div>
+    <div class="tree-wrapper">
+    <tree-root [nodes]="nodes">
+      <ng-template #treeNodeTemplate let-node let-index="index">
+        <div style="float:left;">{{node.data.name}}</div>
+        <mat-icon class="close-icon" style="float:left;" (click)="removeItem(node)" >close</mat-icon>
+        <div style="clear:both;"></div>
+      </ng-template>
+    </tree-root>
+  </div>
+  </div>
+</div>
