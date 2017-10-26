@@ -7,6 +7,7 @@ import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { AddPartnerDialog } from './add.partner.dialog';
 import { MainService } from '../../services/main.service';
 import { DialogService } from '../../services/dialog.service';
+import { DataService } from '../../services/data.service';
 
 
 @Component({
@@ -20,11 +21,13 @@ export class AddPartnerComponent {
   partnerForm: FormGroup;
   showNotification: boolean = false;
   collapsed: boolean = true;
-  types = [{title: 'Юридическое лицо', value: 'ORGANIZATION'}, {title: 'Физическое лицо', value: 'PERSON'}];
-  docTypes = [{title: 'ИНН', value: 'INN'}, {title: 'Паспорт', value: 'PASSPORT'}];
+  types : any;//= [{title: 'Юридическое лицо', value: 'ORGANIZATION'}, {title: 'Физическое лицо', value: 'PERSON'}];
+  docTypes : any;// = [{title: 'ИНН', value: 'INN'}, {title: 'Паспорт', value: 'PASSPORT'}];
   constructor(private stringService: StringService, private fb: FormBuilder,
       private partnerService: PartnerService, public mainService: MainService,
-      private dlgService: DialogService) {
+      private dlgService: DialogService, public dataService: DataService) {
+    this.types = dataService.getPartnerTypes();
+    this.docTypes = dataService.getPartnerDocumentTypes();
     this.partnerForm = this.fb.group({
       partnerType: [''],
       documentType: [''],

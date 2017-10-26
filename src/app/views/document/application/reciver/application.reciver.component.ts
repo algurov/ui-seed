@@ -9,5 +9,32 @@ import { StringService } from '../../../../services/string.service';
 export class ApplicationReciverComponent {
   @Input() data;
 
-  constructor(private stringService: StringService) {}
+  constructor(private stringService: StringService) {
+
+  }
+
+  onCargoSenderPartnerChange(partner) {
+    this.data.cargoSender.partner = partner;
+  }
+
+  onCargoSenderLocationChange(location) {
+    this.data.cargoSender.location = location;
+  }
+
+  onCargoReciverPartnerChange(partner) {
+    this.data.cargoReciver.partner = partner;
+  }
+
+  onCargoReciverLocationChange(location) {
+    this.data.cargoReciver.location = location;
+  }
+
+  ngOnInit() {
+    if (!this.data.cargoSender) {
+      this.data.cargoSender = {};
+    }
+    if (!this.data.cargoReciver) {
+      this.data.cargoReciver = {};
+    }
+  }
 }

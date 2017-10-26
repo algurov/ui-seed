@@ -13,21 +13,25 @@ import { StringService } from '../../../services/string.service';
   styleUrls: ['./partner.list.component.scss']
 })
 export class PartnerListComponent {
-  displayedColumns = [{column: 'name', title:'PARTNER_NAME'}, {column: 'partnerType', title: 'PARTNER_TYPE'}, {column: 'documentNumber', title: 'PARTNER_DOC_NUMBER'}];
+  displayedColumns = [{column: 'name', title:'PARTNER_NAME'}, {column: 'partnerType', title: 'PARTNER_TYPE', data:'PARTNER_TYPE'}, {column: 'documentNumber', title: 'PARTNER_DOC_NUMBER'}];
   allPartners: Array<Partner> = new Array<Partner>();
   dataSource : PartnerDataSource;
   partnerDb: PartnerDataBase;
   filterParams: Array<any> = new Array<any>();
+  subscriptions : Array<any> = new Array<any>();
   constructor(private partnerService : PartnerService, public dlgService: DialogService,
       public mainService: MainService, public stringService: StringService) {
     this.partnerDb = new PartnerDataBase(partnerService, dlgService);
     this.dataSource = new PartnerDataSource(this.partnerDb);
-    mainService.partnerAdded.subscribe(item => this.addPartner(item));
-    mainService.partnerUpdated.subscribe(item => this.updatePartner(item));
-    mainService.partnerDeleted.subscribe(item => this.removePartner(item));
-    mainService.menuActionPerformed.subscribe(item => this.menuActionPerformed(item));
+    this.subscriptions.push(mainService.partnerAdded.subscribe(item => this.addPartner(item)));
+    this.subscriptions.push(mainService.partnerUpdated.subscribe(item => this.updatePartner(item)));
+    this.subscriptions.push(mainService.partnerDeleted.subscribe(item => this.removePartner(item)));
+    this.subscriptions.push(mainService.menuActionPerformed.subscribe(item => this.menuActionPerformed(item)));
   }
-
+  ngOnDestroy() {
+    this.subscriptions.forEach(item => item.unsubscribe());
+    this.subscriptions = [];
+  }
   menuActionPerformed(item) {
     switch(item) {
       case 'PERSONAL_FILTER':
@@ -48,8 +52,8 @@ export class PartnerListComponent {
       }
       this.searchPartners(this.filterParams);
       break;
-      case 'add-agent': this.addAgent(); break;
-    }  
+      case 'add-agent': console.log('show'); this.addAgent(); break;
+    }
   }
 
   addAgent() {
@@ -175,7 +179,9 @@ export class PartnerDataSource extends DataSource<any> {
   constructor(public partnerDb: PartnerDataBase) {
     super();
   }
-
+  getDataCount() {
+    return this.partnerDb.data.length;
+  }
   connect(): Observable<Partner[]> {
     //return this.data;
     //return Observable.of(this.data);

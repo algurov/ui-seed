@@ -1,24 +1,24 @@
 .standard-field {
-  padding: 20px 20px;
+  padding: 20px 0;
 
   &__title {
     padding-top: 2px;
     line-height: 18px;
     font-weight: bold;
     font-size: 18px;
-    float:left;
+    float: left;
+    width: 20%;
   }
 
   &__icon {
     float: left;
-    padding-left: 20px;
-    padding-right: 20px;
+      color: #3696D7;
+    width: 5%;
     line-height: 18px;
   }
 
   &__close {
-    float: left;
-    padding-left: 20px;
+    float: right;
   }
 
   &__divider {
@@ -27,16 +27,68 @@
     width: 70%;
     border-bottom: 1px solid #aaa;
   }
-
 }
 
-.tree-wrapper, .angular-tree-component {
-    overflow: auto;
-    height: 200px;
-    width: 100%;
+.tree-node-wrapper {
+  width: 100%;
 }
-.close-icon {
+
+.wrapper-tree {
+  overflow: visible;
+  height: 20px;
+  width: 100%;
+  display: inline-block;
+}
+
+.wrapper-tree-custom {
+  overflow: visible;
+  height: 20px;
+  width: 100%;
+  display: inline-block;
+}
+
+mat-icon.close-icon {
+  font-size: 14px;
+  font-weight: bold;
   float: left;
-  height: 18px!important;
-  width: 18px!important;
+  height: 14px!important;
+  width: 14px!important;
+  padding-top: 3px;
+  padding-left: 10px;
+}
+
+.toggle {
+  float: left;
+  padding-top: 4px;
+  padding-right: 5px;
+}
+
+i {
+    border: solid #546E7A;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-right: 8px;
+    margin-bottom: 2px;
+    cursor: pointer;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }

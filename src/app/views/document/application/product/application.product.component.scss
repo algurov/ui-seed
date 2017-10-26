@@ -1,7 +1,11 @@
 .product {
   background: #F6F8F8;
   display: block;
-  padding: 20px 20px;
+  padding: 60px 20px;
+  &__column-40 {
+    float: left;
+    width: 40%;
+  }
   &__column {
     float: left;
     width: 50%;
@@ -9,7 +13,13 @@
         color: #3696D7;
     }
     &-field {
-      width: 90%
+      width: 100%;
+      &-90 {
+        width:90%;
+      }
+      &-40 {
+        width:40%;
+      }
     }
   }
 }

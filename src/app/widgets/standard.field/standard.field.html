@@ -1,22 +1,35 @@
 <div class="standard-field">
   <div>
-    <div class="standard-field__title">
-      {{standard.shortName}}
+    <div *ngIf="!customStandard" class="standard-field__title">
+      <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>{{standard.shortName}}
+    </div>
+    <div *ngIf="customStandard" class="standard-field__title">
+      <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>Контракт
     </div>
     <mat-icon class="standard-field__icon" (click)="selectProperty()">search</mat-icon>
     <div class="standard-field__divider"></div>
     <mat-icon class="standard-field__close" (click)="removeStandard()">close</mat-icon>
     <div style="clear:both;"></div>
   </div>
-  <div>
-    <div class="tree-wrapper">
-    <tree-root [nodes]="nodes">
-      <ng-template #treeNodeTemplate let-node let-index="index">
-        <div style="float:left;">{{node.data.name}}</div>
-        <mat-icon class="close-icon" style="float:left;" (click)="removeItem(node)" >close</mat-icon>
-        <div style="clear:both;"></div>
-      </ng-template>
-    </tree-root>
-  </div>
+  <div *ngIf="visible">
+    <div *ngIf="!customStandard" #wrap class="wrapper-tree goods-category-property">
+      <tree-root [nodes]="standard.nodes">
+        <ng-template #treeNodeTemplate let-node let-index="index">
+          <div class="toggle" *ngIf="isToggleVisible(node)">
+                <color-toggle [value]="standard.standardCategory.id == 1"></color-toggle>
+          </div>
+          <div style="float:left;">{{getTitleForNode(node)}}</div>
+          <mat-icon class="close-icon" (click)="removeItem(node)">close</mat-icon>
+          <div style="clear:both;"></div>
+        </ng-template>
+      </tree-root>
+    </div>
+    <div *ngIf="customStandard" #wrap2 class="wrapper-tree-custom">
+      <tree-root [nodes]="standard.nodes">
+        <ng-template #treeNodeTemplate let-node let-index="index">
+          <product-parameter [config]="node" (onRemove)="removeItem(node)"></product-parameter>
+        </ng-template>
+      </tree-root>
+    </div>
   </div>
 </div>

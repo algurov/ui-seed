@@ -72,14 +72,16 @@ export class AuthService extends RequestBase {
 
   getShortName() {
       let result = '';
-      if (this.loggedIn.userFamilyName) {
-        result = result + this.loggedIn.userFamilyName + ' ';
-      }
-      if (this.loggedIn.userGivenName) {
-        result = result + this.loggedIn.userGivenName[0] +'. ';
-      }
-      if (this.loggedIn.userSecondName) {
-        result = result + this.loggedIn.userSecondName[0] + '.';
+      if(this.loggedIn) {
+        if (this.loggedIn.userFamilyName) {
+          result = result + this.loggedIn.userFamilyName + ' ';
+        }
+        if (this.loggedIn.userGivenName) {
+          result = result + this.loggedIn.userGivenName[0] +'. ';
+        }
+        if (this.loggedIn.userSecondName) {
+          result = result + this.loggedIn.userSecondName[0] + '.';
+        }
       }
       return result;
   }

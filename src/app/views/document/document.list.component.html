@@ -1,1 +1,11 @@
-
+<div class="document">
+  <div class="document__list">
+    <div class="document__list-item" *ngFor="let application of applicationList" (click)="openApplication(application.id)">
+      {{application.number}}
+    </div>
+  </div>
+  <div class="document__table">
+    <table style="width: 100%;" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [remove]="deleteApplication" [edit]="editApplication">
+    </table>
+  </div>
+</div>

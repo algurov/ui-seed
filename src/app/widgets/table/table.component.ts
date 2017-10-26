@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DialogService } from '../../services/dialog.service';
 import { PartnerService } from '../../services/partner.service';
 import { MainService } from '../../services/main.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'table',
@@ -19,7 +20,8 @@ import { MainService } from '../../services/main.service';
 export class TableComponent {
   cols = [];
   constructor(private stringService: StringService, private router: Router, private dlgService: DialogService,
-      private partnerService: PartnerService, private mainService: MainService, private route: ActivatedRoute){
+      private partnerService: PartnerService, private mainService: MainService, private route: ActivatedRoute,
+      private dataService: DataService){
 
   }
   @Input() displayedColumns;
@@ -40,6 +42,16 @@ export class TableComponent {
        this.cols.push(item.column);
      });
      this.cols.push('actions');
+   }
+
+   getColumnValue(element, column) {
+     if (column.property) {
+       return element[column.column][column.property];
+     }
+     if (column.data) {
+       return this.dataService.getDataFromList(column.data, element[column.column]);
+     }
+     return element[column.column];
    }
 }
 

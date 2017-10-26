@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
 import { MainService } from '../../services/main.service';
 import { Router } from '@angular/router';
+import { ApplicationService } from '../../services/application.service';
+import { DataSource } from '@angular/cdk/collections';
+import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { DialogService } from '../../services/dialog.service';
+import { StringService } from '../../services/string.service';
+
 
 @Component({
   selector: 'document-list',
@@ -8,15 +15,105 @@ import { Router } from '@angular/router';
   styleUrls: ['./document.list.component.scss']
 })
 export class DocumentListComponent {
-  constructor(public mainService: MainService, public router: Router) {
-    this.mainService.menuActionPerformed.subscribe(item => {
+  displayedColumns = [{column: 'type', title:'DOCUMENT_TYPE'}, {column: 'number', title:'DOCUMENT_NUMBER'}, {column: 'created', title: 'DOCUMENT_DATE'}, {column: 'applicant', property:'name', title: 'DOCUMENT_APPLICANT'}];
+  subscription: any;
+  dataSource : DocumentDataSource;
+  documentDb: DocumentDataBase;
+  applicationList : Array<any> = new Array<any>();
+  constructor(public mainService: MainService, public router: Router, private applicationService: ApplicationService,
+    private dlgService: DialogService) {
+    this.subscription = this.mainService.menuActionPerformed.subscribe(item => {
       if (item == 'ADD_APPLICATION') {
         this.newOrder();
       }
     });
+    this.documentDb = new DocumentDataBase(router, applicationService, dlgService);
+    this.dataSource = new DocumentDataSource(this.documentDb);
   }
-
+  editApplication(application) {
+    this.router.navigate(['main/document/application/' + application.id]);
+  }
+  ngOnInit() {
+    this.applicationService.getApplicationList().subscribe(res => {
+       this.applicationList = res;
+    });
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
   newOrder() {
     this.router.navigate(['main/document/application']);
   }
+  openApplication(id) {
+    this.router.navigate(['main/document/application/' + id]);
+  }
+}
+
+export class DocumentDataBase {
+  dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  get data(): any[] { return this.dataChange.value; }
+
+  constructor(public router, public applicationService, public dlgService : DialogService) {
+    dlgService.block = true;
+    applicationService.getApplicationList().subscribe(res => {
+      res.forEach(item => {
+        this.addApplication(item);
+      });
+      dlgService.block = false;
+    });
+    this.addApplication({type: 'APPLICATION', id: 1, number:'Номер 1', applicant: {name: 'ООО "Зерно"'}, created:'10/10/2012'});
+    this.addApplication({type: 'APPLICATION', id: 2, number:'Номер 2', applicant: {name: 'ООО "Бубочка"'}, created:'10/10/2012'});
+    this.addApplication({type: 'APPLICATION', id: 3, number:'Номер 3', applicant: {name: 'ООО "Санфлавер"'}, created:'10/10/2012'});
+    this.addApplication({type: 'APPLICATION', id: 4, number:'Номер 4', applicant: {name: 'ЗАО "Крупица"'}, created:'10/10/2012'});
+  }
+
+  changeSearch(params) {
+    this.dataChange.next([]);
+    this.dlgService.block = true;
+    this.applicationService.searchPartnersByParams(params).subscribe(res => {
+      res.content.forEach(item => {
+        this.addApplication(item);
+      });
+      this.dlgService.block = false;
+    });
+  }
+
+  addApplication(item) {
+    const copiedData = this.data.slice();
+    copiedData.push(item);
+    this.dataChange.next(copiedData);
+  }
+
+  removeApplication(item) {
+    const copiedData = this.data.slice();
+    let it = copiedData.find(one => one.id == item.id);
+    let index = copiedData.indexOf(it);
+    copiedData.splice(index, 1);
+    this.dataChange.next(copiedData);
+  }
+}
+
+export class DocumentDataSource extends DataSource<any> {
+  /** Connect function called by the table to retrieve one stream containing the data to render. */
+  partnerService : any;
+  data: Array<any> = new Array<any>();
+  constructor(public documentDb: DocumentDataBase) {
+    super();
+  }
+  getDataCount() {
+    return this.documentDb.data.length;
+  }
+  connect(): Observable<any[]> {
+    //return this.data;
+    //return Observable.of(this.data);
+    return this.documentDb.dataChange;
+    // const displayDataChanges = [
+    //   this.partnerDb.dataChange
+    //
+    // ];
+    // return Observable.merge(...displayDataChanges).map(() => {
+    //   return this.partnerDb.data.slice()});
+  }
+
+  disconnect() {}
 }

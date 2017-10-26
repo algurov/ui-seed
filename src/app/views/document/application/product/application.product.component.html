@@ -1,7 +1,7 @@
 <div class="product">
   <div class="product__column">
-    <seed-select-field code="product" placeholder="{{stringService.get('APPLICATION_PRODUCT_TITLE')}}" [data]="data.goodsRelation" (change)="selectProduct($event)"></seed-select-field>
-    <mat-form-field class="product__column-field" floatPlaceholder="always">
+    <seed-select-field code="product" placeholder="{{stringService.get('APPLICATION_PRODUCT_TITLE')}}" [data]="data.goods" (change)="selectProduct($event)"></seed-select-field>
+    <mat-form-field class="product__column-field-90" floatPlaceholder="always">
       <mat-placeholder class="product__column-place">{{stringService.get('APPLICATION_PRODUCT_NAME')}}</mat-placeholder>
       <input matInput [(ngModel)]="data.goodsName"/>
     </mat-form-field>
@@ -10,21 +10,21 @@
   <div class="product__column">
     <mat-form-field class="product__column-field" floatPlaceholder="always">
         <mat-placeholder class="product__column-place">{{stringService.get('APPLICATION_PRODUCT_CODE')}}</mat-placeholder>
-      <input matInput />
+      <input matInput [(ngModel)]="data.goodsTNVD"/>
     </mat-form-field>
     <div>
-      <div class="product__column">
+      <div class="product__column-40" style="padding-right:10px;">
         <mat-form-field class="product__column-field" floatPlaceholder="always">
             <mat-placeholder class="product__column-place">{{stringService.get('APPLICATION_GROUP_DATE')}}</mat-placeholder>
-          <input matInput [matDatepicker]="myDatepicker1" />
+          <input matInput [matDatepicker]="myDatepicker1" [(ngModel)]="data.goodsProductionDate"/>
           <mat-datepicker-toggle matSuffix [for]="myDatepicker1"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker1></mat-datepicker>
         </mat-form-field>
       </div>
-      <div class="product__column">
+      <div class="product__column-40" style="float:right;">
         <mat-form-field class="product__column-field" floatPlaceholder="always">
             <mat-placeholder class="product__column-place">{{stringService.get('APPLICATION_GROUP_WEIGHT')}}</mat-placeholder>
-          <input matInput />
+          <input matInput [(ngModel)]="data.goodsWeight"/>
         </mat-form-field>
       </div>
     </div>

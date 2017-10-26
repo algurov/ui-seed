@@ -22,8 +22,8 @@ export class DialogService {
   }
 
   showAddAgentDialog() {
-    let dlg = this.dialog.open(AddPartnerDialog);
-    let cmp = dlg.componentInstance;
+     let dlg = this.dialog.open(AddPartnerDialog);
+     let cmp = dlg.componentInstance;
   }
 
   showEditAgentDialog(partner) {

@@ -20,7 +20,7 @@ import { APP_DECLARATIONS } from './app.declarations';
 import { APP_ENTRY_COMPONENTS } from './app.entry-components';
 import { APP_IMPORTS } from './app.imports';
 import { APP_PROVIDERS } from './app.providers';
-import { MATERIAL_COMPATIBILITY_MODE } from '@angular/material';
+import { MATERIAL_COMPATIBILITY_MODE , MAT_DATE_LOCALE } from '@angular/material';
 import { routes } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -44,7 +44,7 @@ import { SeedMaterialModule } from './seed.material.module';
   ],
   bootstrap: [AppComponent],
   exports: [AppComponent],
-  providers: [APP_PROVIDERS, {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+  providers: [APP_PROVIDERS,{provide: MAT_DATE_LOCALE, useValue: 'ru-RU'}, {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
 })
 
 export class AppModule {

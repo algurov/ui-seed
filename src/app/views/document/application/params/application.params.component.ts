@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { TaxonomyService } from '../../../../services/taxonomy.service';
-import { MatSelect, MatSelectChange } from '@angular/material';
+import { MatSelect, MatSelectChange, MatOption } from '@angular/material';
 
 @Component({
   selector: 'application-params',
@@ -10,6 +10,8 @@ import { MatSelect, MatSelectChange } from '@angular/material';
 })
 export class ApplicationParamsComponent {
   @Input() data;
+  @ViewChild('resDocuments') resDocuments : MatSelect;
+  @ViewChildren('resOptions') resOptions : QueryList<MatOption>;
   options = [];
   researchType = [
     // {
@@ -30,6 +32,8 @@ export class ApplicationParamsComponent {
 
   ];
   researchTypeOptions = [];
+  stateTargetDocuments = [];
+  stateResearchType: any = 0;
   constructor(private stringService: StringService, private taxonomyService: TaxonomyService){
     this.taxonomyService.loadTaxonomyData('TargetDocuments').subscribe(res => {
       this.options = res.content;
@@ -41,29 +45,55 @@ export class ApplicationParamsComponent {
 
   }
 
+  ngOnInit() {
+    if (this.data.targetDocuments) {
+      this.data.targetDocuments.forEach(item => {
+        this.stateTargetDocuments.push(+item.id);
+      });
+    }
+    if (this.data.researchType) {
+        this.stateResearchType = +this.data.researchType.id;
+    }
+
+  }
+
+  onResearchTypeChange(event: MatSelectChange) {
+    this.stateResearchType = event.value;
+    this.data.researchType = this.researchType.find(item => item.id == event.value);
+  }
+
   onTartgetDocumentsChange(event : MatSelectChange) {
     let parentFound = false;
     let childFound = false;
     event.value.forEach(item => {
-      if (item.id == 2) {
+      if (item == 2) {
         parentFound = true;
       }
-      if (item.id == 1) {
+      if (item == 1) {
         childFound = true;
       }
     });
-    this.data.resultingDocuments = event.value;
+    this.data.targetDocuments = this.findResultingDocumentsById(event.value);
+    this.stateTargetDocuments = event.value;
     if (parentFound && !childFound) {
 
-      this.data.resultingDocuments.push({id: 1});
+      this.stateTargetDocuments.push(1);
+      this.data.targetDocuments =this.findResultingDocumentsById(this.stateTargetDocuments);
       event.source.options.forEach(op => {
-        if (op.value.id == 1) {
+        if (op.value == 1) {
             op.select();
         }
       });
     }
   }
 
+  findResultingDocumentsById(ids: Array<number>){
+    let result = [];
+    ids.forEach(id => {
+    result.push(this.options.find(item => item.id == id));
+    });
+    return result;
+  }
   processResearchType() {
     this.researchType.sort((n1, n2) => {
       if(n1.parent == null && n2.parent == null) {

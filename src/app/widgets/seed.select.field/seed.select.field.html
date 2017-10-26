@@ -1,7 +1,7 @@
 <div>
   <mat-form-field floatPlaceholder="always" class="field">
     <mat-placeholder class="holder"  >{{placeholder}}</mat-placeholder>
-    <input matInput  [value]="getTitle()" readonly="true"/>
+    <input matInput  [value]="getTitle()" [disabled]="!enabled" readonly="true"/>
   </mat-form-field>
-  <mat-icon [ngClass]="{'activated': enabled==true}" (click)="openDialog()">search</mat-icon>
+  <mat-icon [ngClass]="{'activated': enabled, 'disabled': !enabled}" (click)="openDialog()">search</mat-icon>
 </div>

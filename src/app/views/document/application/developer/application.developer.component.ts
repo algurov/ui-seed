@@ -12,11 +12,24 @@ export class ApplicationDeveloperComponent {
   constructor(private stringService: StringService){}
 
   addItem() {
-    this.developers.push({id: this.developers.length});
+    if (!this.data.manufacturers) {
+      this.data.manufacturers = [];
+    }
+    this.data.manufacturers.push({guid: this.data.manufacturers.length});
+  }
+
+  onPartnerChange(guid, partner) {
+    let index = this.data.manufacturers.findIndex(it => it.guid == guid);
+    this.data.manufacturers[index].partner = partner;
+  }
+
+  onLocationChange(guid, location) {
+    let index = this.data.manufacturers.findIndex(it => it.guid == guid);
+    this.data.manufacturers[index].location = location;
   }
 
   removeItem(item) {
-    let index = this.developers.findIndex(it => it.id == item.id);
-    this.developers.splice(index, 1);
+    let index = this.data.manufacturers.findIndex(it => it.guid == item.guid);
+    this.data.manufacturers.splice(index, 1);
   }
 }

@@ -1,4 +1,9 @@
 .application {
   color: #546E7A;
-  width:100%
+  width:100%;
+
+  &__action {
+    padding: 20px 20px;
+    width: 100%;
+  }
 }

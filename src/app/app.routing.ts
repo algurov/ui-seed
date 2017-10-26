@@ -36,7 +36,8 @@ export const routes: Routes = [
       { path: 'settings/taxonomy', component: TaxonomyAllListComponent, data: {breadcrumb: 'Справочники'}},
       { path: 'settings/taxonomy/:tax', component: TaxonomyItemComponent},
       { path: 'document', component: DocumentListComponent, data: {breadcrumb: 'Документы'}},
-      { path: 'document/application', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}}
+      { path: 'document/application', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}},
+      { path: 'document/application/:id', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

@@ -48,7 +48,7 @@ export class UserListComponent {
   }
 
   editUser(user) {
-    this.router.navigate(['/main/user/edit', user.id]);
+    this.router.navigate(['/main/settings/user/edit', user.id]);
   }
 
 }
@@ -59,7 +59,9 @@ export class ExampleDataSource extends DataSource<any> {
   constructor(private userService: UserService) {
     super();
   }
-
+  getDataCount() {
+    return 'refactor here';
+  }
   connect(): Observable<User[]> {
     //return this.data;
     return this.userService.getAllUsers();

@@ -4,7 +4,7 @@
 @import 'variables';
 
 @import '@angular/material/theming';
-@import '~angular-tree-component/dist/angular-tree-component.css';
+// @import '~angular-tree-component/dist/angular-tree-component.css';
 // Plus imports for other components in your app.
 
 // Include the base styles for Angular Material core. We include this here so that you only
@@ -253,3 +253,33 @@ ul, ol {
   .icon-icon_user:before {
     content: "\e90c";
   }
+  tree-viewport {
+    overflow: visible!important;
+  }
+.wrapper-tree .angular-tree-component {
+  height: 200px;
+  width: 100%;
+  overflow: auto;
+}
+
+.wrapper-tree-custom tree-node-expander {
+  padding-top: 20px;
+}
+.wrapper-tree-custom .node-content-wrapper {
+  width: 100%;
+}
+.cbox .mat-checkbox-inner-container {
+  height: 15px;
+  width: 15px;
+}
+
+.check .mat-checkbox-inner-container {
+  height: 15px;
+  width: 15px;
+}
+ // .tree-wrapper {
+ //    overflow: auto;
+ //  }
+ //  .angular-tree-component {
+ //    height: 200px;
+ //  }

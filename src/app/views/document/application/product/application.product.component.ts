@@ -12,7 +12,7 @@ export class ApplicationProductComponent {
   constructor(private stringService: StringService) {}
 
   selectProduct(product) {
-    this.data.goodsRelation = product;
+    this.data.goods = product;
     this.data.goodsName = product.fullNameRu;
   }
 }

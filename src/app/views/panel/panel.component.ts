@@ -88,6 +88,7 @@ toggleSideNav(item) {
 // }
 
 performAction(item) {
+  console.log('emit');
   this.main.menuActionPerformed.emit(item.action);
   // switch(item.action) {
   //   case 'logout': this.logout(); break;

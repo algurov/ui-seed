@@ -113,6 +113,10 @@ export const Messages = {
   "SELECT_PLACE_DIALOG_TITLE": "Выберите местоположение",
   "SELECT_PRODUCT_DIALOG_TITLE": "Выберите продукт",
   "SELECT_STANDARD_DIALOG_TITLE": "Выберите стандарт",
-  "SELECT_PROPERTY_DIALOG_TITLE": "Выберите параметры стандарта"
+  "SELECT_PROPERTY_DIALOG_TITLE": "Выберите параметры стандарта",
+  "APPLICATION_GROUP_QUANTITY": "Количество",
+  "DOCUMENT_TYPE": "Тип",
+  "DOCUMENT_DATE": "Создан",
+  "DOCUMENT_APPLICANT": "Контрагент"
 
 };

@@ -5,9 +5,9 @@
       <div fxFlex></div>
       <div fxLayout="row" fxLayoutAlign="space-around center">
         <div fxFlex ></div>
-        <button class="remove-button row-item" fxFlex="1 1 30%" mat-button *ngIf="id"
+        <button class="row-item" color="warn" fxFlex="1 1 30%" mat-raised-button *ngIf="id"
         (click)="removeUser(id)">{{stringService.get('USER_REMOVE_BTN')}}</button>
-        <button class="save-button row-item" fxFlex="1 1 30%" mat-button
+        <button class="row-item" color="primary" fxFlex="1 1 30%" mat-raised-button
         (click)="submitForm()">{{stringService.get('USER_EDIT_BTN')}}</button>
         <div fxFlex></div>
       </div>
@@ -52,7 +52,7 @@
               <input formControlName="email" type="email" matInput placeholder=
               "{{stringService.get('USER_EMAIL')}}"/>
             </mat-form-field>
-            <button class="save-button row-item" fxFlex="1 1 30%" fxLayoutAlign="center end" mat-button
+            <button class="butt-padding row-item" color="primary" mat-raised-button
             (click)="resetPassword()">{{stringService.get('RESET_PASS_BTN')}}</button>
           </div>
             <div fxFlex="40%"></div>

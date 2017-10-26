@@ -26,7 +26,7 @@ export class TaxonomyItemComponent {
           this.fullTaxonomy = this.taxonomyService.getTaxonomy(this.taxonomy);
           console.log(this.fullTaxonomy);
            this.fullTaxonomy.columns.forEach(item => {
-             if(item.name == 'name' || item.name == 'fullName' || item.name == 'fullNameRu' || item.name == 'titleRu') {
+             if(item.name == 'name' || item.name == 'fullName' || item.name == 'fullNameRu' || item.name == 'titleRu' || item.name == 'nameRu') {
                this.displayedColumns.push({column: item.name, title: 'NAME'});
              }
            });
@@ -101,7 +101,9 @@ export class TaxonomyDataSource extends DataSource<any> {
   constructor(public taxonomyDb: TaxonomyDataBase) {
     super();
   }
-
+  getDataCount() {
+    return this.taxonomyDb.data.length;
+  }
   connect(): Observable<any[]> {
     //return this.data;
     //return Observable.of(this.data);

@@ -1,20 +1,21 @@
 <div class="developer">
   <button class="developer-button" mat-raised-button (click)="addItem()">ДОБАВИТЬ ИЗГОТОВИТЕЛЯ</button>
 
-  <div *ngFor="let developer of developers">
-    <div style="float: right;"><mat-icon (click)="removeItem(developer)">close</mat-icon></div>
-    <div style="float: left; width: 100%;">
+  <div *ngFor="let developer of data.manufacturers">
+
+    <div style="float: left; width: 95%; padding-top: 40px;">
       <div style="float: left; width: 50%">
-        <seed-select-field code="partner" placeholder="Изготовитель" [data]="data"></seed-select-field>
+        <seed-select-field code="partner" placeholder="Изготовитель" [data]="developer.partner" (change)="onPartnerChange(developer.guid, $event)"></seed-select-field>
       </div>
       <div style="float: left; width: 50%">
-        <seed-select-field code="place" placeholder="Местоположение" [data]="data"></seed-select-field>
+        <seed-select-field code="place" placeholder="Местоположение" [data]="developer.location" (change)="onLocationChange(developer.guid, $event)"></seed-select-field>
       </div>
     </div>
-    <div style="float: left; width: 100%">
+    <div style="float: left; width: 2%; padding-top: 45px; cursor:pointer;"><mat-icon (click)="removeItem(developer)">close</mat-icon></div>
+    <div style="float: left; width: 98%">
       <mat-form-field floatPlaceholder="always" class="developer__field">
         <mat-placeholder class="developer__place">Местоположение (комментарии)</mat-placeholder>
-        <input matInput />
+        <input matInput [(ngModel)]="developer.comment"/>
       </mat-form-field>
     </div>
     <div style="clear: both;"></div>

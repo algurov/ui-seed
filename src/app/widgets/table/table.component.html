@@ -5,7 +5,7 @@
           The actual rendered columns are set as a property on the row definition" -->
     <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column.column">
       <mat-header-cell *matHeaderCellDef> {{stringService.get(column.title)}} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element[column.column]}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{getColumnValue(element, column)}} </mat-cell>
     </ng-container>
     <!-- Position Column -->
     <!-- <ng-container matColumnDef="actions">
@@ -40,5 +40,7 @@
 
     <mat-header-row *matHeaderRowDef="cols"></mat-header-row>
     <mat-row class="table-row" *matRowDef="let row; columns: cols;"></mat-row>
+
   </mat-table>
+  <!-- <div class="total">Всего записей: {{dataSource.getDataCount()}}</div> -->
 </div>

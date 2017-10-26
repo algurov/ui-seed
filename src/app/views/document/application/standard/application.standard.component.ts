@@ -13,51 +13,70 @@ import { DialogService } from '../../../../services/dialog.service';
 })
 export class ApplicationStandardComponent {
   @Input() data;
-  param = {placeholder: 'Текст'};
   options = [{id: 1, name: 'На качество'}, {id: 2, name: 'На безопасность'}];
   nodes = [{id:1, name: '222', children: [{id:2, name: 'sdsadsdasdaa'}]}];
-  standards = []
+  contractEmpty: boolean = true;
+  subscription : any;
   constructor(public dialog: MatDialog,
      private stringService: StringService,
      private mainService: MainService,
     private dialogService: DialogService) {
-       this.mainService.standardParameterAdded.subscribe(item => {
-         if (!this.standards.find(it => it.id == item.id)) {
-           this.standards.push(item);
+      this.subscription = this.mainService.standardParameterAdded.subscribe(item => {
+         if(!this.data.standards) {
+           this.data.standards = [];
+         }
+         if (!this.data.standards.find(it => it.id == item.id)) {
+           this.data.standards.push(item);
            this.dialogService.showNotification('Стандарт "'+ item.shortName + '" добавлен к заявке');
-           console.log(this.standards);
+           console.log(this.data.standards);
          }
        });
      }
 
   ngOnInit() {
+    if (!this.data.customStandard) {
+      this.data.customStandard = {};
+    } else {
+      this.contractEmpty = false;
+    }
 
   }
-  onStandardRemoved(standard) {
 
-    let index = this.standards.findIndex(item => item.id == standard.id);
-    console.log(index);
-      this.standards.splice(index, 1);
-      console.log(this.standards);
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  onStandardRemoved(standard) {
+    console.log(standard);
+    if (standard == 'contract') {
+      this.contractEmpty = !this.contractEmpty;
+    } else {
+      let index = this.data.standards.findIndex(item => item.id == standard.id);
+      console.log(index);
+        this.data.standards.splice(index, 1);
+        console.log(this.data.standards);
+    }
   }
 
   addStandard() {
     let dialogRef = this.dialog.open(SelectStandardDialog, {
      data: {
-       product: this.data.goodsRelation
+       product: this.data.goods
      }
    });
    dialogRef.afterClosed().subscribe(result => {
        if (result) {
-         if (!this.standards.find(item => item.id == result.id)) {
-           this.standards.push(result);
+         if (!this.data.standards.find(item => item.id == result.id)) {
+           this.data.standards.push(result);
          }
        }
      });
   }
 
-  addItem() {
-    this.mainService.productParamAdded.emit({id: Math.random(), name:'name', option: 0});
+  addContract() {
+    if (this.data.goods) {
+      this.contractEmpty = !this.contractEmpty;
+    }
   }
 }
 

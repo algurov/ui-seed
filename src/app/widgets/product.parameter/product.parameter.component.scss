@@ -1,7 +1,39 @@
 .short-field {
-  width: 130px;
+  width: 50%;
+  float:left;
+  padding: 0 5px;
+  &-select {
+    width: 0px;
+    padding-right: 20px;
+    float: left;
+  }
 }
 
+.field {
+  width: 100%;
+}
 .short-field-extra {
-  width: 80px;
+  width: 10%;
+  float: left;
+  padding: 0 5px;
+}
+.text-field-extra {
+  width: 15%;
+  float:left;
+  padding: 0 5px;
+}
+.toggle {
+  margin-top: 20px;
+  margin-right: 5px;
+  float: left;
+}
+
+mat-icon.close-icon {
+  font-size: 14px;
+  font-weight: bold;
+  float: right;
+  height: 14px!important;
+  width: 14px!important;
+  padding-top: 15px;
+  padding-left: 10px;
 }

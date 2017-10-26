@@ -9,6 +9,8 @@ import { FlowService } from './services/flow.service';
 import { PartnerService } from './services/partner.service';
 import { SettingsService } from './services/settings.service';
 import { TaxonomyService } from './services/taxonomy.service';
+import { ApplicationService } from './services/application.service';
+import { DataService } from './services/data.service';
 
 export const APP_PROVIDERS = [
   UserService,
@@ -21,5 +23,7 @@ export const APP_PROVIDERS = [
   FlowService,
   PartnerService,
   SettingsService,
-  TaxonomyService
+  TaxonomyService,
+  ApplicationService,
+  DataService
 ];

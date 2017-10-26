@@ -1,7 +1,15 @@
 .applicant {
   display: block;
   background: #F6F8F8;
-  padding: 20px 20px;
+  padding: 40px 20px;
+  &-collapsable {
+    padding-top: 20px;
+  }
+  &-title {
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+  }
   &__boxes {
     margin-top: 2px;
     margin-bottom: 20px;
@@ -33,4 +41,37 @@
       width: 100%;
     }
   }
+}
+
+i {
+    border: solid #546E7A;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-right: 8px;
+    margin-bottom: 2px;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.cbox {
+  display: block;
 }
