@@ -32,8 +32,9 @@ export class StandardField {
   constructor(private dialog: MatDialog, private dialogService: DialogService) { }
 
   ngOnInit() {
-    if (!this.standard.id) {
+    if (!this.standard) {
       this.customStandard = true;
+      this.standard = {};
       console.log(this.standard);
     }
   }

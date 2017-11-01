@@ -52,6 +52,15 @@ export class TableComponent {
      if (column.data) {
        return this.dataService.getDataFromList(column.data, element[column.column]);
      }
+     if (column.type) {
+       if (column.type == 'date') {
+         let d = new Date(element[column.column]);
+         return d.getDay() + '.' + d.getMonth() + '.' + d.getFullYear();
+       }
+     }
+     if (column.type == 'const') {
+       return 'Заявка';
+     }
      return element[column.column];
    }
 }

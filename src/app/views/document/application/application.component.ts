@@ -145,7 +145,7 @@ export class ApplicationComponent {
       if (this.data.customStandard  && this.data.customStandard.nodes) {
         let appResearch = this.data.customStandard.nodes;
         delete this.data.customStandard.nodes;
-          let standardsToSend = {name: 'Контракт', applicationResearches: appResearch};
+          let standardsToSend = {name: 'Контракт',customStandard: true, applicationResearches: appResearch};
         this.data.customStandard = standardsToSend;
         console.log(this.data.customStandard);
       } else {

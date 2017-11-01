@@ -12,13 +12,13 @@ export class ProductParameterComponent {
   options = [{value: 0, title: 'Значение'}, {value: -1, title: 'Не допускается'}, {value: 1, title: 'Не ограничено'}];
 
   ngOnInit() {
-    if (this.config.data.applicationResearch.name) {
-      this.config.data.applicationResearch.name = this.config.data.applicationResearch.name;
+    if (this.config.data.name) {
+      this.config.data.name = this.config.data.name;
     } else {
-      this.config.data.applicationResearch.name = this.config.data.applicationResearch.property.nameRu;
+      this.config.data.name = this.config.data.property.nameRu;
     }
-    if (!this.config.data.applicationResearch.option) {
-      this.config.data.applicationResearch.option = 0;
+    if (!this.config.data.option) {
+      this.config.data.option = 0;
     }
     console.log(this.config);
   }
@@ -26,22 +26,22 @@ export class ProductParameterComponent {
     return node.parent.data.virtual;
   }
   isValue() {
-    if (this.config.data.applicationResearch.option == 0) {
+    if (this.config.data.option == 0) {
       return true;
     }
     return false;
   }
 
   onOptionChange(event) {
-    this.config.data.applicationResearch.option = event.value;
-    switch (this.config.data.applicationResearch.option) {
-      case 0: this.config.data.applicationResearch.text = ''; break;
-      case -1: this.config.data.applicationResearch.text = 'Не допускается'; break;
-      case 1: this.config.data.applicationResearch.text = 'Не ограничено'; break;
+    this.config.data.option = event.value;
+    switch (this.config.data.option) {
+      case 0: this.config.data.text = ''; break;
+      case -1: this.config.data.text = 'Не допускается'; break;
+      case 1: this.config.data.text = 'Не ограничено'; break;
     }
   }
   onStateChanged(state) {
-    this.config.data.applicationResearch.state = state;
+    this.config.data.state = state;
     if (this.config.hasChildren) {
     this.config.children.forEach(item => {
       this.updateChildrenState(item, state);
@@ -50,7 +50,7 @@ export class ProductParameterComponent {
   }
 
   updateChildrenState(node, state) {
-    node.data.applicationResearch.state = state;
+    node.data.state = state;
     if (node.hasChildren) {
     this.config.children.forEach(item => {
       this.updateChildrenState(item, state);

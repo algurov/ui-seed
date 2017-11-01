@@ -15,7 +15,7 @@ import { StringService } from '../../services/string.service';
   styleUrls: ['./document.list.component.scss']
 })
 export class DocumentListComponent {
-  displayedColumns = [{column: 'type', title:'DOCUMENT_TYPE'}, {column: 'number', title:'DOCUMENT_NUMBER'}, {column: 'creationDate', title: 'DOCUMENT_DATE'}, {column: 'applicant', property:'name', title: 'DOCUMENT_APPLICANT'}];
+  displayedColumns = [{column: 'type', title:'DOCUMENT_TYPE', type:'const'}, {column: 'number', title:'DOCUMENT_NUMBER'}, {column: 'creationDate', title: 'DOCUMENT_DATE', type:'date'}, {column: 'applicant', property:'name', title: 'DOCUMENT_APPLICANT'}];
   subscription: Array<any> = new Array<any>();
   dataSource : DocumentDataSource;
   documentDb: DocumentDataBase;
