@@ -3,14 +3,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'confirm-dialog',
-    template: `
-        <p>{{ title }}</p>
-        <p>{{ message }}</p>
-        <button type="button" mat-raised-button
-            (click)="dialogRef.close(true)">OK</button>
-        <button type="button" mat-button
-            (click)="dialogRef.close()">Cancel</button>
-    `,
+    templateUrl: './confirm.dialog.html',
+    styleUrls: ['./confirm.dialog.scss']
 })
 export class ConfirmDialog {
 

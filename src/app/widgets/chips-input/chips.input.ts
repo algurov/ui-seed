@@ -60,6 +60,6 @@ export class ChipsInput {
   }
 
   setPlaceholder() {
-    this.field.nativeElement.placeholder = this.getTitle();
+  //  this.field.nativeElement.placeholder = this.getTitle();
   }
 }

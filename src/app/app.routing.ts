@@ -21,6 +21,7 @@ import { TaxonomyItemComponent } from './views/taxonomy/taxonomy.item/taxonomy.i
 import { DocumentListComponent } from './views/document/document.list.component';
 import { ApplicationComponent } from './views/document/application/application.component';
 import { SettingsListComponent } from './views/settings/settings.list.component';
+import { RoleListComponent } from './views/role/role.list.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -29,6 +30,8 @@ export const routes: Routes = [
     data: {breadcrumb: 'Кабинет'},
     children: [
       { path: 'settings', component: SettingsListComponent, data: {breadcrumb: 'Настройки'}},
+      { path: 'settings/roles', component: RoleListComponent, data: {breadcrumb: 'Роли'}},
+      { path: 'settings/locations', redirectTo: 'settings'},
       { path: 'settings/user', component: UserListComponent,  data: {breadcrumb: 'Пользователи'}},
       { path: 'settings/user/edit/:id', component: UserEditComponent},
       { path: 'settings/user/add', component: UserEditComponent},

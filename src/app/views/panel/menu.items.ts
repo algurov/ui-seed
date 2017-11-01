@@ -68,7 +68,13 @@ export const menuItems = [
       {
         name: 'ROLE_TITLE',
         icon: 'role',
-        link: 'main/settings/roles'
+        link: 'main/settings/roles',
+        actions: [
+          {
+            name: 'ADD_ROLE',
+            action: 'ADD_ROLE'
+          }
+        ]
       },
       {
         name: 'DEPARTMENT_TITLE',

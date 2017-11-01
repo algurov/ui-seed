@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
               if (res) {
                 return true;
               }
-            });
+            }).catch(err => {this.authService.login(); return Observable.of(false);});
         } else {
           this.authService.login();
           return Observable.of(false);

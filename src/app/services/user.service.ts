@@ -57,22 +57,6 @@ export class UserService extends RequestBase {
 
   getAllUsers(): Observable<User[]>{
     return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/user`).map(res => res.json());
-    // return this.http.get(`${API_BASE_URL}/user-provisioning/user`)
-    // .map(res => res.json());
-  }
-
-  getRoleById(id): Observable<Role> {
-    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role` + id).map(res => res.json());
-  }
-
-  getAllRoles(): Observable<Role[]> {
-    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role`).map(res => res.json());
-    //return this.http.get(`http://82.202.236.172:8081/user-provisioning/role`).map(res => res.json());
-  }
-
-  createRole(role: Role): Observable<Role> {
-    return this.http.post(`${PROVISIONING_BASE_URL}/user-provisioning/role`, JSON.stringify(role), this.options)
-    .map(res => res.json());
   }
 
   createUser(user: User): Observable<User> {
@@ -86,21 +70,6 @@ export class UserService extends RequestBase {
     .map(res => res.json());
   }
 
-  updateRole(role: Role) {
-    return this.http.put(`${API_BASE_URL}/user-provisioning/role/`+ role.id, JSON.stringify(role), this.options)
-    .map(res => res.json());
-  }
-
-  deleteRoleById(id) {
-    this.http.delete(`${API_BASE_URL}/user-provisioning/role/` + id);
-  }
-
-  deleteRole(role: Role) {
-    if (role.id) {
-      this.deleteRoleById(role.id);
-    }
-  }
-
   deleteUserById(id) {
     this.http.delete(`${PROVISIONING_BASE_URL}/user-provisioning/user/` + id).subscribe(res => {console.log(res);
       this.router.navigateByUrl('/main/user');
@@ -109,7 +78,7 @@ export class UserService extends RequestBase {
 
   deleteUser(user: User) {
     if (user.id) {
-      this.deleteRoleById(user.id);
+      this.deleteUserById(user.id);
     }
   }
 

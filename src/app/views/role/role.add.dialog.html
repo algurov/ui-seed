@@ -1,0 +1,18 @@
+<h2 matDialogTitle>{{stringService.get('ADD_ROLE_DIALOG_TITLE')}}</h2>
+<mat-dialog-content style="min-width: 400px;">
+
+    <form [formGroup]="form" (submit)="submit()">
+    <mat-form-field class="role-field">
+      <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+      <mat-placeholder>{{stringService.get('ADD_ROLE_TITLE')}}</mat-placeholder>
+      <input matInput formControlName="name"/>
+    </mat-form-field>
+    <div class="action-panel">
+        <button mat-raised-button type="submit" color="primary">Добавить</button>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<!-- <mat-dialog-actions fxLayout="column" style="text-align: center;">
+  <button fxFlex="100%" mat-button matDialogClose>Close</button>
+</mat-dialog-actions> -->

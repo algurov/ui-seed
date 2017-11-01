@@ -6,8 +6,14 @@
   </mat-form-field>
   <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
   <div *ngIf="loaded">
-    <div class="list-item" *ngFor="let item of list" (click)="selectItem(item)">
-      {{getTitle(item)}}
+    <div class="list-item" *ngFor="let country of countryList" (click)="selectCounrty(country)">
+      {{getTitleForField(country)}}
+    </div>
+    <div class="list-item" *ngFor="let region of regionList" (click)="selectRegion(region)">
+      {{getTitleForField(region)}}
+    </div>
+    <div class="list-item" *ngFor="let city of cityList" (click)="selectCity(city)">
+      {{getTitleForField(city)}}
     </div>
   </div>
 </mat-dialog-content>

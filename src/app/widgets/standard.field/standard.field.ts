@@ -5,7 +5,7 @@ import { MainService } from '../../services/main.service';
 import { TaxonomyService } from '../../services/taxonomy.service';
 import { TreeComponent } from 'angular2-tree-component';
 import { DialogService } from '../../services/dialog.service';
-import { TREE_ACTIONS, KEYS, IActionMapping } from 'angular2-tree-component';
+import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular2-tree-component';
 
 @Component({
   selector: 'standard-field',
@@ -13,6 +13,10 @@ import { TREE_ACTIONS, KEYS, IActionMapping } from 'angular2-tree-component';
   styleUrls: ['./standard.field.scss']
 })
 export class StandardField {
+  lastSelectedNode :any;
+  options : ITreeOptions = {
+    idField: 'uuid'
+  };
   @ViewChild(TreeComponent)
   private tree: TreeComponent;
   @ViewChild('wrap') wrap: any;
@@ -37,7 +41,9 @@ export class StandardField {
   toggleVisible() {
     this.visible = ! this.visible;
   }
+
   selectProperty() {
+    this.lastSelectedNode = this.tree.treeModel.getFocusedNode();
     let dialogRef = this.dialog.open(StandardPropertyDialog, {
       data: {
         standard: this.standard,
@@ -56,11 +62,11 @@ export class StandardField {
         (item.name ? item.name : item.nameRu) + '" добавлен');
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.lastSelectedNode = null;
     });
   }
 
   addItem(item) {
-    // this.properties.push(item);
     this.addNewItem(item);
   }
 
@@ -81,10 +87,7 @@ export class StandardField {
     }
     return {
       children: children,
-      applicationResearch: {
-        property: item
-      }
-
+      property: item
     }
   }
 
@@ -97,10 +100,7 @@ export class StandardField {
     }
     return {
       children: children,
-      applicationResearch: {
-        goodsCategoryProperty: item
-      }
-
+      goodsCategoryProperty: item
     }
   }
 
@@ -113,10 +113,15 @@ export class StandardField {
       this.removed.emit('contract');
     }
   }
-
+onClickOutside(ev) {
+  if(ev.value == true) {
+    this.tree.treeModel.setFocusedNode(null);
+    this.tree.treeModel.setActiveNode(null, null);
+  }
+}
   addNewItem(item) {
-    if (this.tree.treeModel.getFocusedNode()) {
-      this.insertItemToTree(item, this.tree.treeModel.getFocusedNode().data, this.standard.nodes);
+    if (this.lastSelectedNode) {
+      this.insertItemToTree(item, this.lastSelectedNode.data, this.standard.nodes);
     } else {
       if (!this.standard.nodes) {
         this.standard.nodes = [];
@@ -143,7 +148,7 @@ export class StandardField {
   insertItemToTree(data, parent, arr) {
     let found = -1;
     arr.forEach((element, index) => {
-      if (element.id == parent.id) {
+      if (element.uuid == parent.uuid) {
         found = index;
       } else {
         if (element.children) {
@@ -162,7 +167,7 @@ export class StandardField {
   removeItemFromTree(item, arr: Array<any>) {
     let found = -1;
     arr.forEach((element, index) => {
-      if (element.id == item.id) {
+      if (element.uuid == item.uuid) {
         found = index;
       } else {
         if (element.children) {
@@ -180,10 +185,10 @@ export class StandardField {
   }
 
   getTitleForNode(node) {
-    if (node.data.applicationResearch.property) {
-      return node.data.applicationResearch.property.nameRu;
+    if (node.data.property) {
+      return node.data.property.nameRu;
     } else {
-      return node.data.applicationResearch.goodsCategoryProperty.name;
+      return node.data.goodsCategoryProperty.name;
     }
   }
 }
@@ -194,6 +199,9 @@ export class StandardField {
   styleUrls: ['./standard.property.dialog.scss']
 })
 export class StandardPropertyDialog {
+  options : ITreeOptions = {
+    idField: 'uuid'
+  };
   @ViewChild(TreeComponent)
   private tree: TreeComponent;
   dialog: MatDialogRef<StandardPropertyDialog>;
@@ -280,6 +288,7 @@ export class StandardPropertyDialog {
     });
   }
   addNameFilter(name) {
+    name = name.trim();
     let params = [{ field: 'name', value: name }, { field: 'standard.id', value: this.standard.id }, { field: 'goodsCategory.goods.id', value: this.goodId }];
     this.loaded = false;
     this.taxonmyService.searchTaxonomyDataByParams('GoodsCategoryProperty', params).subscribe(res => {
@@ -290,6 +299,7 @@ export class StandardPropertyDialog {
   }
 
   addNameFilterAll(name) {
+    name = name.trim();
     let params = [{ field: 'nameRu', value: name }];
     this.loadedAll = false;
     this.taxonmyService.searchTaxonomyDataByParams('Property', params).subscribe(res => {

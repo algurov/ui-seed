@@ -19,4 +19,7 @@ export class MainService {
 
   public standardParameterAdded: EventEmitter<any> = new EventEmitter<any>();
 
+  public applicationRemoved: EventEmitter<any> = new EventEmitter<any>();
+  public applicationLoaded: EventEmitter<any> = new EventEmitter<any>();
+
 }

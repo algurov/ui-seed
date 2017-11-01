@@ -1,0 +1,9 @@
+<div class="role">
+  <button class="role__add-button" mat-raised-button color="primary" (click)="showAddRoleDialog()">ДОБАВИТЬ РОЛЬ</button>
+  <div class="role__title">Наименование</div>
+  <div class="role__list">
+    <div *ngFor="let role of roleList">
+      <role-field class="role__list-item" [role]="role" (update)="updateRole($event)" (remove)="removeRole($event)"></role-field>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TaxonomyService } from '../../../services/taxonomy.service';
+import { ITreeOptions } from 'angular2-tree-component';
 
 @Component({
   selector: 'taxonomy-select',
@@ -8,6 +9,9 @@ import { TaxonomyService } from '../../../services/taxonomy.service';
 })
 export class SelectTaxonomyComponent {
   @Input() taxonomy;
+  options: ITreeOptions = {
+    idField: 'uuid'
+  };
   loaded = false;
   nodes = [
     //{id: 1, name: 'lol'}

@@ -5,10 +5,15 @@
       color: #3696D7;
   }
   &__column {
+    &-second {
+      float: left;
+      width: 48%;
+      padding-left: 4%
+    }
     float: left;
-    width: 50%;
+    width: 48%;
     &-item {
-      width: 90%;
+      width: 100%;
     }
   }
 }

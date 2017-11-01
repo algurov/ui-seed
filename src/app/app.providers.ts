@@ -11,6 +11,7 @@ import { SettingsService } from './services/settings.service';
 import { TaxonomyService } from './services/taxonomy.service';
 import { ApplicationService } from './services/application.service';
 import { DataService } from './services/data.service';
+import { RoleService } from './services/role.service';
 
 export const APP_PROVIDERS = [
   UserService,
@@ -25,5 +26,6 @@ export const APP_PROVIDERS = [
   SettingsService,
   TaxonomyService,
   ApplicationService,
-  DataService
+  DataService,
+  RoleService
 ];

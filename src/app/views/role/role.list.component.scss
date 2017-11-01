@@ -1,0 +1,20 @@
+.role {
+  &__add-button {
+    margin: 20px 0;
+  }
+  &__title {
+    padding-top: 20px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 1px solid #aaa;
+    color: #546E7A;
+  }
+  &__list {
+    padding-top: 20px;
+    &-item {
+      color: #546E7A;
+      width: 100%;
+    }
+  }
+}

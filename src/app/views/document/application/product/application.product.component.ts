@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
+import { MainService } from '../../../../services/main.service';
 
 @Component({
   selector: 'application-product',
@@ -8,11 +9,30 @@ import { StringService } from '../../../../services/string.service';
 })
 export class ApplicationProductComponent {
   @Input() data;
-
-  constructor(private stringService: StringService) {}
-
+  date: any;
+  subscription: any;
+  constructor(private stringService: StringService, private mainService: MainService) {
+    this.subscription = this.mainService.applicationLoaded.subscribe(item => {
+      if (item.goodsProductionDate) {
+        this.date = new Date(item.goodsProductionDate);
+      }
+    });
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+  ngOnInit() {
+    if (this.data.goodsProductionDate) {
+      this.date = new Date(this.data.goodsProductionDate);
+    }
+  }
   selectProduct(product) {
     this.data.goods = product;
     this.data.goodsName = product.fullNameRu;
+  }
+
+  onDateChange(event) {
+    this.data.goodsProductionDate = event.value.getTime();
+    this.date = event.value;
   }
 }

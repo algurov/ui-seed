@@ -2,6 +2,7 @@ import { Component, Input, ViewChild, ViewChildren, QueryList } from '@angular/c
 import { StringService } from '../../../../services/string.service';
 import { TaxonomyService } from '../../../../services/taxonomy.service';
 import { MatSelect, MatSelectChange, MatOption } from '@angular/material';
+import { MainService } from '../../../../services/main.service';
 
 @Component({
   selector: 'application-params',
@@ -34,7 +35,8 @@ export class ApplicationParamsComponent {
   researchTypeOptions = [];
   stateTargetDocuments = [];
   stateResearchType: any = 0;
-  constructor(private stringService: StringService, private taxonomyService: TaxonomyService){
+  constructor(private stringService: StringService, private taxonomyService: TaxonomyService,
+    private mainService: MainService){
     this.taxonomyService.loadTaxonomyData('TargetDocuments').subscribe(res => {
       this.options = res.content;
     });
@@ -42,7 +44,24 @@ export class ApplicationParamsComponent {
       this.researchType = res.content;
       this.processResearchType();
     });
-
+    this.mainService.applicationLoaded.subscribe(item => {
+      if (item.targetDocuments) {
+        item.targetDocuments.forEach(item => {
+          this.stateTargetDocuments.push(+item.id);
+        });
+        this.stateTargetDocuments.forEach(i => {
+          let found = this.resDocuments.options.find(opt => opt.value == i)
+          if (found) {
+            found.select();
+          }
+          this.resDocuments.value = this.stateTargetDocuments;
+        });
+        console.log(this.resDocuments.value);
+      }
+      if (item.researchType) {
+          this.stateResearchType = +item.researchType.id;
+      }
+    });
   }
 
   ngOnInit() {

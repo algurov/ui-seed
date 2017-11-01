@@ -9,17 +9,18 @@
       <!-- <span class="title__item-label">{{stringService.get('NEW_APPLICATION_TITLE_FROM')}}</span> -->
       <mat-form-field class="title__item" floatPlaceholder="always">
         <mat-placeholder class="title__item-placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
-        <input matInput [matDatepicker]="myDatepicker" [(ngModel)]="data.created">
+        <input matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #myDatepicker></mat-datepicker>
       </mat-form-field>
       <!-- <span class="title__item-label">{{stringService.get('NEW_APPLICATION_TITLE_IN')}}</span> -->
     </div>
-    <div class="title-content-column">
-      <mat-form-field class="title__item-grow" floatPlaceholder="always">
+    <div class="title-content-column" style="padding-top: 8px;">
+      <seed-select-field code="laboratory" (change)="onLaboratoryChange($event)" [data]="data.laboratory" placeholder="{{stringService.get('APPLICATION_LAB_TITLE')}}"></seed-select-field>
+      <!-- <mat-form-field class="title__item-grow" floatPlaceholder="always">
         <mat-placeholder class="title__item-placeholder">{{stringService.get('APPLICATION_LAB_TITLE')}}</mat-placeholder>
         <input matInput [(ngModel)]="data.laboratory">
-      </mat-form-field>
+      </mat-form-field> -->
     </div>
     <div style="clear:both;"></div>
 </div>

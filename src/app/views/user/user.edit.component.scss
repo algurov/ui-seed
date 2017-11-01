@@ -32,3 +32,46 @@
 .pad-bot {
   padding-bottom: 1.25em;
 }
+//new
+.header {
+  padding: 20px 0;
+  &__card {
+    float: left;
+    width: 50%;
+  }
+  &__buttons {
+    float: left;
+    width: 50%;
+    padding-top: 40px;
+    &-item {
+      width: 40%;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+  &__line {
+    width: 100%;
+    &-reset {
+      margin-left: 20px;
+    }
+    &-30 {
+      float: left;
+      width: 30%;
+      &-padding {
+        float: left;
+        width: 30%;
+        padding-left: 5%;
+      }
+    }
+    &-100 {
+      float:left;
+      width: 100%;
+    }
+    &-50 {
+      float:left;
+      width: 50%;
+    }
+  }
+}

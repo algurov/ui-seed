@@ -12,7 +12,11 @@ export class ProductParameterComponent {
   options = [{value: 0, title: 'Значение'}, {value: -1, title: 'Не допускается'}, {value: 1, title: 'Не ограничено'}];
 
   ngOnInit() {
-    //this.config.data.applicationResearch.name = this.config.data.applicationResearch.property.nameRu;
+    if (this.config.data.applicationResearch.name) {
+      this.config.data.applicationResearch.name = this.config.data.applicationResearch.name;
+    } else {
+      this.config.data.applicationResearch.name = this.config.data.applicationResearch.property.nameRu;
+    }
     if (!this.config.data.applicationResearch.option) {
       this.config.data.applicationResearch.option = 0;
     }

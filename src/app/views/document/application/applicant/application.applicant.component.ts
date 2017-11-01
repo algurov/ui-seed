@@ -28,15 +28,15 @@ export class ApplicationApplicantComponent {
         this.sameOwner = true;
         this.data.owner = this.data.applicant;
       }
-      if (this.data.reciver) {
-        if (this.data.applicant.id != this.data.reciver.id) {
+      if (this.data.documentsReceiver) {
+        if (this.data.applicant.id != this.data.documentsReceiver.id) {
           this.sameReciver = false;
         } else {
           this.sameReciver = true;
         }
       } else {
         this.sameReciver = true;
-        this.data.reciver = this.data.applicant;
+        this.data.documentsReceiver = this.data.applicant;
       }
     } else {
       this.sameOwner = true;
@@ -50,7 +50,7 @@ export class ApplicationApplicantComponent {
       this.data.owner = this.data.applicant;
     }
     if (this.sameReciver) {
-      this.data.reciver = this.data.applicant;
+      this.data.documentsReceiver = this.data.applicant;
     }
   }
 
@@ -59,7 +59,7 @@ export class ApplicationApplicantComponent {
   }
 
   changeReciver(event) {
-    this.data.reciver = event;
+    this.data.documentsReceiver = event;
   }
   sameOwnerChange(event) {
     this.sameOwner = event.checked;
@@ -76,7 +76,7 @@ export class ApplicationApplicantComponent {
     this.sameReciver = event.checked;
     if (this.sameReciver){
       if (this.data.applicant) {
-        this.data.reciver = this.data.applicant;
+        this.data.documentsReceiver = this.data.applicant;
       }
     }
 

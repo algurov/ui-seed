@@ -1,0 +1,13 @@
+<h2 matDialogTitle>{{ title }}</h2>
+
+
+<mat-dialog-content style="min-width: 400px;">
+  <div class="message">
+    {{ message }}
+  </div>
+  <div class="action-panel">
+
+    <button type="button" color="primary" mat-button (click)="dialogRef.close()">Отмена</button>
+    <button type="button" color="primary" mat-raised-button (click)="dialogRef.close(true)">Подтвердить</button>
+  </div>
+</mat-dialog-content>

@@ -7,7 +7,7 @@ export class Role implements Serializable<Role>{
   users: User[];
 
   constructor() {}
-
+  
   deserialize(input) {
     let users = new Array<User>();
 

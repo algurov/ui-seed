@@ -1,15 +1,14 @@
 <mat-form-field class="container" (click)="click()">
   <!-- <mat-placeholder floatPlaceholder="always">{{getTitle()}}</mat-placeholder> -->
-  <mat-chip-list readonly="false" matPrefix #chipList >
-    <mat-chip *ngFor="let item of items"
-             [removable]="removable" (remove)="remove(item)">
+  <mat-chip-list readonly="false" matPrefix #chipList>
+    <mat-chip *ngFor="let item of items" [removable]="removable" (remove)="remove(item)">
       {{item}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
   <input matInput #field placeholder="{{getTitle()}}"
-         [matChipInputFor]="chipList"
-         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-         [matChipInputAddOnBlur]="addOnBlur"
-         (matChipInputTokenEnd)="add($event)"/>
+   [matChipInputFor]="chipList"
+   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+   [matChipInputAddOnBlur]="addOnBlur"
+   (matChipInputTokenEnd)="add($event)" />
 </mat-form-field>

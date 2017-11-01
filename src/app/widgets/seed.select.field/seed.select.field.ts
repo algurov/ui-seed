@@ -3,6 +3,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { StringService } from '../../services/string.service';
 import { PartnerService } from '../../services/partner.service';
 import { TaxonomyService } from '../../services/taxonomy.service';
+import { Location } from '../../models/location';
 
 
 
@@ -14,6 +15,7 @@ import { TaxonomyService } from '../../services/taxonomy.service';
 export class SeedSelectField {
   @Input() code;
   @Input() placeholder;
+  @Input() placeholderType: boolean = true;
   _data : any = {};
   @Input() set data(value: any) {
     if (value) {
@@ -42,23 +44,31 @@ export class SeedSelectField {
           return this.value.name;
         }
       }
+      if (this.code == 'laboratory') {
+        if (this.value.name) {
+          return this.value.name;
+        }
+      }
       if (this.code == 'product') {
         if (this.value.fullNameRu) {
           return this.value.fullNameRu;
         }
       }
       if (this.code == 'place') {
-        if (this.value.titleRu) {
-          let result = '';
-          if (this.value.country) {
-            result += this.value.country.titleRu + ', ';
-          }
-          if (this.value.region) {
-            result += this.value.region.titleRu + ', ';
-          }
-          result += this.value.titleRu;
-          return result;
-        }
+        let loc = new Location().deserialize(this.value);
+          return loc.getTitle();
+
+        // if (this.value.titleRu) {
+        //   let result = '';
+        //   if (this.value.country) {
+        //     result += this.value.country.titleRu + ', ';
+        //   }
+        //   if (this.value.region) {
+        //     result += this.value.region.titleRu + ', ';
+        //   }
+        //   result += this.value.titleRu;
+        //   return result;
+        // }
       }
       return '';
 
@@ -81,10 +91,18 @@ export class SeedSelectField {
         }
       });
     }
+    if (this.code == 'laboratory') {
+       dialogRef = this.dialog.open(SelectLaboratoryDialog, {
+        data: {
+          code: this.code
+        }
+      });
+    }
     if (this.code == 'place') {
       dialogRef = this.dialog.open(SelectPlaceDialog, {
        data: {
-         code: this.code
+         code: this.code,
+         selected: this.value
        }
      });
     }
@@ -125,6 +143,7 @@ export class SelectDialog {
    }
 
    addNameFilter(name) {
+     name = name.trim();
      let params = [{field:'name', value: name}];
      this.loaded = false;
      this.partnerService.searchPartnersByParams(params).subscribe(res => {
@@ -156,39 +175,31 @@ export class SelectDialog {
 }
 
 @Component({
-  selector: 'select-place-dlg',
-  templateUrl: './select.place.dialog.html',
-  styleUrls: ['./select.dialog.scss']
+  selector: 'select-laboratory-dlg',
+  templateUrl: 'select.laboratory.dialog.html',
+  styleUrls: ['/select.laboratory.dialog.scss']
 })
-export class SelectPlaceDialog {
-  dialog: MatDialogRef<SelectPlaceDialog>;
+export class SelectLaboratoryDialog {
+  dialog: MatDialogRef<SelectLaboratoryDialog>;
   list: Array<any>;
   selectedItem: any;
-  loaded = true;
+  loaded = false;
   constructor(
-    private taxonomyService: TaxonomyService,
     private stringService: StringService,
-    public dialogRef: MatDialogRef<SelectPlaceDialog>,
+    private taxonomyService: TaxonomyService,
+    public dialogRef: MatDialogRef<SelectLaboratoryDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.dialog = dialogRef;
    }
 
    addNameFilter(name) {
-     this.list = [];
-     let params = [{field:'titleRu', value: name}];
+     name = name.trim();
+     let params = [{field:'name', value: name}];
      this.loaded = false;
-     this.taxonomyService.searchTaxonomyDataByParams('Countries', params).subscribe(res => {
-      this.list = this.list.concat(res.content);
-      this.taxonomyService.searchTaxonomyDataByParams('Regiones', params).subscribe(res => {
-       this.list = this.list.concat(res.content);
-       this.taxonomyService.searchTaxonomyDataByParams('Cities', params).subscribe(res => {
-        this.list = this.list.concat(res.content);
-         this.loaded = true;
-       });
-      });
+     this.taxonomyService.searchTaxonomyDataByParams('Laboratory', params).subscribe(res => {
+       this.list = res.content;
+       this.loaded = true;
      });
-
-
    }
 
    selectItem(item) {
@@ -200,7 +211,110 @@ export class SelectPlaceDialog {
     }
    }
 
-   getTitle(item) {
+   ngOnInit() {
+     this.taxonomyService.loadTaxonomyData('Laboratory').subscribe(res => {
+       this.list = res.content;
+       this.loaded = true;
+     })
+   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'select-place-dlg',
+  templateUrl: './select.place.dialog.html',
+  styleUrls: ['./select.dialog.scss']
+})
+export class SelectPlaceDialog {
+  dialog: MatDialogRef<SelectPlaceDialog>;
+  countryList: Array<any>;
+  regionList: Array<any>;
+  cityList: Array<any>;
+  list: Array<any>;
+  selectedItem: Location;
+  loaded = true;
+
+  constructor(
+    private taxonomyService: TaxonomyService,
+    private stringService: StringService,
+    public dialogRef: MatDialogRef<SelectPlaceDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.dialog = dialogRef;
+    if (data.selected) {
+      this.selectedItem = data.selected;
+    } else {
+
+    }
+   }
+
+   addNameFilter(name) {
+     this.list = [];
+     name = name.trim();
+     let params = [{field:'titleRu', value: name}];
+     this.loaded = false;
+     this.taxonomyService.searchTaxonomyDataByParams('Countries', params).subscribe(res => {
+      this.list = this.list.concat(res.content);
+      this.countryList = res.content;
+      this.taxonomyService.searchTaxonomyDataByParams('Regiones', params).subscribe(res => {
+       this.list = this.list.concat(res.content);
+       this.regionList = res.content;
+       this.taxonomyService.searchTaxonomyDataByParams('Cities', params).subscribe(res => {
+        this.list = this.list.concat(res.content);
+        this.cityList = res.content;
+         this.loaded = true;
+       });
+      });
+     });
+
+
+   }
+   clearSelectedFields() {
+     if (this.selectedItem) {
+       this.selectedItem.country = null;
+       this.selectedItem.region = null;
+       this.selectedItem.city = null;
+     }
+   }
+
+   selectCounrty(country) {
+     if (this.selectedItem) {
+       this.clearSelectedFields();
+       this.selectedItem.country = country;
+       this.dialogRef.close(this.selectedItem);
+     }
+   }
+
+   selectRegion(region) {
+     if (this.selectedItem) {
+       this.clearSelectedFields();
+       this.selectedItem.region = region;
+       this.dialogRef.close(this.selectedItem);
+     }
+   }
+
+   selectCity(city) {
+     if (this.selectedItem) {
+       this.clearSelectedFields();
+       this.selectedItem.city = city;
+       this.dialogRef.close(this.selectedItem);
+     }
+   }
+
+   selectItem(item) {
+     if (item) {
+      this.clearSelectedFields();
+      this.selectedItem = item;
+      this.dialogRef.close(this.selectedItem);
+    } else {
+      this.dialogRef.close();
+    }
+   }
+
+   getTitleForField(item) {
          if (item.titleRu) {
            let result = '';
            if (item.country) {
@@ -248,6 +362,7 @@ export class SelectProductDialog {
    }
 
    addNameFilter(name) {
+     name = name.trim();
      this.list = [];
      this.listToView = [];
      let params = [{field:'fullNameRu', value: name}];

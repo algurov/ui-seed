@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { TaxonomyService } from '../../../../services/taxonomy.service';
+import { MainService } from '../../../../services/main.service';
 
 @Component({
   selector: 'application-group',
@@ -11,20 +12,26 @@ export class ApplicationGroupComponent {
   @Input() data;
   storageOptions: Array<any>;
   selectedStorage: any;
-  constructor(private stringService: StringService, private taxonomyService: TaxonomyService) {
+  constructor(private stringService: StringService, private taxonomyService: TaxonomyService,
+    private mainService: MainService) {
     this.taxonomyService.loadTaxonomyData('Storage').subscribe(res => {
       this.storageOptions = res.content;
+    });
+    this.mainService.applicationLoaded.subscribe(item => {
+      if (item.productStorage) {
+        this.selectedStorage = +item.productStorage.id;
+      }
     });
   }
 
   ngOnInit() {
-    if (this.data.goodsStorageRelation) {
-      this.selectedStorage = +this.data.goodsStorageRelation.id;
+    if (this.data.productStorage) {
+      this.selectedStorage = +this.data.productStorage.id;
     }
   }
 
   storageChanged(event) {
     this.selectedStorage = event.value;
-    this.data.goodsStorageRelation = this.storageOptions.find(item => item.id == this.selectedStorage);
+    this.data.productStorage = this.storageOptions.find(item => item.id == this.selectedStorage);
   }
 }

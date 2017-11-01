@@ -24,32 +24,41 @@ export class ApplicationComponent {
     private partnerService: PartnerService, private dialogService: DialogService,
     private applicationService: ApplicationService, private route: ActivatedRoute) {
       this.dialogService.block = true;
-      // this.route.params.subscribe(params => {
-      //   if (params['id']) {
-      //     this.id = +params['id'];
-      //    this.applicationService.getApplicationById(this.id).subscribe(res=> {
-      //      this.data = res;
-      //    });
-      //  }
-      // });
+      this.route.params.subscribe(params => {
+        if (params['id']) {
+          this.id = +params['id'];
+         this.applicationService.getApplicationById(this.id).subscribe(res=> {
+           this.data = res;
+           this.readJson_2();
+           this.mainService.applicationLoaded.emit(this.data);
+           this.dialogService.block = false;
+           console.log(this.data);
+         });
+       } else {
+         this.dialogService.block = false;
+       }
+      });
     }
 
   ngOnInit() {
-    // if (localStorage.getItem('application')) {
-    // this.data = JSON.parse(localStorage.getItem('application'));
-    // this.readJson();
-    // console.log(this.data);
-    // }
+
+    if (localStorage.getItem('application')) {
+    this.data = JSON.parse(localStorage.getItem('application'));
+    this.readJson_2();
+    console.log(this.data);
+    }
+    if (!this.data.id){
     if (this.settingsService.settings.selectedPartnerId) {
       this.partnerService.getPartnerById(this.settingsService.settings.selectedPartnerId)
         .subscribe(res => {this.data.applicant = res; this.dialogService.block = false;
         if (!this.data.id){
-          this.data.reciver = res;
+          this.data.documentsReceiver = res;
           this.data.owner = res;
-        }});
+         }
+      });
     } else {
       this.dialogService.block = false;
-    }
+    }}
   }
 
   selectPartner() {
@@ -65,6 +74,25 @@ export class ApplicationComponent {
     if (this.data.standards) {
       let tmpStandards = this.data.standards;
       delete this.data.standards;
+      let res = [];
+      tmpStandards.forEach(item => {
+        item.standard.nodes = item.applicationResearches;
+        res.push(item.standard);
+      });
+      this.data.standards = res;
+    }
+
+  }
+
+  readJson_2() {
+    // if (this.data.customStandard) {
+    //   let tmp = this.data.customStandard;
+    //   delete this.data.customStandard;
+    //   this.data.customStandard = {nodes: tmp.applicationResearches};
+    // }
+    if (this.data.applicationStandardResearches) {
+      let tmpStandards = this.data.applicationStandardResearches;
+      delete this.data.applicationStandardResearches;
       let res = [];
       tmpStandards.forEach(item => {
         item.standard.nodes = item.applicationResearches;
@@ -101,14 +129,53 @@ export class ApplicationComponent {
       }
   }
 
+  prepareResult_2() {
+      if (this.data.standards) {
+        let standardsToSend = [];
+        this.data.standards.forEach(item => {
+          let appResearch = item.nodes;
+          // appResearch.forEach(it => {
+          //   delete it.id;
+          // });
+          delete item.nodes;
+          standardsToSend.push({standard: item, applicationResearches: appResearch});
+        });
+        this.data.applicationStandardResearches = standardsToSend;
+      }
+      if (this.data.customStandard  && this.data.customStandard.nodes) {
+        let appResearch = this.data.customStandard.nodes;
+        delete this.data.customStandard.nodes;
+          let standardsToSend = {name: 'Контракт', applicationResearches: appResearch};
+        this.data.customStandard = standardsToSend;
+        console.log(this.data.customStandard);
+      } else {
+        delete this.data.customStandard;
+      }
+      if (this.data.manufacturers) {
+        this.data.manufacturers.forEach(item => {
+          delete item.guid;
+        });
+      }
+  }
+
   save() {
-    this.prepareResult();
-    this.data.id = 1;
-    // this.applicationService.createApplication(this.data).subscribe(res => {
-    //   this.dialogService.showNotification('Заявка ' + res.number + ' сохранена');
-    // });
-    localStorage.setItem('application', JSON.stringify(this.data));
-    //console.log(JSON.stringify(this.data));
-    this.readJson();
+    this.prepareResult_2();
+      //this.data.id = 1;
+      console.log(this.data);
+      console.log(JSON.stringify(this.data));
+      if(!this.data.id) {
+        this.applicationService.createApplication(this.data).subscribe(res => {
+          console.log(res);
+          this.dialogService.showNotification('Заявка ' + res.number + ' сохранена');
+        });
+      } else {
+        this.applicationService.updateApplication(this.data).subscribe(res => {
+          this.dialogService.showNotification('Заявка ' + res.number + ' сохранена')});
+      }
+
+
+    //localStorage.setItem('application', JSON.stringify(this.data));
+
+    this.readJson_2();
   }
 }

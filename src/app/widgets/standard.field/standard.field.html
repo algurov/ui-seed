@@ -12,8 +12,8 @@
     <div style="clear:both;"></div>
   </div>
   <div *ngIf="visible">
-    <div *ngIf="!customStandard" #wrap class="wrapper-tree goods-category-property">
-      <tree-root [nodes]="standard.nodes">
+    <div *ngIf="!customStandard" click-outside (clickOutside)="onClickOutside($event)" #wrap class="wrapper-tree goods-category-property">
+      <tree-root [options]="options" [nodes]="standard.nodes">
         <ng-template #treeNodeTemplate let-node let-index="index">
           <div class="toggle" *ngIf="isToggleVisible(node)">
                 <color-toggle [value]="standard.standardCategory.id == 1"></color-toggle>
@@ -24,8 +24,8 @@
         </ng-template>
       </tree-root>
     </div>
-    <div *ngIf="customStandard" #wrap2 class="wrapper-tree-custom">
-      <tree-root [nodes]="standard.nodes">
+    <div *ngIf="customStandard" click-outside (clickOutside)="onClickOutside($event)" #wrap2 class="wrapper-tree-custom">
+      <tree-root [options]="options" [nodes]="standard.nodes">
         <ng-template #treeNodeTemplate let-node let-index="index">
           <product-parameter [config]="node" (onRemove)="removeItem(node)"></product-parameter>
         </ng-template>

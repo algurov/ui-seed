@@ -61,6 +61,7 @@ export class PartnerListComponent {
   }
 
   addNumberFilter(number) {
+    number = number.trim();
     let index = this.filterParams.findIndex(item => item.field == 'documentNumber')
     if (index == -1) {
       this.filterParams.push({field:'documentNumber', value: number});
@@ -71,6 +72,8 @@ export class PartnerListComponent {
   }
 
   addNameFilter(name) {
+    name = name.trim();
+    console.log(name);
     let index = this.filterParams.findIndex(item => item.field == 'name')
     if (index == -1) {
       this.filterParams.push({field:'name', value: name});

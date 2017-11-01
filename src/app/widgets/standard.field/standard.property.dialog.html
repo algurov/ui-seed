@@ -17,7 +17,7 @@
           </div>
         </ng-container> -->
         <div class="wrapper">
-          <tree-root [nodes]="listToView">
+          <tree-root [options]="options" [nodes]="listToView">
             <ng-template #treeNodeTemplate let-node let-index="index">
               <div (click)="selectGoodsCategoryProperty(node.data)">{{node.data.name}}</div>
             </ng-template>

@@ -6,6 +6,9 @@ import { SelectTaxonomyDialog } from './views/taxonomy/select/select.taxonomy.di
 import { SelectDialog, SelectPlaceDialog, SelectProductDialog } from './widgets/seed.select.field/seed.select.field';
 import { SelectStandardDialog } from './views/document/application/standard/application.standard.component';
 import { StandardPropertyDialog } from './widgets/standard.field/standard.field';
+import { RoleAddDialog } from './views/role/role.add.dialog';
+import { SelectLaboratoryDialog } from './widgets/seed.select.field/seed.select.field';
+
 export const APP_ENTRY_COMPONENTS = [
   MessageDialogComponent,
   ConfirmDialog,
@@ -16,5 +19,7 @@ export const APP_ENTRY_COMPONENTS = [
   SelectPlaceDialog,
   SelectProductDialog,
   SelectStandardDialog,
-  StandardPropertyDialog
+  StandardPropertyDialog,
+  RoleAddDialog,
+  SelectLaboratoryDialog
 ];

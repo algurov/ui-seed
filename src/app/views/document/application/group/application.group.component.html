@@ -1,6 +1,6 @@
 <div class="group">
     <div class="group__item-50">
-      <mat-form-field style="width:90%!important;" class="group__item-field" floatPlaceholder="always">
+      <mat-form-field style="width:100%!important;" class="group__item-field" floatPlaceholder="always">
         <mat-placeholder class="group__item-placeholder">{{stringService.get('APPLICATION_GROUP_STORAGE')}}</mat-placeholder>
         <mat-select matInput [ngModel]="selectedStorage" (change)="storageChanged($event)">
           <mat-option *ngFor="let opt of storageOptions" [value]="opt.id">
@@ -10,22 +10,22 @@
       </mat-form-field>
       <!-- <seed-select-field code="partner" placeholder="{{stringService.get('APPLICATION_GROUP_STORAGE')}}" [data]="data"></seed-select-field> -->
     </div>
-    <div class="group__item-50">
+    <div class="group__item-50-second">
       <mat-form-field class="group__item-field" floatPlaceholder="always">
         <mat-placeholder class="group__item-placeholder">{{stringService.get('APPLICATION_GROUP_QUANTITY')}}</mat-placeholder>
-        <input matInput [(ngModel)]="data.goodsStorageQuantity"/>
+        <input matInput [(ngModel)]="data.productStorageCount"/>
       </mat-form-field>
     </div>
     <div class="group__item-100">
       <mat-form-field class="group__item-field" floatPlaceholder="always">
         <mat-placeholder class="group__item-placeholder">{{stringService.get('APPLICATION_GROUP_BORDER')}}</mat-placeholder>
-        <input matInput [(ngModel)]="data.customs"/>
+        <input matInput [(ngModel)]="data.customsPost"/>
       </mat-form-field>
     </div>
     <div class="group__item-100">
       <mat-form-field class="group__item-field" floatPlaceholder="always">
         <mat-placeholder class="group__item-placeholder">{{stringService.get('APPLICATION_GROUP_ADDITIONAL')}}</mat-placeholder>
-        <textarea matInput [(ngModel)]="data.comment"></textarea>
+        <textarea matInput [(ngModel)]="data.additionalStorageInformation"></textarea>
       </mat-form-field>
     </div>
     <div style="clear: both;"></div>

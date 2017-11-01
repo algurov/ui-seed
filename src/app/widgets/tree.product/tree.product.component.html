@@ -1,5 +1,5 @@
 <div class="tree-wrapper">
-<tree-root [nodes]="nodes">
+<tree-root [options]="options" [nodes]="nodes">
   <ng-template #treeNodeTemplate let-node let-index="index">
     <product-parameter [config]="node" (onRemove)="removeItem(node)"></product-parameter>
   </ng-template>

@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { TreeComponent } from 'angular2-tree-component';
+import { TreeComponent, ITreeOptions } from 'angular2-tree-component';
 import { MainService } from '../../services/main.service';
 
 @Component({
@@ -8,6 +8,9 @@ import { MainService } from '../../services/main.service';
   styleUrls: ['./tree.product.component.scss']
 })
 export class TreeProductComponent {
+  options : ITreeOptions = {
+    idField: 'uuid'
+  };
   @Input() config: any;
   nodes: Array<any> = new Array<any>();
   @ViewChild(TreeComponent)

@@ -1,7 +1,8 @@
 .applicant {
+  margin: 0 -20px;
   display: block;
   background: #F6F8F8;
-  padding: 40px 20px;
+  padding: 60px 40px;
   &-collapsable {
     padding-top: 20px;
   }
@@ -27,8 +28,13 @@
     clear:both;
   }
   &__left {
-    width: 50%;
+    width: 48%;
     float: left;
+    &-second {
+      width: 48%;
+      float: left;
+      padding-left: 4%;
+    }
     &-100 {
       width: 100%;
       float: left;

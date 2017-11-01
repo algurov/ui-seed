@@ -66,7 +66,7 @@ export class AuthService extends RequestBase {
       return;
     }
     this.me(at).map(res => res.json())
-      .catch(err => {this.loggedIn = null; return Observable.of(false)})
+      .catch(err => {this.loggedIn = null; this.login(); return Observable.of(false)})
         .subscribe(res => {this.loggedIn = res; console.log(this.loggedIn)});
   }
 

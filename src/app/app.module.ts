@@ -27,6 +27,7 @@ import { AppComponent } from './app.component';
 
 import { AppState } from './reducers';
 import { SeedMaterialModule } from './seed.material.module';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { SeedMaterialModule } from './seed.material.module';
   ],
   entryComponents: [APP_ENTRY_COMPONENTS],
   imports: [
+    TagInputModule,
     CommonModule,
     HttpModule,
     SeedMaterialModule,

@@ -4,10 +4,10 @@
   <div *ngFor="let developer of data.manufacturers">
 
     <div style="float: left; width: 95%; padding-top: 40px;">
-      <div style="float: left; width: 50%">
-        <seed-select-field code="partner" placeholder="Изготовитель" [data]="developer.partner" (change)="onPartnerChange(developer.guid, $event)"></seed-select-field>
+      <div style="float: left; width: 48%">
+        <seed-select-field code="partner" placeholder="Изготовитель" [data]="developer.partnerDto" (change)="onPartnerChange(developer.guid, $event)"></seed-select-field>
       </div>
-      <div style="float: left; width: 50%">
+      <div style="float: left; width: 48%; padding-left:4%;">
         <seed-select-field code="place" placeholder="Местоположение" [data]="developer.location" (change)="onLocationChange(developer.guid, $event)"></seed-select-field>
       </div>
     </div>

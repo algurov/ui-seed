@@ -13,7 +13,12 @@ export class DialogService {
   block: boolean = false;
   constructor(public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
-
+  showBlocker() {
+    this.block = true;
+  }
+  hideBlocker() {
+    this.block = false;
+  }
   showMessageDlg(title: string, message: string) {
     let dlg = this.dialog.open(MessageDialogComponent);
     let cmp = dlg.componentInstance;

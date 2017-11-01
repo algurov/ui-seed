@@ -12,9 +12,9 @@
     <div class="applicant__left">
       <seed-select-field *ngIf="false" code="partner" (change)="changeApplicant($event)" placeholder="Заявитель" [data]="data.applicant"></seed-select-field>
       <seed-select-field code="partner" (change)="changeOwner($event)" [enabled]="!sameOwner" placeholder="Владелец груза" [data]="data.owner"></seed-select-field>
-      <seed-select-field code="partner" (change)="changeReciver($event)" [enabled]="!sameReciver" placeholder="Получатель документов" [data]="data.reciver"></seed-select-field>
+      <seed-select-field code="partner" (change)="changeReciver($event)" [enabled]="!sameReciver" placeholder="Получатель документов" [data]="data.documentsReceiver"></seed-select-field>
     </div>
-    <div class="applicant__left">
+    <div class="applicant__left-second">
         <div class="applicant__placeholder">Заявитель является:</div>
         <mat-checkbox class="cbox" style="padding-top: 5px;" color="primary" [ngModel]="sameOwner" (change)="sameOwnerChange($event)">владельцем груза</mat-checkbox>
         <mat-checkbox class="cbox" style="padding-top: 35px;" color="primary" [ngModel]="sameReciver" (change)="sameReciverChange($event)">получателем документов</mat-checkbox>

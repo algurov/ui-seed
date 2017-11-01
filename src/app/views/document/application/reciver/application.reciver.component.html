@@ -2,17 +2,17 @@
   <div>
 
     <div style="float: left; width: 100%;">
-      <div style="float: left; width: 50%">
-        <seed-select-field code="partner" placeholder="Отправитель" [data]="data.cargoSender.partner" (change)="onCargoSenderPartnerChange($event)"></seed-select-field>
+      <div style="float: left; width: 48%">
+        <seed-select-field code="partner" placeholder="Отправитель" [data]="sender" (change)="onCargoSenderPartnerChange($event)"></seed-select-field>
       </div>
-      <div style="float: left; width: 50%">
-        <seed-select-field code="place" placeholder="Местоположение" [data]="data.cargoSender.location" (change)="onCargoSenderLocationChange($event)"></seed-select-field>
+      <div style="float: left; width: 48%; padding-left: 4%;">
+        <seed-select-field code="place" placeholder="Местоположение" [data]="senderLocation" (change)="onCargoSenderLocationChange($event)"></seed-select-field>
       </div>
     </div>
     <div style="float: left; width: 100%">
       <mat-form-field floatPlaceholder="always" class="reciver__field">
         <mat-placeholder class="reciver__place">Местоположение (комментарии)</mat-placeholder>
-        <input matInput [(ngModel)]="data.cargoSender.comment"/>
+        <input matInput [ngModel]="senderComment" (change)="onCargoSenderCommentChange($event)"/>
       </mat-form-field>
     </div>
     <div style="clear: both;"></div>
@@ -21,17 +21,17 @@
   <div style="padding-top: 40px;">
 
     <div style="float: left; width: 100%;">
-      <div style="float: left; width: 50%">
-        <seed-select-field code="partner" placeholder="Получатель" [data]="data.cargoReciver.partner" (change)="onCargoReciverPartnerChange($event)"></seed-select-field>
+      <div style="float: left; width: 48%">
+        <seed-select-field code="partner" placeholder="Получатель" [data]="reciver" (change)="onCargoReceiverPartnerChange($event)"></seed-select-field>
       </div>
-      <div style="float: left; width: 50%">
-        <seed-select-field code="place" placeholder="Местоположение" [data]="data.cargoReciver.location" (change)="onCargoReciverLocationChange($event)"></seed-select-field>
+      <div style="float: left; width: 48%; padding-left: 4%;">
+        <seed-select-field code="place" placeholder="Местоположение" [data]="reciverLocation" (change)="onCargoReceiverLocationChange($event)"></seed-select-field>
       </div>
     </div>
     <div style="float: left; width: 100%">
       <mat-form-field floatPlaceholder="always" class="reciver__field">
         <mat-placeholder class="reciver__place">Местоположение (комментарии)</mat-placeholder>
-        <input matInput [(ngModel)]="data.cargoReciver.comment"/>
+        <input matInput [ngModel]="reciverComment" (change)="onCargoReceiverCommentChange($event)"/>
       </mat-form-field>
     </div>
   </div>

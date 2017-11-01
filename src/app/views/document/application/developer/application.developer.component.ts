@@ -20,7 +20,7 @@ export class ApplicationDeveloperComponent {
 
   onPartnerChange(guid, partner) {
     let index = this.data.manufacturers.findIndex(it => it.guid == guid);
-    this.data.manufacturers[index].partner = partner;
+    this.data.manufacturers[index].partnerDto = partner;
   }
 
   onLocationChange(guid, location) {

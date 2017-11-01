@@ -47,7 +47,11 @@ import { SelectPlaceDialog } from './widgets/seed.select.field/seed.select.field
 import { SelectProductDialog } from './widgets/seed.select.field/seed.select.field';
 import { SelectStandardDialog } from './views/document/application/standard/application.standard.component';
 import { StandardField, StandardPropertyDialog } from './widgets/standard.field/standard.field';
-
+import { ClickOutside } from './widgets/click-outside.directive';
+import { RoleListComponent } from './views/role/role.list.component';
+import { RoleFieldComponent } from './views/role/field/role.field.component';
+import { RoleAddDialog } from './views/role/role.add.dialog';
+import { SelectLaboratoryDialog } from './widgets/seed.select.field/seed.select.field';
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -97,5 +101,10 @@ export const APP_DECLARATIONS = [
   SelectProductDialog,
   SelectStandardDialog,
   StandardField,
-  StandardPropertyDialog
+  StandardPropertyDialog,
+  ClickOutside,
+  RoleListComponent,
+  RoleFieldComponent,
+  RoleAddDialog,
+  SelectLaboratoryDialog
 ];

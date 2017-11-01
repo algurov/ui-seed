@@ -15,23 +15,32 @@ import { StringService } from '../../services/string.service';
   styleUrls: ['./document.list.component.scss']
 })
 export class DocumentListComponent {
-  displayedColumns = [{column: 'type', title:'DOCUMENT_TYPE'}, {column: 'number', title:'DOCUMENT_NUMBER'}, {column: 'created', title: 'DOCUMENT_DATE'}, {column: 'applicant', property:'name', title: 'DOCUMENT_APPLICANT'}];
-  subscription: any;
+  displayedColumns = [{column: 'type', title:'DOCUMENT_TYPE'}, {column: 'number', title:'DOCUMENT_NUMBER'}, {column: 'creationDate', title: 'DOCUMENT_DATE'}, {column: 'applicant', property:'name', title: 'DOCUMENT_APPLICANT'}];
+  subscription: Array<any> = new Array<any>();
   dataSource : DocumentDataSource;
   documentDb: DocumentDataBase;
   applicationList : Array<any> = new Array<any>();
   constructor(public mainService: MainService, public router: Router, private applicationService: ApplicationService,
     private dlgService: DialogService) {
-    this.subscription = this.mainService.menuActionPerformed.subscribe(item => {
+    this.subscription.push(this.mainService.menuActionPerformed.subscribe(item => {
       if (item == 'ADD_APPLICATION') {
         this.newOrder();
       }
-    });
+    }));
+    this.subscription.push(this.mainService.applicationRemoved.subscribe(item => {
+      this.documentDb.removeApplication(item);
+    }));
     this.documentDb = new DocumentDataBase(router, applicationService, dlgService);
     this.dataSource = new DocumentDataSource(this.documentDb);
   }
+
   editApplication(application) {
     this.router.navigate(['main/document/application/' + application.id]);
+  }
+  removeApplication(application) {
+    this.applicationService.deleteApplication(application).subscribe(res => {
+        this.mainService.applicationRemoved.emit(application);
+    });
   }
   ngOnInit() {
     this.applicationService.getApplicationList().subscribe(res => {
@@ -39,7 +48,9 @@ export class DocumentListComponent {
     });
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscription.forEach(item => {
+      item.unsubscribe();
+    });
   }
   newOrder() {
     this.router.navigate(['main/document/application']);
@@ -61,10 +72,10 @@ export class DocumentDataBase {
       });
       dlgService.block = false;
     });
-    this.addApplication({type: 'APPLICATION', id: 1, number:'Номер 1', applicant: {name: 'ООО "Зерно"'}, created:'10/10/2012'});
-    this.addApplication({type: 'APPLICATION', id: 2, number:'Номер 2', applicant: {name: 'ООО "Бубочка"'}, created:'10/10/2012'});
-    this.addApplication({type: 'APPLICATION', id: 3, number:'Номер 3', applicant: {name: 'ООО "Санфлавер"'}, created:'10/10/2012'});
-    this.addApplication({type: 'APPLICATION', id: 4, number:'Номер 4', applicant: {name: 'ЗАО "Крупица"'}, created:'10/10/2012'});
+    // this.addApplication({type: 'Заявка', id: 1, number:'Номер 1', applicant: {name: 'ООО "Зерно"'}, created:'10/10/2012'});
+    // this.addApplication({type: 'Заявка', id: 2, number:'Номер 2', applicant: {name: 'ООО "Бубочка"'}, created:'10/10/2012'});
+    // this.addApplication({type: 'Заявка', id: 3, number:'Номер 3', applicant: {name: 'ООО "Санфлавер"'}, created:'10/10/2012'});
+    // this.addApplication({type: 'Заявка', id: 4, number:'Номер 4', applicant: {name: 'ЗАО "Крупица"'}, created:'10/10/2012'});
   }
 
   changeSearch(params) {

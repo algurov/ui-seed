@@ -1,5 +1,13 @@
 export const taxonomy = [
   {
+    title: 'Лаборатории',
+    name: 'Laboratory',
+    api: 'laboratory',
+    columns: [
+      {name:'name', title: 'Наименование', type: 'string'}
+    ]
+  },
+  {
     title: 'Место хранения',
     name: 'Storage',
     api: 'productStorage',
