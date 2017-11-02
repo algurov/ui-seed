@@ -5,6 +5,7 @@ import { MainService } from '../../services/main.service';
 import { TaxonomyService } from '../../services/taxonomy.service';
 import { TreeComponent } from 'angular2-tree-component';
 import { DialogService } from '../../services/dialog.service';
+import { DataService } from '../../services/data.service';
 import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular2-tree-component';
 
 @Component({
@@ -17,24 +18,30 @@ export class StandardField {
   options : ITreeOptions = {
     idField: 'uuid'
   };
+  @Input() applicationStandartResearch;
   @ViewChild(TreeComponent)
   private tree: TreeComponent;
   @ViewChild('wrap') wrap: any;
   @ViewChild('wrap2') wrap2: any;
-  @Input() standard: any;
+  standard: any;
   customStandard = false;
+  researches: any;
   @Input() data: any;
   nodes: Array<any> = new Array<any>()
   properties: Array<any> = new Array<any>();
-  @Output() change: EventEmitter<any> = new EventEmitter<any>();
+  // @Output() change: EventEmitter<any> = new EventEmitter<any>();
   @Output() removed: EventEmitter<any> = new EventEmitter<any>();
   visible: boolean = true;
-  constructor(private dialog: MatDialog, private dialogService: DialogService) { }
+  constructor(private dialog: MatDialog, private dialogService: DialogService,
+    private dataService: DataService) { }
 
   ngOnInit() {
-    if (!this.standard) {
+    if (!this.applicationStandartResearch.standard) {
       this.customStandard = true;
-      this.standard = {};
+      // this.data.customContract.standard = {};
+      // this.data.customContract.researches = [];
+      // this.standard = this.data.customContract.standard;
+      // this.researches = this.data.customContract.researches;
       console.log(this.standard);
     }
   }
@@ -47,7 +54,7 @@ export class StandardField {
     this.lastSelectedNode = this.tree.treeModel.getFocusedNode();
     let dialogRef = this.dialog.open(StandardPropertyDialog, {
       data: {
-        standard: this.standard,
+        standard: this.applicationStandartResearch.standard,
         custom: this.customStandard,
         goodId: this.data.goods.id
       }
@@ -106,11 +113,11 @@ export class StandardField {
   }
 
   removeStandard() {
-    if (!this.customStandard) {
-      this.removed.emit(this.standard);
+    if (this.applicationStandartResearch.standard) {
+      this.removed.emit(this.applicationStandartResearch.standard);
     } else {
-      this.standard.nodes = [];
-      this.tree.treeModel.update();
+      //this.applicationStandartResearch.standard.nodes = [];
+      //this.tree.treeModel.update();
       this.removed.emit('contract');
     }
   }
@@ -122,12 +129,12 @@ onClickOutside(ev) {
 }
   addNewItem(item) {
     if (this.lastSelectedNode) {
-      this.insertItemToTree(item, this.lastSelectedNode.data, this.standard.nodes);
+      this.insertItemToTree(item, this.lastSelectedNode.data, this.applicationStandartResearch.applicationResearches);
     } else {
-      if (!this.standard.nodes) {
-        this.standard.nodes = [];
+      if (!this.applicationStandartResearch.applicationResearches) {
+        this.applicationStandartResearch.applicationResearches = [];
       }
-      this.standard.nodes.push(item);
+      this.applicationStandartResearch.applicationResearches.push(item);
     }
     this.tree.treeModel.update();
     if (this.wrap) {
@@ -142,7 +149,7 @@ onClickOutside(ev) {
 
   removeItem(item) {
     console.log(item.data);
-    this.removeItemFromTree(item.data, this.standard.nodes);
+    this.removeItemFromTree(item.data, this.applicationStandartResearch.applicationResearches);
     this.tree.treeModel.update();
   }
 
@@ -178,18 +185,6 @@ onClickOutside(ev) {
     });
     if (found >= 0) {
       arr = arr.splice(found, 1);
-    }
-  }
-
-  isToggleVisible(node) {
-    return node.parent.data.virtual;
-  }
-
-  getTitleForNode(node) {
-    if (node.data.property) {
-      return node.data.property.nameRu;
-    } else {
-      return node.data.goodsCategoryProperty.name;
     }
   }
 }
@@ -303,9 +298,11 @@ export class StandardPropertyDialog {
     name = name.trim();
     let params = [{ field: 'nameRu', value: name }];
     this.loadedAll = false;
+    this.loaded = false;
     this.taxonmyService.searchTaxonomyDataByParams('Property', params).subscribe(res => {
       this.allList = res.content;
       this.loadedAll = true;
+      this.loaded = true;
     });
   }
 
@@ -332,12 +329,11 @@ export class StandardPropertyDialog {
         this.listToView = this.processData_2(this.list);
         this.loaded = true;
       });
-    } else {
-      this.loaded = true;
     }
     this.taxonmyService.searchTaxonomyDataByParams('Property', []).subscribe(res => {
       this.allList = res.content;
       this.loadedAll = true;
+      this.loaded = true;
     });
   }
 

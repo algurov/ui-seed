@@ -1,0 +1,6 @@
+<div class="toggle" *ngIf="isToggleVisible(node)">
+      <color-toggle [value]="node.data.propertyType" (onChange)="onStateChange($event)"></color-toggle>
+</div>
+<div style="float:left;">{{getTitleForNode(node)}}</div>
+<mat-icon class="close-icon" (click)="removeItem(node)">close</mat-icon>
+<div style="clear:both;"></div>

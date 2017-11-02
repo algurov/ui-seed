@@ -8,6 +8,7 @@ import { MatIconRegistry } from '@angular/material';
 import { DialogService } from './services/dialog.service';
 import { MainService } from './services/main.service';
 import { SettingsService } from './services/settings.service';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'my-app',
@@ -31,7 +32,8 @@ export class AppComponent {
     public sanitizer: DomSanitizer,
     public dlgService : DialogService,
     public mainService: MainService,
-    public SettingsService: SettingsService
+    public SettingsService: SettingsService,
+    public dataService: DataService
   ) {
     iconReg.addSvgIcon('agent', sanitizer.bypassSecurityTrustResourceUrl('../assets/icon/icon_agent.svg'))
     .addSvgIcon('docs', sanitizer.bypassSecurityTrustResourceUrl('../assets/icon/icon_docs.svg'))

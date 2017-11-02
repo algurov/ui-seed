@@ -48,11 +48,11 @@ export class ApplicationReciverComponent {
   }
 
   onCargoSenderCommentChange(event) {
-      this.senderComment = event.value;
+      this.senderComment = event.target.value;
       if (!this.data.cargoSender) {
         this.data.cargoSender = {};
       }
-      this.data.cargoSender.comment = event.value;
+      this.data.cargoSender.comment = event.target.value;
   }
 
   onCargoReceiverPartnerChange(partner) {
@@ -72,11 +72,11 @@ export class ApplicationReciverComponent {
   }
 
   onCargoReceiverCommentChange(event) {
-      this.reciverComment = event.value;
+      this.reciverComment = event.target.value;
       if (!this.data.cargoReceiver) {
         this.data.cargoReceiver = {};
       }
-      this.data.cargoReceiver.comment = event.value;
+      this.data.cargoReceiver.comment = event.target.value;
   }
 
   ngOnInit() {

@@ -29,10 +29,10 @@ export class ApplicationComponent {
           this.id = +params['id'];
          this.applicationService.getApplicationById(this.id).subscribe(res=> {
            this.data = res;
-           this.readJson_2();
            this.mainService.applicationLoaded.emit(this.data);
            this.dialogService.block = false;
            console.log(this.data);
+           console.log(JSON.stringify(this.data));
          });
        } else {
          this.dialogService.block = false;
@@ -42,11 +42,10 @@ export class ApplicationComponent {
 
   ngOnInit() {
 
-    if (localStorage.getItem('application')) {
-    this.data = JSON.parse(localStorage.getItem('application'));
-    this.readJson_2();
-    console.log(this.data);
-    }
+    // if (localStorage.getItem('application')) {
+    // this.data = JSON.parse(localStorage.getItem('application'));
+    // console.log(this.data);
+    // }
     if (!this.data.id){
     if (this.settingsService.settings.selectedPartnerId) {
       this.partnerService.getPartnerById(this.settingsService.settings.selectedPartnerId)
@@ -61,105 +60,7 @@ export class ApplicationComponent {
     }}
   }
 
-  selectPartner() {
-    this.dialogService.showSelectTaxonomyDialog("Goods");
-  }
-
-  readJson() {
-    if (this.data.customStandard) {
-      let tmp = this.data.customStandard;
-      delete this.data.customStandard;
-      this.data.customStandard = {nodes: tmp.applicationResearches};
-    }
-    if (this.data.standards) {
-      let tmpStandards = this.data.standards;
-      delete this.data.standards;
-      let res = [];
-      tmpStandards.forEach(item => {
-        item.standard.nodes = item.applicationResearches;
-        res.push(item.standard);
-      });
-      this.data.standards = res;
-    }
-
-  }
-
-  readJson_2() {
-    // if (this.data.customStandard) {
-    //   let tmp = this.data.customStandard;
-    //   delete this.data.customStandard;
-    //   this.data.customStandard = {nodes: tmp.applicationResearches};
-    // }
-    if (this.data.applicationStandardResearches) {
-      let tmpStandards = this.data.applicationStandardResearches;
-      delete this.data.applicationStandardResearches;
-      let res = [];
-      tmpStandards.forEach(item => {
-        item.standard.nodes = item.applicationResearches;
-        res.push(item.standard);
-      });
-      this.data.standards = res;
-    }
-
-  }
-
-  prepareResult() {
-      if (this.data.standards) {
-        let standardsToSend = [];
-        this.data.standards.forEach(item => {
-          let appResearch = item.nodes;
-          delete item.nodes;
-          standardsToSend.push({standard: item, applicationResearches: appResearch});
-        });
-        this.data.standards = standardsToSend;
-      }
-      if (this.data.customStandard.nodes) {
-        let appResearch = this.data.customStandard.nodes;
-        delete this.data.customStandard.nodes;
-          let standardsToSend = {name: 'Контракт', applicationResearches: appResearch};
-        this.data.customStandard = standardsToSend;
-        console.log(this.data.customStandard);
-      } else {
-        delete this.data.customStandard;
-      }
-      if (this.data.manufacturers) {
-        this.data.manufacturers.forEach(item => {
-          delete item.guid;
-        });
-      }
-  }
-
-  prepareResult_2() {
-      if (this.data.standards) {
-        let standardsToSend = [];
-        this.data.standards.forEach(item => {
-          let appResearch = item.nodes;
-          // appResearch.forEach(it => {
-          //   delete it.id;
-          // });
-          delete item.nodes;
-          standardsToSend.push({standard: item, applicationResearches: appResearch});
-        });
-        this.data.applicationStandardResearches = standardsToSend;
-      }
-      if (this.data.customStandard  && this.data.customStandard.nodes) {
-        let appResearch = this.data.customStandard.nodes;
-        delete this.data.customStandard.nodes;
-          let standardsToSend = {name: 'Контракт',customStandard: true, applicationResearches: appResearch};
-        this.data.customStandard = standardsToSend;
-        console.log(this.data.customStandard);
-      } else {
-        delete this.data.customStandard;
-      }
-      if (this.data.manufacturers) {
-        this.data.manufacturers.forEach(item => {
-          delete item.guid;
-        });
-      }
-  }
-
   save() {
-    this.prepareResult_2();
       //this.data.id = 1;
       console.log(this.data);
       console.log(JSON.stringify(this.data));
@@ -175,7 +76,5 @@ export class ApplicationComponent {
 
 
     //localStorage.setItem('application', JSON.stringify(this.data));
-
-    this.readJson_2();
   }
 }

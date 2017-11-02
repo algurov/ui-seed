@@ -1,7 +1,7 @@
 <div class="standard-field">
   <div>
     <div *ngIf="!customStandard" class="standard-field__title">
-      <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>{{standard.shortName}}
+      <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>{{applicationStandartResearch.standard.shortName}}
     </div>
     <div *ngIf="customStandard" class="standard-field__title">
       <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>Контракт
@@ -13,19 +13,20 @@
   </div>
   <div *ngIf="visible">
     <div *ngIf="!customStandard" click-outside (clickOutside)="onClickOutside($event)" #wrap class="wrapper-tree goods-category-property">
-      <tree-root [options]="options" [nodes]="standard.nodes">
+      <tree-root [options]="options" [nodes]="applicationStandartResearch.applicationResearches">
         <ng-template #treeNodeTemplate let-node let-index="index">
-          <div class="toggle" *ngIf="isToggleVisible(node)">
-                <color-toggle [value]="standard.standardCategory.id == 1"></color-toggle>
+          <!-- <div class="toggle" *ngIf="isToggleVisible(node)">
+                <color-toggle [value]="node.data.state" (changeNode)="onNodeStateChange($event)"></color-toggle>
           </div>
           <div style="float:left;">{{getTitleForNode(node)}}</div>
           <mat-icon class="close-icon" (click)="removeItem(node)">close</mat-icon>
-          <div style="clear:both;"></div>
+          <div style="clear:both;"></div> -->
+          <product-field [node]="node" (onRemove)="removeItem($event)" [standard]="applicationStandartResearch.standard"></product-field>
         </ng-template>
       </tree-root>
     </div>
     <div *ngIf="customStandard" click-outside (clickOutside)="onClickOutside($event)" #wrap2 class="wrapper-tree-custom">
-      <tree-root [options]="options" [nodes]="standard.nodes">
+      <tree-root [options]="options" [nodes]="applicationStandartResearch.applicationResearches">
         <ng-template #treeNodeTemplate let-node let-index="index">
           <product-parameter [config]="node" (onRemove)="removeItem(node)"></product-parameter>
         </ng-template>

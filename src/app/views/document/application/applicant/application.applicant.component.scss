@@ -3,10 +3,11 @@
   display: block;
   background: #F6F8F8;
   padding: 60px 40px;
-  &-collapsable {
-    padding-top: 20px;
+  &__data{
+    padding-bottom: 20px;
   }
   &-title {
+    padding-bottom: 20px;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;

@@ -1,5 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { StringService } from '../../../../services/string.service';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
   selector: 'application-applicant',
@@ -11,8 +12,11 @@ export class ApplicationApplicantComponent {
   sameOwner: any;
   sameReciver: any;
   visible: boolean = false;
-  constructor(private stringService: StringService) {}
+  constructor(private stringService: StringService, private dataService: DataService) {}
 
+  getDocumentTitle(document) {
+    return this.dataService.getPartnerDocumentTypeNameByValue(document);
+  }
   toggleVisibility() {
     this.visible = !this.visible;
   }

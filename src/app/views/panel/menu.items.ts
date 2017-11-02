@@ -43,6 +43,11 @@ export const menuItems = [
         name: 'GROUP',
         icon: 'group',
         action: 'GROUP_FILTER'
+      },
+      {
+        name: 'ALL_PARTNERS',
+        icon: 'group',
+        action: 'ALL_PARTNERS_FILTER'
       }
     ],
     actions: [

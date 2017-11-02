@@ -1,15 +1,27 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { TaxonomyService } from './taxonomy.service';
 
 
 
 @Injectable()
 export class DataService {
+  constructor(private taxonomyService: TaxonomyService) {
+    this.taxonomyService.loadTaxonomyData('PropertyType').subscribe(res => {
+      this.propertyType = res.content;
+    });
+  }
   partnerTypes = [{title: 'Юридическое лицо', value: 'ORGANIZATION'}, {title: 'Физическое лицо', value: 'PERSON'}];
   partnerDocumentTypes = [{title: 'ИНН', value: 'INN'}, {title: 'Паспорт', value: 'PASSPORT'}];
   dataMap = {
     'PARTNER_TYPE' : this.partnerTypes,
     'PARTNER_DOC_TYPE': this.partnerDocumentTypes
   };
+  propertyType: Array<any>;
+
+  ngOnInit() {
+
+  }
+
   getPartnerTypes() {
     return this.partnerTypes;
   }
@@ -18,6 +30,9 @@ export class DataService {
     return this.partnerDocumentTypes;
   }
 
+  getPartnerDocumentTypeNameByValue(value: string) : string {
+    return this.partnerDocumentTypes.find(item => item.value == value).title;
+  }
   getPartnerTypeNameByValue(value: string) :string {
     return this.partnerTypes.find(item => item.value == value).title;
   }

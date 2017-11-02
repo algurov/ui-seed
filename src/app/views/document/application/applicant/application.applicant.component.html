@@ -3,11 +3,11 @@
     <i class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>{{data.applicant? data.applicant.name: ''}}
   </div>
   <div *ngIf="visible" class="applicant-collapsable">
-    <div class="applicant__left-100">
-      <mat-form-field floatPlaceholder="always" class="applicant__list-grow">
-        <mat-placeholder class="applicant__place">{{stringService.get('APPLICATION_APPLICANT_PERSON_NAME')}}</mat-placeholder>
-        <input matInput [(ngModel)]="data.applicantName"/>
-      </mat-form-field>
+    <div class="applicant__data">
+      <div>{{getDocumentTitle(data.applicant.documentType)}} : {{data.applicant.documentNumber}}</div>
+      <div>Адрес: {{data.applicant.address}}</div>
+      <div>Телефон: {{data.applicant.contactPhones}}</div>
+      <div>Факс: {{data.applicant.fax}}</div>
     </div>
     <div class="applicant__left">
       <seed-select-field *ngIf="false" code="partner" (change)="changeApplicant($event)" placeholder="Заявитель" [data]="data.applicant"></seed-select-field>
@@ -20,6 +20,12 @@
         <mat-checkbox class="cbox" style="padding-top: 35px;" color="primary" [ngModel]="sameReciver" (change)="sameReciverChange($event)">получателем документов</mat-checkbox>
     </div>
     <div style="clear:both;"></div>
+  </div>
+  <div class="applicant__left-100">
+    <mat-form-field floatPlaceholder="always" class="applicant__list-grow">
+      <mat-placeholder class="applicant__place">{{stringService.get('APPLICATION_APPLICANT_PERSON_NAME')}}</mat-placeholder>
+      <input matInput [(ngModel)]="data.applicantName"/>
+    </mat-form-field>
   </div>
     <!-- <div class="applicant__left">
       <seed-select-field code="partner" placeholder="Получатель документов" [data]="data"></seed-select-field>

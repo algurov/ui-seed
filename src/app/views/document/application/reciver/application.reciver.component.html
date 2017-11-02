@@ -12,7 +12,7 @@
     <div style="float: left; width: 100%">
       <mat-form-field floatPlaceholder="always" class="reciver__field">
         <mat-placeholder class="reciver__place">Местоположение (комментарии)</mat-placeholder>
-        <input matInput [ngModel]="senderComment" (change)="onCargoSenderCommentChange($event)"/>
+        <input matInput [ngModel]="senderComment" (keyup)="onCargoSenderCommentChange($event)"/>
       </mat-form-field>
     </div>
     <div style="clear: both;"></div>
@@ -31,7 +31,7 @@
     <div style="float: left; width: 100%">
       <mat-form-field floatPlaceholder="always" class="reciver__field">
         <mat-placeholder class="reciver__place">Местоположение (комментарии)</mat-placeholder>
-        <input matInput [ngModel]="reciverComment" (change)="onCargoReceiverCommentChange($event)"/>
+        <input matInput [ngModel]="reciverComment" (keyup)="onCargoReceiverCommentChange($event)"/>
       </mat-form-field>
     </div>
   </div>

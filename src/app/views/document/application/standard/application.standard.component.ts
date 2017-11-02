@@ -22,13 +22,17 @@ export class ApplicationStandardComponent {
      private mainService: MainService,
     private dialogService: DialogService) {
       this.subscription = this.mainService.standardParameterAdded.subscribe(item => {
-         if(!this.data.standards) {
-           this.data.standards = [];
+         if(!this.data.applicationStandardResearches) {
+           this.data.applicationStandardResearches = [];
          }
-         if (!this.data.standards.find(it => it.id == item.id)) {
-           this.data.standards.push(item);
+         if (!this.data.applicationStandardResearches.find(it => {
+           if(it.standard){
+          return it.standard.id == item.id;
+        } else { return false;}
+         })) {
+           this.data.applicationStandardResearches.push({standard:item, applicationResearches: []});
            this.dialogService.showNotification('Стандарт "'+ item.shortName + '" добавлен к заявке');
-           console.log(this.data.standards);
+           console.log(this.data.applicationStandardResearches);
          }
        });
      }
@@ -50,11 +54,21 @@ export class ApplicationStandardComponent {
     console.log(standard);
     if (standard == 'contract') {
       this.contractEmpty = !this.contractEmpty;
-    } else {
-      let index = this.data.standards.findIndex(item => item.id == standard.id);
+      let index = this.data.applicationStandardResearches.findIndex(item => item.standard == null);
       console.log(index);
-        this.data.standards.splice(index, 1);
-        console.log(this.data.standards);
+        this.data.applicationStandardResearches.splice(index, 1);
+        console.log(this.data.applicationStandardResearches);
+    } else {
+      let index = this.data.applicationStandardResearches.findIndex(item => {
+        if (item.standard) {
+          return item.standard.id == standard.id;
+        } else {
+          return false;
+        }
+      });
+      console.log(index);
+        this.data.applicationStandardResearches.splice(index, 1);
+        console.log(this.data.applicationStandardResearches);
     }
   }
 
@@ -66,8 +80,8 @@ export class ApplicationStandardComponent {
    });
    dialogRef.afterClosed().subscribe(result => {
        if (result) {
-         if (!this.data.standards.find(item => item.id == result.id)) {
-           this.data.standards.push(result);
+         if (!this.data.applicationStandardResearches.find(item => item.standard.id == result.id)) {
+           this.data.applicationStandardResearches.push({standard:result, applicationResearches:[]});
          }
        }
      });
@@ -76,6 +90,11 @@ export class ApplicationStandardComponent {
   addContract() {
     if (this.data.goods) {
       this.contractEmpty = !this.contractEmpty;
+      if (!this.data.applicationStandardResearches) {
+        this.data.applicationStandardResearches = [];
+      }
+      this.data.applicationStandardResearches.push({standard: null, customContract:{name: 'Контракт'}, applicationResearches: []});
+      console.log(this.data.applicationStandardResearches);
     }
   }
 }

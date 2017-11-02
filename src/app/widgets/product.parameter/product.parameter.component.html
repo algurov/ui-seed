@@ -1,23 +1,24 @@
 <div class="field">
   <div class="toggle" *ngIf="isToggleVisible(config)">
-  <color-toggle [value]="config.data.state" (onChange)="onStateChanged($event)"></color-toggle>
+  <color-toggle [value]="config.data.propertyType" (onChange)="onStateChanged($event)"></color-toggle>
 </div>
   <mat-form-field class="short-field">
-    <input matInput [(ngModel)]="config.data.name"/>
+    <input matInput [(ngModel)]="config.data.customName"/>
   </mat-form-field>
+  <div class="units">{{getPropertyUnit()}}</div>
   <ng-container *ngIf="isValue()">
     <mat-form-field class="short-field-extra">
-      <input matInput placeholder="не менее" [(ngModel)]="config.data.min"/>
+      <input matInput placeholder="не менее" [(ngModel)]="config.data.minValue"/>
     </mat-form-field>
     <mat-form-field class="short-field-extra" >
-      <input matInput placeholder="не более" [(ngModel)]="config.data.max"/>
+      <input matInput placeholder="не более" [(ngModel)]="config.data.maxValue"/>
     </mat-form-field>
   </ng-container>
   <mat-form-field class="text-field-extra">
-    <input matInput placeholder="Текст" [(ngModel)]="config.data.text"/>
+    <input matInput placeholder="Текст" [(ngModel)]="config.data.customText"/>
   </mat-form-field>
   <mat-form-field class="short-field-select">
-    <mat-select [ngModel]="config.data.option" (change)="onOptionChange($event)" matSelect>
+    <mat-select [ngModel]="config.data.researchCondition" (change)="onOptionChange($event)" matSelect>
       <mat-option *ngFor="let opt of options" [value]="opt.value">
         {{opt.title}}
       </mat-option>

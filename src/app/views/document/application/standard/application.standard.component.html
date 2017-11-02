@@ -1,10 +1,10 @@
 <div class="standard">
   <button class="standard-button" mat-raised-button [disabled]="!data.goods" (click)="addStandard()">ДОБАВИТЬ СТАНДАРТ</button>
-  <div class="standard__list" *ngFor="let standard of data.standards">
-    <standard-field [standard]="standard" [data]="data" (removed)="onStandardRemoved($event)" (change)="onStandardChange($event)"></standard-field>
+  <div class="standard__list" *ngFor="let applicationStandardResearch of data.applicationStandardResearches">
+    <standard-field [applicationStandartResearch]="applicationStandardResearch" [data]="data" (removed)="onStandardRemoved($event)"></standard-field>
   </div>
   <div *ngIf="contractEmpty" class="standard-button-link" [ngClass]="{'disabled-link': !data.goods}" (click)="addContract()">добавить параметры по контракту</div>
-  <div *ngIf="!contractEmpty" class="standard__list">
-    <standard-field [standard]="data.customStandard" [data]="data" (removed)="onStandardRemoved($event)"></standard-field>
-  </div>
+  <!-- <div *ngIf="!contractEmpty" class="standard__list">
+    <standard-field [standard]="data.customContract.standard" [researches]="data.customContract.applicationResearches" [data]="data" (removed)="onStandardRemoved($event)"></standard-field>
+  </div> -->
 </div>

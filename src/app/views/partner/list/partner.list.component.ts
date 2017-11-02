@@ -34,6 +34,13 @@ export class PartnerListComponent {
   }
   menuActionPerformed(item) {
     switch(item) {
+      case 'ALL_PARTNERS_FILTER':
+      let __index = this.filterParams.findIndex(item => item.field == 'partnerType')
+      if (__index > -1) {
+        this.filterParams.splice(__index, 1);
+        this.searchPartners(this.filterParams);
+      }
+      break;
       case 'PERSONAL_FILTER':
       let index = this.filterParams.findIndex(item => item.field == 'partnerType')
       if (index == -1) {
