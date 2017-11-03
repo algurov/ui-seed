@@ -68,18 +68,18 @@ export class ApplicationComponent {
       //this.data.id = 1;
       console.log(this.data);
       console.log(JSON.stringify(this.data));
-      // this.dialogService.showBlocker();
-      // if(!this.data.id) {
-      //   this.applicationService.createApplication(this.data).subscribe(res => {
-      //     console.log(res);
-      //     this.dialogService.hideBlocker();
-      //     this.dialogService.showNotification('Заявка ' + res.number + ' сохранена');
-      //   });
-      // } else {
-      //   this.applicationService.updateApplication(this.data).subscribe(res => {
-      //     this.dialogService.hideBlocker();
-      //     this.dialogService.showNotification('Заявка ' + res.number + ' сохранена')});
-      // }
+      this.dialogService.showBlocker();
+      if(!this.data.id) {
+        this.applicationService.createApplication(this.data).subscribe(res => {
+          console.log(res);
+          this.dialogService.hideBlocker();
+          this.dialogService.showNotification('Заявка ' + res.number + ' сохранена');
+        });
+      } else {
+        this.applicationService.updateApplication(this.data).subscribe(res => {
+          this.dialogService.hideBlocker();
+          this.dialogService.showNotification('Заявка ' + res.number + ' сохранена')});
+      }
 
 
     //localStorage.setItem('application', JSON.stringify(this.data));
