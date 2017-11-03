@@ -38,8 +38,11 @@ export class DocumentListComponent {
     this.router.navigate(['main/document/application/' + application.id]);
   }
   removeApplication(application) {
+    this.dlgService.showBlocker();
     this.applicationService.deleteApplication(application).subscribe(res => {
         this.mainService.applicationRemoved.emit(application);
+        this.dlgService.hideBlocker();
+        this.dlgService.showNotification('Заявка удалена');
     });
   }
   ngOnInit() {

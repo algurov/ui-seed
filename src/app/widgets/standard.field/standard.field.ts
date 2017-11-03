@@ -46,6 +46,11 @@ export class StandardField {
     }
   }
 
+  updateCustomContractName(name) {
+      console.log(name);
+      this.applicationStandartResearch.customContract.name = name;
+  }
+
   toggleVisible() {
     this.visible = ! this.visible;
   }

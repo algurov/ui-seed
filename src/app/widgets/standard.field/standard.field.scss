@@ -8,6 +8,15 @@
     font-size: 18px;
     float: left;
     width: 20%;
+
+    &-custom {
+      padding-top: 2px;
+      line-height: 18px;
+      font-weight: bold;
+      font-size: 18px;
+      float: left;
+      width: 20%;
+    }
   }
 
   &__icon {
@@ -15,10 +24,21 @@
       color: #3696D7;
     width: 5%;
     line-height: 18px;
+    &-custom {
+      float: left;
+        color: #3696D7;
+      width: 5%;
+      line-height: 18px;
+      padding-top: 20px;
+    }
   }
 
   &__close {
     float: right;
+    &-custom {
+      float: right;
+      padding-top: 20px;
+    }
   }
 
   &__divider {
@@ -26,6 +46,14 @@
     float: left;
     width: 70%;
     border-bottom: 1px solid #aaa;
+
+    &-custom {
+      height: 10px;
+      float: left;
+      width: 70%;
+      border-bottom: 1px solid #aaa;
+      padding-top: 20px;
+    }
   }
 }
 
@@ -54,6 +82,16 @@ mat-icon.close-icon {
   height: 14px!important;
   width: 14px!important;
   padding-top: 3px;
+  padding-left: 10px;
+}
+
+mat-icon.close-icon-custom {
+  font-size: 14px;
+  font-weight: bold;
+  float: left;
+  height: 14px!important;
+  width: 14px!important;
+  padding-top: 23px;
   padding-left: 10px;
 }
 

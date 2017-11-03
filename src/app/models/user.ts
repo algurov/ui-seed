@@ -15,6 +15,7 @@ export class User implements Serializable<User>{
   branchOffice: BranchOffice;
   contacts: Array<Contact> = new Array<Contact>();
   email: string;
+  version: number;
 
   toSend() {
     // let positionsToSend = [];
@@ -31,7 +32,8 @@ export class User implements Serializable<User>{
       roles : this.roles,
       contacts: this.contacts,
       positions: this.positions,
-      branchOffice: null
+      branchOffice: null,
+      version: this.version
 
     };
   }
@@ -138,6 +140,7 @@ export class User implements Serializable<User>{
     this.userName = input.userName;
     this.userGivenName = input.userGivenName;
     this.userSecondName = input.userSecondName;
+    this.version = input.version;
     return this;
   }
 }

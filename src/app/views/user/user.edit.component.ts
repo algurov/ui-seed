@@ -227,8 +227,11 @@ export class UserEditComponent implements OnInit {
       //this.currentUser.partner = this.partner;
       if (this.id) {
         //this.dlgService.showMessageDlg('Not implemented', 'Update action');
-        this.dlgService.block = true;
-        this.usrService.updateUser(this.currentUser.toSend()).subscribe(res => { this.dlgService.block = false; this.dlgService.showNotification('Пользователь обновлен') });
+        this.dlgService.showBlocker();
+        this.usrService.updateUser(this.currentUser.toSend()).subscribe(res => {
+           this.dlgService.hideBlocker();
+           this.currentUser = new User().deserialize(res);
+           this.dlgService.showNotification('Пользователь обновлен') });
       } else {
         this.flow.sendNewUser(new UserToSend().buildFromUser(this.currentUser));
       }

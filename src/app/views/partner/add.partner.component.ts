@@ -37,7 +37,8 @@ export class AddPartnerComponent {
       address: [''],
       contactPhones: [''],
       fax: [''],
-      id: ['']
+      id: [''],
+      version: ['']
     });
 
   }
@@ -67,7 +68,7 @@ export class AddPartnerComponent {
     if (this.partnerForm.valid) {
       this.dlgService.block = true;
       let partnerToSend = new Partner().deserialize(this.partnerForm.value);
-      if (this.partner) {
+    if (this.partner) {
         this.partnerService.updatePartner(partnerToSend).subscribe(res=>{
           this.dlgService.block = false;
           this.dialog.close();

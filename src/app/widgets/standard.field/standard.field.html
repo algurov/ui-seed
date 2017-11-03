@@ -1,15 +1,25 @@
 <div class="standard-field">
   <div>
-    <div *ngIf="!customStandard" class="standard-field__title">
-      <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>{{applicationStandartResearch.standard.shortName}}
+    <div *ngIf="!customStandard">
+      <div  class="standard-field__title">
+        <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>{{applicationStandartResearch.standard.shortName}}
+      </div>
+      <mat-icon class="standard-field__icon" (click)="selectProperty()">search</mat-icon>
+      <div class="standard-field__divider"></div>
+      <mat-icon class="standard-field__close" (click)="removeStandard()">close</mat-icon>
+      <div style="clear:both;"></div>
     </div>
-    <div *ngIf="customStandard" class="standard-field__title">
-      <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>Контракт
+
+    <div *ngIf="customStandard">
+      <div class="standard-field__title-custom">
+        <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>
+        <editable-field [value]="applicationStandartResearch.customContract.name" (update)="updateCustomContractName($event)"></editable-field>
+      </div>
+      <mat-icon class="standard-field__icon-custom" (click)="selectProperty()">search</mat-icon>
+      <div class="standard-field__divider-custom"></div>
+      <mat-icon class="standard-field__close-custom" (click)="removeStandard()">close</mat-icon>
+      <div style="clear:both;"></div>
     </div>
-    <mat-icon class="standard-field__icon" (click)="selectProperty()">search</mat-icon>
-    <div class="standard-field__divider"></div>
-    <mat-icon class="standard-field__close" (click)="removeStandard()">close</mat-icon>
-    <div style="clear:both;"></div>
   </div>
   <div *ngIf="visible">
     <div *ngIf="!customStandard" click-outside (clickOutside)="onClickOutside($event)" #wrap class="wrapper-tree goods-category-property">

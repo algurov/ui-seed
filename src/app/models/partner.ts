@@ -11,6 +11,7 @@ documentNumber: string;
 documentIssued: string;
 fax: string;
 id: number;
+version: number;
 
 deserialize(input) {
   this.partnerType = input.partnerType;
@@ -22,6 +23,7 @@ deserialize(input) {
   this.documentIssued = input.documentIssued;
   this.fax = input.fax;
   this.id = input.id;
+  this.version = input.version;
   return this;
 }
 }

@@ -19,7 +19,7 @@ export class EditableField {
 
   saveAction() {
     this.edit = false;
-    this.update.emit(this.value);
+    this.update.emit(this.field.nativeElement.value);
   }
 
   discardAction() {

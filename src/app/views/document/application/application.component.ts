@@ -23,9 +23,10 @@ export class ApplicationComponent {
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private applicationService: ApplicationService, private route: ActivatedRoute) {
-      this.dialogService.block = true;
+      this.dialogService.showBlocker();
       this.route.params.subscribe(params => {
         if (params['id']) {
+            this.dialogService.block = true;
           this.id = +params['id'];
          this.applicationService.getApplicationById(this.id).subscribe(res=> {
            this.data = res;
@@ -35,7 +36,7 @@ export class ApplicationComponent {
            console.log(JSON.stringify(this.data));
          });
        } else {
-         this.dialogService.block = false;
+         //this.dialogService.block = false;
        }
       });
     }
@@ -46,17 +47,20 @@ export class ApplicationComponent {
     // this.data = JSON.parse(localStorage.getItem('application'));
     // console.log(this.data);
     // }
+
     if (!this.data.id){
     if (this.settingsService.settings.selectedPartnerId) {
+      this.dialogService.showBlocker();
       this.partnerService.getPartnerById(this.settingsService.settings.selectedPartnerId)
         .subscribe(res => {this.data.applicant = res; this.dialogService.block = false;
         if (!this.data.id){
           this.data.documentsReceiver = res;
           this.data.owner = res;
          }
+         this.dialogService.hideBlocker();
       });
     } else {
-      this.dialogService.block = false;
+    //  this.dialogService.block = false;
     }}
   }
 
@@ -64,15 +68,18 @@ export class ApplicationComponent {
       //this.data.id = 1;
       console.log(this.data);
       console.log(JSON.stringify(this.data));
-      if(!this.data.id) {
-        this.applicationService.createApplication(this.data).subscribe(res => {
-          console.log(res);
-          this.dialogService.showNotification('Заявка ' + res.number + ' сохранена');
-        });
-      } else {
-        this.applicationService.updateApplication(this.data).subscribe(res => {
-          this.dialogService.showNotification('Заявка ' + res.number + ' сохранена')});
-      }
+      // this.dialogService.showBlocker();
+      // if(!this.data.id) {
+      //   this.applicationService.createApplication(this.data).subscribe(res => {
+      //     console.log(res);
+      //     this.dialogService.hideBlocker();
+      //     this.dialogService.showNotification('Заявка ' + res.number + ' сохранена');
+      //   });
+      // } else {
+      //   this.applicationService.updateApplication(this.data).subscribe(res => {
+      //     this.dialogService.hideBlocker();
+      //     this.dialogService.showNotification('Заявка ' + res.number + ' сохранена')});
+      // }
 
 
     //localStorage.setItem('application', JSON.stringify(this.data));
