@@ -65,11 +65,15 @@ export class StandardField {
       }
     });
     dialogRef.componentInstance.propertySelected.subscribe(item => {
+      //delete item.uuid;
+      //delete item.children;
       this.addProperty(item);
       this.dialogService.showNotification('Параметр "' +
         (item.name ? item.name : item.nameRu) + '" добавлен');
     });
     dialogRef.componentInstance.goodsCategoryPropertySelected.subscribe(item => {
+      // delete item.uuid;
+      // delete item.children;
       this.addGoodsCategoryProperty(item);
       this.dialogService.showNotification('Параметр "' +
         (item.name ? item.name : item.nameRu) + '" добавлен');
@@ -111,6 +115,8 @@ export class StandardField {
         children.push(this.wrapGoodsCategoryProperty(it));
       })
     }
+    delete item.uuid;
+    delete item.children;
     return {
       children: children,
       goodsCategoryProperty: item

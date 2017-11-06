@@ -1,3 +1,15 @@
 .field {
   width: 85%;
+  &-icon {
+    font-size: 23px;
+  }
+}
+.input-field {
+  font-weight: bold;
+}
+.field .mat-form-field-underline {
+  display: none;
+}
+.field::ng-deep .mat-input-underline {
+    display: none;
 }

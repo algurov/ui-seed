@@ -33,7 +33,7 @@ export class AppComponent {
     public dlgService : DialogService,
     public mainService: MainService,
     public SettingsService: SettingsService,
-    public dataService: DataService
+    //public dataService: DataService
   ) {
     iconReg.addSvgIcon('agent', sanitizer.bypassSecurityTrustResourceUrl('../assets/icon/icon_agent.svg'))
     .addSvgIcon('docs', sanitizer.bypassSecurityTrustResourceUrl('../assets/icon/icon_docs.svg'))

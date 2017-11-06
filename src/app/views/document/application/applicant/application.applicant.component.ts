@@ -22,15 +22,15 @@ export class ApplicationApplicantComponent {
   }
   ngOnInit() {
     if (this.data.applicant) {
-      if (this.data.owner) {
-        if (this.data.applicant.id != this.data.owner.id) {
+      if (this.data.cargoOwner) {
+        if (this.data.applicant.id != this.data.cargoOwner.id) {
           this.sameOwner = false;
         } else {
           this.sameOwner = true;
         }
       } else {
         this.sameOwner = true;
-        this.data.owner = this.data.applicant;
+        this.data.cargoOwner = this.data.applicant;
       }
       if (this.data.documentsReceiver) {
         if (this.data.applicant.id != this.data.documentsReceiver.id) {
@@ -51,7 +51,7 @@ export class ApplicationApplicantComponent {
   changeApplicant(event) {
     this.data.applicant = event;
     if (this.sameOwner) {
-      this.data.owner = this.data.applicant;
+      this.data.cargoOwner = this.data.applicant;
     }
     if (this.sameReciver) {
       this.data.documentsReceiver = this.data.applicant;
@@ -59,7 +59,7 @@ export class ApplicationApplicantComponent {
   }
 
   changeOwner(event) {
-    this.data.owner = event;
+    this.data.cargoOwner = event;
   }
 
   changeReciver(event) {
@@ -69,7 +69,7 @@ export class ApplicationApplicantComponent {
     this.sameOwner = event.checked;
     if (this.sameOwner) {
       if (this.data.applicant) {
-        this.data.owner = this.data.applicant;
+        this.data.cargoOwner = this.data.applicant;
       }
     }
 

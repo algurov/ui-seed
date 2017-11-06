@@ -70,7 +70,7 @@ export class DocumentDataBase {
   constructor(public router, public applicationService, public dlgService : DialogService) {
     dlgService.block = true;
     applicationService.getApplicationList().subscribe(res => {
-      res.forEach(item => {
+      res.content.forEach(item => {
         this.addApplication(item);
       });
       dlgService.block = false;

@@ -38,11 +38,11 @@ export class ApplicationStandardComponent {
      }
 
   ngOnInit() {
-    if (!this.data.customStandard) {
-      this.data.customStandard = {};
-    } else {
-      this.contractEmpty = false;
-    }
+    // if (!this.data.customStandard) {
+    //   //this.data.customStandard = {};
+    // } else {
+    //   this.contractEmpty = false;
+    // }
 
   }
 

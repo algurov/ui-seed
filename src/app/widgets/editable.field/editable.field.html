@@ -1,6 +1,6 @@
 <mat-form-field class="field">
-  <input [readonly]="!edit" [ngModel]="value" matInput #field />
-  <mat-icon matSuffix *ngIf="!edit" (click)="enterEditMode()">edit</mat-icon>
-  <mat-icon matSuffix *ngIf="edit" (click)="saveAction()">done</mat-icon>
-  <mat-icon matSuffix *ngIf="edit" (click)="discardAction()">close</mat-icon>
+  <input class="input-field" [readonly]="!edit" [ngModel]="value" matInput #field />
+  <mat-icon class="field-icon" matSuffix *ngIf="!edit" (click)="enterEditMode()">edit</mat-icon>
+  <mat-icon class="field-icon" matSuffix *ngIf="edit" (click)="saveAction()">done</mat-icon>
+  <mat-icon class="field-icon" matSuffix *ngIf="edit" (click)="discardAction()">close</mat-icon>
 </mat-form-field>

@@ -19,12 +19,12 @@ export class ApplicationReciverComponent {
   constructor(private stringService: StringService, private mainService: MainService) {
     this.mainService.applicationLoaded.subscribe(item => {
       if (item.cargoSender) {
-        this.sender = item.cargoSender.partnerDto;
+        this.sender = item.cargoSender.partner;
         this.senderLocation = item.cargoSender.location;
         this.senderComment = item.cargoSender.comment;
       }
       if (item.cargoReceiver) {
-        this.reciver = item.cargoReceiver.partnerDto;
+        this.reciver = item.cargoReceiver.partner;
         this.reciverLocation = item.cargoReceiver.location;
         this.reciverComment = item.cargoReceiver.comment;
       }
@@ -36,7 +36,7 @@ export class ApplicationReciverComponent {
     if (!this.data.cargoSender) {
       this.data.cargoSender = {};
     }
-    this.data.cargoSender.partnerDto = partner;
+    this.data.cargoSender.partner = partner;
   }
 
   onCargoSenderLocationChange(location) {
@@ -60,7 +60,7 @@ export class ApplicationReciverComponent {
     if (!this.data.cargoReceiver) {
       this.data.cargoReceiver = {};
     }
-    this.data.cargoReceiver.partnerDto = partner;
+    this.data.cargoReceiver.partner = partner;
   }
 
   onCargoReceiverLocationChange(location) {
@@ -81,12 +81,12 @@ export class ApplicationReciverComponent {
 
   ngOnInit() {
     if (this.data.cargoSender) {
-      this.sender = this.data.cargoSender.partnerDto;
+      this.sender = this.data.cargoSender.partner;
       this.senderLocation = this.data.cargoSender.location;
       this.senderComment = this.data.cargoSender.comment;
     }
     if (this.data.cargoReceiver) {
-      this.reciver = this.data.cargoReceiver.partnerDto;
+      this.reciver = this.data.cargoReceiver.partner;
       this.reciverLocation = this.data.cargoReceiver.location;
       this.reciverComment = this.data.cargoReceiver.comment;
     }

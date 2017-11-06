@@ -54,8 +54,15 @@ export class TableComponent {
      }
      if (column.type) {
        if (column.type == 'date') {
-         let d = new Date(element[column.column]);
-         return d.getDay() + '.' + d.getMonth() + '.' + d.getFullYear();
+         if (element[column.column]) {
+           let d = new Date(element[column.column]);
+           return d.toLocaleDateString();
+         } else {
+           return '';
+         }
+
+         //console.log(d);
+         //d.getDay() + '.' + d.getMonth() + '.' + d.getFullYear();
        }
      }
      if (column.type == 'const') {

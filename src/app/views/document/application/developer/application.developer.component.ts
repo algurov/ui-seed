@@ -9,8 +9,8 @@ import { StringService } from '../../../../services/string.service';
 export class ApplicationDeveloperComponent {
   @Input() data;
   developers = [];
-  constructor(private stringService: StringService){}
-
+  constructor(private stringService: StringService){
+  }
   addItem() {
     if (!this.data.manufacturers) {
       this.data.manufacturers = [];
@@ -20,7 +20,7 @@ export class ApplicationDeveloperComponent {
 
   onPartnerChange(guid, partner) {
     let index = this.data.manufacturers.findIndex(it => it.guid == guid);
-    this.data.manufacturers[index].partnerDto = partner;
+    this.data.manufacturers[index].partner = partner;
   }
 
   onLocationChange(guid, location) {
