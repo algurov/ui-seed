@@ -411,8 +411,12 @@ export class SelectProductDialog {
 
    selectItem(item) {
      if (item) {
-      this.selectItem = item;
-      this.dialogRef.close(this.selectItem);
+      this.selectedItem = item;
+      if (this.selectedItem.parent) {
+        delete this.selectedItem.parent.children;
+      }
+      delete this.selectedItem.children;
+      this.dialogRef.close(this.selectedItem);
     } else {
       this.dialogRef.close();
     }
