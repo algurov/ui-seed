@@ -20,7 +20,8 @@ export class ApplicationStandardComponent {
   constructor(public dialog: MatDialog,
      private stringService: StringService,
      private mainService: MainService,
-    private dialogService: DialogService) {
+    private dialogService: DialogService,
+    private taxonomyService: TaxonomyService) {
       this.subscription = this.mainService.standardParameterAdded.subscribe(item => {
          if(!this.data.applicationStandardResearches) {
            this.data.applicationStandardResearches = [];
@@ -30,9 +31,16 @@ export class ApplicationStandardComponent {
           return it.standard.id == item.id;
         } else { return false;}
          })) {
-           this.data.applicationStandardResearches.push({standard:item, applicationResearches: []});
-           this.dialogService.showNotification('Стандарт "'+ item.shortName + '" добавлен к заявке');
-           console.log(this.data.applicationStandardResearches);
+           this.taxonomyService.searchTaxonomyDataByParams('Standard', [{field: 'id', value: item.id}])
+            .subscribe(res => {
+              console.log(res.content[0]);
+              this.data.applicationStandardResearches.push({standard:res.content[0], applicationResearches: []});
+              this.dialogService.showNotification('Стандарт "'+ res.content[0].shortName + '" добавлен к заявке');
+              //console.log(this.data.applicationStandardResearches);
+            });
+          //  this.data.applicationStandardResearches.push({standard:item, applicationResearches: []});
+          //  this.dialogService.showNotification('Стандарт "'+ item.shortName + '" добавлен к заявке');
+          //  console.log(this.data.applicationStandardResearches);
          }
        });
      }

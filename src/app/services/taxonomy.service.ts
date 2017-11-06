@@ -48,4 +48,8 @@ export class TaxonomyService extends RequestBase {
     }
     return this.http.get(`${SEED_BASE_URL}/seed/`+ this.getTaxonomy(name).api +`/`+subQuery +`/`+subQueryArg + (params? `?` + paramString : ``), this.options).map(res => res.json());
   }
+
+  customQuery(query: string): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/` + query, this.options).map(res => res.json());
+  }
 }

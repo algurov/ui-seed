@@ -8,13 +8,13 @@
   <mat-checkbox color="primary" style="padding-left: 20px;">На безопасность</mat-checkbox>
   <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
   <div *ngIf="loaded">
-    <tree-root [nodes]="treeItems">
+    <tree-root [nodes]="list">
       <ng-template #treeNodeTemplate let-node let-index="index">
         <div (click)="select(node.data)">{{node.data.name}}</div>
       </ng-template>
     </tree-root>
-    <div class="list-item" *ngFor="let item of list" (click)="select(item)">
+    <!-- <div class="list-item" *ngFor="let item of list" (click)="select(item)">
       {{item.fullName}}
-    </div>
+    </div> -->
   </div>
 </mat-dialog-content>

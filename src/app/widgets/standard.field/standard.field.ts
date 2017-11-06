@@ -334,12 +334,21 @@ export class StandardPropertyDialog {
 
   ngOnInit() {
     if (!this.customStandard) {
-      let params = [{ field: 'standard.id', value: this.standard.id }, { field: 'goodsCategory.goods.id', value: this.data.goodId }];
-      this.taxonmyService.searchTaxonomyDataByParams('GoodsCategoryProperty', params).subscribe(res => {
-        this.list = res.content;
-        this.listToView = this.processData_2(this.list);
-        this.loaded = true;
-      });
+      // let params = [{ field: 'standard.id', value: this.standard.id }, { field: 'goodsCategory.goods.id', value: this.data.goodId }];
+      // this.taxonmyService.searchTaxonomyDataByParams('GoodsCategoryProperty', params).subscribe(res => {
+      //
+      //   this.list = res.content;
+      //     console.log(this.list);
+      //   this.listToView = this.processData_2(this.list);
+      //   console.log(this.listToView);
+      //   this.loaded = true;
+      // });
+      this.taxonmyService.customQuery('goodsCategoryProperty/tree?standardId='+ this.standard.id + '&goodsId=' + this.goodId)
+        .subscribe(res => {
+          this.list = res;
+          this.listToView = this.processData_2(this.list);
+          this.loaded = true;
+        });
     }
     this.taxonmyService.searchTaxonomyDataByParams('Property', []).subscribe(res => {
       this.allList = res.content;
