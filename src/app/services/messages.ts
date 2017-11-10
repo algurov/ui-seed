@@ -122,6 +122,9 @@ export const Messages = {
 
   "ADD_ROLE_DIALOG_TITLE": "Новая роль",
   "ADD_ROLE_TITLE": "Наименование",
-  "ALL_PARTNERS": "Все контрагенты"
+  "ALL_PARTNERS": "Все контрагенты",
+
+  "NEW_ACT_TITLE": "Номер пробы",
+  "ADD_ACT": "Новый акт"
 
 };

@@ -1,10 +1,10 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject,ViewChild } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { MainService } from '../../../../services/main.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TaxonomyService } from '../../../../services/taxonomy.service';
 import { DialogService } from '../../../../services/dialog.service';
-
+import { TreeComponent } from 'angular2-tree-component';
 
 @Component({
   selector: 'application-standard',
@@ -118,6 +118,8 @@ export class SelectStandardDialog {
   selectedItem: any;
   loaded = false;
   product: any;
+  @ViewChild(TreeComponent)
+  private tree: TreeComponent;
   constructor(
     private mainService: MainService,
     private stringService: StringService,
@@ -126,6 +128,16 @@ export class SelectStandardDialog {
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.dialog = dialogRef;
     this.product = data.product;
+   }
+
+   addNameFilterTree(text) {
+     this.tree.treeModel.filterNodes((node) => {
+       if (node.data.name.toLowerCase().search(text) >= 0) {
+         return true;
+       } else {
+         return false;
+       }
+     });
    }
 
    addNameFilter(name) {

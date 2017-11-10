@@ -1,0 +1,31 @@
+<div class="group group__back">
+
+    <div class="group__content">
+      <div class="group__content-first-column">
+        <mat-form-field style="width:100%!important;" class="group__item-field" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">Место отбора проб</mat-placeholder>
+          <mat-select matInput [ngModel]="selectedStorage" (change)="storageChanged($event)">
+            <mat-option *ngFor="let opt of storageOptions" [value]="opt.id">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Cостояние хранилища</mat-placeholder>
+          <input matInput [(ngModel)]="data.storageState"/>
+        </mat-form-field>
+      </div>
+      <div class="group__content-second-column">
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Номер места отбора проб</mat-placeholder>
+          <input matInput [(ngModel)]="data.number"/>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Состояние тары</mat-placeholder>
+          <input matInput [(ngModel)]="data.tareCondition"/>
+        </mat-form-field>
+      </div>
+    <div style="clear: both;"></div>
+  </div>
+  <div style="clear: both;"></div>
+</div>

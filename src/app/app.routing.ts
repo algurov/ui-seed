@@ -22,7 +22,8 @@ import { DocumentListComponent } from './views/document/document.list.component'
 import { ApplicationComponent } from './views/document/application/application.component';
 import { SettingsListComponent } from './views/settings/settings.list.component';
 import { RoleListComponent } from './views/role/role.list.component';
-
+import { ActComponent } from './views/document/act/act.component';
+import { ApplicationPreviewComponent } from './views/document/application/preview/application.preview.component';
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
@@ -40,7 +41,10 @@ export const routes: Routes = [
       { path: 'settings/taxonomy/:tax', component: TaxonomyItemComponent},
       { path: 'document', component: DocumentListComponent, data: {breadcrumb: 'Документы'}},
       { path: 'document/application', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}},
-      { path: 'document/application/:id', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}}
+      { path: 'document/application/:id', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}},
+      { path: 'document/application/:id/view', component: ApplicationPreviewComponent, data: {breadcrumb: 'Заявка'}},
+      { path: 'document/act', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
+      { path: 'document/act/:id', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

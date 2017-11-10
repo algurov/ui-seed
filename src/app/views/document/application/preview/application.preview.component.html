@@ -1,0 +1,29 @@
+<div class="application">
+  <div class="application__action">
+      <button mat-raised-button color="primary" (click)="addAct()">ДОБАВИТЬ АКТ</button>
+  </div>
+  <div>
+    <div>
+      Заявка номер: {{data.number}}
+    </div>
+    <div>
+      Создана: {{data.creationDate}}
+    </div>
+    <div>
+      Продукт: {{data.goodsName}}
+    </div>
+  </div>
+  <ng-container *ngFor="let act of actList">
+    <div style=" cursor: pointer; padding: 20px 20px; font-size: 20px; border-bottom: 1px solid #aaa;">
+      <div style="float:left; width:90%;" (click)="openAct(act.id)">
+        {{act.sampleNumber}}
+      </div>
+      <div style="float:right;">
+        <mat-icon  (click)="removeAct(act)">delete</mat-icon>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+</div>

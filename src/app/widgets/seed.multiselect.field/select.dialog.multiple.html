@@ -1,0 +1,17 @@
+<h2 matDialogTitle>{{stringService.get('SELECT_PARTNER_DIALOG_TITLE')}}</h2>
+<mat-dialog-content style="min-width: 600px;">
+  <mat-form-field>
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilter(nameFilter.value)" />
+  </mat-form-field>
+  <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+  <div *ngIf="loaded">
+    <ng-container *ngFor="let item of list">
+      <mat-checkbox color="primary" class="cbox list-item" [ngModel]="checkedArray[item.id]" (change)="selectItem($event, item)">{{item[nameField]}}</mat-checkbox>
+      <!-- <div class="list-item" (click)="selectItem(item)">
+        {{item[nameField]}}
+      </div> -->
+    </ng-container>
+
+  </div>
+</mat-dialog-content>

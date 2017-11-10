@@ -3,7 +3,7 @@ import { MainService } from '../../../services/main.service';
 import { SettingsService } from '../../../services/settings.service';
 import { PartnerService } from '../../../services/partner.service';
 import { DialogService } from '../../../services/dialog.service';
-import { ApplicationService } from '../../../services/application.service';
+import { DocumentService } from '../../../services/document.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -22,14 +22,14 @@ export class ApplicationComponent {
   };
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
-    private applicationService: ApplicationService, private route: ActivatedRoute,
+    private documentService: DocumentService, private route: ActivatedRoute,
     private router: Router) {
       this.dialogService.showBlocker();
       this.route.params.subscribe(params => {
         if (params['id']) {
             this.dialogService.block = true;
           this.id = +params['id'];
-         this.applicationService.getApplicationById(this.id).subscribe(res=> {
+         this.documentService.getApplicationById(this.id).subscribe(res=> {
            this.data = res;
            if (this.data.manufacturers) {
              if (this.data.manufacturers.length > 0) {
@@ -106,14 +106,14 @@ export class ApplicationComponent {
       console.log(JSON.stringify(this.data));
       this.dialogService.showBlocker();
       if(!this.data.id) {
-        this.applicationService.createApplication(this.data).subscribe(res => {
+        this.documentService.createApplication(this.data).subscribe(res => {
           console.log(res);
           this.dialogService.hideBlocker();
           this.router.navigate(['main/document']);
           this.dialogService.showNotification('Заявка ' + res.number + ' сохранена');
         });
       } else {
-        this.applicationService.updateApplication(this.data).subscribe(res => {
+        this.documentService.updateApplication(this.data).subscribe(res => {
           console.log(res);
           console.log(JSON.stringify(res));
           this.dialogService.hideBlocker();

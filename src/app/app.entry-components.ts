@@ -8,6 +8,7 @@ import { SelectStandardDialog } from './views/document/application/standard/appl
 import { StandardPropertyDialog } from './widgets/standard.field/standard.field';
 import { RoleAddDialog } from './views/role/role.add.dialog';
 import { SelectLaboratoryDialog } from './widgets/seed.select.field/seed.select.field';
+import { SelectDialogMultiple } from './widgets/seed.multiselect.field/seed.multiselect.field';
 
 export const APP_ENTRY_COMPONENTS = [
   MessageDialogComponent,
@@ -21,5 +22,6 @@ export const APP_ENTRY_COMPONENTS = [
   SelectStandardDialog,
   StandardPropertyDialog,
   RoleAddDialog,
-  SelectLaboratoryDialog
+  SelectLaboratoryDialog,
+  SelectDialogMultiple
 ];

@@ -22,4 +22,6 @@ export class MainService {
   public applicationRemoved: EventEmitter<any> = new EventEmitter<any>();
   public applicationLoaded: EventEmitter<any> = new EventEmitter<any>();
 
+  public actLoaded: EventEmitter<any> = new EventEmitter<any>();
+
 }

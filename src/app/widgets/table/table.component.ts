@@ -11,7 +11,7 @@ import { DialogService } from '../../services/dialog.service';
 import { PartnerService } from '../../services/partner.service';
 import { MainService } from '../../services/main.service';
 import { DataService } from '../../services/data.service';
-import { ApplicationService } from '../../services/application.service';
+import { DocumentService } from '../../services/document.service';
 
 @Component({
   selector: 'table',
@@ -22,13 +22,14 @@ export class TableComponent {
   cols = [];
   constructor(private stringService: StringService, private router: Router, private dlgService: DialogService,
       private partnerService: PartnerService, private mainService: MainService, private route: ActivatedRoute,
-      private dataService: DataService, private applicationService: ApplicationService){
+      private dataService: DataService, private documentService: DocumentService){
 
   }
   @Input() displayedColumns;
   @Input() dataSource;
   @Input() edit;
   @Input() remove;
+  @Input() view;
 
    editRow(row){
      this.edit(row);
@@ -36,6 +37,10 @@ export class TableComponent {
 
    deleteRow(row) {
      this.remove(row);
+   }
+
+   viewRow(row) {
+     this.view(row);
    }
 
    ngOnInit() {
@@ -56,7 +61,7 @@ export class TableComponent {
        if (column.type == 'date') {
          if (element[column.column]) {
            let d = new Date(element[column.column]);
-           return d.toLocaleDateString();
+           return this.dataService.convertDate(d);
          } else {
            return '';
          }

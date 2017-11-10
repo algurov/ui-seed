@@ -78,7 +78,9 @@ export class ApplicationParamsComponent {
 
   onResearchTypeChange(event: MatSelectChange) {
     this.stateResearchType = event.value;
-    this.data.researchType = this.researchType.find(item => item.id == event.value);
+    let found = this.researchType.find(item => item.id == event.value);
+    this.data.researchType = Object.assign({},found);
+    delete this.data.researchType.children;
   }
 
   onTartgetDocumentsChange(event : MatSelectChange) {

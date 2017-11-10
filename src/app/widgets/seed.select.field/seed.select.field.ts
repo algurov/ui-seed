@@ -4,6 +4,7 @@ import { StringService } from '../../services/string.service';
 import { PartnerService } from '../../services/partner.service';
 import { TaxonomyService } from '../../services/taxonomy.service';
 import { Location } from '../../models/location';
+import { Observable } from 'rxjs';
 
 
 
@@ -14,8 +15,12 @@ import { Location } from '../../models/location';
 })
 export class SeedSelectField {
   @Input() code;
+  @Input() selectDataRequest: Observable<any>;
+  selectData: any;
   @Input() placeholder;
   @Input() placeholderType: boolean = true;
+  @Input() request: Observable<any>;
+  @Input() nameField: string;
   _data : any = {};
   @Input() set data(value: any) {
     if (value) {

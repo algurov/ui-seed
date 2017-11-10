@@ -54,6 +54,20 @@ import { RoleAddDialog } from './views/role/role.add.dialog';
 import { SelectLaboratoryDialog } from './widgets/seed.select.field/seed.select.field';
 import { ProductField } from './widgets/product.field/product.field';
 import { EditableField } from './widgets/editable.field/editable.field';
+import { ActComponent } from './views/document/act/act.component';
+import { ActTitleComponent } from './views/document/act/title/act.title.component';
+import { ActInfoComponent } from './views/document/act/info/act.info.component';
+import { ActContactorComponent } from './views/document/act/contactor/act.contactor.component';
+import { ActProductComponent } from './views/document/act/product/act.product.component';
+import { ActTransportationComponent } from './views/document/act/transportation/act.transportation.component';
+import { ActProofComponent } from './views/document/act/proof/act.proof.component';
+import { ActWeightComponent } from './views/document/act/weight/act.weight.component';
+import { ActPlaceComponent } from './views/document/act/place/act.place.component';
+import { ActQualityComponent } from './views/document/act/quality/act.quality.component';
+import { ActStampComponent } from './views/document/act/stamp/act.stamp.component';
+import { ActAdditionalComponent } from './views/document/act/additional/act.additional.component';
+import { ApplicationPreviewComponent } from './views/document/application/preview/application.preview.component';
+import { SeedMutiselectField, SelectDialogMultiple } from './widgets/seed.multiselect.field/seed.multiselect.field';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -111,5 +125,20 @@ export const APP_DECLARATIONS = [
   RoleAddDialog,
   SelectLaboratoryDialog,
   ProductField,
-  EditableField
+  EditableField,
+  ActComponent,
+  ActTitleComponent,
+  ActInfoComponent,
+  ActContactorComponent,
+  ActProductComponent,
+  ActTransportationComponent,
+  ActProofComponent,
+  ActWeightComponent,
+  ActPlaceComponent,
+  ActQualityComponent,
+  ActStampComponent,
+  ActAdditionalComponent,
+  ApplicationPreviewComponent,
+  SeedMutiselectField,
+  SelectDialogMultiple
 ];

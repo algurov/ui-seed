@@ -9,8 +9,13 @@ export const menuItems = [
     actions: [
       {
         name: 'ADD_APPLICATION',
-        action: 'ADD_APPLICATION'
-      }
+        action: 'ADD_APPLICATION',
+        visibleOn: 'main/document'
+      },
+      // {
+      //   name: 'ADD_ACT',
+      //   action: 'ADD_ACT'
+      // }
     ],
     top: true
   },

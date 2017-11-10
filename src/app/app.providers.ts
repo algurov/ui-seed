@@ -9,7 +9,7 @@ import { FlowService } from './services/flow.service';
 import { PartnerService } from './services/partner.service';
 import { SettingsService } from './services/settings.service';
 import { TaxonomyService } from './services/taxonomy.service';
-import { ApplicationService } from './services/application.service';
+import { DocumentService } from './services/document.service';
 import { DataService } from './services/data.service';
 import { RoleService } from './services/role.service';
 
@@ -25,7 +25,7 @@ export const APP_PROVIDERS = [
   PartnerService,
   SettingsService,
   TaxonomyService,
-  ApplicationService,
+  DocumentService,
   DataService,
   RoleService
 ];

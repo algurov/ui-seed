@@ -1,0 +1,8 @@
+<div>
+  <mat-form-field (click)="openDialog()" [floatPlaceholder]="placeholderType? 'always': 'auto'" class="field">
+    <mat-placeholder [ngClass]="{'holder': placeholderType}" >{{placeholder}}</mat-placeholder>
+    <input matInput  [value]="getTitle()" [disabled]="!enabled" readonly="true"/>
+    <mat-icon matSuffix [ngClass]="{'activated': enabled, 'disabled': !enabled}" (click)="openDialog()">search</mat-icon>
+  </mat-form-field>
+
+</div>

@@ -1,0 +1,49 @@
+<div class="group">
+
+    <div class="group__content">
+      <div class="group__content-full-width">
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Состояние продукта</mat-placeholder>
+          <input matInput [(ngModel)]="data.productQuality"/>
+        </mat-form-field>
+      </div>
+      <div class="group__content-first-column">
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Цвет</mat-placeholder>
+          <input matInput [(ngModel)]="data.productColor"/>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Зараженность вредителями</mat-placeholder>
+          <input matInput [(ngModel)]="data.productInfection"/>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Общая масса проб, кг</mat-placeholder>
+          <input matInput [(ngModel)]="data.totalMassSample" type="number"/>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Вид упаковки</mat-placeholder>
+          <input matInput [(ngModel)]="data.packingTypeSample"/>
+        </mat-form-field>
+      </div>
+      <div class="group__content-second-column">
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Запах</mat-placeholder>
+          <input matInput [(ngModel)]="data.productSmell"/>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Однородность</mat-placeholder>
+          <input matInput [(ngModel)]="data.productHomogeneity"/>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Масса пробы, гр</mat-placeholder>
+          <input matInput [(ngModel)]="data.massSample" type="number"/>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Количество проб</mat-placeholder>
+          <input matInput [(ngModel)]="data.samplesCount" type="number"/>
+        </mat-form-field>
+      </div>
+    <div style="clear: both;"></div>
+  </div>
+  <div style="clear: both;"></div>
+</div>

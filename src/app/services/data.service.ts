@@ -40,4 +40,9 @@ export class DataService {
   getDataFromList(code, value) {
     return this.dataMap[code].find(item => item.value == value).title;
   }
+
+  convertDate(date){
+  let newDate = date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear();
+  return newDate;
+  }
 }

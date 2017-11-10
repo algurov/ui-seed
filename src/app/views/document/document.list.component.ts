@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MainService } from '../../services/main.service';
 import { Router } from '@angular/router';
-import { ApplicationService } from '../../services/application.service';
+import { DocumentService } from '../../services/document.service';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -20,35 +20,42 @@ export class DocumentListComponent {
   dataSource : DocumentDataSource;
   documentDb: DocumentDataBase;
   applicationList : Array<any> = new Array<any>();
-  constructor(public mainService: MainService, public router: Router, private applicationService: ApplicationService,
+
+  constructor(public mainService: MainService, public router: Router, private documentService: DocumentService,
     private dlgService: DialogService) {
     this.subscription.push(this.mainService.menuActionPerformed.subscribe(item => {
       if (item == 'ADD_APPLICATION') {
         this.newOrder();
       }
+      if (item == 'ADD_ACT') {
+        this.newAct();
+      }
     }));
     this.subscription.push(this.mainService.applicationRemoved.subscribe(item => {
       this.documentDb.removeApplication(item);
     }));
-    this.documentDb = new DocumentDataBase(router, applicationService, dlgService);
+    this.documentDb = new DocumentDataBase(router, documentService, dlgService);
     this.dataSource = new DocumentDataSource(this.documentDb);
   }
 
   editApplication(application) {
     this.router.navigate(['main/document/application/' + application.id]);
   }
+
+  viewApplication(application) {
+      this.router.navigate(['main/document/application/' + application.id +'/view']);
+  }
+
   removeApplication(application) {
     this.dlgService.showBlocker();
-    this.applicationService.deleteApplication(application).subscribe(res => {
+    this.documentService.deleteApplication(application).subscribe(res => {
         this.mainService.applicationRemoved.emit(application);
         this.dlgService.hideBlocker();
         this.dlgService.showNotification('Заявка удалена');
     });
   }
   ngOnInit() {
-    this.applicationService.getApplicationList().subscribe(res => {
-       this.applicationList = res;
-    });
+
   }
   ngOnDestroy() {
     this.subscription.forEach(item => {
@@ -58,18 +65,24 @@ export class DocumentListComponent {
   newOrder() {
     this.router.navigate(['main/document/application']);
   }
+
+  newAct() {
+    this.router.navigate(['main/document/act']);
+  }
+
   openApplication(id) {
     this.router.navigate(['main/document/application/' + id]);
   }
+
 }
 
 export class DocumentDataBase {
   dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   get data(): any[] { return this.dataChange.value; }
 
-  constructor(public router, public applicationService, public dlgService : DialogService) {
+  constructor(public router, public documentService, public dlgService : DialogService) {
     dlgService.block = true;
-    applicationService.getApplicationList().subscribe(res => {
+    documentService.getApplicationList().subscribe(res => {
       res.content.forEach(item => {
         this.addApplication(item);
       });
@@ -84,7 +97,7 @@ export class DocumentDataBase {
   changeSearch(params) {
     this.dataChange.next([]);
     this.dlgService.block = true;
-    this.applicationService.searchPartnersByParams(params).subscribe(res => {
+    this.documentService.searchPartnersByParams(params).subscribe(res => {
       res.content.forEach(item => {
         this.addApplication(item);
       });

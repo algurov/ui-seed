@@ -1,0 +1,36 @@
+<div class="group">
+  <button class="group__button" mat-raised-button (click)="addItem()">ДОБАВИТЬ ПРЕДСТАВИТЕЛЯ</button>
+  <div class="group__content">
+    <div *ngFor="let agent of data.agents">
+      <div class="group__content-full-width" style="padding-top: 40px;">
+        <div class="group__content-first-column">
+          <mat-form-field floatPlaceholder="always" class="group__field">
+            <mat-placeholder class="group__placeholder">Имя представителя</mat-placeholder>
+            <input matInput [(ngModel)]="agent.personName"/>
+          </mat-form-field>
+        </div>
+        <div class="group__content-second-column-44">
+          <mat-form-field floatPlaceholder="always" class="group__field">
+            <mat-placeholder class="group__placeholder">Должность</mat-placeholder>
+            <input matInput [(ngModel)]="agent.personPosition"/>
+          </mat-form-field>
+      </div>
+      <div class="group__close-icon"><mat-icon (click)="removeItem(agent)">close</mat-icon></div>
+      <div class="group__content-full-width">
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Наименование организации представителя</mat-placeholder>
+          <input matInput [(ngModel)]="agent.organizationName"/>
+        </mat-form-field>
+      </div>
+      <div class="group__content-full-width">
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Подтверждающий документ</mat-placeholder>
+          <input matInput [(ngModel)]="agent.document"/>
+        </mat-form-field>
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    <div style="clear: both;"></div>
+  </div>
+  </div>
+</div>

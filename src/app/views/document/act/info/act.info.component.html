@@ -1,0 +1,30 @@
+<div class="group group__back">
+  <div class="group__content">
+    <div class="group__content-full-width">
+      <mat-form-field floatPlaceholder="always" class="group__field">
+        <mat-placeholder class="group__placeholder">Место составления акта</mat-placeholder>
+        <input matInput [(ngModel)]="data.placeDrawingUpAct"/>
+      </mat-form-field>
+    </div>
+    <div class="group__content-first-column">
+      <mat-form-field floatPlaceholder="always" class="group__field">
+        <mat-placeholder class="group__placeholder">Уполномоченное лицо</mat-placeholder>
+        <input matInput [(ngModel)]="data.authorizedPersonName"/>
+      </mat-form-field>
+    </div>
+    <div class="group__content-second-column">
+      <mat-form-field floatPlaceholder="always" class="group__field">
+        <mat-placeholder class="group__placeholder">Должность</mat-placeholder>
+        <input matInput [(ngModel)]="data.authorizedPersonPosition"/>
+      </mat-form-field>
+    </div>
+    <!-- <div style="clear:both;"></div> -->
+  </div>
+  <div class="group__content-full-width">
+    <mat-form-field floatPlaceholder="always" class="group__field">
+      <mat-placeholder class="group__placeholder">Управление Россельхознадзора и(или) испытательная лаборатория</mat-placeholder>
+      <input matInput [(ngModel)]="data.organizationComposingAct"/>
+    </mat-form-field>
+  </div>
+  <div style="clear:both;"></div>
+</div>

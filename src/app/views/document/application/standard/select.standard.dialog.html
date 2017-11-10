@@ -2,7 +2,7 @@
 <mat-dialog-content style="min-width: 600px;">
   <mat-form-field>
     <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
-    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilter(nameFilter.value)" />
+    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup)="addNameFilterTree(nameFilter.value)" />
   </mat-form-field>
   <mat-checkbox color="primary" style="padding-left: 20px;">На качество</mat-checkbox>
   <mat-checkbox color="primary" style="padding-left: 20px;">На безопасность</mat-checkbox>

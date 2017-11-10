@@ -1,0 +1,45 @@
+<div class="group">
+
+    <div class="group__content">
+      <div class="group__content-first-column">
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Отправитель</mat-placeholder>
+          <input matInput [ngModel]="sender" readonly="true"/>
+        </mat-form-field>
+        <!-- <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Место хранения</mat-placeholder>
+          <input matInput [(ngModel)]="data.goodsName"/>
+        </mat-form-field> -->
+        <mat-form-field style="width:100%!important;" class="group__item-field" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">Место хранения</mat-placeholder>
+          <mat-select matInput [ngModel]="selectedStorage" (change)="storageChanged($event)">
+            <mat-option *ngFor="let opt of storageOptions" [value]="opt.id">
+              {{opt.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Номер накладной</mat-placeholder>
+          <input matInput [(ngModel)]="data.invoiceNumber"/>
+        </mat-form-field>
+      </div>
+      <div class="group__content-second-column">
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Пункт отправления</mat-placeholder>
+          <input matInput [(ngModel)]="data.pointDeparture"/>
+        </mat-form-field>
+        <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-placeholder class="group__placeholder">Номер места хранения</mat-placeholder>
+          <input matInput [(ngModel)]="data.transportNumber"/>
+        </mat-form-field>
+        <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">Дата поступления</mat-placeholder>
+          <input matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    <div style="clear: both;"></div>
+  </div>
+  <div style="clear: both;"></div>
+</div>
