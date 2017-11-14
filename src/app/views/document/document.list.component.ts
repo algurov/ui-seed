@@ -47,12 +47,17 @@ export class DocumentListComponent {
   }
 
   removeApplication(application) {
-    this.dlgService.showBlocker();
-    this.documentService.deleteApplication(application).subscribe(res => {
-        this.mainService.applicationRemoved.emit(application);
-        this.dlgService.hideBlocker();
-        this.dlgService.showNotification('Заявка удалена');
-    });
+    this.dlgService.showConfirm('Удаление заявки', 'Подтвердите удаление заявки').subscribe(res => {
+      if (res) {
+        this.dlgService.showBlocker();
+        this.documentService.deleteApplication(application).subscribe(res => {
+            this.mainService.applicationRemoved.emit(application);
+            this.dlgService.hideBlocker();
+            this.dlgService.showNotification('Заявка удалена');
+        });
+      }
+    })
+
   }
   ngOnInit() {
 

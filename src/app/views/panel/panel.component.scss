@@ -1,69 +1,4 @@
 @import '../../variables';
-.toolbar-left {
-  height: 80px !important;
-  background-color: $logo-back-color;
-  text-align: center;
-}
-
-.toolbar-left > mat-icon {
-  padding-top: 5px;
-  height: 70px;
-  width: 70px;
-  fill: white;
-}
-
-.tab-container {
-  height: 200px;
-}
-.mat-form-field {
-  width: 100%;
-}
-
-.field {
-  margin-top: 5px;
-}
-
-.mat-tab-label {
-  min-width: 80px !important;
-}
-.tabs {
-  min-height: 290px;
-}
- .header {
-   background-color: #3498DB;
- }
-
- .main-container-left {
-   height: 100%;
-   background-color: $main-blue-color;
- }
-
- .login-button {
-   background-color: #3498DB;
-   color: white;
-   min-height: 35px;
- }
-
- .header-icon {
-   font-size: 96px;
-   margin: auto;
- }
-
- .menu-div {
-   text-align: center;
-   margin-top: 20px;
-   :hover {
-     cursor: pointer;
-   }
- }
- .menu-icon {
-   height: 25px;
-   width: 25px;
-   fill: white;
-   margin: auto;
- }
-
- ////new
 
  .nav {
      width: 80px;
@@ -119,32 +54,66 @@
      height: 100%;
      background: #F5F5F5; /* gray 100 */
  }
+ .context__branch-content {
+   float:left;
+   width: 80%;
+   //padding: 20px 20px;
+   padding-top: 20px;
+   padding-left: 20px;
+   padding-bottom: 20px;
+
+   //text-align: center;
+ }
  .context__branch {
      position: relative;
-     padding: 20px 40px 20px 20px;
-     //min-height: 80px;
+
+     height: 80px;
      font-weight: bold;
      font-size: 14px;
      color: #546E7A; /* blue gray 600 */
      background: #ECEFF1; /* blue gray 50 */
  }
- .context__branch:after {
-     content: "\e90e";
-     font-family: 'icomoon' !important;
-     speak: none;
-     font-style: normal;
-     font-weight: normal;
-     font-variant: normal;
-     text-transform: none;
-     line-height: 1;
+ // .context__branch:after {
+ //     content: "\e90e";
+ //     font-family: 'icomoon' !important;
+ //     speak: none;
+ //     font-style: normal;
+ //     font-weight: normal;
+ //     font-variant: normal;
+ //     text-transform: none;
+ //     line-height: 1;
+ //
+ //     /* Better Font Rendering =========== */
+ //     -webkit-font-smoothing: antialiased;
+ //     -moz-osx-font-smoothing: grayscale;
+ //
+ //     position: absolute;
+ //     top: 30px;
+ //     right: 20px;
+ // }
+ .context__branch-icon {
+   float: left;
+   width: 1%;
+   cursor: pointer;
+   padding-top: 20px;
+   padding-right: 20px;
+  // padding: 20px 5px;
+   //content: "\e90e";
+   //font-family: 'icomoon' !important;
+   //speak: none;
+   //font-style: normal;
+   //font-weight: normal;
+   //font-variant: normal;
+   //text-transform: none;
+   //line-height: 1;
 
-     /* Better Font Rendering =========== */
-     -webkit-font-smoothing: antialiased;
-     -moz-osx-font-smoothing: grayscale;
+   /* Better Font Rendering =========== */
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
 
-     position: absolute;
-     top: 30px;
-     right: 20px;
+   // position: absolute;
+   // top: 20px;
+   // right: 20px;
  }
  .context__links {
      padding: 40px 0px 20px 0px;

@@ -47,8 +47,15 @@
 
 <div class="context">
     <div class="context__branch">
-        Казанский филиал ФГУП «Центр оценки качества зерна»
+      <div class="context__branch-content">
+        <!-- Казанский филиал ФГУП «Центр оценки качества зерна» -->
+        {{getTitle()}}
+      </div>
+        <div class="context__branch-icon" (click)="performAction({action: 'SELECT_BRANCH'})">
+          <i class="icon-icon_arrow-down"></i>
+        </div>
     </div>
+
 
     <div class="context__links">
         <div (click)="item.action? performAction(item): changeSelectedItem(item)" class="context-link" *ngFor="let item of selectedItem.sub">

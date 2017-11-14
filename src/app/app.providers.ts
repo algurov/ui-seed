@@ -12,6 +12,7 @@ import { TaxonomyService } from './services/taxonomy.service';
 import { DocumentService } from './services/document.service';
 import { DataService } from './services/data.service';
 import { RoleService } from './services/role.service';
+import { BranchOfficeService } from './services/branch.service';
 
 export const APP_PROVIDERS = [
   UserService,
@@ -27,5 +28,6 @@ export const APP_PROVIDERS = [
   TaxonomyService,
   DocumentService,
   DataService,
-  RoleService
+  RoleService,
+  BranchOfficeService
 ];

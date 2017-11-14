@@ -68,7 +68,7 @@ import { ActStampComponent } from './views/document/act/stamp/act.stamp.componen
 import { ActAdditionalComponent } from './views/document/act/additional/act.additional.component';
 import { ApplicationPreviewComponent } from './views/document/application/preview/application.preview.component';
 import { SeedMutiselectField, SelectDialogMultiple } from './widgets/seed.multiselect.field/seed.multiselect.field';
-
+import { SelectBranchDialog } from './views/main/select.branch.dialog/select.branch.dialog';
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -140,5 +140,6 @@ export const APP_DECLARATIONS = [
   ActAdditionalComponent,
   ApplicationPreviewComponent,
   SeedMutiselectField,
-  SelectDialogMultiple
+  SelectDialogMultiple,
+  SelectBranchDialog
 ];

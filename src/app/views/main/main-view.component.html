@@ -15,13 +15,13 @@
                   </div>
                   <div class="toolbar__card-content">
                     <div>{{authService.getShortName()}}</div>
-                    <div>
+                    <!-- <div>
                       <mat-select #partnerSelect [ngModel]="selectedPartnerId" (ngModelChange)="partnerChange($event)" class="toolbar__card-select" floatPlaceholder="never" placeholder="{{stringService.get('SELECT_PARTNER')}}">
                         <mat-option *ngFor="let partner of partners" [value]="partner.id">
                           {{ partner.name }}
                         </mat-option>
                       </mat-select>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>

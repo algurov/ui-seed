@@ -109,7 +109,6 @@ export class PartnerListComponent {
     this.dlgService.showNotification('Контрагент удален');
   }
 
-
   deletePartner(item) {
     this.dlgService.showConfirm('Удаление контрагента', 'Вы уверены, что хотите удалить контрагента?')
     .subscribe(res => {if (res) {

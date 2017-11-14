@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material';
 import { AddPartnerDialog } from '../views/partner/add.partner.dialog';
 import { AddTaxonomyDialog } from '../views/taxonomy/add.taxonomy.dialog';
 import { SelectTaxonomyDialog } from '../views/taxonomy/select/select.taxonomy.dialog';
+import { SelectBranchDialog } from '../views/main/select.branch.dialog/select.branch.dialog';
 
 @Injectable()
 export class DialogService {
@@ -64,5 +65,9 @@ export class DialogService {
         dialogRef.componentInstance.message = message;
 
         return dialogRef.afterClosed();
+  }
+
+  showSelectBranchDialog() {
+    let dlg = this.dialog.open(SelectBranchDialog);
   }
 }

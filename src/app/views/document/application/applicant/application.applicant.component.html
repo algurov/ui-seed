@@ -3,7 +3,7 @@
     <i class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>{{data.applicant? data.applicant.name: ''}}
   </div>
   <div *ngIf="visible" class="applicant-collapsable">
-    <div class="applicant__data">
+    <div class="applicant__data" *ngIf="data.applicant">
       <div>{{getDocumentTitle(data.applicant.documentType)}} : {{data.applicant.documentNumber}}</div>
       <div>Адрес: {{data.applicant.address}}</div>
       <div>Телефон: {{data.applicant.contactPhones}}</div>

@@ -10,6 +10,7 @@ import { Partner } from '../../models/partner';
 import { PartnerService } from '../../services/partner.service';
 import { SettingsService } from '../../services/settings.service';
 import { DataService } from '../../services/data.service';
+import { DialogService } from '../../services/dialog.service';
 
 @Component({
   selector: 'main-view',
@@ -30,10 +31,16 @@ export class MainViewComponent {
   constructor(private authService : AuthService, private router: Router,
      private main : MainService, private stringService: StringService,
       private partnerService: PartnerService, private settingsService: SettingsService,
-      private dataService: DataService) {
+      private dataService: DataService, private dialogService: DialogService) {
         this.main.partnerAdded.subscribe(item => this.refreshPartners());
         this.main.partnerUpdated.subscribe(item => this.refreshPartners());
         this.main.partnerDeleted.subscribe(item => this.refreshPartners());
+        this.main.menuActionPerformed.subscribe(item => {
+          if (item == 'SELECT_BRANCH') {
+            this.dialogService.showSelectBranchDialog();
+          //  this.dialogService.showMessageDlg('title', 'message');
+          }
+        });
   }
 
   refreshPartners() {

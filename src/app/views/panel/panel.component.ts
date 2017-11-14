@@ -9,6 +9,9 @@ import { menuItems } from './menu.items';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { API_BASE_URL } from '../../services/constants';
+import { SettingsService } from '../../services/settings.service';
+import { PartnerService } from '../../services/partner.service';
+import { BranchOfficeService } from '../../services/branch.service';
 
 @Component({
   selector: 'panel',
@@ -21,8 +24,11 @@ export class PanelComponent {
 topViews: Array<any> = new Array();
 botViews: Array<any> = new Array();
 selectedItem: any;
+partner: any;
+branchOffice: any;
 constructor(public dlgService: DialogService, public main : MainService, public stringService: StringService,
-  public router : Router, public auth : AuthService, public route: ActivatedRoute){
+  public router : Router, public auth : AuthService, public route: ActivatedRoute, public settingsService: SettingsService,
+  public partnerService: PartnerService, public branchOfficeService: BranchOfficeService){
   menuItems.forEach(item => {
     if (item.top) {
       this.topViews.push(item);
@@ -36,6 +42,27 @@ constructor(public dlgService: DialogService, public main : MainService, public 
       this.logout();
     }
   });
+  this.main.branchOfficeSelectedForUser.subscribe(res => this.refresh(true));
+  this.main.partnerSelectedForUser.subscribe(res => this.refresh(true));
+  this.refresh(false);
+}
+
+refresh(reload) {
+  this.dlgService.showBlocker();
+  if (this.settingsService.settings.selectedPartnerId) {
+    this.partnerService.getPartnerById(this.settingsService.settings.selectedPartnerId).subscribe(res => {
+      this.partner = res;
+      this.dlgService.hideBlocker();
+
+    });
+  }
+  if (this.settingsService.settings.selectedBranchOfficeId) {
+    this.branchOfficeService.getBranchOfficeById(this.settingsService.settings.selectedBranchOfficeId).subscribe(res => {
+      this.branchOffice = res;
+    this.dlgService.hideBlocker();
+
+    });
+  }
 }
 
 findSelectedItem(url: string, items: Array<any>) {
@@ -53,9 +80,9 @@ findSelectedItem(url: string, items: Array<any>) {
 changeSelectedItem(item) {
   this.router.navigate([item.link]);
 }
- ngAfterContentInit() {
-    //this.toggleSideNav(menuItems[0]);
- }
+ngOnInit() {
+
+}
 
 toggleSideNav(item) {
   // let data = {
@@ -106,4 +133,16 @@ logout() {
   });
 }
 
+getTitle() {
+  if (this.settingsService.settings.selectedPartnerId) {
+    if (this.partner) {
+      return this.partner.name;
+    }
+  }
+  if (this.settingsService.settings.selectedBranchOfficeId) {
+    if (this.branchOffice) {
+      return this.branchOffice.fullName;
+    }
+  }
+}
 }

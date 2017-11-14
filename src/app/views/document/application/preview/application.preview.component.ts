@@ -39,12 +39,17 @@ export class ApplicationPreviewComponent {
   }
 
   removeAct(act) {
-    this.dialogService.showBlocker();
-    this.documentService.deleteAct(act).subscribe(res => {
+    this.dialogService.showConfirm('Удаление акта отбора пробы', 'Подтвердиде удаление акта отбора пробы').subscribe(res => {
+      if (res) {
+        this.dialogService.showBlocker();
+        this.documentService.deleteAct(act).subscribe(res => {
 
-    this.actList.splice(this.actList.findIndex(item => item.id == act.id), 1);
-    this.dialogService.hideBlocker();
+        this.actList.splice(this.actList.findIndex(item => item.id == act.id), 1);
+        this.dialogService.hideBlocker();
+        });
+      }
     });
+
   }
 
   openAct(id) {

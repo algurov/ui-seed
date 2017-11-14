@@ -10,7 +10,10 @@ export class MainService {
   public partnerAdded: EventEmitter<any> = new EventEmitter<any>();
   public partnerUpdated: EventEmitter<any> = new EventEmitter<any>();
   public partnerDeleted: EventEmitter<any> = new EventEmitter<any>();
+
   public partnerSelectedForUser: EventEmitter<any> = new EventEmitter<any>();
+  public branchOfficeSelectedForUser: EventEmitter<any> = new EventEmitter<any>();
+
   public populateSettings: EventEmitter<any> = new EventEmitter<any>();
 
   public menuActionPerformed: EventEmitter<any> = new EventEmitter<any>();
