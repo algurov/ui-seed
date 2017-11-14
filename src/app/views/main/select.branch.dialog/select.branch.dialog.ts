@@ -17,6 +17,8 @@ export class SelectBranchDialog {
   loaded = false;
   partnerList: Array<any>;
   branchList: Array<any>;
+  partnerFilterParams = [];
+
   constructor(
     private stringService: StringService,
     private partnerService: PartnerService,
@@ -27,11 +29,35 @@ export class SelectBranchDialog {
     this.dialog = dialogRef;
    }
 
+   addPartnerFilterParam(param) {
+     let found = this.partnerFilterParams.findIndex(item => item.field == param.field);
+     if (found >= 0 ) {
+       if (param.value == '') {
+         this.partnerFilterParams.splice(found, 1);
+       } else {
+          this.partnerFilterParams[found].value = param.value;
+       }
+     } else {
+       this.partnerFilterParams.push(param);
+     }
+   }
    addNameFilterPartner(name) {
      name = name.trim();
-     let params = [{field:'name', value: name}];
+     let param = {field:'name', value: name};
+     this.addPartnerFilterParam(param);
      this.loaded = false;
-     this.partnerService.searchPartnersByParams(params).subscribe(res => {
+     this.partnerService.searchPartnersByParams(this.partnerFilterParams).subscribe(res => {
+       this.partnerList = res.content;
+       this.loaded = true;
+     });
+   }
+
+   addNumberFilterPartner(number) {
+     number = number.trim();
+     let param = {field: 'documentNumber', value: number};
+     this.addPartnerFilterParam(param);
+     this.loaded = false;
+     this.partnerService.searchPartnersByParams(this.partnerFilterParams).subscribe(res => {
        this.partnerList = res.content;
        this.loaded = true;
      });

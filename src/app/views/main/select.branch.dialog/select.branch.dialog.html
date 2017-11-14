@@ -25,10 +25,14 @@
         <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
         <input matInput #nameFilter2 placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilterPartner(nameFilter2.value)" />
       </mat-form-field>
+      <mat-form-field style="padding-left: 20px;">
+        <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+        <input matInput #numberFilter placeholder="Поиск по номеру" (keyup.enter)="addNumberFilterPartner(numberFilter.value)" />
+      </mat-form-field>
       <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
       <div *ngIf="loaded">
         <div class="list-item" *ngFor="let partner of partnerList" (click)="selectPartner(partner.id)">
-          {{partner.name}}
+          {{partner.name}} - {{partner.documentNumber}}
         </div>
       </div>
     </mat-tab>
