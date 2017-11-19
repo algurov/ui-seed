@@ -52,8 +52,12 @@ export class ActComponent {
     console.log(this.data);
     this.documentService.updateAct(this.data).subscribe(res => {
       this.data = res;
-      this.dialogService.hideBlocker();
-      this.dialogService.showNotification('Акт сохранен');
+      this.documentService.getApplicationByActId(this.data.id).subscribe(res => {
+        this.dialogService.hideBlocker();
+          this.dialogService.showNotification('Акт сохранен');
+        this.router.navigate(['main/document/application/' + res.id + '/view']);
+      });
+
     });
 
   }

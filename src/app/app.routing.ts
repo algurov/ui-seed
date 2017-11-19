@@ -24,6 +24,8 @@ import { SettingsListComponent } from './views/settings/settings.list.component'
 import { RoleListComponent } from './views/role/role.list.component';
 import { ActComponent } from './views/document/act/act.component';
 import { ApplicationPreviewComponent } from './views/document/application/preview/application.preview.component';
+import { DirectionComponent } from './views/document/direction/direction.component';
+
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
@@ -45,6 +47,8 @@ export const routes: Routes = [
       { path: 'document/application/:id/view', component: ApplicationPreviewComponent, data: {breadcrumb: 'Заявка'}},
       { path: 'document/act', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
       { path: 'document/act/:id', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
+      { path: 'document/assignment/:id', component: DirectionComponent, data: {breadcrumb: 'Направление'}},
+      { path: 'document/assignment', component: DirectionComponent, data: {breadcrumb: 'Направление'}}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

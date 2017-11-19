@@ -27,4 +27,9 @@ export class MainService {
 
   public actLoaded: EventEmitter<any> = new EventEmitter<any>();
 
+  public directionLoaded: EventEmitter<any> = new EventEmitter<any>();
+
+  public updateAssignmentTreeItem: EventEmitter<any> = new EventEmitter<any>();
+  public standardChecked: EventEmitter<any> = new EventEmitter<any>();
+
 }

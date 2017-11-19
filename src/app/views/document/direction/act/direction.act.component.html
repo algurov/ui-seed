@@ -1,0 +1,27 @@
+<div class="group">
+  <div class="group__content">
+    <div class="group__content-first-column">
+      <div class="group__content-first-column">
+        <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">Номер пробы</mat-placeholder>
+          <input matInput [(ngModel)]="sampleNumber" readonly="true"/>
+        </mat-form-field>
+      </div>
+      <div class="group__content-second-column">
+        <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">Срок исполнения</mat-placeholder>
+          <input matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="group__content-second-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Продукт</mat-placeholder>
+        <input matInput [ngModel]="productName" readonly="true"/>
+      </mat-form-field>
+    </div>
+</div>
+<div style="clear:both;"></div>
+</div>

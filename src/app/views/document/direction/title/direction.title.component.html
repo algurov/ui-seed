@@ -1,0 +1,25 @@
+<div class="group">
+  <div class="title-text">Направление по заявке {{getApplicationTitle()}}</div>
+  <div class="group__content" style="padding-top: 20px;">
+    <div class="group__content-first-column">
+      <div class="group__content-first-column">
+        <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">Номер документа</mat-placeholder>
+          <input matInput [(ngModel)]="data.number"/>
+        </mat-form-field>
+      </div>
+      <div class="group__content-second-column">
+        <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
+          <input matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="group__content-second-column">
+      <seed-select-field code="laboratory" (change)="onLaboratoryChange($event)" [data]="data.laboratory" placeholder="{{stringService.get('APPLICATION_LAB_TITLE')}}"></seed-select-field>
+    </div>
+</div>
+<div style="clear:both;"></div>
+</div>

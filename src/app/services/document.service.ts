@@ -57,6 +57,14 @@ export class DocumentService extends RequestBase {
     return this.http.get(`${SEED_BASE_URL}/seed/act`, this.options).map(res => res.json());
   }
 
+  getApplicationByActId(actId): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/application/byAct/` + actId, this.options).map(res => res.json());
+  }
+
+  getActListForApplication(applicationId): Observable<any> {
+      return this.http.get(`${SEED_BASE_URL}/seed/act?application.id=` + applicationId, this.options).map(res => res.json());
+  }
+
   getActById(id) : Observable<any> {
     return this.http.get(`${SEED_BASE_URL}/seed/act/` + id, this.options).map(res => res.json());
   }
@@ -67,6 +75,30 @@ export class DocumentService extends RequestBase {
 
   deleteAct(act): Observable<any> {
     return this.http.delete(`${SEED_BASE_URL}/seed/act/` + act.id, this.options)
+    .map(res => res.json());
+  }
+
+  createAssignment(actId) : Observable<any> {
+    return this.http.post(`${SEED_BASE_URL}/seed/assignment/` + actId, {}, this.options).map(res => res.json());
+  }
+
+  getAssignmentList() : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/assignment`, this.options).map(res => res.json());
+  }
+
+  getAssignmentListByApplication(applicationId): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/assignment?application.id=` + applicationId, this.options).map(res => res.json());
+  }
+  getAssignmentById(id) : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/assignment/` + id, this.options).map(res => res.json());
+  }
+
+  updateAssignment(assignment): Observable<any> {
+    return this.http.put(`${SEED_BASE_URL}/seed/assignment`, assignment, this.options).map(res => res.json());
+  }
+
+  deleteAssignment(assignment): Observable<any> {
+    return this.http.delete(`${SEED_BASE_URL}/seed/assignment/` + assignment.id, this.options)
     .map(res => res.json());
   }
 }

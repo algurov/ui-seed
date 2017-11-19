@@ -5,6 +5,7 @@ import { PartnerService } from '../../../../services/partner.service';
 import { DialogService } from '../../../../services/dialog.service';
 import { DocumentService } from '../../../../services/document.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'application-preview',
@@ -14,7 +15,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ApplicationPreviewComponent {
   id: number;
   data: any = {};
+  assignmentList: Array<any> = new Array<any>();
   actList: Array<any> = new Array<any>();
+  observableGroup: Observable<any> = new Observable<any>();
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
@@ -52,13 +55,41 @@ export class ApplicationPreviewComponent {
 
   }
 
+  removeAssignment(assignment) {
+    this.dialogService.showConfirm('Удаление направления', 'Подтвердиде удаление направления').subscribe(res => {
+      if (res) {
+        this.dialogService.showBlocker();
+        this.documentService.deleteAssignment(assignment).subscribe(res => {
+
+        this.assignmentList.splice(this.assignmentList.findIndex(item => item.id == assignment.id), 1);
+        this.dialogService.hideBlocker();
+        });
+      }
+    });
+
+  }
+  addDirection(act) {
+    this.documentService.createAssignment(act.id).subscribe(res => {
+        this.router.navigate(['main/document/assignment/' + res.id]);
+    });
+  }
+
   openAct(id) {
     this.router.navigate(['main/document/act/' + id]);
   }
 
+  openAssignment(id) {
+    this.router.navigate(['main/document/assignment/' + id]);
+  }
+
   ngOnInit() {
-    this.documentService.getActList().subscribe(res => {
+    this.dialogService.showBlocker();
+    this.documentService.getActListForApplication(this.id).subscribe(res => {
        this.actList = res.content;
+    });
+    this.documentService.getAssignmentListByApplication(this.id).subscribe(res => {
+      this.assignmentList = res.content;
+      this.dialogService.hideBlocker();
     });
   }
 

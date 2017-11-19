@@ -10,6 +10,8 @@ import { RoleAddDialog } from './views/role/role.add.dialog';
 import { SelectLaboratoryDialog } from './widgets/seed.select.field/seed.select.field';
 import { SelectDialogMultiple } from './widgets/seed.multiselect.field/seed.multiselect.field';
 import { SelectBranchDialog } from './views/main/select.branch.dialog/select.branch.dialog';
+import { ParamTreeDialog } from './views/document/direction/param.tree/param.tree';
+import { SelectFieldDialog } from './widgets/select.field/select.field';
 
 export const APP_ENTRY_COMPONENTS = [
   MessageDialogComponent,
@@ -25,5 +27,7 @@ export const APP_ENTRY_COMPONENTS = [
   RoleAddDialog,
   SelectLaboratoryDialog,
   SelectDialogMultiple,
-  SelectBranchDialog
+  SelectBranchDialog,
+  ParamTreeDialog,
+  SelectFieldDialog
 ];

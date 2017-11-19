@@ -1,0 +1,16 @@
+<div class="group">
+
+    <div class="group__content">
+        <div class="group__content-full-width">
+          Нормативные документы
+        </div>
+      <div class="group__content-full-width" style="padding-top: 20px; padding-bottom: 20px;" *ngFor="let option of researchStandardOptions">
+        <mat-checkbox [value]="option.id" [(ngModel)]="option.checked" class="cbox" color="primary" (change)="changeStandardSelection($event)">{{getStandardTitle(option.value)}}</mat-checkbox>
+      </div>
+        <div class="group__content-full-width">
+          <param-tree [data]="data"></param-tree>
+        </div>
+    <div style="clear: both;"></div>
+  </div>
+  <div style="clear: both;"></div>
+</div>

@@ -1,0 +1,53 @@
+<h2 matDialogTitle>{{stringService.get('SELECT_PROPERTY_DIALOG_TITLE')}}</h2>
+<mat-dialog-content style="min-width: 600px; height: 600px;">
+  <mat-tab-group *ngIf="!customStandard">
+    <mat-tab [label]="standard? standard.shortName: ''">
+      <mat-form-field>
+        <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+        <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup)="addNameFilterTree(nameFilter.value)" />
+      </mat-form-field>
+      <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+      <div *ngIf="loaded && loadedAll">
+        <!-- <ng-container *ngFor="let item of listToView">
+          <div class="list-item" (click)="selectGoodsCategoryProperty(item)">
+            {{item.name}}
+          </div>
+          <div style="padding-left: 40px;" class="list-item" *ngFor="let subItem of item.children" (click)="selectGoodsCategoryProperty(subItem)">
+            {{subItem.name}}
+          </div>
+        </ng-container> -->
+        <div class="wrapper">
+          <tree-root [options]="options" [nodes]="listToView">
+            <ng-template #treeNodeTemplate let-node let-index="index">
+              <div (click)="selectGoodsCategoryProperty(node.data)">{{node.data.name}}</div>
+            </ng-template>
+          </tree-root>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Все параметры">
+      <mat-form-field>
+        <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+        <input matInput #nameFilter2 placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilterAll(nameFilter2.value)" />
+      </mat-form-field>
+      <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+      <div *ngIf="loaded && loadedAll">
+        <div class="list-item" *ngFor="let item of allList" (click)="selectProperty(item)">
+          {{item.nameRu}}
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <ng-container *ngIf="customStandard">
+    <mat-form-field>
+      <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+      <input matInput #nameFilter2 placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilterAll(nameFilter2.value)" />
+    </mat-form-field>
+    <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+    <div *ngIf="loadedAll">
+      <div class="list-item" *ngFor="let item of allList" (click)="selectProperty(item)">
+        {{item.nameRu}}
+      </div>
+    </div>
+  </ng-container>
+</mat-dialog-content>

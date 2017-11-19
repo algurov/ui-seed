@@ -1,0 +1,20 @@
+<div class="field">
+  <mat-checkbox class="cbox tree-checkbox" color="primary" [ngModel]="config.data.checked" (change)="onCheckChange($event)"></mat-checkbox>
+  <div class="toggle" *ngIf="isToggleVisible(config)">
+  <color-toggle [value]="config.data.value.applicationResearch.propertyType" (onChange)="onStateChanged($event)"></color-toggle>
+</div>
+  <mat-form-field class="short-field">
+    <input matInput [value]="getPropertyName()" readonly="true"/>
+  </mat-form-field>
+  <div class="units">{{getPropertyUnit()}}</div>
+
+    <mat-form-field class="short-field-extra">
+      <input matInput placeholder="значение" [ngModel]="config.data.value.value" (keyup)="onValueChanged($event)"/>
+    </mat-form-field>
+    <select-field class="short-field-extra" placeholder="ГОСТ" [data]="config.data.value.standard" (change)="onStandardChanged($event)" taxonomy="Standard" [taxonomyParams]="taxonomyParams" nameField="fullName" nameFieldToView="shortName"></select-field>
+    <mat-form-field class="short-field-extra" >
+      <input matInput placeholder="текст" [ngModel]="config.data.value.textValue" (keyup)="onTextValueChanged($event)"/>
+    </mat-form-field>
+
+  <mat-icon class="close-icon" (click)="removeItem()">close</mat-icon>
+</div>

@@ -69,6 +69,16 @@ import { ActAdditionalComponent } from './views/document/act/additional/act.addi
 import { ApplicationPreviewComponent } from './views/document/application/preview/application.preview.component';
 import { SeedMutiselectField, SelectDialogMultiple } from './widgets/seed.multiselect.field/seed.multiselect.field';
 import { SelectBranchDialog } from './views/main/select.branch.dialog/select.branch.dialog';
+import { DirectionComponent } from './views/document/direction/direction.component';
+import { DirectionTitleComponent } from './views/document/direction/title/direction.title.component';
+import { DirectionActComponent } from './views/document/direction/act/direction.act.component';
+import { DirectionDocumentComponent } from './views/document/direction/document/direction.document.component';
+import { DirectionAdditionalComponent } from './views/document/direction/additional/direction.additional.component';
+import { DirectionParamsComponent } from './views/document/direction/params/direction.params.component';
+import { ParamTree, ParamTreeDialog } from './views/document/direction/param.tree/param.tree';
+import { ParamNode } from './views/document/direction/param.node/param.node';
+import { SelectField, SelectFieldDialog } from './widgets/select.field/select.field';
+
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -141,5 +151,16 @@ export const APP_DECLARATIONS = [
   ApplicationPreviewComponent,
   SeedMutiselectField,
   SelectDialogMultiple,
-  SelectBranchDialog
+  SelectBranchDialog,
+  DirectionComponent,
+  DirectionTitleComponent,
+  DirectionActComponent,
+  DirectionDocumentComponent,
+  DirectionAdditionalComponent,
+  DirectionParamsComponent,
+  ParamTree,
+  ParamTreeDialog,
+  ParamNode,
+  SelectField,
+  SelectFieldDialog
 ];

@@ -13,15 +13,40 @@
       Продукт: {{data.goodsName}}
     </div>
   </div>
+  <div class="text-title">Список актов отбора проб</div>
   <ng-container *ngFor="let act of actList">
-    <div style=" cursor: pointer; padding: 20px 20px; font-size: 20px; border-bottom: 1px solid #aaa;">
+    <div style=" cursor: pointer; padding: 20px 20px; border-bottom: 1px solid #aaa;">
       <div style="float:left; width:90%;" (click)="openAct(act.id)">
         {{act.sampleNumber}}
       </div>
+
       <div style="float:right;">
-        <mat-icon  (click)="removeAct(act)">delete</mat-icon>
+        <mat-icon matTooltip="Удалить" matTooltipPosition="above" (click)="removeAct(act)">delete</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon matTooltip="Редактировать" matTooltipPosition="above"  (click)="openAct(act.id)">edit</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon matTooltip="Добавить направление" matTooltipPosition="above" (click)="addDirection(act)">forward</mat-icon>
       </div>
 
+    </div>
+
+  </ng-container>
+
+  <div class="text-title">Список направлений</div>
+  <ng-container *ngFor="let assignment of assignmentList">
+    <div style=" cursor: pointer; padding: 20px 20px; border-bottom: 1px solid #aaa;">
+      <div style="float:left; width:90%;" (click)="openAssignment(act.id)">
+        {{assignment.number}}
+      </div>
+
+      <div style="float:right;">
+        <mat-icon matTooltip="Удалить" matTooltipPosition="above"  (click)="removeAssignment(assignment)">delete</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon  matTooltip="Редактировать" matTooltipPosition="above" (click)="openAssignment(assignment.id)">edit</mat-icon>
+      </div>
     </div>
 
   </ng-container>
