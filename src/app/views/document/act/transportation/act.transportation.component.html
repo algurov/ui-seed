@@ -11,7 +11,7 @@
           <input matInput [(ngModel)]="data.goodsName"/>
         </mat-form-field> -->
         <mat-form-field style="width:100%!important;" class="group__item-field" floatPlaceholder="always">
-          <mat-placeholder class="group__placeholder">Место хранения</mat-placeholder>
+          <mat-placeholder class="group__placeholder">Транспорт</mat-placeholder>
           <mat-select matInput [ngModel]="selectedStorage" (change)="storageChanged($event)">
             <mat-option *ngFor="let opt of storageOptions" [value]="opt.id">
               {{opt.name}}
