@@ -31,5 +31,8 @@ export class MainService {
 
   public updateAssignmentTreeItem: EventEmitter<any> = new EventEmitter<any>();
   public standardChecked: EventEmitter<any> = new EventEmitter<any>();
+  public contractChecked: EventEmitter<any> = new EventEmitter<any>();
+
+  public menuChange: EventEmitter<any> = new EventEmitter<any>();
 
 }

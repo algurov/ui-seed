@@ -26,7 +26,7 @@ export class DirectionComponent {
           this.id = +params['id'];
          this.documentService.getAssignmentById(this.id).subscribe(res=> {
            this.data = res;
-           console.log(JSON.stringify(this.data));
+           console.log(this.data);
            this.mainService.directionLoaded.emit(this.data);
            this.dialogService.block = false;
          });
@@ -51,14 +51,17 @@ export class DirectionComponent {
     this.beforeSave();
     this.dialogService.showBlocker();
     console.log('toSave');
-    console.log(JSON.stringify(this.data));
+    console.log(this.data);
     this.documentService.updateAssignment(this.data).subscribe(res => {
       this.data = res;
       console.log('response');
-      console.log(JSON.stringify(this.data));
-      this.dialogService.hideBlocker();
-      this.router.navigate(['main/document/application/' + this.data.application.id + '/view']);
-      this.dialogService.showNotification('Направление сохранено');
+      console.log(this.data);
+      this.documentService.getApplicationByActId(this.data.act.id).subscribe(r => {
+        this.dialogService.hideBlocker();
+        this.router.navigate(['main/document/application/' + r.id + '/view']);
+        this.dialogService.showNotification('Направление сохранено');
+      });
+
     });
 
   }

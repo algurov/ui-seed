@@ -24,14 +24,16 @@ export const menuItems = [
     icon: 'files',
     activator: 2,
     sub: [],
-    top: true
+    top: true,
+    actions:[]
   },
   {
     name: 'TASKS',
     icon: 'task',
     activator: 3,
     sub: [],
-    top: true
+    top: true,
+    actions:[]
   },
   {
     name: 'AGENT',
@@ -69,6 +71,7 @@ export const menuItems = [
     link: 'main/settings',
     activator: 0,
     top: false,
+    actions:[],
     sub: [
       {
         name: 'USERS_TITLE',
@@ -105,6 +108,7 @@ export const menuItems = [
     activator: 5,
     sub: [],
     top: false,
-    action: 'logout'
+    action: 'logout',
+    actions:[]
   }
 ];

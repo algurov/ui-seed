@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, Inject, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Inject, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StringService } from '../../../../services/string.service';
 import { MainService } from '../../../../services/main.service';
@@ -14,8 +14,8 @@ import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular2-tree-
   styleUrls: ['./param.tree.scss']
 })
 export class ParamTree {
-  lastSelectedNode :any;
-  options : ITreeOptions = {
+  lastSelectedNode: any;
+  options: ITreeOptions = {
     idField: 'uuid'
   };
   @Input() assignment;
@@ -33,201 +33,280 @@ export class ParamTree {
   visible: boolean = true;
   constructor(private dialog: MatDialog, private dialogService: DialogService,
     private dataService: DataService, private mainService: MainService) {
-      this.mainService.directionLoaded.subscribe(item => {
-        this.data = item;
-        console.log(this.data);
-        this.initNodes();
-      });
-      this.mainService.standardChecked.subscribe(item => {
-        if (item.checked) {
-          this.addStandardNodes(item.standard);
-          //this.nodes = this.nodes.filter(it => it.value.applicationResearch.goodsCategoryProperty.standard.id == item.standard.id);
-        } else {
-          this.nodes = this.nodes.filter(it => it.value.applicationResearch.goodsCategoryProperty.standard.id != item.standard.id);
-        }
-        this.tree.treeModel.update();
-      });
-     }
-
-  addStandardNodes(standard) {
-
-    this.data.application.applicationStandardResearches.forEach(item => {
-      if (!item.customContract) {
-        item.applicationResearches.forEach(it => {
-          if (it.goodsCategoryProperty.standard.id == standard.id) {
-            let node = this.wrapNode(it);
-            this.nodes.push(node);
-          }
-        });
-      }
+    this.mainService.directionLoaded.subscribe(item => {
+      this.data = item;
+      this.initNodes();
     });
+    // this.mainService.standardChecked.subscribe(item => {
+    //   if (item.checked) {
+    //     if (item.standard['@c']=='.CustomContract') {
+    //       this.addStandardNodes(item.standard);
+    //     } else {
+    //       this.addStandardNodes(item.standard);
+    //     }
+    //   } else {
+    //     this.nodes = this.nodes.filter(it => {
+    //       if (it.source != 'custom') {
+    //         if (it.source['@c'] != ".CustomContract") {
+    //           return  it.source.id != item.standard.id;
+    //         } else {
+    //           if (item.standard.id != it.source.id) return true;
+    //         }
+    //
+    //       }
+    //
+    //     });
+    //   }
+    //   this.tree.treeModel.update();
+    // });
+  }
 
-  this.tree.treeModel.update();
-}
+  //   addStandardNodes(standard) {
+  //     this.data.application.applicationStandardResearches.forEach(item => {
+  //     if (!item.customContract) {
+  //         item.applicationResearches.forEach(it => {
+  //           if (it.goodsCategoryProperty.standard.id == standard.id) {
+  //             let node = this.wrapNode(it);
+  //             this.nodes.push(node);
+  //           }
+  //         });
+  //       } else {
+  //         item.applicationResearches.forEach(it => {
+  //           if (it.property) {
+  //             let node = this.wrapNode(it);
+  //             this.nodes.push(node);
+  //           }
+  //         });
+  //       }
+  //     });
+  //
+  //   this.tree.treeModel.update();
+  // }
 
   ngOnInit() {
 
   }
 
-  unwrap(node) {
-    let result = node.value;
-    if (result.propertyType) {
-    delete result.propertyType;
+  unwrapNew(node) {
+    let result = node.data.value;
     let children = [];
-    if(result.children) {
-        result.children.forEach(child => {
-            children.push(this.unwrap(child));
-        });
-    }
-    result.children = children;
+    if (node.children) {
+      node.children.forEach(child => {
+        children.push(this.unwrapNew(child));
+
+      });
+      result.children = children;
     }
     return result;
   }
 
+  // unwrap(node) {
+  //   let result = node.value;
+  //   if (result.propertyType) {
+  //   delete result.propertyType;
+  //   let children = [];
+  //   if(result.children) {
+  //       result.children.forEach(child => {
+  //           children.push(this.unwrap(child));
+  //       });
+  //   }
+  //   result.children = children;
+  //   }
+  //   return result;
+  // }
+
   onNodeStandardChange(event) {
-      if (event.standard) {
-        let found = this.findItemInTree(event.value.data.value.applicationResearch, this.data.assignmentResearches);
-        if (found) {
-          found.standard = event.standard;
-        }
-      }
-  }
-
-  onNodeValueChange(event) {
-      let found = this.findItemInTree(event.value.data.value.applicationResearch, this.data.assignmentResearches);
+    if (event.standard) {
+      let found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
       if (found) {
-        found.value = event.val;
-      }
-  }
-
-  onNodeTextValueChange(event) {
-      let found = this.findItemInTree(event.value.data.value.applicationResearch, this.data.assignmentResearches);
-      if (found) {
-        found.textValue = event.val;
-      }
-  }
-
-  onNodeStateChange(event) {
-    let unwrapped = this.unwrap(event.value.data);
-      if (event.checked) {
-          if(event.value.parent.data.virtual) {
-            this.data.assignmentResearches.push(unwrapped);
-          } else {
-            this.addWithParent(event.value, unwrapped);
-          }
-      } else {
-        if(event.value.parent.data.virtual) {
-          let index = this.data.assignmentResearches.findIndex(item => item.applicationResearch.id == unwrapped.applicationResearch.id);
-          if (index >= 0) {
-            this.data.assignmentResearches.splice(index, 1);
-          }
-        } else {
-          this.removeFromParent(event.value);
-        }
-
-      }
-      console.log(this.data.assignmentResearches);
-  }
-
-  removeFromParent(node) {
-    let parent = node.parent.data.value.applicationResearch;
-    let found = this.findItemInTree(parent, this.data.assignmentResearches);
-    if (found) {
-      let index = found.children.findIndex(item => item.applicationResearch.id == node.data.value.applicationResearch.id);
-      if (index >= 0) {
-        found.children.splice(index, 1);
+        found.standard = event.standard;
       }
     }
   }
 
-  addWithParent(node, value) {
+  onNodeValueChange(event) {
+    let found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+    if (found) {
+      found.value = event.val;
+    }
+  }
+
+  onNodeTextValueChange(event) {
+    let found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+    if (found) {
+      found.textValue = event.val;
+    }
+  }
+
+  onNodeStateChange(event) {
+    console.log(event);
+    let unwrapped = this.unwrapNew(event.value);
+    if (event.checked) {
+      if (event.value.parent.data.virtual) {
+        let found = this.data.assignmentResearches.find(item => item.id == unwrapped.id);
+        found.visibleForLaboratory = event.checked;
+      } else {
+        this.selectWithParent(event.value, unwrapped);
+      }
+
+    } else {
+      let found = this.data.assignmentResearches.find(item => item.id == unwrapped.id);
+      if (found) {
+        found.visibleForLaboratory = false;
+        this.deselectAllChildren(found);
+      }
+
+    }
+    //  let unwrapped = this.unwrap(event.value.data);
+    // if (event.checked) {
+    //     if(event.value.parent.data.virtual) {
+    //       this.data.assignmentResearches.push(unwrapped);
+    //     } else {
+    //       this.addWithParent(event.value, unwrapped);
+    //     }
+    // } else {
+    //   if(event.value.parent.data.virtual) {
+    //     let index = this.data.assignmentResearches.findIndex(item => item.applicationResearch.id == unwrapped.applicationResearch.id);
+    //     if (index >= 0) {
+    //       this.data.assignmentResearches.splice(index, 1);
+    //     }
+    //   } else {
+    //     this.removeFromParent(event.value);
+    //   }
+    //
+    // }
+    console.log(this.data.assignmentResearches);
+  }
+  deselectAllChildren(assignmentResearch) {
+    assignmentResearch.children.forEach(child => {
+      child.visibleForLaboratory = false;
+      if (child.children.length > 0) {
+        this.deselectAllChildren(child);
+      }
+    });
+  }
+  // removeFromParent(node) {
+  //   let parent = node.parent.data.value.applicationResearch;
+  //   let found = this.findItemInTree(parent, this.data.assignmentResearches);
+  //   if (found) {
+  //     let index = found.children.findIndex(item => item.applicationResearch.id == node.data.value.applicationResearch.id);
+  //     if (index >= 0) {
+  //       found.children.splice(index, 1);
+  //     }
+  //   }
+  // }
+
+  // addWithParent(node, value) {
+  //   let path = node.path;
+  //   let parentArray = [];
+  //   path.forEach(pathItem => {
+  //     parentArray.push(this.tree.treeModel.getNodeById(pathItem));
+  //   });
+  //   this.addAssignmentResearchWithParents(parentArray, value, null);
+  // }
+
+  selectWithParent(node, value) {
     let path = node.path;
     let parentArray = [];
     path.forEach(pathItem => {
       parentArray.push(this.tree.treeModel.getNodeById(pathItem));
     });
-    this.addAssignmentResearchWithParents(parentArray, value, null);
+    this.selectAssignmentResearchWithParents(parentArray);
   }
 
-  addAssignmentResearchWithParents(parentArray, value, parent) {
-    if (parentArray.length > 0) {
-      if (parentArray.length > 1) {
-        let item = parentArray[0];
-        parentArray.splice(0, 1);
-        let val = null;
-        val = this.unwrap(item.data);
-
-        let found = null;
-        if (parent) {
-          found = this.findItemInTree(val.applicationResearch, parent.children);
-        } else {
-          found = this.findItemInTree(val.applicationResearch, this.data.assignmentResearches);
-        }
-        if (!found) {
-          if (parent) {
-            parent.children.push(val);
-          } else {
-            this.data.assignmentResearches.push(val);
-          }
-          found = val;
-        }
-        this.addAssignmentResearchWithParents(parentArray, value, found);
-      } else {
-        if (parent) {
-          parent.children.push(value);
-        } else {
-          this.data.assignmentResearches.push(value);
-        }
-      }
-    } else {
-      return;
-    }
-
-  }
-  initNodes() {
-    if (this.data && this.data.application) {
-    this.data.application.applicationStandardResearches.forEach(item => {
-      if (!item.customContract) {
-        item.applicationResearches.forEach(it => {
-          let node = this.wrapNode(it);
-          this.nodes.push(node);
-        });
-      }
+  selectAssignmentResearchWithParents(parentArray) {
+    parentArray.forEach(item => {
+      let found = this.findItemInTree(item.data.value, this.data.assignmentResearches);
+      found.visibleForLaboratory = true;
     });
   }
-  this.tree.treeModel.update();
-}
 
-  wrapNode(applicationResearch) {
+  // addAssignmentResearchWithParents(parentArray, value, parent) {
+  //   if (parentArray.length > 0) {
+  //     if (parentArray.length > 1) {
+  //       let item = parentArray[0];
+  //       parentArray.splice(0, 1);
+  //       let val = null;
+  //       val = this.unwrap(item.data);
+  //
+  //       let found = null;
+  //       if (parent) {
+  //         found = this.findItemInTree(val.applicationResearch, parent.children);
+  //       } else {
+  //         found = this.findItemInTree(val.applicationResearch, this.data.assignmentResearches);
+  //       }
+  //       if (!found) {
+  //         if (parent) {
+  //           parent.children.push(val);
+  //         } else {
+  //           this.data.assignmentResearches.push(val);
+  //         }
+  //         found = val;
+  //       }
+  //       this.addAssignmentResearchWithParents(parentArray, value, found);
+  //     } else {
+  //       if (parent) {
+  //         parent.children.push(value);
+  //       } else {
+  //         this.data.assignmentResearches.push(value);
+  //       }
+  //     }
+  //   } else {
+  //     return;
+  //   }
+  //
+  // }
+  initNodes() {
+    if (this.data) {
+      this.data.assignmentResearches.forEach(item => {
+        let node = this.wrapNode(item);
+        this.nodes.push(node);
+      });
+
+
+      // this.data.application.applicationStandardResearches.forEach(item => {
+      //   if (!item.customContract) {
+      //     item.applicationResearches.forEach(it => {
+      //       let node = this.wrapNode(it, item.standard);
+      //       this.nodes.push(node);
+      //     });
+      //   } else {
+      //     item.applicationResearches.forEach(it => {
+      //       let node = this.wrapNode(it, item.customContract);
+      //       this.nodes.push(node);
+      //     });
+      //   }
+      // });
+    }
+    console.log(this.nodes);
+    this.tree.treeModel.update();
+  }
+
+  wrapNode(assignmentResearch) {
     let children = [];
     let checked = false;
-    applicationResearch.children.forEach(child => {
+    assignmentResearch.children.forEach(child => {
       children.push(this.wrapNode(child));
     });
 
-  //  let found = this.data.assignmentResearches.find(item => item.applicationResearch.id == applicationResearch.id);
-  // let found = this.findItemInTree(applicationResearch, this.data.assignmentResearches);
-   //console.log(found);
-   let found = this.findItemInTree(applicationResearch, this.data.assignmentResearches);
-    if (found) {
-      checked = true;
-    }
+    //  let found = this.data.assignmentResearches.find(item => item.applicationResearch.id == applicationResearch.id);
+    // let found = this.findItemInTree(applicationResearch, this.data.assignmentResearches);
+    //console.log(found);
+    //let found = this.findItemInTree(applicationResearch, this.data.assignmentResearches);
+    //if (found) {
+    //  checked = true;
+    //}
     return {
-      checked: checked,
+      checked: assignmentResearch.visibleForLaboratory,
       children: children,
-      value: {
-        applicationResearch: applicationResearch,
-        standard: found? found.standard: null,
-        textValue: found? found.textValue: null,
-        value: found? found.value: null
-      }
+      value: assignmentResearch
     }
   }
 
   findItemInTree(item, arr: Array<any>) {
     let found = null;
     for (let i = 0; i < arr.length && !found; i++) {
-      if (arr[i].applicationResearch.id == item.id) {
+      if (arr[i].id == item.id) {
         found = arr[i];
       } else {
         if (arr[i].children) {
@@ -239,27 +318,23 @@ export class ParamTree {
   }
 
   toggleVisible() {
-    this.visible = ! this.visible;
+    this.visible = !this.visible;
   }
 
   selectProperty() {
     this.lastSelectedNode = this.tree.treeModel.getFocusedNode();
     let dialogRef = this.dialog.open(ParamTreeDialog, {
       data: {
-        standards: this.assignment.standards,
+        standards: this.data.standards,
         goodId: this.data.goods.id
       }
     });
     dialogRef.componentInstance.propertySelected.subscribe(item => {
-      //delete item.uuid;
-      //delete item.children;
       this.addProperty(item);
       this.dialogService.showNotification('Параметр "' +
         (item.name ? item.name : item.nameRu) + '" добавлен');
     });
     dialogRef.componentInstance.goodsCategoryPropertySelected.subscribe(item => {
-      // delete item.uuid;
-      // delete item.children;
       this.addGoodsCategoryProperty(item);
       this.dialogService.showNotification('Параметр "' +
         (item.name ? item.name : item.nameRu) + '" добавлен');
@@ -269,12 +344,9 @@ export class ParamTree {
     });
   }
 
-  addItem(item) {
-    this.addNewItem(item);
-  }
-
   addGoodsCategoryProperty(item) {
-    this.addNewItem(this.wrapGoodsCategoryProperty(item));
+    this.addNewItem(this.wrapGoodsCategoryProperty(item, item.standard));
+
   }
 
   addProperty(item) {
@@ -289,50 +361,91 @@ export class ParamTree {
       })
     }
     return {
+      checked: false,
       children: children,
-      property: item
+      value: {
+        customName: null,
+        minValue: null,
+        maxValue: null,
+        customText: null,
+        researchCondition: null,
+        property: item,
+        children: children,
+        goodsCategoryProperty: null,
+        textValue: null,
+        value: null
+      }
     }
   }
 
-  wrapGoodsCategoryProperty(item) {
+  wrapGoodsCategoryProperty(item, source) {
     let children = [];
     if (item.children) {
       item.children.forEach(it => {
-        children.push(this.wrapGoodsCategoryProperty(it));
+        children.push(this.wrapGoodsCategoryProperty(it, source));
       })
     }
     delete item.uuid;
     delete item.children;
     return {
+      checked: false,
       children: children,
-      goodsCategoryProperty: item
+      value: {
+        customName: null,
+        minValue: null,
+        maxValue: null,
+        customText: null,
+        researchCondition: null,
+        property: null,
+        children: children,
+        goodsCategoryProperty: item,
+        textValue: null,
+        value: null
+      }
     }
   }
 
-onClickOutside(ev) {
-  if(ev.value == true) {
-    this.tree.treeModel.setFocusedNode(null);
-    this.tree.treeModel.setActiveNode(null, null);
+  onClickOutside(ev) {
+    if (ev.value == true) {
+      this.tree.treeModel.setFocusedNode(null);
+      this.tree.treeModel.setActiveNode(null, null);
+    }
   }
-}
+  removeChecked(research) {
+    let result = research.value;
+    let children = [];
+    if (research.value.children) {
+      research.value.children.forEach(child => {
+        children.push(this.removeChecked(child));
+
+      });
+      result.children = children;
+    }
+    return result;
+  }
+
   addNewItem(item) {
-    // if (this.lastSelectedNode) {
-    //   this.insertItemToTree(item, this.lastSelectedNode.data, this.applicationStandartResearch.applicationResearches);
-    // } else {
-    //   if (!this.applicationStandartResearch.applicationResearches) {
-    //     this.applicationStandartResearch.applicationResearches = [];
-    //   }
-    //   this.applicationStandartResearch.applicationResearches.push(item);
-    // }
-    // this.tree.treeModel.update();
-    // if (this.wrap) {
-    //   this.wrap.nativeElement.style = "height: auto;";
-    // }
-    // if (this.wrap2) {
-    //   this.wrap2.nativeElement.style = "height: auto;";
-    // }
+    console.log(item);
+    if (this.lastSelectedNode) {
+      this.insertItemToTree(item, this.lastSelectedNode.data, this.nodes);
+      let found = this.findItemInTree(this.lastSelectedNode.data.value, this.data.assignmentResearches);
+      found.children.push(this.removeChecked(item));
+    } else {
+      if (!this.nodes) {
+        this.nodes = [];
+      }
+      this.nodes.push(item);
+      this.data.assignmentResearches.push(this.removeChecked(item));
+    }
+    this.tree.treeModel.update();
+    if (this.wrap) {
+      this.wrap.nativeElement.style = "height: auto;";
+    }
+    if (this.wrap2) {
+      this.wrap2.nativeElement.style = "height: auto;";
+    }
 
-
+    console.log(this.data.assignmentResearches);
   }
 
   removeItem(item) {
@@ -383,19 +496,21 @@ onClickOutside(ev) {
   styleUrls: ['./param.tree.dialog.scss']
 })
 export class ParamTreeDialog {
-  options : ITreeOptions = {
+  options: ITreeOptions = {
     idField: 'uuid'
   };
-  @ViewChild(TreeComponent)
-  private tree: TreeComponent;
+  @ViewChildren(TreeComponent)
+  private trees: QueryList<TreeComponent>;
   dialog: MatDialogRef<ParamTreeDialog>;
   list: Array<any>;
   allList: Array<any>;
   selectedItem: any;
   loaded = false;
   loadedAll = false;
+  tabIndex = 0;
   listToView: Array<any> = new Array<any>();
-  standard: any;
+  listMap = {};
+  standards: any;
   customStandard = false;
   goodId: number;
   param = { placeholder: 'Текст' };
@@ -407,7 +522,7 @@ export class ParamTreeDialog {
     public dialogRef: MatDialogRef<ParamTreeDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.dialog = dialogRef;
-    this.standard = data.standard;
+    this.standards = data.standards;
     this.goodId = data.goodId;
     this.customStandard = data.custom;
   }
@@ -415,6 +530,9 @@ export class ParamTreeDialog {
     this.select(event);
   }
 
+  changeTab(event) {
+    this.tabIndex = event;
+  }
   processData_2(list) {
 
     var map = {}, node, roots = [], i;
@@ -463,7 +581,7 @@ export class ParamTreeDialog {
     });
   }
   addNameFilterTree(text) {
-    this.tree.treeModel.filterNodes((node) => {
+    this.trees[this.tabIndex].treeModel.filterNodes((node) => {
       if (node.data.name.toLowerCase().search(text) >= 0) {
         return true;
       } else {
@@ -473,7 +591,7 @@ export class ParamTreeDialog {
   }
   addNameFilter(name) {
     name = name.trim();
-    let params = [{ field: 'name', value: name }, { field: 'standard.id', value: this.standard.id }, { field: 'goodsCategory.goods.id', value: this.goodId }];
+    let params = [{ field: 'name', value: name }, { field: 'standard.id', value: this.standards[0].id }, { field: 'goodsCategory.goods.id', value: this.goodId }];
     this.loaded = false;
     this.taxonmyService.searchTaxonomyDataByParams('GoodsCategoryProperty', params).subscribe(res => {
       this.list = res.content;
@@ -511,27 +629,22 @@ export class ParamTreeDialog {
 
   ngOnInit() {
     if (!this.customStandard) {
-      // let params = [{ field: 'standard.id', value: this.standard.id }, { field: 'goodsCategory.goods.id', value: this.data.goodId }];
-      // this.taxonmyService.searchTaxonomyDataByParams('GoodsCategoryProperty', params).subscribe(res => {
-      //
-      //   this.list = res.content;
-      //     console.log(this.list);
-      //   this.listToView = this.processData_2(this.list);
-      //   console.log(this.listToView);
-      //   this.loaded = true;
-      // });
-      this.taxonmyService.customQuery('goodsCategoryProperty/tree?standardId='+ this.standard.id + '&goodsId=' + this.goodId)
-        .subscribe(res => {
-          this.list = res;
-          this.listToView = this.processData_2(this.list);
-          this.loaded = true;
-        });
+      this.standards.forEach((standard, index) => {
+        this.taxonmyService.customQuery('goodsCategoryProperty/tree?standardId=' + standard.id + '&goodsId=' + this.goodId)
+          .subscribe(res => {
+            this.list = res;
+            this.listToView = this.processData_2(this.list);
+            this.listMap[index] = this.listToView;
+            this.loaded = true;
+            console.log(this.listMap);
+          });
+      });
+      this.taxonmyService.searchTaxonomyDataByParams('Property', []).subscribe(res => {
+        this.allList = res.content;
+        this.loadedAll = true;
+        this.loaded = true;
+      });
     }
-    this.taxonmyService.searchTaxonomyDataByParams('Property', []).subscribe(res => {
-      this.allList = res.content;
-      this.loadedAll = true;
-      this.loaded = true;
-    });
   }
 
   onNoClick(): void {

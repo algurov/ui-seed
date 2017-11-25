@@ -1,13 +1,13 @@
 <h2 matDialogTitle>{{stringService.get('SELECT_PROPERTY_DIALOG_TITLE')}}</h2>
 <mat-dialog-content style="min-width: 600px; height: 600px;">
-  <mat-tab-group *ngIf="!customStandard">
-    <mat-tab [label]="standard? standard.shortName: ''">
+  <mat-tab-group (selectedIndexChange)="changeTab($event)" *ngIf="!customStandard">
+    <mat-tab *ngFor="let standard of standards; let i = index" [label]="standard.shortName">
       <mat-form-field>
         <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
         <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup)="addNameFilterTree(nameFilter.value)" />
       </mat-form-field>
       <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
-      <div *ngIf="loaded && loadedAll">
+      <div *ngIf="loaded && loadedAll && tabIndex==i">
         <!-- <ng-container *ngFor="let item of listToView">
           <div class="list-item" (click)="selectGoodsCategoryProperty(item)">
             {{item.name}}
@@ -17,7 +17,7 @@
           </div>
         </ng-container> -->
         <div class="wrapper">
-          <tree-root [options]="options" [nodes]="listToView">
+          <tree-root [id]="i" [options]="options" [nodes]="listMap[i]">
             <ng-template #treeNodeTemplate let-node let-index="index">
               <div (click)="selectGoodsCategoryProperty(node.data)">{{node.data.name}}</div>
             </ng-template>

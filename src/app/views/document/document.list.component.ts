@@ -60,7 +60,7 @@ export class DocumentListComponent {
 
   }
   ngOnInit() {
-
+    this.mainService.menuChange.emit({name: 'APPLICATION'});
   }
   ngOnDestroy() {
     this.subscription.forEach(item => {

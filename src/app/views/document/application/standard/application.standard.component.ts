@@ -118,6 +118,9 @@ export class SelectStandardDialog {
   selectedItem: any;
   loaded = false;
   product: any;
+  isQuality: false;
+  isSafety: false;
+  text: '';
   @ViewChild(TreeComponent)
   private tree: TreeComponent;
   constructor(
@@ -130,16 +133,54 @@ export class SelectStandardDialog {
     this.product = data.product;
    }
 
+   onQualityChange(event) {
+     this.isQuality = event.checked;
+     this.filterNodes();
+   }
+
+   onSafetyChange(event) {
+     this.isSafety = event.checked;
+     this.filterNodes();
+   }
+
    addNameFilterTree(text) {
+     this.text = text;
+     this.filterNodes();
+   }
+
+   filterNodes() {
      this.tree.treeModel.filterNodes((node) => {
-       if (node.data.name.toLowerCase().search(text) >= 0) {
-         return true;
+       let rules = [];
+       if (this.isSafety != this.isQuality) {
+       if (this.isQuality) {
+         if (node.data.standardCategoryId == 1) {
+           rules.push(true);
+         } else {
+           rules.push(false);
+         }
+       }
+       if (this.isSafety) {
+         if (node.data.standardCategoryId == 2) {
+           rules.push(true);
+         } else {
+           rules.push(false);
+         }
+       }
+     }
+       if (node.data.name.toLowerCase().search(this.text) >= 0) {
+          rules.push(true);
        } else {
+          rules.push(false);
+       }
+       if(rules.findIndex(it => it == false) >= 0) {
+         rules = [];
          return false;
+       } else {
+         rules = [];
+         return true;
        }
      });
    }
-
    addNameFilter(name) {
      let params = [{field:'name', value: name}];
      this.loaded = false;

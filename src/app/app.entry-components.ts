@@ -12,7 +12,7 @@ import { SelectDialogMultiple } from './widgets/seed.multiselect.field/seed.mult
 import { SelectBranchDialog } from './views/main/select.branch.dialog/select.branch.dialog';
 import { ParamTreeDialog } from './views/document/direction/param.tree/param.tree';
 import { SelectFieldDialog } from './widgets/select.field/select.field';
-
+import { SelectBranchFieldDialog } from './widgets/seed.select.field/seed.select.field';
 export const APP_ENTRY_COMPONENTS = [
   MessageDialogComponent,
   ConfirmDialog,
@@ -29,5 +29,6 @@ export const APP_ENTRY_COMPONENTS = [
   SelectDialogMultiple,
   SelectBranchDialog,
   ParamTreeDialog,
-  SelectFieldDialog
+  SelectFieldDialog,
+  SelectBranchFieldDialog
 ];

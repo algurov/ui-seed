@@ -3,6 +3,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { StringService } from '../../services/string.service';
 import { PartnerService } from '../../services/partner.service';
 import { TaxonomyService } from '../../services/taxonomy.service';
+import { BranchOfficeService } from '../../services/branch.service';
 import { Location } from '../../models/location';
 import { Observable } from 'rxjs';
 
@@ -54,6 +55,11 @@ export class SeedSelectField {
           return this.value.name;
         }
       }
+      if (this.code == 'branchOffice') {
+        if (this.value.fullName) {
+          return this.value.fullName;
+        }
+      }
       if (this.code == 'product') {
         if (this.value.fullNameRu) {
           return this.value.fullNameRu;
@@ -98,6 +104,13 @@ export class SeedSelectField {
     }
     if (this.code == 'laboratory') {
        dialogRef = this.dialog.open(SelectLaboratoryDialog, {
+        data: {
+          code: this.code
+        }
+      });
+    }
+    if (this.code == 'branchOffice') {
+       dialogRef = this.dialog.open(SelectBranchFieldDialog, {
         data: {
           code: this.code
         }
@@ -218,6 +231,56 @@ export class SelectLaboratoryDialog {
 
    ngOnInit() {
      this.taxonomyService.loadTaxonomyData('Laboratory').subscribe(res => {
+       this.list = res.content;
+       this.loaded = true;
+     })
+   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'select-branch-dlg',
+  templateUrl: 'select.branch.dialog.html',
+  styleUrls: ['/select.dialog.scss']
+})
+export class SelectBranchFieldDialog {
+  dialog: MatDialogRef<SelectBranchFieldDialog>;
+  list: Array<any>;
+  selectedItem: any;
+  loaded = false;
+  constructor(
+    private stringService: StringService,
+    private branchOfficeService: BranchOfficeService,
+    public dialogRef: MatDialogRef<SelectBranchFieldDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.dialog = dialogRef;
+   }
+
+   addNameFilter(name) {
+     name = name.trim();
+     let params = [{field:'fullName', value: name}];
+     this.loaded = false;
+     this.branchOfficeService.searchBeranchOfficeByParams(params).subscribe(res => {
+       this.list = res.content;
+       this.loaded = true;
+     });
+   }
+
+   selectItem(item) {
+     if (item) {
+      this.selectItem = item;
+      this.dialogRef.close(this.selectItem);
+    } else {
+      this.dialogRef.close();
+    }
+   }
+
+   ngOnInit() {
+     this.branchOfficeService.getBranchOfficeList().subscribe(res => {
        this.list = res.content;
        this.loaded = true;
      })

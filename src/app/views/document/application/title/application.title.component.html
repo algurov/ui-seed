@@ -16,7 +16,7 @@
       <!-- <span class="title__item-label">{{stringService.get('NEW_APPLICATION_TITLE_IN')}}</span> -->
     </div>
     <div class="title-content-column" style="padding-top: 8px;">
-      <seed-select-field code="laboratory" (change)="onLaboratoryChange($event)" [data]="data.laboratory" placeholder="{{stringService.get('APPLICATION_LAB_TITLE')}}"></seed-select-field>
+      <seed-select-field code="branchOffice" (change)="onBranchChange($event)" [data]="data.branchOffice" placeholder="{{stringService.get('APPLICATION_BRANCH_TITLE')}}"></seed-select-field>
       <!-- <mat-form-field class="title__item-grow" floatPlaceholder="always">
         <mat-placeholder class="title__item-placeholder">{{stringService.get('APPLICATION_LAB_TITLE')}}</mat-placeholder>
         <input matInput [(ngModel)]="data.laboratory">

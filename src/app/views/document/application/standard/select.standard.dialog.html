@@ -4,8 +4,8 @@
     <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
     <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup)="addNameFilterTree(nameFilter.value)" />
   </mat-form-field>
-  <mat-checkbox color="primary" style="padding-left: 20px;">На качество</mat-checkbox>
-  <mat-checkbox color="primary" style="padding-left: 20px;">На безопасность</mat-checkbox>
+  <mat-checkbox color="primary" style="padding-left: 20px;" [ngModel]="isQuality" (change)="onQualityChange($event)">На качество</mat-checkbox>
+  <mat-checkbox color="primary" style="padding-left: 20px;" [ngModel]="isSafety" (change)="onSafetyChange($event)">На безопасность</mat-checkbox>
   <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
   <div *ngIf="loaded">
     <tree-root [nodes]="list">

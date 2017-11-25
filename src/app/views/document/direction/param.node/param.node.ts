@@ -65,18 +65,22 @@ export class ParamNode {
   }
 
   getPropertyUnit() {
-    if (this.config.data.value.applicationResearch.goodsCategoryProperty.unit) {
-      return this.config.data.value.applicationResearch.goodsCategoryProperty.unit.nameRu;
+    if (this.config.data.value.goodsCategoryProperty) {
+      if (this.config.data.value.goodsCategoryProperty.unit) {
+        return this.config.data.value.goodsCategoryProperty.unit.nameRu;
+      } else {
+        return '';
+      }
     } else {
-      return '';
+      return this.config.data.value.property.units[0].nameRu;
     }
   }
 
   getPropertyName() {
-    if (this.config.data.value.applicationResearch.goodsCategoryProperty) {
-      return this.config.data.value.applicationResearch.goodsCategoryProperty.name;
+    if (this.config.data.value.goodsCategoryProperty) {
+      return this.config.data.value.goodsCategoryProperty.name;
     } else {
-      return '';
+      return this.config.data.value.property.nameRu;
     }
   }
 

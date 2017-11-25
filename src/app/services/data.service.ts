@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { TaxonomyService } from './taxonomy.service';
+import { menuActions } from '../views/panel/menu.actions';
 
 
 
@@ -44,5 +45,9 @@ export class DataService {
   convertDate(date){
   let newDate = date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear();
   return newDate;
+  }
+
+  getMenuActionsByScreen(screen:string) {
+    return menuActions[screen];
   }
 }

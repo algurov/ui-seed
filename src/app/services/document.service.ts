@@ -86,6 +86,14 @@ export class DocumentService extends RequestBase {
     return this.http.get(`${SEED_BASE_URL}/seed/assignment`, this.options).map(res => res.json());
   }
 
+  getStandardsForAssignment(id): Observable<any> {
+      return this.http.get(`${SEED_BASE_URL}/seed/assignment/` + id + '/originalStandards', this.options).map(res => res.json());
+  }
+
+  getContractsForAssignment(id): Observable<any> {
+      return this.http.get(`${SEED_BASE_URL}/seed/assignment/` + id + '/originalCustomContracts', this.options).map(res => res.json());
+  }
+
   getAssignmentListByApplication(applicationId): Observable<any> {
     return this.http.get(`${SEED_BASE_URL}/seed/assignment?application.id=` + applicationId, this.options).map(res => res.json());
   }

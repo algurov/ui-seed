@@ -12,6 +12,7 @@ import { API_BASE_URL } from '../../services/constants';
 import { SettingsService } from '../../services/settings.service';
 import { PartnerService } from '../../services/partner.service';
 import { BranchOfficeService } from '../../services/branch.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'panel',
@@ -26,9 +27,10 @@ botViews: Array<any> = new Array();
 selectedItem: any;
 partner: any;
 branchOffice: any;
+menuActions: Array<any> = new Array<any>();
 constructor(public dlgService: DialogService, public main : MainService, public stringService: StringService,
   public router : Router, public auth : AuthService, public route: ActivatedRoute, public settingsService: SettingsService,
-  public partnerService: PartnerService, public branchOfficeService: BranchOfficeService){
+  public partnerService: PartnerService, public branchOfficeService: BranchOfficeService, public dataService: DataService){
   menuItems.forEach(item => {
     if (item.top) {
       this.topViews.push(item);
@@ -44,7 +46,12 @@ constructor(public dlgService: DialogService, public main : MainService, public 
   });
   this.main.branchOfficeSelectedForUser.subscribe(res => this.refresh(true));
   this.main.partnerSelectedForUser.subscribe(res => this.refresh(true));
+  this.main.menuChange.subscribe(res => this.updateMenuActions(res.name));
   this.refresh(false);
+}
+
+updateMenuActions(screen: string) {
+  this.menuActions = this.dataService.getMenuActionsByScreen(screen);
 }
 
 refresh(reload) {

@@ -1,7 +1,7 @@
 <div class="field">
   <mat-checkbox class="cbox tree-checkbox" color="primary" [ngModel]="config.data.checked" (change)="onCheckChange($event)"></mat-checkbox>
   <div class="toggle" *ngIf="isToggleVisible(config)">
-  <color-toggle [value]="config.data.value.applicationResearch.propertyType" (onChange)="onStateChanged($event)"></color-toggle>
+  <color-toggle [value]="config.data.value.propertyType" (onChange)="onStateChanged($event)"></color-toggle>
 </div>
   <mat-form-field class="short-field">
     <input matInput [value]="getPropertyName()" readonly="true"/>
@@ -16,5 +16,5 @@
       <input matInput placeholder="текст" [ngModel]="config.data.value.textValue" (keyup)="onTextValueChanged($event)"/>
     </mat-form-field>
 
-  <mat-icon class="close-icon" (click)="removeItem()">close</mat-icon>
+  <mat-icon *ngIf="false" class="close-icon" (click)="removeItem()">close</mat-icon>
 </div>

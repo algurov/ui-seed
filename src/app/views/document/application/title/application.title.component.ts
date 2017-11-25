@@ -22,15 +22,15 @@ export class ApplicationTitleComponent {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  
+
   ngOnInit() {
       if(this.data.creationDate) {
         this.date = new Date(this.data.creationDate);
       }
   }
 
-  onLaboratoryChange(lab) {
-    this.data.laboratory = lab;
+  onBranchChange(lab) {
+    this.data.branchOffice = lab;
   }
 
   onDateChange(event) {

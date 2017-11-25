@@ -52,6 +52,7 @@ import { RoleListComponent } from './views/role/role.list.component';
 import { RoleFieldComponent } from './views/role/field/role.field.component';
 import { RoleAddDialog } from './views/role/role.add.dialog';
 import { SelectLaboratoryDialog } from './widgets/seed.select.field/seed.select.field';
+import { SelectBranchFieldDialog } from './widgets/seed.select.field/seed.select.field';
 import { ProductField } from './widgets/product.field/product.field';
 import { EditableField } from './widgets/editable.field/editable.field';
 import { ActComponent } from './views/document/act/act.component';
@@ -162,5 +163,6 @@ export const APP_DECLARATIONS = [
   ParamTreeDialog,
   ParamNode,
   SelectField,
-  SelectFieldDialog
+  SelectFieldDialog,
+  SelectBranchFieldDialog
 ];

@@ -346,7 +346,9 @@ export class StandardPropertyDialog {
       this.taxonmyService.customQuery('goodsCategoryProperty/tree?standardId='+ this.standard.id + '&goodsId=' + this.goodId)
         .subscribe(res => {
           this.list = res;
+          console.log(res);
           this.listToView = this.processData_2(this.list);
+          console.log(this.listToView);
           this.loaded = true;
         });
     }
