@@ -117,7 +117,12 @@ export class ParamTree {
 
   onNodeStandardChange(event) {
     if (event.standard) {
-      let found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+      let found = null;
+      if (event.value.data.value.uid) {
+        found = this.findItemInTreeByUid(event.value.data.value, this.data.assignmentResearches);
+      } else {
+        found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+      }
       if (found) {
         found.standard = event.standard;
       }
@@ -125,14 +130,24 @@ export class ParamTree {
   }
 
   onNodeValueChange(event) {
-    let found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+    let found = null;
+    if (event.value.data.value.uid) {
+      found = this.findItemInTreeByUid(event.value.data.value, this.data.assignmentResearches);
+    } else {
+      found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+    }
     if (found) {
       found.value = event.val;
     }
   }
 
   onNodeTextValueChange(event) {
-    let found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+    let found = null;
+    if (event.value.data.value.uid) {
+      found = this.findItemInTreeByUid(event.value.data.value, this.data.assignmentResearches);
+    } else {
+      found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+    }
     if (found) {
       found.textValue = event.val;
     }
@@ -143,14 +158,26 @@ export class ParamTree {
     let unwrapped = this.unwrapNew(event.value);
     if (event.checked) {
       if (event.value.parent.data.virtual) {
-        let found = this.data.assignmentResearches.find(item => item.id == unwrapped.id);
+        let found = null;
+        if (event.value.data.value.uid) {
+          found = this.findItemInTreeByUid(event.value.data.value, this.data.assignmentResearches);
+        } else {
+          found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+        }
+      //  let found = this.data.assignmentResearches.find(item => item.id == unwrapped.id);
         found.visibleForLaboratory = event.checked;
       } else {
         this.selectWithParent(event.value, unwrapped);
       }
 
     } else {
-      let found = this.data.assignmentResearches.find(item => item.id == unwrapped.id);
+      let found = null;
+      if (event.value.data.value.uid) {
+        found = this.findItemInTreeByUid(event.value.data.value, this.data.assignmentResearches);
+      } else {
+        found = this.findItemInTree(event.value.data.value, this.data.assignmentResearches);
+      }
+      //let found = this.data.assignmentResearches.find(item => item.id == unwrapped.id);
       if (found) {
         found.visibleForLaboratory = false;
         this.deselectAllChildren(found);
@@ -216,7 +243,12 @@ export class ParamTree {
 
   selectAssignmentResearchWithParents(parentArray) {
     parentArray.forEach(item => {
-      let found = this.findItemInTree(item.data.value, this.data.assignmentResearches);
+      let found = null;
+      if (item.data.value.uid) {
+        found = this.findItemInTreeByUid(item.data.value, this.data.assignmentResearches);
+      } else {
+        found = this.findItemInTree(item.data.value, this.data.assignmentResearches);
+      }
       found.visibleForLaboratory = true;
     });
   }
@@ -317,6 +349,20 @@ export class ParamTree {
     return found;
   }
 
+  findItemInTreeByUid(item, arr: Array<any>) {
+    let found = null;
+    for (let i = 0; i < arr.length && !found; i++) {
+      if (arr[i].uid == item.uid) {
+        found = arr[i];
+      } else {
+        if (arr[i].children) {
+          found = this.findItemInTreeByUid(item, arr[i].children);
+        }
+      }
+    }
+    return found;
+  }
+
   toggleVisible() {
     this.visible = !this.visible;
   }
@@ -364,6 +410,7 @@ export class ParamTree {
       checked: false,
       children: children,
       value: {
+        uid: Math.random(),
         customName: null,
         minValue: null,
         maxValue: null,
@@ -391,6 +438,7 @@ export class ParamTree {
       checked: false,
       children: children,
       value: {
+        uid: Math.random(),
         customName: null,
         minValue: null,
         maxValue: null,

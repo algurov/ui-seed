@@ -38,14 +38,21 @@ export class DirectionComponent {
 
   }
 
+  removeUid(arr) {
+      arr.forEach(item => {
+        delete item.uid;
+        if (item.children) {
+          this.removeUid(item.children);
+        }
+      });
+  }
+
   beforeSave() {
-    // if (this.data.agents) {
-    //   if (this.data.agents.length > 0) {
-    //     this.data.agents.forEach(item => {
-    //       delete item.guid;
-    //     });
-    //   }
-    // }
+    if (this.data.assignmentResearches) {
+      if (this.data.assignmentResearches.length > 0) {
+        this.removeUid(this.data.assignmentResearches);
+      }
+    }
   }
   save() {
     this.beforeSave();
