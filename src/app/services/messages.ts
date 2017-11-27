@@ -126,7 +126,12 @@ export const Messages = {
 
   "NEW_ACT_TITLE": "Номер пробы",
   "ADD_ACT": "Новый акт",
+  "ADD_DIRECTION": "Новое направление",
   "SELECT_BRANCH_DIALOG_TITLE": "Выберите филиал или контрагента",
-  "APPLICATION_BRANCH_TITLE": "Филиал"
+  "APPLICATION_BRANCH_TITLE": "Филиал",
+  "SAVE_APPLICATION": "СОХРАНИТЬ",
+  "SAVE_DIRECTION": "СОХРАНИТЬ",
+  "SAVE_ACT": "СОХРАНИТЬ",
+  "CANCEL_APPLICATION": "ОТМЕНА"
 
 };

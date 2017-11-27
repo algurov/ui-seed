@@ -63,8 +63,13 @@
           <span class="context-link__label">{{stringService.get(item.name)}}</span>
         </div>
         <div  class="context-action" *ngFor="let action of menuActions">
-          <span class="context-action-label">{{stringService.get(action.name)}}</span>
-          <div (click)="performAction(action)" class="context-action-btn">+</div>
+          <ng-container *ngIf="action.type=='link'">
+            <span class="context-action-label">{{stringService.get(action.name)}}</span>
+            <div (click)="performAction(action)" class="context-action-btn">+</div>
+          </ng-container>
+          <ng-container *ngIf="action.type=='button'">
+            <button mat-raised-button class="action-btn" color="primary" (click)="performAction(action)">{{stringService.get(action.name)}}</button>
+          </ng-container>
         </div>
         <!-- <div class="context-link">
             <i class="icon-icon_user context-link__icon"></i>

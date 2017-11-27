@@ -18,10 +18,16 @@ export class ApplicationPreviewComponent {
   assignmentList: Array<any> = new Array<any>();
   actList: Array<any> = new Array<any>();
   observableGroup: Observable<any> = new Observable<any>();
+  subscriptions = [];
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
     private router: Router) {
+      this.subscriptions.push(this.mainService.menuActionPerformed.subscribe(action => {
+        if (action == 'ADD_ACT') {
+          this.addAct();
+        }
+      }));
       this.dialogService.showBlocker();
       this.route.params.subscribe(params => {
         if (params['id']) {
@@ -81,8 +87,11 @@ export class ApplicationPreviewComponent {
   openAssignment(id) {
     this.router.navigate(['main/document/assignment/' + id]);
   }
-
+  ngOnDestroy() {
+    this.subscriptions.forEach(item => item.unsubscribe());
+  }
   ngOnInit() {
+    this.mainService.menuChange.emit({name: 'APPLICATION_VIEW'});
     this.dialogService.showBlocker();
     this.documentService.getActListForApplication(this.id).subscribe(res => {
        this.actList = res.content;

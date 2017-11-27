@@ -15,10 +15,16 @@ export class ActComponent {
   id: number;
   data: any = {
   };
+  subscriptions = [];
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
     private router: Router) {
+      this.subscriptions.push(this.mainService.menuActionPerformed.subscribe(action => {
+        if (action == 'SAVE_ACT') {
+          this.save();
+        }
+      }));
       this.dialogService.showBlocker();
       this.route.params.subscribe(params => {
         if (params['id']) {
@@ -32,9 +38,11 @@ export class ActComponent {
        }
       });
   }
-
+  ngOnDestroy() {
+    this.subscriptions.forEach(item => item.unsubscribe());
+  }
   ngOnInit() {
-
+    this.mainService.menuChange.emit({name:'ACT_EDIT'});
   }
 
   beforeSave() {

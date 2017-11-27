@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./application.component.scss']
 })
 export class ApplicationComponent {
+  subscriptions = [];
   id: number;
   data: any = {
     status: 'CREATED',
@@ -24,6 +25,12 @@ export class ApplicationComponent {
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
     private router: Router) {
+      this.subscriptions.push(this.mainService.menuActionPerformed.subscribe(action => {
+        switch(action) {
+          case 'SAVE_APPLICATION' : this.save(); break;
+          case 'CANCEL_APPLICATION' : this.cancel(); break;
+        }
+      }));
       this.dialogService.showBlocker();
       this.route.params.subscribe(params => {
         if (params['id']) {
@@ -51,14 +58,16 @@ export class ApplicationComponent {
        }
       });
     }
-
+  ngOnDestroy() {
+    this.subscriptions.forEach(item => item.unsubscribe());
+  }
   ngOnInit() {
 
     // if (localStorage.getItem('application')) {
     // this.data = JSON.parse(localStorage.getItem('application'));
     // console.log(this.data);
     // }
-
+    this.mainService.menuChange.emit({name: 'APPLICATION_EDIT'});
     if (!this.data.id){
     if (this.settingsService.settings.selectedPartnerId) {
       this.dialogService.showBlocker();
@@ -96,6 +105,10 @@ export class ApplicationComponent {
 
       });
     }
+  }
+
+  cancel() {
+    this.router.navigate(['main/document']);
   }
 
   save() {
