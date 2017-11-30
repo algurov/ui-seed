@@ -1,0 +1,4 @@
+<div class="field">
+  <mat-checkbox *ngIf="isCheckboxVisible()" class="cbox" color="primary" [ngModel]="config.data.checked" (change)="onCheckChange($event)"></mat-checkbox>
+  {{config.data.name}}
+</div>

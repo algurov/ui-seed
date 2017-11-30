@@ -1,0 +1,49 @@
+<div class="group">
+  <div class="title-text">Протокол по заявке {{getApplicationTitle()}}</div>
+  <div class="group__content" style="padding-top: 20px;">
+    <div class="group__content-full-width">
+      <div class="collapsible">
+        <div class="collapsible-title" (click)="toggleLaboratoryVisibility()">
+          <i class="arrow" [ngClass]="{'right': !laboratoryVisible, 'down': laboratoryVisible}"></i>{{getLaboratoryName()}}
+        </div>
+        <div *ngIf="laboratoryVisible" class="collapsible-contnet">
+          <div class="laboratory__data">
+            <div>Свидетельство (аттестата) о аккредитации: {{getLaboratoryCertificateNumber()}}</div>
+            <div>Зарегистрирована в реестре Россельхознадзора за №: {{getLaboratoryRegistrationNumber()}}</div>
+            <div>Адрес: {{getLaboratoryContact()}}</div>
+            <div>Тел./Факс: </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <div class="collapsible-title" (click)="togglePartnerVisibility()">
+          <i class="arrow" [ngClass]="{'right': !partnerVisible, 'down': partnerVisible}"></i>{{getApplicantName()}}
+        </div>
+        <div *ngIf="partnerVisible" class="collapsible-contnet">
+          <div class="laboratory__data">
+            <div>Адрес заявителя: {{getApplicantAddress()}}</div>
+            <div>Сопроводительные документы: </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <div class="collapsible-title" (click)="toggleGoodsVisibility()">
+          <i class="arrow" [ngClass]="{'right': !goodsVisible, 'down': goodsVisible}"></i>{{getGoodsName()}}
+        </div>
+        <div *ngIf="goodsVisible" class="collapsible-contnet">
+          <div class="laboratory__data">
+            <div>Проихождение продукции: {{getManufacturersLocations()}}</div>
+            <div>Отбор произведен: {{getAuthorizedPersonName()}}</div>
+            <div>Номер регистрации пробы: {{getSampleNumber()}}</div>
+            <div>Дата поступления пробы: {{getDate(getActDate())}}</div>
+            <div>Дата проведения испытаний: {{getDate(getActDate())}}-{{getDate(getActReceiptDate())}}</div>
+            <div>Масса партии (кг.): {{getSampleMass()}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+</div>

@@ -1,0 +1,41 @@
+<div class="group">
+  <div class="group__content" style="padding-top: 20px;">
+    <div class="group__content-first-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Номер протокола</mat-placeholder>
+        <input matInput [(ngModel)]="data.protocolNumber"/>
+      </mat-form-field>
+    </div>
+    <div class ="group__content-second-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
+        <input matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="group__content-first-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Количество проведенных исследований</mat-placeholder>
+        <input matInput [(ngModel)]="data.researchCount"/>
+      </mat-form-field>
+    </div>
+    <div class ="group__content-second-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Результаты исследований распространяются на</mat-placeholder>
+        <mat-select matInput [ngModel]="resultsTo" (change)="resultsToChanged($event)">
+          <mat-option *ngFor="let opt of resultToOptions" [value]="opt.value">
+            {{opt.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div calss="group__content-full-width">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Заключение</mat-placeholder>
+        <textarea matInput [(ngModel)]="data.conclusion"></textarea>
+      </mat-form-field>
+    </div>
+</div>
+<div style="clear:both;"></div>
+</div>

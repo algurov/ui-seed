@@ -26,6 +26,7 @@ export class MainService {
   public applicationLoaded: EventEmitter<any> = new EventEmitter<any>();
 
   public actLoaded: EventEmitter<any> = new EventEmitter<any>();
+  public protocolLoaded: EventEmitter<any> = new EventEmitter<any>();
 
   public directionLoaded: EventEmitter<any> = new EventEmitter<any>();
 

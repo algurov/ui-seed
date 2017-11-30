@@ -16,7 +16,7 @@
   <div class="text-title">Список актов отбора проб</div>
   <ng-container *ngFor="let act of actList">
     <div style=" cursor: pointer; padding: 20px 20px; border-bottom: 1px solid #aaa;">
-      <div style="float:left; width:90%;" (click)="openAct(act.id)">
+      <div style="float:left; width:87%;" (click)="openAct(act.id)">
         {{act.sampleNumber}}
       </div>
 
@@ -28,6 +28,9 @@
       </div>
       <div style="float:right;">
         <mat-icon matTooltip="Добавить направление" matTooltipPosition="above" (click)="addDirection(act)">forward</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon matTooltip="Добавить протокол испытаний" matTooltipPosition="above" (click)="addProtocol(act)">chat</mat-icon>
       </div>
 
     </div>
@@ -46,6 +49,23 @@
       </div>
       <div style="float:right;">
         <mat-icon  matTooltip="Редактировать" matTooltipPosition="above" (click)="openAssignment(assignment.id)">edit</mat-icon>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <div class="text-title">Список протоколов</div>
+  <ng-container *ngFor="let protocol of protocolList">
+    <div style=" cursor: pointer; padding: 20px 20px; border-bottom: 1px solid #aaa;">
+      <div style="float:left; width:90%;" (click)="openProtocol(protocol.id)">
+        {{protocol.protocolNumber}}
+      </div>
+
+      <div style="float:right;">
+        <mat-icon matTooltip="Удалить" matTooltipPosition="above"  (click)="removeProtocol(protocol)">delete</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon  matTooltip="Редактировать" matTooltipPosition="above" (click)="openProtocol(protocol.id)">edit</mat-icon>
       </div>
     </div>
 

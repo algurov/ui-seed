@@ -40,5 +40,24 @@ export const menuActions =
         action: 'SAVE_DIRECTION',
         type: 'button'
       }
-    ]
+    ],
+    'PARTNER_LIST': [
+      {
+        name: 'ADD_AGENT',
+        action: 'add-agent',
+        type: 'link'
+      }
+    ],
+    'PROTOCOL_EDIT': [
+      {
+        name: 'SAVE_APPLICATION',
+        action: 'SAVE_PROTOCOL',
+        type: 'button'
+      },
+      {
+        name: 'CANCEL_APPLICATION',
+        action: 'CANCEL_PROTOCOL',
+        type: 'button'
+      }
+  ]
   };

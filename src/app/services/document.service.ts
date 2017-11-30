@@ -109,4 +109,37 @@ export class DocumentService extends RequestBase {
     return this.http.delete(`${SEED_BASE_URL}/seed/assignment/` + assignment.id, this.options)
     .map(res => res.json());
   }
+
+  createProtocol(actId, data) : Observable<any> {
+    return this.http.post(`${SEED_BASE_URL}/seed/researchProtocol/` + actId, data, this.options).map(res => res.json());
+  }
+
+  previewProtocol(actId, goodsCategories) {
+    return this.http.post(`${SEED_BASE_URL}/seed/researchProtocol/` + actId + '/tree', goodsCategories, this.options).map(res => res.json());
+  }
+
+  getProtocolList() : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/researchProtocol`, this.options).map(res => res.json());
+  }
+
+  getProtocolListByApplication(applicationId): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/researchProtocol?application.id=` + applicationId, this.options).map(res => res.json());
+  }
+
+  getProtocolById(id) : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/researchProtocol/` + id, this.options).map(res => res.json());
+  }
+
+  updateProtocol(protocol): Observable<any> {
+    return this.http.put(`${SEED_BASE_URL}/seed/researchProtocol`, protocol, this.options).map(res => res.json());
+  }
+
+  deleteProtocol(protocol): Observable<any> {
+    return this.http.delete(`${SEED_BASE_URL}/seed/researchProtocol/` + protocol.id, this.options)
+    .map(res => res.json());
+  }
+
+  getGoodsCategories(actId) : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/goodsCategory/byAct/` + actId, this.options).map(res => res.json());
+  }
 }

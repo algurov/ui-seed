@@ -17,6 +17,7 @@ export class ApplicationPreviewComponent {
   data: any = {};
   assignmentList: Array<any> = new Array<any>();
   actList: Array<any> = new Array<any>();
+  protocolList: Array<any> = new Array<any>();
   observableGroup: Observable<any> = new Observable<any>();
   subscriptions = [];
   constructor(private mainService: MainService, private settingsService: SettingsService,
@@ -37,6 +38,8 @@ export class ApplicationPreviewComponent {
            this.data = res;
            this.dialogService.block = false;
          });
+       } else {
+         this.dialogService.hideBlocker();
        }
       });
     }
@@ -72,8 +75,28 @@ export class ApplicationPreviewComponent {
         });
       }
     });
+  }
+
+  removeProtocol(protocol) {
+      this.dialogService.showConfirm('Удаление направления', 'Подтвердиде удаление направления').subscribe(res => {
+        if (res) {
+          this.dialogService.showBlocker();
+          this.documentService.deleteProtocol(protocol).subscribe(res => {
+          this.protocolList.splice(this.protocolList.findIndex(item => item.id == protocol.id), 1);
+          this.dialogService.hideBlocker();
+          });
+        }
+      });
 
   }
+  openProtocol(id) {
+      this.router.navigate(['main/document/protocol/'+ id]);
+  }
+
+  addProtocol(act) {
+      this.router.navigate(['main/document/protocol'], { queryParams: { actId: act.id } });
+  }
+
   addDirection(act) {
     this.documentService.createAssignment(act.id).subscribe(res => {
         this.router.navigate(['main/document/assignment/' + res.id]);
@@ -98,6 +121,9 @@ export class ApplicationPreviewComponent {
     });
     this.documentService.getAssignmentListByApplication(this.id).subscribe(res => {
       this.assignmentList = res.content;
+    });
+    this.documentService.getProtocolListByApplication(this.id).subscribe(res => {
+      this.protocolList = res.content;
       this.dialogService.hideBlocker();
     });
   }

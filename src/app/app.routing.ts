@@ -25,6 +25,7 @@ import { RoleListComponent } from './views/role/role.list.component';
 import { ActComponent } from './views/document/act/act.component';
 import { ApplicationPreviewComponent } from './views/document/application/preview/application.preview.component';
 import { DirectionComponent } from './views/document/direction/direction.component';
+import { ProtocolComponent } from './views/document/protocol/protocol.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -48,7 +49,9 @@ export const routes: Routes = [
       { path: 'document/act', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
       { path: 'document/act/:id', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
       { path: 'document/assignment/:id', component: DirectionComponent, data: {breadcrumb: 'Направление'}},
-      { path: 'document/assignment', component: DirectionComponent, data: {breadcrumb: 'Направление'}}
+      { path: 'document/assignment', component: DirectionComponent, data: {breadcrumb: 'Направление'}},
+      { path: 'document/protocol/:id', component: ProtocolComponent, data: {breadcrumb: 'Протокол'}},
+      { path: 'document/protocol', component: ProtocolComponent, data: {breadcrumb: 'Протокол'}}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

@@ -1,0 +1,16 @@
+<div class="field">
+  <div class="sub-text" *ngIf="!config.parent.data.virtual">в т.ч.</div>
+  <mat-form-field class="short-field" [style.width.px]="getWidth()">
+    <input matInput [value]="getPropertyName()" readonly="true"/>
+  </mat-form-field>
+  <div class="units">{{getPropertyUnit()}}</div>
+  <mat-form-field class="number-field">
+    <input matInput style="text-align: center;" [value]="getValue()" readonly="true"/>
+  </mat-form-field>
+  <mat-form-field class="number-field">
+    <input matInput style="text-align: center;" [value]="getMinMax()" readonly="true"/>
+  </mat-form-field>
+  <mat-form-field class="number-field">
+    <input matInput style="text-align: center;" [value]="getStandardName()" readonly="true"/>
+  </mat-form-field>
+</div>

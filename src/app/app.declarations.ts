@@ -79,6 +79,13 @@ import { DirectionParamsComponent } from './views/document/direction/params/dire
 import { ParamTree, ParamTreeDialog } from './views/document/direction/param.tree/param.tree';
 import { ParamNode } from './views/document/direction/param.node/param.node';
 import { SelectField, SelectFieldDialog } from './widgets/select.field/select.field';
+import { ProtocolComponent } from './views/document/protocol/protocol.component';
+import { ProtocolTitleComponent } from './views/document/protocol/title/protocol.title.component';
+import { ProtocolInfoComponent } from './views/document/protocol/info/protocol.info.component';
+import { ProtocolParamsComponent } from './views/document/protocol/params/protocol.params.component';
+import { GoodsCategoryDialog } from './views/document/protocol/goods.category.dilalog/goods.category.dialog';
+import { GoodsCategoryNode} from './views/document/protocol/goods.category.node/goods.category.node';
+import { ProtocolParamNode } from './views/document/protocol/protocol.param.node/protocol.param.node';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -164,5 +171,12 @@ export const APP_DECLARATIONS = [
   ParamNode,
   SelectField,
   SelectFieldDialog,
-  SelectBranchFieldDialog
+  SelectBranchFieldDialog,
+  ProtocolComponent,
+  ProtocolTitleComponent,
+  ProtocolInfoComponent,
+  ProtocolParamsComponent,
+  GoodsCategoryDialog,
+  GoodsCategoryNode,
+  ProtocolParamNode
 ];

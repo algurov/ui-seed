@@ -47,7 +47,7 @@ constructor(public dlgService: DialogService, public main : MainService, public 
   this.main.branchOfficeSelectedForUser.subscribe(res => this.refresh(true));
   this.main.partnerSelectedForUser.subscribe(res => this.refresh(true));
   this.main.menuChange.subscribe(res => this.updateMenuActions(res.name));
-  this.refresh(false);
+
 }
 
 updateMenuActions(screen: string) {
@@ -55,18 +55,18 @@ updateMenuActions(screen: string) {
 }
 
 refresh(reload) {
-  this.dlgService.showBlocker();
+  //this.dlgService.showBlocker();
   if (this.settingsService.settings.selectedPartnerId) {
     this.partnerService.getPartnerById(this.settingsService.settings.selectedPartnerId).subscribe(res => {
       this.partner = res;
-      this.dlgService.hideBlocker();
+      //this.dlgService.hideBlocker();
 
     });
   }
   if (this.settingsService.settings.selectedBranchOfficeId) {
     this.branchOfficeService.getBranchOfficeById(this.settingsService.settings.selectedBranchOfficeId).subscribe(res => {
       this.branchOffice = res;
-    this.dlgService.hideBlocker();
+    //this.dlgService.hideBlocker();
 
     });
   }
@@ -88,7 +88,7 @@ changeSelectedItem(item) {
   this.router.navigate([item.link]);
 }
 ngOnInit() {
-
+  this.refresh(false);
 }
 
 toggleSideNav(item) {

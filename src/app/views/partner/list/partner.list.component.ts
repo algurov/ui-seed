@@ -119,6 +119,7 @@ export class PartnerListComponent {
   }
   ngOnInit() {
     this.filterParams = [];
+    this.mainService.menuChange.emit({name: 'PARTNER_LIST'});
     //this.searchPartners(this.filterParams);
   }
 
