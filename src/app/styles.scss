@@ -262,6 +262,16 @@ ul, ol {
   overflow: auto;
 }
 
+.wrapper-tree-params .node-content-wrapper:hover {
+  background-color: white;
+  box-shadow: none;
+  cursor: auto;
+}
+
+.wrapper-tree-params tree-node-expander {
+  display:none;
+}
+
 .wrapper-tree-custom tree-node-expander {
   padding-top: 20px;
 }

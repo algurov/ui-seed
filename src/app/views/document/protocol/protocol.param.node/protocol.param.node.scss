@@ -1,6 +1,6 @@
 .short-field {
   //width: 40%;
-  float:left;
+  float:left;height: 30px;
   //padding: 0 5px;
   &-select {
     width: 0px;
@@ -10,6 +10,7 @@
 }
 .number-field {
   width: 130px;
+  height: 30px;
   float:left;
   padding: 0 5px;
 }
@@ -58,4 +59,18 @@ mat-icon.close-icon {
   width: 14px!important;
   padding-top: 15px;
   padding-left: 10px;
+}
+
+.short-field .mat-form-field-underline {
+  display: none;
+}
+.short-field::ng-deep .mat-input-underline {
+    display: none;
+}
+
+.number-field .mat-form-field-underline {
+  display: none;
+}
+.number-field::ng-deep .mat-input-underline {
+    display: none;
 }

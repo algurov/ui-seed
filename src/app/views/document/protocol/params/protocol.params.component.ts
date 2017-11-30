@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { MainService } from '../../../../services/main.service';
 import { DocumentService } from '../../../../services/document.service';
@@ -13,10 +13,16 @@ import { TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions, TreeComponent } from 
 })
 export class ProtocolParamsComponent {
   options: ITreeOptions = {
-    idField: 'uuid'
-  };
-  // @ViewChild(TreeComponent)
-  // private tree: TreeComponent;
+    idField: 'uuid',
+    actionMapping: {
+    mouse: {
+      click: (tree, node, $event) => {}
+    }
+  }
+
+}
+  @ViewChildren(TreeComponent)
+  private trees: QueryList<TreeComponent>;
   @Input() data: any;
   date: any;
   @Input() act: any;
@@ -55,6 +61,7 @@ export class ProtocolParamsComponent {
     this.securityTree = [];
     this.qualityTree = [];
     this.preview.forEach(item => {
+        item.isExpanded = true;
         if (item.propertyType.id == 1) {
           this.qualityTree.push(item);
         } else {
@@ -63,6 +70,7 @@ export class ProtocolParamsComponent {
     });
     console.log(this.qualityTree);
   }
+
   createParams() {
     let dialogRef = this.dialog.open(GoodsCategoryDialog, {data:{actId: this.data.act? this.data.act.id : this.act.id}});
     dialogRef.afterClosed().subscribe(result => {

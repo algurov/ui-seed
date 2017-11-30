@@ -72,6 +72,7 @@ export class ProtocolComponent {
   removeUid(arr) {
       arr.forEach(item => {
         delete item.uuid;
+        delete item.isExpanded;
         if (item.children) {
           this.removeUid(item.children);
         }
