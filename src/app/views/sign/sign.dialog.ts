@@ -69,7 +69,8 @@ export class SignDialog {
         signerRoleId: this.form.value.role,
         signerPosition: this.form.value.position,
         documentType: this.docType,
-        comment: this.form.value.comment
+        comment: this.form.value.comment,
+        date: this.form.value.date.getTime()
       };
       console.log(toSend);
       this.documentService.signDocument(toSend).subscribe(res => {
