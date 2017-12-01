@@ -86,6 +86,7 @@ import { ProtocolParamsComponent } from './views/document/protocol/params/protoc
 import { GoodsCategoryDialog } from './views/document/protocol/goods.category.dilalog/goods.category.dialog';
 import { GoodsCategoryNode} from './views/document/protocol/goods.category.node/goods.category.node';
 import { ProtocolParamNode } from './views/document/protocol/protocol.param.node/protocol.param.node';
+import { SignDialog } from './views/sign/sign.dialog';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -178,5 +179,6 @@ export const APP_DECLARATIONS = [
   ProtocolParamsComponent,
   GoodsCategoryDialog,
   GoodsCategoryNode,
-  ProtocolParamNode
+  ProtocolParamNode,
+  SignDialog
 ];

@@ -1,0 +1,60 @@
+<h2 matDialogTitle>Подпись</h2>
+<mat-dialog-content style="min-width: 600px;">
+  <form [formGroup]="form" (ngSubmit)="submitAction()">
+  <div class="group__content-first-column">
+    <mat-form-field class="group__field">
+      <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+      <mat-placeholder>Имя пользователя</mat-placeholder>
+      <input matInput formControlName="signerName"/>
+    </mat-form-field>
+  </div>
+  <div class="group__content-second-column">
+    <mat-form-field class="group__field" floatPlaceholder="always">
+      <mat-placeholder class="group__placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
+      <input matInput formControlName="date" [matDatepicker]="myDatepicker">
+      <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #myDatepicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div class="group__content-first-column">
+    <mat-form-field class="group__field">
+      <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+      <mat-placeholder>Должность</mat-placeholder>
+      <mat-select formControlName="position">
+        <mat-option *ngFor="let pos of positionList" [value]="pos.name">
+          {{pos.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="group__content-second-column">
+    <mat-form-field class="group__field">
+      <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+      <mat-placeholder>Роль</mat-placeholder>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let r of roleList" [value]="r.id">
+          {{r.roleName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="group__content-full-width">
+    <mat-form-field class="group__field">
+      <mat-placeholder>Организация</mat-placeholder>
+      <input matInput formControlName="organization"/>
+    </mat-form-field>
+  </div>
+  <div class="group__content-full-width">
+    <mat-form-field class="group__field">
+      <mat-placeholder>Комментарий</mat-placeholder>
+      <textarea matInput formControlName="comment"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="action-panel">
+    <button type="submit" color="primary" mat-raised-button>Подписать</button>
+  </div>
+</form>
+</mat-dialog-content>
+<!-- <mat-dialog-actions fxLayout="column" style="text-align: center;">
+  <button fxFlex="100%" mat-button matDialogClose>Close</button>
+</mat-dialog-actions> -->

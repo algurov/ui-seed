@@ -20,6 +20,10 @@ export class ApplicationPreviewComponent {
   protocolList: Array<any> = new Array<any>();
   observableGroup: Observable<any> = new Observable<any>();
   subscriptions = [];
+  signList = [];
+  actSign = {};
+  protocolSign = {};
+  assignmentSign = {};
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
@@ -37,6 +41,9 @@ export class ApplicationPreviewComponent {
          this.documentService.getApplicationById(this.id).subscribe(res=> {
            this.data = res;
            this.dialogService.block = false;
+         });
+         this.documentService.getSignListByDocumentId(this.id).subscribe(res => {
+           this.signList = res.content;
          });
        } else {
          this.dialogService.hideBlocker();
@@ -118,12 +125,27 @@ export class ApplicationPreviewComponent {
     this.dialogService.showBlocker();
     this.documentService.getActListForApplication(this.id).subscribe(res => {
        this.actList = res.content;
+       this.actList.forEach(act => {
+         this.documentService.getSignListByDocumentId(act.id).subscribe(signs => {
+           this.actSign[act.id] = signs.content;
+         });
+       });
     });
     this.documentService.getAssignmentListByApplication(this.id).subscribe(res => {
       this.assignmentList = res.content;
+      this.assignmentList.forEach(ass => {
+        this.documentService.getSignListByDocumentId(ass.id).subscribe(signs => {
+          this.assignmentSign[ass.id] = signs.content;
+        });
+      });
     });
     this.documentService.getProtocolListByApplication(this.id).subscribe(res => {
       this.protocolList = res.content;
+      this.protocolList.forEach(protocol => {
+        this.documentService.getSignListByDocumentId(protocol.id).subscribe(signs => {
+          this.protocolSign[protocol.id] = signs.content;
+        });
+      });
       this.dialogService.hideBlocker();
     });
   }

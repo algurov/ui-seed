@@ -130,6 +130,10 @@ export const Messages = {
   "SELECT_BRANCH_DIALOG_TITLE": "Выберите филиал или контрагента",
   "APPLICATION_BRANCH_TITLE": "Филиал",
   "SAVE_APPLICATION": "СОХРАНИТЬ",
+  "SIGN_APPLICATION": "ПОДПИСАТЬ",
+  "SIGN_ACT": "ПОДПИСАТЬ",
+  "SIGN_DIRECTION": "ПОДПИСАТЬ",
+  "SIGN_PROTOCOL": "ПОДПИСАТЬ",
   "SAVE_DIRECTION": "СОХРАНИТЬ",
   "SAVE_ACT": "СОХРАНИТЬ",
   "CANCEL_APPLICATION": "ОТМЕНА"

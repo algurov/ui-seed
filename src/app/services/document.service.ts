@@ -142,4 +142,20 @@ export class DocumentService extends RequestBase {
   getGoodsCategories(actId) : Observable<any> {
     return this.http.get(`${SEED_BASE_URL}/seed/goodsCategory/byAct/` + actId, this.options).map(res => res.json());
   }
+
+  signDocument(signData): Observable<any> {
+    return this.http.post(`${SEED_BASE_URL}/seed/sign`, signData, this.options).map(res => res.json());
+  }
+
+  getSignList() : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/sign`, this.options).map(res => res.json());
+  }
+
+  getSignById(id): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/sign/` + id, this.options).map(res => res.json());
+  }
+
+  getSignListByDocumentId(id): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/sign?signedDocument.documentId=` + id, this.options).map(res => res.json());
+  }
 }

@@ -24,6 +24,9 @@ export class DirectionComponent {
         if (action == "SAVE_DIRECTION") {
           this.save();
         }
+        if (action == 'SIGN_DIRECTION') {
+          this.dialogService.showSignDialog(this.id, 'ASSIGNMENT');
+        }
       }));
       this.dialogService.showBlocker();
       this.route.params.subscribe(params => {
@@ -44,7 +47,7 @@ export class DirectionComponent {
     this.subscriptions.forEach(item => item.unsubscribe());
   }
   ngOnInit() {
-    this.mainService.menuChange.emit({name: 'DIRECTION_EDIT'});
+    this.mainService.menuChange.emit({name: 'DIRECTION_EDIT', state: this.id? true: false});
   }
 
   removeUid(arr) {

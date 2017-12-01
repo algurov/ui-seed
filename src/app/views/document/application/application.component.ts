@@ -29,12 +29,13 @@ export class ApplicationComponent {
         switch(action) {
           case 'SAVE_APPLICATION' : this.save(); break;
           case 'CANCEL_APPLICATION' : this.cancel(); break;
+          case 'SIGN_APPLICATION': this.sign(); break;
         }
       }));
-      this.dialogService.showBlocker();
+
       this.route.params.subscribe(params => {
         if (params['id']) {
-            this.dialogService.block = true;
+             this.dialogService.block = true;
           this.id = +params['id'];
          this.documentService.getApplicationById(this.id).subscribe(res=> {
            this.data = res;
@@ -48,7 +49,7 @@ export class ApplicationComponent {
            }
            }
            this.mainService.applicationLoaded.emit(this.data);
-           this.dialogService.block = false;
+            this.dialogService.block = false;
            console.log('read');
            console.log(this.data);
            //console.log(JSON.stringify(this.data));
@@ -67,20 +68,20 @@ export class ApplicationComponent {
     // this.data = JSON.parse(localStorage.getItem('application'));
     // console.log(this.data);
     // }
-    this.mainService.menuChange.emit({name: 'APPLICATION_EDIT'});
+    this.mainService.menuChange.emit({name: 'APPLICATION_EDIT', state: this.id? true:false});
     if (!this.data.id){
     if (this.settingsService.settings.selectedPartnerId) {
-      this.dialogService.showBlocker();
+    //  this.dialogService.showBlocker();
       this.partnerService.getPartnerById(this.settingsService.settings.selectedPartnerId)
         .subscribe(res => {this.data.applicant = res; this.dialogService.block = false;
         if (!this.data.id){
           this.data.documentsReceiver = res;
           this.data.cargoOwner = res;
          }
-         this.dialogService.hideBlocker();
+         //this.dialogService.hideBlocker();
       });
     } else {
-    //  this.dialogService.block = false;
+      // this.dialogService.block = false;
     }}
   }
 
@@ -91,6 +92,10 @@ export class ApplicationComponent {
         this.removeUuid(item);
       });
     }
+  }
+
+  sign() {
+      this.dialogService.showSignDialog(this.id, 'APPLICATION');
   }
 
   clearData() {

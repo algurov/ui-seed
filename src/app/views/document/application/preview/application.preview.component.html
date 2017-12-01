@@ -2,6 +2,15 @@
   <!-- <div class="application__action">
       <button mat-raised-button color="primary" (click)="addAct()">ДОБАВИТЬ АКТ</button>
   </div> -->
+  <div *ngIf="signList.length > 0">
+    <div>
+      Подписан:
+    </div>
+    <div style="padding-left: 20px;" *ngFor="let sign of signList">
+      {{sign.signerName}}
+    </div>
+  </div>
+
   <div>
     <div>
       Заявка номер: {{data.number}}
@@ -32,6 +41,10 @@
       <div style="float:right;">
         <mat-icon matTooltip="Добавить протокол испытаний" matTooltipPosition="above" (click)="addProtocol(act)">chat</mat-icon>
       </div>
+      <div *ngIf="actSign[act.id] && actSign[act.id].length > 0">
+        <div>Подписан:</div>
+        <div style="padding-left: 20px;" *ngFor="let sign of actSign[act.id]">{{sign.signerName}}</div>
+      </div>
 
     </div>
 
@@ -50,6 +63,10 @@
       <div style="float:right;">
         <mat-icon  matTooltip="Редактировать" matTooltipPosition="above" (click)="openAssignment(assignment.id)">edit</mat-icon>
       </div>
+      <div *ngIf="assignmentSign[assignment.id] && assignmentSign[assignment.id].length > 0">
+        <div>Подписан:</div>
+        <div style="padding-left: 20px;" *ngFor="let sign of assignmentSign[assignment.id]">{{sign.signerName}}</div>
+      </div>
     </div>
 
   </ng-container>
@@ -66,6 +83,10 @@
       </div>
       <div style="float:right;">
         <mat-icon  matTooltip="Редактировать" matTooltipPosition="above" (click)="openProtocol(protocol.id)">edit</mat-icon>
+      </div>
+      <div *ngIf="protocolSign[protocol.id] && protocolSign[protocol.id].length > 0">
+        <div>Подписан:</div>
+        <div style="padding-left: 20px;" *ngFor="let sign of protocolSign[protocol.id]">{{sign.signerName}}</div>
       </div>
     </div>
 

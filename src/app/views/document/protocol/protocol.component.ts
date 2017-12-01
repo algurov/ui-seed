@@ -29,6 +29,9 @@ export class ProtocolComponent {
         if (action == "CANCEL_PROTOCOL") {
           this.cancel();
         }
+        if (action == 'SIGN_PROTOCOL') {
+          this.dialogService.showSignDialog(this.id, 'TEST_REPORT');
+        }
       }));
       this.dialogService.showBlocker();
       this.route
@@ -66,7 +69,7 @@ export class ProtocolComponent {
     this.subscriptions.forEach(item => item.unsubscribe());
   }
   ngOnInit() {
-    this.mainService.menuChange.emit({name: 'PROTOCOL_EDIT'});
+    this.mainService.menuChange.emit({name: 'PROTOCOL_EDIT', state: this.id? true: false});
   }
 
   removeUid(arr) {

@@ -46,12 +46,12 @@ constructor(public dlgService: DialogService, public main : MainService, public 
   });
   this.main.branchOfficeSelectedForUser.subscribe(res => this.refresh(true));
   this.main.partnerSelectedForUser.subscribe(res => this.refresh(true));
-  this.main.menuChange.subscribe(res => this.updateMenuActions(res.name));
+  this.main.menuChange.subscribe(res => this.updateMenuActions(res.name, res.state));
 
 }
 
-updateMenuActions(screen: string) {
-  this.menuActions = this.dataService.getMenuActionsByScreen(screen);
+updateMenuActions(screen: string, state: boolean) {
+  this.menuActions = this.dataService.getMenuActionsByScreen(screen, state);
 }
 
 refresh(reload) {

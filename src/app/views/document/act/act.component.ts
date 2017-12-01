@@ -24,6 +24,9 @@ export class ActComponent {
         if (action == 'SAVE_ACT') {
           this.save();
         }
+        if (action == 'SIGN_ACT') {
+          this.dialogService.showSignDialog(this.id, 'ACT');
+        }
       }));
       this.dialogService.showBlocker();
       this.route.params.subscribe(params => {
@@ -42,7 +45,7 @@ export class ActComponent {
     this.subscriptions.forEach(item => item.unsubscribe());
   }
   ngOnInit() {
-    this.mainService.menuChange.emit({name:'ACT_EDIT'});
+    this.mainService.menuChange.emit({name:'ACT_EDIT', state: this.id? true: false});
   }
 
   beforeSave() {

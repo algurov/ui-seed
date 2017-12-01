@@ -47,7 +47,12 @@ export class DataService {
   return newDate;
   }
 
-  getMenuActionsByScreen(screen:string) {
-    return menuActions[screen];
+  getMenuActionsByScreen(screen:string, state: boolean) {
+    let result = menuActions[screen];
+    if (state) {
+      return result;
+    } else {
+      return result.filter(item => item.state != state);
+    }
   }
 }

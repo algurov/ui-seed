@@ -8,6 +8,7 @@ import { AddPartnerDialog } from '../views/partner/add.partner.dialog';
 import { AddTaxonomyDialog } from '../views/taxonomy/add.taxonomy.dialog';
 import { SelectTaxonomyDialog } from '../views/taxonomy/select/select.taxonomy.dialog';
 import { SelectBranchDialog } from '../views/main/select.branch.dialog/select.branch.dialog';
+import { SignDialog } from '../views/sign/sign.dialog';
 
 @Injectable()
 export class DialogService {
@@ -25,6 +26,18 @@ export class DialogService {
     let cmp = dlg.componentInstance;
     cmp.title = title;
     cmp.message = message;
+  }
+
+  showSignDialog(docId, docType) {
+   let dlg = this.dialog.open(SignDialog);
+   let cmp = dlg.componentInstance;
+   cmp.docId = docId;
+   cmp.docType = docType;
+   dlg.afterClosed().subscribe(res => {
+     if(res) {
+       this.showNotification('Документ подписан');
+     }
+   })
   }
 
   showAddAgentDialog() {

@@ -14,7 +14,7 @@ import { ParamTreeDialog } from './views/document/direction/param.tree/param.tre
 import { SelectFieldDialog } from './widgets/select.field/select.field';
 import { SelectBranchFieldDialog } from './widgets/seed.select.field/seed.select.field';
 import { GoodsCategoryDialog } from './views/document/protocol/goods.category.dilalog/goods.category.dialog';
-
+import { SignDialog } from './views/sign/sign.dialog';
 export const APP_ENTRY_COMPONENTS = [
   MessageDialogComponent,
   ConfirmDialog,
@@ -33,5 +33,6 @@ export const APP_ENTRY_COMPONENTS = [
   ParamTreeDialog,
   SelectFieldDialog,
   SelectBranchFieldDialog,
-  GoodsCategoryDialog
+  GoodsCategoryDialog,
+  SignDialog
 ];
