@@ -234,6 +234,7 @@ export class StandardPropertyDialog {
     this.goodId = data.goodId;
     this.customStandard = data.custom;
   }
+
   selectFromTree(event) {
     this.select(event);
   }
@@ -346,7 +347,7 @@ export class StandardPropertyDialog {
       this.taxonmyService.customQuery('goodsCategoryProperty/tree?standardId='+ this.standard.id + '&goodsId=' + this.goodId)
         .subscribe(res => {
           this.list = res;
-          console.log(res);
+          //console.log(res);
           this.listToView = this.processData_2(this.list);
           console.log(this.listToView);
           this.loaded = true;
@@ -355,7 +356,7 @@ export class StandardPropertyDialog {
     this.taxonmyService.searchTaxonomyDataByParams('Property', []).subscribe(res => {
       this.allList = res.content;
       this.loadedAll = true;
-      this.loaded = true;
+      //this.loaded = true;
     });
   }
 
