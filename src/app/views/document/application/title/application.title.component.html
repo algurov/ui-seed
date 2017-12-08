@@ -4,7 +4,8 @@
     <div class="title-content-column">
       <mat-form-field class="title__item" floatPlaceholder="always">
         <mat-placeholder class="title__item-placeholder">{{stringService.get('NEW_APPLICATION_TITLE')}}</mat-placeholder>
-        <input matInput [(ngModel)]="data.number"/>
+        <input matInput [(ngModel)]="data.number" [formControl]="numberControl" required/>
+        <mat-error *ngIf="numberControl.invalid">Обязательное поле</mat-error>
       </mat-form-field>
       <!-- <span class="title__item-label">{{stringService.get('NEW_APPLICATION_TITLE_FROM')}}</span> -->
       <mat-form-field class="title__item" floatPlaceholder="always">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaxonomyService } from '../../../services/taxonomy.service';
 import { DataSource } from '@angular/cdk/collections';
@@ -8,12 +8,14 @@ import { DialogService } from '../../../services/dialog.service';
 import { StringService } from '../../../services/string.service';
 import { DataService } from '../../../services/data.service';
 import { MainService } from '../../../services/main.service';
+import { PropertyTree } from './property.tree/property.tree';
 @Component({
   selector: 'sproperty-edit',
   templateUrl: './property.edit.component.html',
   styleUrls: ['./property.edit.component.scss']
 })
 export class PropertyEditComponent {
+  @ViewChild(PropertyTree) propertyTree: PropertyTree;
   goodsCategory: any;
   id: number;
   data = { id: -1 };
@@ -21,6 +23,8 @@ export class PropertyEditComponent {
   toDelete: Array<any> = new Array<any>();
   goodsCategoryProperties: Array<any> = new Array<any>();
   toSave: Array<any> = new Array<any>();
+  toCreate: Array<any> = new Array<any>();
+  toUpdate: Array<any> = new Array<any>();
   subscriptions = [];
   constructor(public stringService: StringService, public taxonomyService: TaxonomyService, private route: ActivatedRoute,
     public dialogService: DialogService, private dataService: DataService, private mainService: MainService,
@@ -76,7 +80,7 @@ export class PropertyEditComponent {
   onNodeDelete(node) {
     this.toDelete.push(node);
   }
-  
+
   selectGoodsCategory(event) {
     this.goodsCategory = event;
     this.dialogService.showBlocker();
@@ -95,7 +99,7 @@ export class PropertyEditComponent {
   }
 
   beforeSave() {
-    this.treeToArray(this.goodsCategoryProperties, null);
+    this.treeToArray(this.propertyTree.data, null);
     this.toSave.forEach(item => {
       delete item.uuid;
       item.goodsCategory = this.goodsCategory;
@@ -103,7 +107,13 @@ export class PropertyEditComponent {
       item.standard = this.data;
       delete item.standard.children;
     });
-    console.log(this.toSave);
+    this.toSave.forEach(item => {
+      if (item.id) {
+        this.toUpdate.push(item);
+      } else {
+        this.toCreate.push(item);
+      }
+    });
   }
 
   save() {
@@ -111,23 +121,15 @@ export class PropertyEditComponent {
       this.dialogService.showMessageDlg('Ошибка валидации', 'Поле категории обязательно к заполнению');
     } else {
       this.beforeSave();
-      if (this.isNew) {
-        this.taxonomyService.createProperties(this.toSave).subscribe(res => {
-          this.router.navigate(['main/settings/taxonomy/standard-list']);
-          this.dialogService.showNotification('Стандарт сохранен');
-        });
-      } else {
-        if (this.toDelete.length > 0) {
-          this.toDelete.forEach(item => {
-            this.toSave.splice(this.toSave.findIndex(it => it.id == item.id), 1);
-            this.taxonomyService.deleteGoodsCategoryProperty(item.id).subscribe(res => { });
+      this.taxonomyService.createProperties(this.toCreate).subscribe(res => {
+        this.taxonomyService.updateProperties(this.toUpdate).subscribe(res1 => {
+          this.toDelete.forEach(toDel => {
+            this.taxonomyService.deleteGoodsCategoryProperty(toDel.id).subscribe(res2 => {});
           });
-        }
-        this.taxonomyService.updateProperties(this.toSave).subscribe(res => {
           this.router.navigate(['main/settings/taxonomy/standard-list']);
           this.dialogService.showNotification('Стандарт сохранен');
         });
-      }
+      });
     }
   }
   ngOnDestroy() {

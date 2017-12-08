@@ -29,6 +29,7 @@ export class PropertyTree {
   @Input() data: any;
   @Output() dataChange = new EventEmitter();
   @Output() onNodeDelete = new EventEmitter();
+  @Output() onNodeAdd = new EventEmitter();
   nodes: Array<any> = new Array<any>()
   properties: Array<any> = new Array<any>();
   @Output() removed: EventEmitter<any> = new EventEmitter<any>();
@@ -209,6 +210,7 @@ export class PropertyTree {
       this.data.push(item);
       // this.data.assignmentResearches.push(this.removeChecked(item));
     }
+
     this.tree.treeModel.update();
     if (this.wrap) {
       this.wrap.nativeElement.style = "height: auto;";

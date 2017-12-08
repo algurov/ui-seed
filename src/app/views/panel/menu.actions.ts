@@ -122,5 +122,19 @@ export const menuActions =
         type: 'button',
         state: true
       }
-    ]
+    ],
+    'CERTIFICATE_EDIT': [
+      {
+        name: 'SIGN_CERTIFICATE',
+        action: 'SIGN_CERTIFICATE',
+        type: 'button',
+        state: false
+      },
+      {
+        name: 'SAVE_CERTIFICATE',
+        action: 'SAVE_CERTIFICATE',
+        type: 'button',
+        state: true
+      }
+  ],
   };

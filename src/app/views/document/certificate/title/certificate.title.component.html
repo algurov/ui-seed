@@ -1,0 +1,41 @@
+<div class="group">
+  <div class="title-text">Сертификат качества на зерно</div>
+  <div class="group__content" style="padding-top: 20px;">
+      <div class="group__content-first-column">
+        <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">Номер документа</mat-placeholder>
+          <input matInput [(ngModel)]="data.sampleNumber"/>
+        </mat-form-field>
+      </div>
+      <div class="group__content-second-column">
+        <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
+          <input matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    <div class="group__content-full-width">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Дополнительные сведения</mat-placeholder>
+        <textarea matInput [(ngModel)]="data.additional"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="group__content-full-width">
+      <div class="collapsible">
+        <div class="collapsible-title" (click)="toggleLaboratoryVisibility()">
+          <i class="arrow" [ngClass]="{'right': !laboratoryVisible, 'down': laboratoryVisible}"></i>{{getLaboratoryName()}}
+        </div>
+        <div *ngIf="laboratoryVisible" class="collapsible-contnet">
+          <div class="laboratory__data">
+            <div>Свидетельство (аттестата) о аккредитации: {{getLaboratoryCertificateNumber()}}</div>
+            <div>Зарегистрирована в реестре Россельхознадзора за №: {{getLaboratoryRegistrationNumber()}}</div>
+            <div>Адрес: {{getLaboratoryContact()}}</div>
+            <div>Тел./Факс: </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div style="clear:both;"></div>
+</div>

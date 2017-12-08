@@ -94,6 +94,8 @@ import { PropertyEditComponent } from './views/taxonomy/standard/property.edit.c
 import { SelectGoodsCategoryDialog } from './widgets/seed.select.field/seed.select.field';
 import { PropertyTree, PropertyTreeDialog } from './views/taxonomy/standard/property.tree/property.tree';
 import { PropertyNode } from './views/taxonomy/standard/property.node/property.node';
+import { CertificateComponent } from './views/document/certificate/certificate.component';
+import { CertificateTitleComponent } from './views/document/certificate/title/certificate.title.component';
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -194,5 +196,7 @@ export const APP_DECLARATIONS = [
   SelectGoodsCategoryDialog,
   PropertyTree,
   PropertyTreeDialog,
-  PropertyNode
+  PropertyNode,
+  CertificateComponent,
+  CertificateTitleComponent
 ];

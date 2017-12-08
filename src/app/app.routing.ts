@@ -29,6 +29,7 @@ import { ProtocolComponent } from './views/document/protocol/protocol.component'
 import { StandardEditComponent } from './views/taxonomy/standard/standard.edit.component';
 import { PropertyEditComponent } from './views/taxonomy/standard/property.edit.component';
 import { StandardListComponent } from './views/taxonomy/standard/standard.list.component';
+import { CertificateComponent } from './views/document/certificate/certificate.component';
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
@@ -54,6 +55,7 @@ export const routes: Routes = [
       { path: 'document/application/:id/view', component: ApplicationPreviewComponent, data: {breadcrumb: 'Заявка'}},
       { path: 'document/act', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
       { path: 'document/act/:id', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
+      { path: 'document/certificate', component: CertificateComponent, data: {breadcrumb: 'Сертификат'}},
       { path: 'document/assignment/:id', component: DirectionComponent, data: {breadcrumb: 'Направление'}},
       { path: 'document/assignment', component: DirectionComponent, data: {breadcrumb: 'Направление'}},
       { path: 'document/protocol/:id', component: ProtocolComponent, data: {breadcrumb: 'Протокол'}},
