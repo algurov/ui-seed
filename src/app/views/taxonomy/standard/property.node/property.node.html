@@ -1,0 +1,35 @@
+<div class="field">
+  <div class="toggle" *ngIf="isToggleVisible(config)">
+  <color-toggle [value]="config.data.propertyType" (onChange)="onStateChanged($event)"></color-toggle>
+</div>
+  <mat-form-field class="short-field">
+    <input matInput [value]="getPropertyName()" readonly="true"/>
+  </mat-form-field>
+
+    <mat-form-field class="short-field-units">
+      <mat-select [ngModel]="selectedUnit" (change)="onUnitSelection($event)">
+        <mat-option *ngFor="let unit of config.data.property.units" [value]="unit.id">
+          {{unit.nameRu}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field class="short-field-extra">
+      <input matInput placeholder="min" [ngModel]="config.data.goodsCategoryPropertyValues[0].min" (keyup)="onMinChanged($event)"/>
+    </mat-form-field>
+    <mat-form-field class="short-field-extra">
+      <input matInput placeholder="max" [ngModel]="config.data.goodsCategoryPropertyValues[0].max" (keyup)="onMaxChanged($event)"/>
+    </mat-form-field>
+    <mat-form-field class="short-field-extra" >
+      <input matInput placeholder="текст" [ngModel]="config.data.goodsCategoryPropertyValues[0].text" (keyup)="onTextChanged($event)"/>
+    </mat-form-field>
+    <mat-form-field class="short-field-select">
+      <mat-select [ngModel]="config.data.researchCondition" (change)="onOptionChange($event)" matSelect>
+        <mat-option *ngFor="let opt of options" [value]="opt.value">
+          {{opt.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  <mat-icon class="close-icon" (click)="removeItem()">close</mat-icon>
+</div>

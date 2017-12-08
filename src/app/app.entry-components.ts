@@ -3,7 +3,7 @@ import { ConfirmDialog } from './widgets/confirm.dialog';
 import { AddPartnerDialog } from './views/partner/add.partner.dialog';
 import { AddTaxonomyDialog } from './views/taxonomy/add.taxonomy.dialog';
 import { SelectTaxonomyDialog } from './views/taxonomy/select/select.taxonomy.dialog';
-import { SelectDialog, SelectPlaceDialog, SelectProductDialog } from './widgets/seed.select.field/seed.select.field';
+import { SelectDialog, SelectStandardListDialog, SelectPlaceDialog, SelectProductDialog } from './widgets/seed.select.field/seed.select.field';
 import { SelectStandardDialog } from './views/document/application/standard/application.standard.component';
 import { StandardPropertyDialog } from './widgets/standard.field/standard.field';
 import { RoleAddDialog } from './views/role/role.add.dialog';
@@ -15,6 +15,8 @@ import { SelectFieldDialog } from './widgets/select.field/select.field';
 import { SelectBranchFieldDialog } from './widgets/seed.select.field/seed.select.field';
 import { GoodsCategoryDialog } from './views/document/protocol/goods.category.dilalog/goods.category.dialog';
 import { SignDialog } from './views/sign/sign.dialog';
+import { SelectGoodsCategoryDialog } from './widgets/seed.select.field/seed.select.field';
+import { PropertyTreeDialog } from './views/taxonomy/standard/property.tree/property.tree';
 export const APP_ENTRY_COMPONENTS = [
   MessageDialogComponent,
   ConfirmDialog,
@@ -34,5 +36,8 @@ export const APP_ENTRY_COMPONENTS = [
   SelectFieldDialog,
   SelectBranchFieldDialog,
   GoodsCategoryDialog,
-  SignDialog
+  SignDialog,
+  SelectStandardListDialog,
+  SelectGoodsCategoryDialog,
+  PropertyTreeDialog
 ];

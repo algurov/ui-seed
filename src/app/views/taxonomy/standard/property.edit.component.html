@@ -1,0 +1,11 @@
+<div class="standard">
+  <div class="standard-title">Нормативы</div>
+  <div class="group__content">
+    <div class="group__content-full-width">
+        <seed-select-field code="goodsCategory" placeholder="Категория" [data]="goodsCategory" (change)="selectGoodsCategory($event)"></seed-select-field>
+    </div>
+    <div class="group__content-full-width">
+      <property-tree [(dataValue)]="goodsCategoryProperties" (onNodeDelete)="onNodeDelete($event)"></property-tree>
+    </div>
+  </div>
+</div>

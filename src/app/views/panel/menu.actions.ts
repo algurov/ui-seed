@@ -92,5 +92,35 @@ export const menuActions =
         type: 'button',
         state: true
       }
-  ]
+  ],
+    'STANDARD_LIST' : [
+      {
+        name: 'ADD_STANDARD',
+        action: 'ADD_STANDARD',
+        type: 'link',
+        state: true
+      },
+    ],
+    'STANDARD_EDIT' : [
+      {
+        name: 'EDIT_STANDARD',
+        action: 'EDIT_STANDARD',
+        type: 'button',
+        state: true
+      },
+      {
+        name: 'REMOVE_STANDARD',
+        action: 'REMOVE_STANDARD',
+        type: 'button',
+        state: false
+      }
+    ],
+    'STANDARD_PROPERTY_EDIT': [
+      {
+        name: 'EDIT_STANDARD_PROPERTY',
+        action: 'EDIT_STANDARD_PROPERTY',
+        type: 'button',
+        state: true
+      }
+    ]
   };

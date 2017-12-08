@@ -52,4 +52,52 @@ export class TaxonomyService extends RequestBase {
   customQuery(query: string): Observable<any> {
     return this.http.get(`${SEED_BASE_URL}/seed/` + query, this.options).map(res => res.json());
   }
+
+  getStandardList() : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/standard`, this.options).map(res => res.json());
+  }
+
+  getStandardById(id: number) : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/standard/`+id, this.options).map(res => res.json());
+  }
+
+  updateStandard(standard): Observable<any> {
+    return this.http.put(`${SEED_BASE_URL}/seed/standard`, standard, this.options).map(res => res.json());
+  }
+
+  createStandard(standard): Observable<any> {
+    return this.http.post(`${SEED_BASE_URL}/seed/standard`, standard, this.options).map(res => res.json());
+  }
+
+  deleteStandard(standard): Observable<any> {
+    return this.http.delete(`${SEED_BASE_URL}/seed/standard/`+ standard.id,  this.options).map(res => res.json());
+  }
+
+  getGoodsCategoryList(): Observable<any> {
+      return this.http.get(`${SEED_BASE_URL}/seed/goodsCategory`, this.options).map(res => res.json());
+  }
+
+  getGoodsCategoryPropertyByStandardIdAndGoodsCategoryId(standardId, goodsCategoryId): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/goodsCategoryProperty?standard.id=` + standardId + '&goodsCategory.id='+goodsCategoryId, this.options).map(res => res.json());
+  }
+
+  deleteGoodsCategoryProperty(id) {
+    return this.http.delete(`${SEED_BASE_URL}/seed/goodsCategoryProperty/`+ id,  this.options).map(res => res.json());
+  }
+
+  createProperties(properties) : Observable<any> {
+    return this.http.post(`${SEED_BASE_URL}/seed/goodsCategoryProperty`, properties, this.options).map(res => res.json());
+  }
+
+  updateProperties(properties) : Observable<any> {
+    return this.http.put(`${SEED_BASE_URL}/seed/goodsCategoryProperty`, properties, this.options).map(res => res.json());
+  }
+
+  // deleteProperties(properties) : Observable<any> {
+  //   //return this.http.delete(`${SEED_BASE_URL}/seed/goodsCategoryProperty`, properties, this.options).map(res => res.json());
+  // }
+
+  updatePropertiesPatch(properties) : Observable<any> {
+    return this.http.patch(`${SEED_BASE_URL}/seed/goodsCategoryProperty`, properties, this.options).map(res => res.json());
+  }
 }

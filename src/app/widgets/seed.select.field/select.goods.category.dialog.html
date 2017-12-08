@@ -1,0 +1,15 @@
+<h2 matDialogTitle>Выберите категорию</h2>
+<mat-dialog-content style="min-width: 600px;">
+  <mat-form-field>
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup)="addNameFilter(nameFilter.value)" />
+  </mat-form-field>
+  <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+  <div *ngIf="loaded">
+    <tree-root [nodes]="list">
+      <ng-template #treeNodeTemplate let-node let-index="index">
+        <div (click)="selectItem(node.data)">{{node.data.fullName}}</div>
+      </ng-template>
+    </tree-root>
+  </div>
+</mat-dialog-content>

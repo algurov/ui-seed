@@ -26,7 +26,9 @@ import { ActComponent } from './views/document/act/act.component';
 import { ApplicationPreviewComponent } from './views/document/application/preview/application.preview.component';
 import { DirectionComponent } from './views/document/direction/direction.component';
 import { ProtocolComponent } from './views/document/protocol/protocol.component';
-
+import { StandardEditComponent } from './views/taxonomy/standard/standard.edit.component';
+import { PropertyEditComponent } from './views/taxonomy/standard/property.edit.component';
+import { StandardListComponent } from './views/taxonomy/standard/standard.list.component';
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
@@ -41,7 +43,11 @@ export const routes: Routes = [
       { path: 'settings/user/add', component: UserEditComponent},
       { path: 'agent', component: PartnerListComponent,  data: {breadcrumb: 'Контрагенты'}},
       { path: 'settings/taxonomy', component: TaxonomyAllListComponent, data: {breadcrumb: 'Справочники'}},
-      { path: 'settings/taxonomy/:tax', component: TaxonomyItemComponent},
+      //{ path: 'settings/taxonomy/:tax', component: TaxonomyItemComponent},
+      { path: 'settings/taxonomy/standard-list', component: StandardListComponent},
+        { path: 'settings/taxonomy/standard/:id', component: StandardEditComponent},
+        { path: 'settings/taxonomy/standard/:id/property', component: PropertyEditComponent},
+          { path: 'settings/taxonomy/standard', component: StandardEditComponent},
       { path: 'document', component: DocumentListComponent, data: {breadcrumb: 'Документы'}},
       { path: 'document/application', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}},
       { path: 'document/application/:id', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}},

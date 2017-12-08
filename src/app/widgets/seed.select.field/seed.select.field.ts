@@ -1,4 +1,4 @@
-import { Component, Input, Inject, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import { Component, Input, Inject, Output, EventEmitter, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { StringService } from '../../services/string.service';
 import { PartnerService } from '../../services/partner.service';
@@ -6,8 +6,8 @@ import { TaxonomyService } from '../../services/taxonomy.service';
 import { BranchOfficeService } from '../../services/branch.service';
 import { Location } from '../../models/location';
 import { Observable } from 'rxjs';
-
-
+import { SelectStandardDialog } from '../../views/document/application/standard/application.standard.component';
+import { TreeComponent } from 'angular2-tree-component';
 
 @Component({
   selector: 'seed-select-field',
@@ -45,6 +45,16 @@ export class SeedSelectField {
 
   }
   getTitle() {
+      if (this.code == 'standard') {
+        if (this.value.fullName) {
+          return this.value.fullName;
+        }
+      }
+      if (this.code == 'goodsCategory') {
+        if (this.value.fullName) {
+          return this.value.fullName;
+        }
+      }
       if (this.code == 'partner') {
         if (this.value.name) {
           return this.value.name;
@@ -95,6 +105,20 @@ export class SeedSelectField {
   openDialog() {
     if(this.enabled) {
       let dialogRef = null;
+    if (this.code == 'standard') {
+       dialogRef = this.dialog.open(SelectStandardListDialog, {
+        data: {
+          code: this.code
+        }
+      });
+    }
+    if (this.code == 'goodsCategory') {
+       dialogRef = this.dialog.open(SelectGoodsCategoryDialog, {
+        data: {
+          code: this.code
+        }
+      });
+    }
     if (this.code == 'partner') {
        dialogRef = this.dialog.open(SelectDialog, {
         data: {
@@ -182,6 +206,148 @@ export class SelectDialog {
    ngOnInit() {
      this.partnerService.getPartnerList().subscribe(res => {
        this.list = res.content;
+       this.loaded = true;
+     })
+   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'select-standard-dlg',
+  templateUrl: 'select.standard.list.dialog.html',
+  styleUrls: ['/select.dialog.scss']
+})
+export class SelectStandardListDialog {
+  dialog: MatDialogRef<SelectStandardListDialog>;
+  list: Array<any>;
+  selectedItem: any;
+  @ViewChild(TreeComponent) tree: TreeComponent;
+  loaded = false;
+  constructor(
+    private stringService: StringService,
+    private taxonomyService: TaxonomyService,
+    public dialogRef: MatDialogRef<SelectStandardListDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.dialog = dialogRef;
+   }
+
+   processData(list) {
+
+     var map = {}, node, roots = [], i;
+     for (i = 0; i < list.length; i += 1) {
+       map[list[i].id] = i; // initialize the map
+       list[i].children = []; // initialize the children
+     }
+     for (i = 0; i < list.length; i += 1) {
+       node = list[i];
+       if (node.parent != null) {
+         // if you have dangling branches check that map[node.parentId] exists
+         list[map[node.parent.id]].children.push(node);
+       } else {
+         roots.push(node);
+       }
+     }
+     return roots;
+   }
+
+   addNameFilter(name) {
+     name = name.trim();
+     this.tree.treeModel.filterNodes((node) => {
+       if (node.data.fullName.toLowerCase().search(name) >= 0) {
+         return true;
+       } else {
+         return false;
+       }
+     });
+   }
+
+   selectItem(item) {
+     if (item) {
+      this.selectItem = item;
+      this.dialogRef.close(this.selectItem);
+    } else {
+      this.dialogRef.close();
+    }
+   }
+
+   ngOnInit() {
+     this.taxonomyService.getStandardList().subscribe(res => {
+       this.list = this.processData(res.content);
+       this.loaded = true;
+     })
+   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'select-category-dlg',
+  templateUrl: 'select.goods.category.dialog.html',
+  styleUrls: ['/select.dialog.scss']
+})
+export class SelectGoodsCategoryDialog {
+  dialog: MatDialogRef<SelectGoodsCategoryDialog>;
+  list: Array<any>;
+  selectedItem: any;
+  @ViewChild(TreeComponent) tree: TreeComponent;
+  loaded = false;
+  constructor(
+    private stringService: StringService,
+    private taxonomyService: TaxonomyService,
+    public dialogRef: MatDialogRef<SelectGoodsCategoryDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.dialog = dialogRef;
+   }
+
+   processData(list) {
+
+     var map = {}, node, roots = [], i;
+     for (i = 0; i < list.length; i += 1) {
+       map[list[i].id] = i; // initialize the map
+       list[i].children = []; // initialize the children
+     }
+     for (i = 0; i < list.length; i += 1) {
+       node = list[i];
+       if (node.parent != null) {
+         // if you have dangling branches check that map[node.parentId] exists
+         list[map[node.parent.id]].children.push(node);
+       } else {
+         roots.push(node);
+       }
+     }
+     return roots;
+   }
+
+   addNameFilter(name) {
+     name = name.trim();
+     this.tree.treeModel.filterNodes((node) => {
+       if (node.data.fullName.toLowerCase().search(name) >= 0) {
+         return true;
+       } else {
+         return false;
+       }
+     });
+   }
+
+   selectItem(item) {
+     if (item) {
+      this.selectItem = item;
+      this.dialogRef.close(this.selectItem);
+    } else {
+      this.dialogRef.close();
+    }
+   }
+
+   ngOnInit() {
+     this.taxonomyService.getGoodsCategoryList().subscribe(res => {
+       this.list = this.processData(res.content);
        this.loaded = true;
      })
    }

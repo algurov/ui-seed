@@ -1,0 +1,50 @@
+<div class="standard">
+  <div class="standard-title">Стандарт</div>
+  <div class="group__content">
+    <div class="group__content-first-column">
+        <seed-select-field code="standard" placeholder="Приложение, статья, раздел к" [data]="parent" (change)="selectParent($event)"></seed-select-field>
+    </div>
+    <div class="group__content-second-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Категория</mat-placeholder>
+        <mat-select [ngModel]="option" (change)="onOptionChange($event)">
+          <mat-option *ngFor="let opt of options" [value]="opt.id">{{opt.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="group__content-first-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Действует с</mat-placeholder>
+        <input matInput [matDatepicker]="myDatepicker" [ngModel]="startDate" (dateChange)="onStartDateChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="group__content-second-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Действует по</mat-placeholder>
+        <input matInput [matDatepicker]="myDatepicker2" [ngModel]="stopDate" (dateChange)="onStopDateChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="group__content-first-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Полное наименование</mat-placeholder>
+        <input matInput [ngModel]="fullName" (keyup)="fullNameChange($event)">
+      </mat-form-field>
+    </div>
+    <div class="group__content-second-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Краткое наименование</mat-placeholder>
+        <input matInput [ngModel]="shortName" (keyup)="shortNameChange($event)">
+      </mat-form-field>
+    </div>
+    <div class="group__content-full-width">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Описание документа</mat-placeholder>
+        <textarea matInput [ngModel]="description" (keyup)="descriptionChange($event)"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

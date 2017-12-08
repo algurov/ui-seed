@@ -52,6 +52,7 @@ import { RoleListComponent } from './views/role/role.list.component';
 import { RoleFieldComponent } from './views/role/field/role.field.component';
 import { RoleAddDialog } from './views/role/role.add.dialog';
 import { SelectLaboratoryDialog } from './widgets/seed.select.field/seed.select.field';
+import { SelectStandardListDialog } from './widgets/seed.select.field/seed.select.field';
 import { SelectBranchFieldDialog } from './widgets/seed.select.field/seed.select.field';
 import { ProductField } from './widgets/product.field/product.field';
 import { EditableField } from './widgets/editable.field/editable.field';
@@ -87,7 +88,12 @@ import { GoodsCategoryDialog } from './views/document/protocol/goods.category.di
 import { GoodsCategoryNode} from './views/document/protocol/goods.category.node/goods.category.node';
 import { ProtocolParamNode } from './views/document/protocol/protocol.param.node/protocol.param.node';
 import { SignDialog } from './views/sign/sign.dialog';
-
+import { StandardEditComponent } from './views/taxonomy/standard/standard.edit.component';
+import { StandardListComponent } from './views/taxonomy/standard/standard.list.component';
+import { PropertyEditComponent } from './views/taxonomy/standard/property.edit.component';
+import { SelectGoodsCategoryDialog } from './widgets/seed.select.field/seed.select.field';
+import { PropertyTree, PropertyTreeDialog } from './views/taxonomy/standard/property.tree/property.tree';
+import { PropertyNode } from './views/taxonomy/standard/property.node/property.node';
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -180,5 +186,13 @@ export const APP_DECLARATIONS = [
   GoodsCategoryDialog,
   GoodsCategoryNode,
   ProtocolParamNode,
-  SignDialog
+  SignDialog,
+  StandardEditComponent,
+  SelectStandardListDialog,
+  StandardListComponent,
+  PropertyEditComponent,
+  SelectGoodsCategoryDialog,
+  PropertyTree,
+  PropertyTreeDialog,
+  PropertyNode
 ];

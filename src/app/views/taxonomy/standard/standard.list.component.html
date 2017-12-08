@@ -1,0 +1,27 @@
+
+<div>
+  <mat-form-field>
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup)="addNameFilter(nameFilter.value)" />
+  </mat-form-field>
+  <!-- <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner> -->
+  <!-- <div *ngIf="loaded">
+    <div class="list-item" *ngFor="let item of list" (click)="selectItem(item)">
+      {{item.fullName}}
+    </div>
+  </div> -->
+  <div *ngIf="loaded">
+    <tree-root [nodes]="list">
+      <ng-template #treeNodeTemplate let-node let-index="index">
+        <div>
+          <div style="float: left;">{{node.data.fullName}}</div>
+          <div style="float: left; padding-left: 20px;"><mat-icon (click)="selectItem(node.data)" style="font-size:14px; height: 14px; width: 14px;">edit</mat-icon></div>
+            <div style="float: left; padding-left: 10px;"><mat-icon (click)="selectItemForProperty(node.data)" style="font-size:14px; height: 14px; width: 14px;">assessment</mat-icon></div>
+        </div>
+      </ng-template>
+    </tree-root>
+    <!-- <div class="list-item" *ngFor="let item of list" (click)="select(item)">
+      {{item.fullName}}
+    </div> -->
+  </div>
+</div>

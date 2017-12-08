@@ -136,6 +136,10 @@ export const Messages = {
   "SIGN_PROTOCOL": "ПОДПИСАТЬ",
   "SAVE_DIRECTION": "СОХРАНИТЬ",
   "SAVE_ACT": "СОХРАНИТЬ",
-  "CANCEL_APPLICATION": "ОТМЕНА"
+  "CANCEL_APPLICATION": "ОТМЕНА",
+  "EDIT_STANDARD": "СОХРАНИТЬ",
+  "REMOVE_STANDARD": "УДАЛИТЬ",
+  "ADD_STANDARD": "Новый стандарт",
+  "EDIT_STANDARD_PROPERTY": "СОХРАНИТЬ"
 
 };

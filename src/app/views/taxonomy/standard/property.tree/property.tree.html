@@ -1,0 +1,21 @@
+<div class="standard-field">
+  <div>
+    <div>
+      <div  class="standard-field__title">
+        <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>Показатели
+      </div>
+      <mat-icon class="standard-field__icon" (click)="selectProperty()">search</mat-icon>
+      <div class="standard-field__divider"></div>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+  <div *ngIf="visible">
+    <div click-outside (clickOutside)="onClickOutside($event)" #wrap class="wrapper-tree-custom">
+      <tree-root [options]="options" [nodes]="data">
+        <ng-template #treeNodeTemplate let-node let-index="index">
+          <property-node [config]="node" (onRemove)="removeNode($event)"></property-node>
+        </ng-template>
+      </tree-root>
+    </div>
+  </div>
+</div>

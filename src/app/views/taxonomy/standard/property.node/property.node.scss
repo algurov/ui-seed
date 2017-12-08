@@ -1,0 +1,54 @@
+.short-field {
+  width: 40%;
+  float:left;
+  padding: 0 5px;
+  &-select {
+    width: 0px;
+    padding-right: 20px;
+    float: left;
+  }
+}
+.tree-checkbox {
+  float:left;
+  padding-top:20px;
+  padding-right: 5px;
+}
+.units {
+  float: left;
+  padding-top: 17px;
+  width: 2%;
+  padding-left: 10px;
+}
+.field {
+  width: 100%;
+}
+.short-field-extra {
+  width: 12%;
+  float: left;
+  padding: 0 5px;
+}
+.short-field-units {
+  width: 10%;
+  float: left;
+  padding: 0 5px;
+}
+.text-field-extra {
+  width: 15%;
+  float:left;
+  padding: 0 5px;
+}
+.toggle {
+  margin-top: 20px;
+  margin-right: 5px;
+  float: left;
+}
+
+mat-icon.close-icon {
+  font-size: 14px;
+  font-weight: bold;
+  float: right;
+  height: 14px!important;
+  width: 14px!important;
+  padding-top: 15px;
+  padding-left: 10px;
+}
