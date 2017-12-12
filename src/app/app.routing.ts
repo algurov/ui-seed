@@ -56,6 +56,7 @@ export const routes: Routes = [
       { path: 'document/act', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
       { path: 'document/act/:id', component: ActComponent, data: {breadcrumb: 'Акт пробы'}},
       { path: 'document/certificate', component: CertificateComponent, data: {breadcrumb: 'Сертификат'}},
+      { path: 'document/certificate/:id', component: CertificateComponent, data: {breadcrumb: 'Сертификат'}},
       { path: 'document/assignment/:id', component: DirectionComponent, data: {breadcrumb: 'Направление'}},
       { path: 'document/assignment', component: DirectionComponent, data: {breadcrumb: 'Направление'}},
       { path: 'document/protocol/:id', component: ProtocolComponent, data: {breadcrumb: 'Протокол'}},

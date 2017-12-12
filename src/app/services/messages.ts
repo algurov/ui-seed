@@ -140,6 +140,8 @@ export const Messages = {
   "EDIT_STANDARD": "СОХРАНИТЬ",
   "REMOVE_STANDARD": "УДАЛИТЬ",
   "ADD_STANDARD": "Новый стандарт",
-  "EDIT_STANDARD_PROPERTY": "СОХРАНИТЬ"
+  "EDIT_STANDARD_PROPERTY": "СОХРАНИТЬ",
+  "SIGN_CERTIFICATE": "ПОДПИСАТЬ",
+  "SAVE_CERTIFICATE": "СОХРАНИТЬ"
 
 };

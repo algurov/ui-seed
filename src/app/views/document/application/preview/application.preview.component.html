@@ -41,6 +41,9 @@
       <div style="float:right;">
         <mat-icon matTooltip="Добавить протокол испытаний" matTooltipPosition="above" (click)="addProtocol(act)">chat</mat-icon>
       </div>
+      <div style="float:right;">
+        <mat-icon matTooltip="Добавить сертификат" matTooltipPosition="above" (click)="addCertificate(act)">assignment</mat-icon>
+      </div>
       <div *ngIf="actSign[act.id] && actSign[act.id].length > 0">
         <div>Подписан:</div>
         <div style="padding-left: 20px;" *ngFor="let sign of actSign[act.id]">{{sign.signerName}}</div>
@@ -87,6 +90,27 @@
       <div *ngIf="protocolSign[protocol.id] && protocolSign[protocol.id].length > 0">
         <div>Подписан:</div>
         <div style="padding-left: 20px;" *ngFor="let sign of protocolSign[protocol.id]">{{sign.signerName}}</div>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <div class="text-title">Список сертификатов</div>
+  <ng-container *ngFor="let certificate of certificateList">
+    <div style=" cursor: pointer; padding: 20px 20px; border-bottom: 1px solid #aaa;">
+      <div style="float:left; width:90%;" (click)="openCertificate(certificate.id)">
+        {{certificate.certificateNumber}}
+      </div>
+
+      <div style="float:right;">
+        <mat-icon matTooltip="Удалить" matTooltipPosition="above"  (click)="removeCertificate(certificate)">delete</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon  matTooltip="Редактировать" matTooltipPosition="above" (click)="openCertificate(certificate.id)">edit</mat-icon>
+      </div>
+      <div *ngIf="certificateSign[certificate.id] && certificateSign[certificate.id].length > 0">
+        <div>Подписан:</div>
+        <div style="padding-left: 20px;" *ngFor="let sign of certificateSign[certificate.id]">{{sign.signerName}}</div>
       </div>
     </div>
 

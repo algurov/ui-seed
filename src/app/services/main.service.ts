@@ -30,6 +30,8 @@ export class MainService {
 
   public directionLoaded: EventEmitter<any> = new EventEmitter<any>();
 
+  public certificateLoaded: EventEmitter<any> = new EventEmitter<any>();
+
   public updateAssignmentTreeItem: EventEmitter<any> = new EventEmitter<any>();
   public standardChecked: EventEmitter<any> = new EventEmitter<any>();
   public contractChecked: EventEmitter<any> = new EventEmitter<any>();

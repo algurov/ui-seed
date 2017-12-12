@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MainService } from '../../../services/main.service';
 import { SettingsService } from '../../../services/settings.service';
 import { PartnerService } from '../../../services/partner.service';
 import { DialogService } from '../../../services/dialog.service';
 import { DocumentService } from '../../../services/document.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CertificateParamsComponent } from './params/certificate.params.component';
 
 @Component({
   selector: 'certificate',
@@ -12,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./certificate.component.scss']
 })
 export class CertificateComponent {
+  @ViewChild(CertificateParamsComponent) params: CertificateParamsComponent;
   id: number;
   data: any = {
   };
@@ -28,18 +30,19 @@ export class CertificateComponent {
           this.dialogService.showSignDialog(this.id, 'CERTIFICATE');
         }
       }));
-      // this.dialogService.showBlocker();
-      // this.route.params.subscribe(params => {
-      //   if (params['id']) {
-      //       this.dialogService.block = true;
-      //     this.id = +params['id'];
-      //    this.documentService.getCertificateById(this.id).subscribe(res=> {
-      //      this.data = res;
-      //      this.mainService.actLoaded.emit(this.data);
-      //      this.dialogService.block = false;
-      //    });
-      //  }
-      // });
+      this.dialogService.showBlocker();
+      this.route.params.subscribe(params => {
+        if (params['id']) {
+            this.dialogService.block = true;
+          this.id = +params['id'];
+         this.documentService.getCertificateById(this.id).subscribe(res=> {
+           this.data = res;
+           console.log(this.data);
+           this.mainService.certificateLoaded.emit(this.data);
+           this.dialogService.block = false;
+         });
+       }
+      });
   }
   ngOnDestroy() {
     this.subscriptions.forEach(item => item.unsubscribe());
@@ -49,27 +52,27 @@ export class CertificateComponent {
   }
 
   beforeSave() {
-    // if (this.data.agents) {
-    //   if (this.data.agents.length > 0) {
-    //     this.data.agents.forEach(item => {
-    //       delete item.guid;
-    //     });
-    //   }
-    // }
+    if (this.params) {
+      this.data.internationalCertificateTranslation.translationParams = this.params.translationParams;
+    }
+    this.data.advancedCertificateSettings.forEach(item => {
+      let parent = item.parentGoodsCategoryProperty;
+      while(parent != null) {
+        delete parent.children;
+        parent = parent.parentGoodsCategoryProperty;
+      }
+      delete item.children;
+    });
   }
   save() {
-    // this.beforeSave();
-    // this.dialogService.showBlocker();
-    // console.log(this.data);
-    // this.documentService.updateAct(this.data).subscribe(res => {
-    //   this.data = res;
-    //   this.documentService.getApplicationByActId(this.data.id).subscribe(res => {
-    //     this.dialogService.hideBlocker();
-    //       this.dialogService.showNotification('Акт сохранен');
-    //     this.router.navigate(['main/document/application/' + res.id + '/view']);
-    //   });
-    //
-    // });
-
+    this.dialogService.showBlocker();
+    this.beforeSave();
+    this.data.internationalCertificateTranslation = JSON.stringify(this.data.internationalCertificateTranslation);
+      console.log(this.data);
+    this.documentService.updateCertificate(this.data).subscribe(res => {
+      this.dialogService.hideBlocker();
+      this.dialogService.showNotification('Сертификат сохранен');
+      this.router.navigate(['main/document/application/'+ this.data.applicationId +'/view']);
+    });
   }
 }

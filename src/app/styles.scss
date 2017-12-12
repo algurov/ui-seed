@@ -288,6 +288,23 @@ ul, ol {
   width: 15px;
 }
 
+.eng-field .mat-form-field-infix {
+  padding-top: 0px;
+  border-top-width: 0px;
+  padding-bottom: 1px;
+}
+
+.eng-field .mat-form-field-placeholder-wrapper {
+  display: none;
+}
+
+.eng-field .mat-form-field-wrapper {
+  padding-bottom: 0px;
+}
+
+.eng-field .mat-form-field-underline {
+  top: 15px;
+}
  // .tree-wrapper {
  //    overflow: auto;
  //  }

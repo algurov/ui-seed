@@ -18,7 +18,11 @@
       </div>
     </div>
     <div class="group__content-second-column">
-      <seed-select-field code="laboratory" (change)="onLaboratoryChange($event)" [data]="data.laboratory" placeholder="{{stringService.get('APPLICATION_LAB_TITLE')}}"></seed-select-field>
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">{{stringService.get('APPLICATION_LAB_TITLE')}}</mat-placeholder>
+        <input matInput [(ngModel)]="data.samplingLaboratory"/>
+      </mat-form-field>
+      <!-- <seed-select-field code="laboratory" (change)="onLaboratoryChange($event)" [data]="data.laboratory" placeholder="{{stringService.get('APPLICATION_LAB_TITLE')}}"></seed-select-field> -->
     </div>
 </div>
 <div style="clear:both;"></div>

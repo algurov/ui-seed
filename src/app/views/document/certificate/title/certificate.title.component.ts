@@ -13,9 +13,10 @@ export class CertificateTitleComponent {
   subscription: any;
   laboratoryVisible = true;
   constructor(private stringService: StringService, private mainService: MainService) {
-    this.subscription = this.mainService.actLoaded.subscribe(item => {
-      if (item.actDate) {
-        this.date = new Date(item.actDate);
+    this.subscription = this.mainService.certificateLoaded.subscribe(item => {
+      this.data = item;
+      if (item.createDate) {
+        this.date = new Date(item.createDate);
       }
     });
   }
@@ -28,29 +29,48 @@ export class CertificateTitleComponent {
   }
 
   ngOnInit() {
-      if(this.data.actDate) {
-        this.date = new Date(this.data.actDate);
+      if(this.data.createDate) {
+        this.date = new Date(this.data.createDate);
       }
+  }
+
+  getCertificateTitle() {
+    if (this.data.certificateType) {
+      return this.data.certificateType.name;
+    }
+    return '';
   }
 
   onDateChange(event) {
     this.date = event.value;
-    this.data.actDate = event.value.getTime();
+    this.data.createDate = event.value.getTime();
   }
 
   getLaboratoryName() {
-    return 'Laboratory';
+    if (this.data.laboratory) {
+        return this.data.laboratory.name;
+    }
+    return '';
   }
 
   getLaboratoryCertificateNumber() {
+    if (this.data.laboratory) {
+      return this.data.laboratory.numberCertificateAccreditation;
+    }
     return '';
   }
 
   getLaboratoryRegistrationNumber() {
+    if (this.data.laboratory) {
+      return this.data.laboratory.registrationNumber;
+    }
     return '';
   }
 
   getLaboratoryContact() {
+    if (this.data.laboratory) {
+      return this.data.laboratory.contact;
+    }
     return '';
   }
 }

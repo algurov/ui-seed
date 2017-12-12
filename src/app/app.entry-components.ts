@@ -17,6 +17,7 @@ import { GoodsCategoryDialog } from './views/document/protocol/goods.category.di
 import { SignDialog } from './views/sign/sign.dialog';
 import { SelectGoodsCategoryDialog } from './widgets/seed.select.field/seed.select.field';
 import { PropertyTreeDialog } from './views/taxonomy/standard/property.tree/property.tree';
+import { CertificateTypeDialog } from './views/document/certificate/type.dialog/type.dialog';
 export const APP_ENTRY_COMPONENTS = [
   MessageDialogComponent,
   ConfirmDialog,
@@ -39,5 +40,6 @@ export const APP_ENTRY_COMPONENTS = [
   SignDialog,
   SelectStandardListDialog,
   SelectGoodsCategoryDialog,
-  PropertyTreeDialog
+  PropertyTreeDialog,
+  CertificateTypeDialog
 ];

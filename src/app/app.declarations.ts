@@ -96,6 +96,9 @@ import { PropertyTree, PropertyTreeDialog } from './views/taxonomy/standard/prop
 import { PropertyNode } from './views/taxonomy/standard/property.node/property.node';
 import { CertificateComponent } from './views/document/certificate/certificate.component';
 import { CertificateTitleComponent } from './views/document/certificate/title/certificate.title.component';
+import { CertificateTypeDialog } from './views/document/certificate/type.dialog/type.dialog';
+import { CertificateParamsComponent } from './views/document/certificate/params/certificate.params.component';
+
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -198,5 +201,7 @@ export const APP_DECLARATIONS = [
   PropertyTreeDialog,
   PropertyNode,
   CertificateComponent,
-  CertificateTitleComponent
+  CertificateTitleComponent,
+  CertificateTypeDialog,
+  CertificateParamsComponent
 ];

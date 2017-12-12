@@ -158,4 +158,28 @@ export class DocumentService extends RequestBase {
   getSignListByDocumentId(id): Observable<any> {
     return this.http.get(`${SEED_BASE_URL}/seed/sign?signedDocument.documentId=` + id, this.options).map(res => res.json());
   }
+
+  createCerificate(actId, certificateTypeId): Observable<any> {
+    return this.http.post(`${SEED_BASE_URL}/seed/certificate`, {certificateTypeId: certificateTypeId, actId: actId}, this.options).map(res => res.json());
+  }
+
+  getCertificateTypeList() :Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/certificateType`, this.options).map(res => res.json());
+  }
+
+  getCertificateById(id): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/certificate/` + id, this.options).map(res => res.json());
+  }
+
+  getCertificateListByApplicationId(applicationId): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/certificate?application.id=` + applicationId, this.options).map(res => res.json());
+  }
+
+  deleteCertificate(certificate): Observable<any> {
+    return this.http.delete(`${SEED_BASE_URL}/seed/certificate/` + certificate.id, this.options).map(res => res.json());
+  }
+
+  updateCertificate(certificate): Observable<any> {
+    return this.http.put(`${SEED_BASE_URL}/seed/certificate`, certificate ,this.options).map(res => res.json());
+  }
 }

@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MainService } from '../../../services/main.service';
 import { SettingsService } from '../../../services/settings.service';
 import { PartnerService } from '../../../services/partner.service';
 import { DialogService } from '../../../services/dialog.service';
 import { DocumentService } from '../../../services/document.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { ApplicationTitleComponent } from './title/application.title.component';
 @Component({
   selector: 'application',
   templateUrl: './application.component.html',
   styleUrls: ['./application.component.scss']
 })
 export class ApplicationComponent {
+  @ViewChild(ApplicationTitleComponent) title: ApplicationTitleComponent;
   subscriptions = [];
   id: number;
   data: any = {
@@ -118,6 +119,7 @@ export class ApplicationComponent {
 
   save() {
       //this.data.id = 1;
+      if (this.title.numberControl.valid){
       this.clearData();
       console.log('write');
       console.log(this.data);
@@ -139,7 +141,9 @@ export class ApplicationComponent {
           this.dialogService.showNotification('Заявка ' + res.number + ' сохранена')});
       }
 
-
+    } else {
+      console.log('field is invalid');
+    }
     //localStorage.setItem('application', JSON.stringify(this.data));
   }
 }

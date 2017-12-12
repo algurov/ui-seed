@@ -1,10 +1,10 @@
 <div class="group">
-  <div class="title-text">Сертификат качества на зерно</div>
+  <div class="title-text">{{getCertificateTitle()}}</div>
   <div class="group__content" style="padding-top: 20px;">
       <div class="group__content-first-column">
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-placeholder class="group__placeholder">Номер документа</mat-placeholder>
-          <input matInput [(ngModel)]="data.sampleNumber"/>
+          <input matInput [(ngModel)]="data.certificateNumber"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
@@ -18,7 +18,7 @@
     <div class="group__content-full-width">
       <mat-form-field class="group__field" floatPlaceholder="always">
         <mat-placeholder class="group__placeholder">Дополнительные сведения</mat-placeholder>
-        <textarea matInput [(ngModel)]="data.additional"></textarea>
+        <textarea matInput [(ngModel)]="data.additionalInformation"></textarea>
       </mat-form-field>
     </div>
     <div class="group__content-full-width">

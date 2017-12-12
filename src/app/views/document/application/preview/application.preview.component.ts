@@ -18,10 +18,12 @@ export class ApplicationPreviewComponent {
   assignmentList: Array<any> = new Array<any>();
   actList: Array<any> = new Array<any>();
   protocolList: Array<any> = new Array<any>();
+  certificateList: Array<any> = new Array<any>();
   observableGroup: Observable<any> = new Observable<any>();
   subscriptions = [];
   signList = [];
   actSign = {};
+  certificateSign = {};
   protocolSign = {};
   assignmentSign = {};
   constructor(private mainService: MainService, private settingsService: SettingsService,
@@ -94,7 +96,18 @@ export class ApplicationPreviewComponent {
           });
         }
       });
+  }
 
+  removeCertificate(certificate) {
+    this.dialogService.showConfirm('Удаление сертификата', 'Подтвердиде удаление сертификата').subscribe(res => {
+      if (res) {
+        this.dialogService.showBlocker();
+        this.documentService.deleteCertificate(certificate).subscribe(res => {
+        this.certificateList.splice(this.certificateList.findIndex(item => item.id == certificate.id), 1);
+        this.dialogService.hideBlocker();
+        });
+      }
+    });
   }
   openProtocol(id) {
       this.router.navigate(['main/document/protocol/'+ id]);
@@ -116,6 +129,22 @@ export class ApplicationPreviewComponent {
 
   openAssignment(id) {
     this.router.navigate(['main/document/assignment/' + id]);
+  }
+
+  openCertificate(id) {
+    this.router.navigate(['main/document/certificate/'+ id]);
+  }
+
+  addCertificate(act) {
+    this.dialogService.showCertificateType().subscribe(res => {
+      if (res) {
+        this.dialogService.showBlocker();
+        this.documentService.createCerificate(act.id, res).subscribe(created => {
+          this.dialogService.hideBlocker();
+          this.router.navigate(['main/document/certificate/', created.id]);
+        });
+      }
+    });
   }
   ngOnDestroy() {
     this.subscriptions.forEach(item => item.unsubscribe());
@@ -144,6 +173,15 @@ export class ApplicationPreviewComponent {
       this.protocolList.forEach(protocol => {
         this.documentService.getSignListByDocumentId(protocol.id).subscribe(signs => {
           this.protocolSign[protocol.id] = signs.content;
+        });
+      });
+      this.dialogService.hideBlocker();
+    });
+    this.documentService.getCertificateListByApplicationId(this.id).subscribe(res => {
+      this.certificateList = res.content;
+      this.certificateList.forEach(certificate => {
+        this.documentService.getSignListByDocumentId(certificate.id).subscribe(signs => {
+          this.certificateSign[certificate.id] = signs.content;
         });
       });
       this.dialogService.hideBlocker();

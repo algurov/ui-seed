@@ -155,7 +155,7 @@ export class FlowService extends RequestBase {
     body.set(param, '');
   }
 
-  sendNewUser(user: UserToSend): Subscription {
+  sendNewUser(user: UserToSend, partner): Subscription {
     this.dlgService.block = true;
     console.log(user);
     let body = new URLSearchParams();
@@ -169,6 +169,7 @@ export class FlowService extends RequestBase {
     body.set('branchOffices', '');
     this.getParameter('positions', user, body);
     body.set('contacts', user.contact);
+    body.set('partnerId', partner.id)
 
     console.log(body);
     console.log(body.toString());

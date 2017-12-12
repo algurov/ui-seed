@@ -12,6 +12,7 @@ import { BranchOffice } from '../../models/branch.office';
 import { FlowResponse } from '../../models/flow.response';
 import { UserService } from '../../services/user.service';
 import { RoleService } from '../../services/role.service';
+import { PartnerService } from '../../services/partner.service';
 
 @Component({
   selector: 'user-edit',
@@ -34,7 +35,7 @@ export class UserEditComponent implements OnInit {
   constructor(public dlgService: DialogService, public stringService: StringService,
     public fb: FormBuilder, public flow: FlowService,
     public usrService: UserService, public route: ActivatedRoute,
-    public roleService: RoleService) {
+    public roleService: RoleService, private partnerService: PartnerService) {
 
     this.route.params.subscribe(params => {
       if (params['id']) {
@@ -231,9 +232,16 @@ export class UserEditComponent implements OnInit {
         this.usrService.updateUser(this.currentUser.toSend()).subscribe(res => {
            this.dlgService.hideBlocker();
            this.currentUser = new User().deserialize(res);
+           if (this.partner) {
+             let found = this.partner.users.find(item => item.id == this.currentUser.id);
+             if (!found) {
+               this.partner.users.push(this.currentUser);
+               this.partnerService.updatePartner(this.partner).subscribe(res => {});
+             }
+           }
            this.dlgService.showNotification('Пользователь обновлен') });
       } else {
-        this.flow.sendNewUser(new UserToSend().buildFromUser(this.currentUser));
+        this.flow.sendNewUser(new UserToSend().buildFromUser(this.currentUser), this.partner);
       }
     }
   }

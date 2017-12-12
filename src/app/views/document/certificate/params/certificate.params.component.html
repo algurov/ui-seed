@@ -1,0 +1,167 @@
+<div class="group" style="padding-top: 0px;">
+    <div class="group__content">
+        <div class="group__content-full-width">
+          <mat-button-toggle-group (change)="onLanguageChange($event)" #group="matButtonToggleGroup">
+            <mat-button-toggle [checked]="isRus" value="ru">
+              Русский язык
+            </mat-button-toggle>
+            <mat-button-toggle [checked]="isEng" value="eng">
+              Английский язык
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="group__content-full-width">
+          <div class="data-group">
+            <div class="data-group-item">{{getGoodsNameLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getGoodsName()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.goodsName"/>
+              </mat-form-field>
+            </div>
+            <div class="data-group-item">{{getTNVDLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getTNVD()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.goodsTNVD"/>
+              </mat-form-field>
+            </div>
+            <div class="data-group-item">{{getDocumentLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getDocument()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.regulations"/>
+              </mat-form-field>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+          <div class="data-group">
+            <div class="data-group-item">{{getSenderAddressLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getSenderAddress()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.senderLocation"/>
+              </mat-form-field>
+            </div>
+            <div class="data-group-item">{{getSenderLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getSender()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.sender"/>
+              </mat-form-field>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+          <div class="data-group">
+            <div class="data-group-item">{{getReciverAddressLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getReciverAddress()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.receiverLocation"/>
+              </mat-form-field>
+            </div>
+            <div class="data-group-item">{{getReciverLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getReciver()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.receiver"/>
+              </mat-form-field>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+          <div class="data-group">
+            <div class="data-group-item">{{getConsignmentLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getConsignment()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.consignment"/>
+              </mat-form-field>
+            </div>
+            <div class="data-group-item">{{getContractNumberLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getContractNumber()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.contractNumber"/>
+              </mat-form-field>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+          <div class="data-group">
+            <div class="data-group-item">{{getWeightLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getWeigth()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.goodsWeight"/>
+              </mat-form-field>
+            </div>
+            <div class="data-group-item">{{getStorageCountLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getStorageCount()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.numberStorageLocation"/>
+              </mat-form-field>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+          <div class="data-group">
+            <div class="data-group-item">{{getTransportLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getTransport()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.transportNumber"/>
+              </mat-form-field>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+          <div class="data-group">
+            <div class="data-group-item">{{getManufacturerLocationLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getManufacturerLocation()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.manufacturerLocation"/>
+              </mat-form-field>
+            </div>
+            <div class="data-group-item">{{getManufactureDateLabel()}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getManufactureDate()}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="data.internationalCertificateTranslation.harvestYear"/>
+              </mat-form-field>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+        </div>
+        <div class="group__content-full-width">
+          <div style="padding: 20px 0; font-weight:bold;">Показатели</div>
+        </div>
+        <div class="group__content-full-width">
+          <ng-template #recursiveList let-list>
+            <div class="data-group" *ngFor="let item of list">
+              <div class="data-group-item">{{getParamLabel(item)}}</div>
+              <div *ngIf="isRus" class="data-group-item">{{getParamValue(item)}}</div>
+              <div *ngIf="isEng" class="data-group-item">
+                <mat-form-field class="eng-field">
+                  <input matInput class="eng-input" [(ngModel)]="translationParams[getParamPropertyId(item)]"/>
+                </mat-form-field>
+              </div>
+              <ng-container *ngIf="item.children">
+                <div *ngIf="item.children.length > 0">
+                  <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.children }"></ng-container>
+                </div>
+              </ng-container>
+          </div>
+          </ng-template>
+          <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: listToView }"></ng-container>
+          <!-- <div class="data-group" *ngFor="let param of listToView">
+            <div class="data-group-item">{{getParamLabel(param)}}</div>
+            <div *ngIf="isRus" class="data-group-item">{{getParamValue(param)}}</div>
+            <div *ngIf="isEng" class="data-group-item">
+              <mat-form-field class="eng-field">
+                <input matInput class="eng-input" [(ngModel)]="translationParams[getParamPropertyId(param)]"/>
+              </mat-form-field>
+            </div>
+          </div> -->
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</div>

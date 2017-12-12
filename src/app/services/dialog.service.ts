@@ -9,6 +9,7 @@ import { AddTaxonomyDialog } from '../views/taxonomy/add.taxonomy.dialog';
 import { SelectTaxonomyDialog } from '../views/taxonomy/select/select.taxonomy.dialog';
 import { SelectBranchDialog } from '../views/main/select.branch.dialog/select.branch.dialog';
 import { SignDialog } from '../views/sign/sign.dialog';
+import { CertificateTypeDialog } from '../views/document/certificate/type.dialog/type.dialog';
 
 @Injectable()
 export class DialogService {
@@ -69,6 +70,11 @@ export class DialogService {
       duration: 2000,
     });
 
+  }
+  showCertificateType() : Observable<number> {
+    let dialogRef: MatDialogRef<CertificateTypeDialog>;
+        dialogRef = this.dialog.open(CertificateTypeDialog);
+        return dialogRef.afterClosed();
   }
   showConfirm(title: string, message: string) : Observable<boolean> {
     let dialogRef: MatDialogRef<ConfirmDialog>;
