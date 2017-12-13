@@ -1,16 +1,18 @@
 <div class="params">
   <div class="params__column">
     <mat-form-field class="params__column-item" floatPlaceholder="always">
+      <mat-error *ngIf="docControl.invalid">Обязательное поле</mat-error>
       <mat-placeholder class="params-placeholder" >{{stringService.get('APPLICATION_PARAMS_DOCUMNETS')}}</mat-placeholder>
-      <mat-select #resDocuments multiple [ngModel]="stateTargetDocuments" (change)="onTartgetDocumentsChange($event)">
+      <mat-select required [formControl]="docControl" #resDocuments multiple [ngModel]="stateTargetDocuments" (change)="onTartgetDocumentsChange($event)">
         <mat-option #resOptions *ngFor="let opt of options" [value]="opt.id">
           {{opt.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="params__column-item" floatPlaceholder="always">
+      <!-- <mat-error *ngIf="resControl.invalid">Обязательное поле</mat-error> -->
       <mat-placeholder class="params-placeholder" >{{stringService.get('APPLICATION_PARAMS_RESEARCH_TYPE')}}</mat-placeholder>
-      <mat-select [ngModel]="stateResearchType" (change)="onResearchTypeChange($event)">
+      <mat-select [formControl]="resControl" required [ngModel]="stateResearchType" (change)="onResearchTypeChange($event)">
         <ng-container *ngFor="let opt of researchTypeOptions">
 
           <mat-option [value]="opt.id">

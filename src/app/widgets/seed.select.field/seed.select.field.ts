@@ -8,7 +8,7 @@ import { Location } from '../../models/location';
 import { Observable } from 'rxjs';
 import { SelectStandardDialog } from '../../views/document/application/standard/application.standard.component';
 import { TreeComponent } from 'angular2-tree-component';
-
+import { FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'seed-select-field',
   templateUrl: './seed.select.field.html',
@@ -16,9 +16,11 @@ import { TreeComponent } from 'angular2-tree-component';
 })
 export class SeedSelectField {
   @Input() code;
+  selectControl = new FormControl('', [Validators.required]);
   @Input() selectDataRequest: Observable<any>;
   selectData: any;
   @Input() placeholder;
+  @Input() required: boolean = false;
   @Input() placeholderType: boolean = true;
   @Input() request: Observable<any>;
   @Input() nameField: string;

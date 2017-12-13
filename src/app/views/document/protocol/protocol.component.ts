@@ -18,6 +18,7 @@ export class ProtocolComponent {
   application: any;
   data: any = {};
   subscriptions = [];
+  validationError = '';
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
@@ -102,7 +103,22 @@ export class ProtocolComponent {
       this.router.navigate(['main/document/application/'+ this.getApplicationId() +'/view']);
   }
 
+  checkValidation() {
+    let valid = true;
+    this.validationError = '';
+    if (!this.data.protocolNumber) {
+      this.validationError += 'Номер документа должен быть указан. ';
+      valid = false;
+    }
+    if (!this.data.date) {
+      this.validationError += 'Дата создания должна быть указана. ';
+      valid = false;
+    }
+    return valid;
+  }
+
   save() {
+    if (this.checkValidation()) {
     this.beforeSave();
     this.dialogService.showBlocker();
     console.log('toSave');
@@ -134,5 +150,8 @@ export class ProtocolComponent {
     this.dialogService.hideBlocker();
   }
 }
-  }
+} else {
+  this.dialogService.showMessageDlg('Ошибка валидации', this.validationError);
+}
+}
 }

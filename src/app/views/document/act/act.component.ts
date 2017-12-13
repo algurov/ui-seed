@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ActComponent {
   id: number;
+  validationError = '';
   data: any = {
   };
   subscriptions = [];
@@ -57,7 +58,42 @@ export class ActComponent {
       }
     }
   }
+
+  checkValidation() {
+    let valid = true;
+    this.validationError = '';
+    if (!this.data.sampleNumber) {
+      this.validationError += 'Номер акта отбора проб должен быть указан. ';
+      valid = false;
+    }
+    if (!this.data.actDate) {
+      this.validationError += 'Дата создания должна быть указана. ';
+      valid = false;
+    }
+    if (!this.data.samplingLaboratory) {
+      this.validationError += 'Лаборатория должна быть указана. ';
+      valid = false;
+    }
+    if (!this.data.placeDrawingUpAct) {
+      this.validationError += 'Место составления акта должно быть указано. ';
+      valid = false;
+    }
+    if (!this.data.authorizedPersonName) {
+      this.validationError += 'Уполномоченное лицо должно быть указано. ';
+      valid = false;
+    }
+    if (!this.data.goods) {
+      this.validationError += 'Продукт должен быть указан. ';
+      valid = false;
+    }
+    if (!this.data.analyzingLaboratory) {
+      this.validationError += 'Лаборатория должна быть указана. ';
+      valid = false;
+    }
+    return valid;
+  }
   save() {
+    if (this.checkValidation()) {
     this.beforeSave();
     this.dialogService.showBlocker();
     console.log(this.data);
@@ -70,6 +106,8 @@ export class ActComponent {
       });
 
     });
-
+  } else {
+    this.dialogService.showMessageDlg('Ошибка валидации', this.validationError);
+  }
   }
 }

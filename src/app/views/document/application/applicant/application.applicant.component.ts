@@ -1,6 +1,7 @@
 import { Component, Input} from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { DataService } from '../../../../services/data.service';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'application-applicant',
@@ -12,6 +13,7 @@ export class ApplicationApplicantComponent {
   sameOwner: any;
   sameReciver: any;
   visible: boolean = false;
+  nameControl = new FormControl('', [Validators.required]);
   constructor(private stringService: StringService, private dataService: DataService) {}
 
   getDocumentTitle(document) {

@@ -2,14 +2,16 @@
   <div class="group__content">
     <div class="group__content-full-width">
       <mat-form-field floatPlaceholder="always" class="group__field">
+        <mat-error>Обязательное поле</mat-error>
         <mat-placeholder class="group__placeholder">Место составления акта</mat-placeholder>
-        <input matInput [(ngModel)]="data.placeDrawingUpAct"/>
+        <input matInput required [(ngModel)]="data.placeDrawingUpAct"/>
       </mat-form-field>
     </div>
     <div class="group__content-first-column">
       <mat-form-field floatPlaceholder="always" class="group__field">
+        <mat-error>Обязательное поле</mat-error>
         <mat-placeholder class="group__placeholder">Уполномоченное лицо</mat-placeholder>
-        <input matInput [(ngModel)]="data.authorizedPersonName"/>
+        <input required matInput [(ngModel)]="data.authorizedPersonName"/>
       </mat-form-field>
     </div>
     <div class="group__content-second-column">

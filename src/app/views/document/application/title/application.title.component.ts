@@ -13,6 +13,7 @@ export class ApplicationTitleComponent {
   date: any;
   subscription: any;
   numberControl = new FormControl('', [Validators.required]);
+  dateControl = new FormControl('', [Validators.required]);
   constructor(private stringService: StringService, private mainService: MainService) {
     this.subscription = this.mainService.applicationLoaded.subscribe(item => {
       if (item.creationDate) {

@@ -16,6 +16,7 @@ export class DirectionComponent {
   data: any = {
   };
   subscriptions = [];
+  validationError = '';
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
@@ -66,7 +67,45 @@ export class DirectionComponent {
       }
     }
   }
+  checkValidation() {
+    let valid = true;
+    this.validationError = '';
+    if (!this.data.number) {
+      this.validationError += 'Номер документа должен быть указан. ';
+      valid = false;
+    }
+    if (!this.data.date) {
+      this.validationError += 'Дата создания должна быть указана. ';
+      valid = false;
+    }
+    if (!this.data.laboratory) {
+      this.validationError += 'Лаборатория должна быть указана. ';
+      valid = false;
+    }
+    if (!this.data.dateByWhen) {
+      this.validationError += 'Срок исполнения должен быть указан. ';
+      valid = false;
+    }
+    if (!this.data.goods) {
+      this.validationError += 'Продукт должен быть указан. ';
+      valid = false;
+    }
+    if (!this.data.act) {
+      this.validationError += 'Акт отбора пробы должен быть указан. ';
+      valid = false;
+    }
+    if (this.data.standards.length == 0) {
+      this.validationError += 'Стандарт должен быть указан. ';
+      valid = false;
+    }
+    if (this.data.assignmentResearches.length == 0) {
+      this.validationError += 'Параметры должены быть указаны. ';
+      valid = false;
+    }
+    return valid;
+  }
   save() {
+    if (this.checkValidation()) {
     this.beforeSave();
     this.dialogService.showBlocker();
     console.log('toSave');
@@ -82,6 +121,8 @@ export class DirectionComponent {
       });
 
     });
-
+  } else {
+    this.dialogService.showMessageDlg('Ошибка валидации', this.validationError);
+  }
   }
 }

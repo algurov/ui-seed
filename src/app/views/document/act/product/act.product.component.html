@@ -3,8 +3,9 @@
     <div class="group__content">
       <div class="group__content-first-column">
         <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">Отобраны пробы от партии</mat-placeholder>
-          <input matInput [(ngModel)]="data.goods"/>
+          <input required matInput [(ngModel)]="data.goods"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">

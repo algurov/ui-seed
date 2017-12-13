@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { MainService } from '../../../../services/main.service';
-
+import {FormControl, Validators} from '@angular/forms';
 @Component({
   selector: 'application-product',
   templateUrl: './application.product.component.html',
@@ -11,6 +11,7 @@ export class ApplicationProductComponent {
   @Input() data;
   date: any;
   subscription: any;
+  weightControl = new FormControl(['', Validators.required]);
   constructor(private stringService: StringService, private mainService: MainService) {
     this.subscription = this.mainService.applicationLoaded.subscribe(item => {
       if (item.goodsProductionDate) {

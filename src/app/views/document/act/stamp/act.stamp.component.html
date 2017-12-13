@@ -8,7 +8,7 @@
         <div class="group__content-second-column" style="padding-bottom: 20px;">
           <mat-checkbox class="cbox" color="primary"  [ngModel]="seal" (change)="sealChange($event)">опечатаны пломбой</mat-checkbox>
         </div>
-        <seed-select-field code="laboratory" (change)="onLaboratoryChange($event)" [data]="data.analyzingLaboratory" placeholder="Направляются в лабораторию"></seed-select-field>
+        <seed-select-field required="true" code="laboratory" (change)="onLaboratoryChange($event)" [data]="data.analyzingLaboratory" placeholder="Направляются в лабораторию"></seed-select-field>
       </div>
       <div class="group__content-second-column">
         <mat-form-field floatPlaceholder="always" class="group__field">

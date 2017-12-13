@@ -5,8 +5,9 @@
       <div class="group__content-full-width" style="padding-top: 40px;">
         <div class="group__content-first-column">
           <mat-form-field floatPlaceholder="always" class="group__field">
+            <mat-error>Обязательное поле</mat-error>
             <mat-placeholder class="group__placeholder">Имя представителя</mat-placeholder>
-            <input matInput [(ngModel)]="agent.personName"/>
+            <input matInput required [(ngModel)]="agent.personName"/>
           </mat-form-field>
         </div>
         <div class="group__content-second-column-44">
@@ -18,8 +19,9 @@
       <div class="group__close-icon"><mat-icon (click)="removeItem(agent)">close</mat-icon></div>
       <div class="group__content-full-width">
         <mat-form-field floatPlaceholder="always" class="group__field">
+          <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">Наименование организации представителя</mat-placeholder>
-          <input matInput [(ngModel)]="agent.organizationName"/>
+          <input required matInput [(ngModel)]="agent.organizationName"/>
         </mat-form-field>
       </div>
       <div class="group__content-full-width">

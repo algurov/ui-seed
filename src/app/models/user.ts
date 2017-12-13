@@ -2,7 +2,7 @@ import { Role } from './role';
 import { Serializable } from './serializable';
 import { Contact } from './contact';
 import { BranchOffice } from './branch.office';
-
+import { Partner } from './partner';
 export class User implements Serializable<User>{
   id: number;
   userName: string = "";
@@ -16,6 +16,7 @@ export class User implements Serializable<User>{
   contacts: Array<Contact> = new Array<Contact>();
   email: string;
   version: number;
+  partner: Partner;
 
   toSend() {
     // let positionsToSend = [];
@@ -33,8 +34,8 @@ export class User implements Serializable<User>{
       contacts: this.contacts,
       positions: this.positions,
       branchOffice: null,
-      version: this.version
-
+      version: this.version,
+      partner: this.partner
     };
   }
 
@@ -135,6 +136,9 @@ export class User implements Serializable<User>{
       input.contacts.forEach(item => {
         this.contacts.push(new Contact().deserialize(item));
       });
+    }
+    if (input.partner) {
+      this.partner = new Partner().deserialize(input.partner);
     }
     this.userFamilyName = input.userFamilyName;
     this.userName = input.userName;

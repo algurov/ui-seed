@@ -1,5 +1,5 @@
 <div class="role">
-  <button class="role__add-button" mat-raised-button color="primary" (click)="showAddRoleDialog()">ДОБАВИТЬ РОЛЬ</button>
+  <button *ngIf="false" class="role__add-button" mat-raised-button color="primary" (click)="showAddRoleDialog()">ДОБАВИТЬ РОЛЬ</button>
   <div class="role__title">Наименование</div>
   <div class="role__list">
     <div *ngFor="let role of roleList">

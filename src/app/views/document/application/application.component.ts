@@ -6,6 +6,9 @@ import { DialogService } from '../../../services/dialog.service';
 import { DocumentService } from '../../../services/document.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationTitleComponent } from './title/application.title.component';
+import { ApplicationApplicantComponent } from './applicant/application.applicant.component';
+import { ApplicationProductComponent } from './product/application.product.component';
+import { ApplicationParamsComponent } from './params/application.params.component';
 @Component({
   selector: 'application',
   templateUrl: './application.component.html',
@@ -13,6 +16,10 @@ import { ApplicationTitleComponent } from './title/application.title.component';
 })
 export class ApplicationComponent {
   @ViewChild(ApplicationTitleComponent) title: ApplicationTitleComponent;
+  @ViewChild(ApplicationApplicantComponent) applicant: ApplicationApplicantComponent;
+  @ViewChild(ApplicationProductComponent) product: ApplicationProductComponent;
+  @ViewChild(ApplicationParamsComponent) params: ApplicationParamsComponent;
+  validationError = '';
   subscriptions = [];
   id: number;
   data: any = {
@@ -117,9 +124,55 @@ export class ApplicationComponent {
     this.router.navigate(['main/document']);
   }
 
+  checkValidation() {
+    let error = true;
+    this.validationError = '';
+    if (!this.data.number) {
+      this.validationError += 'Номер заявки должен быть заполнен. ';
+      error = false;
+    }
+    if (!this.data.creationDate) {
+      this.validationError += 'Дата должна быть заполнена. ';
+      error = false;
+    }
+    if (!this.data.branchOffice) {
+      this.validationError += 'Филиал должен быть заполнен. ';
+      error = false;
+    }
+    if (!this.data.goodsWeight) {
+      this.validationError += 'Масса должна быть заполнена. ';
+      error = false;
+    }
+    if (!this.data.goods) {
+      this.validationError += 'Продукт должен быть заполнен. ';
+      error = false;
+    }
+    if (!this.data.applicantName) {
+      this.validationError += 'Имя заявителя должено быть заполнено. ';
+      error = false;
+    }
+    if (!this.data.applicationStandardResearches) {
+      this.validationError += 'Стандарты должены быть заполнены. ';
+      error = false;
+    }
+    if (!this.data.targetDocuments) {
+      this.validationError += 'Целевые документы должены быть заполнены. ';
+      error = false;
+    }
+    if (!this.data.researchType) {
+      this.validationError += 'Тип исследования должен быть заполнен. ';
+      error = false;
+    }
+    if (!this.data.applicant) {
+      this.validationError += 'Заявитель должен быть заполнен. ';
+      error = false;
+    }
+    return error;
+  }
+
   save() {
       //this.data.id = 1;
-      if (this.title.numberControl.valid){
+      if (this.checkValidation()){
       this.clearData();
       console.log('write');
       console.log(this.data);
@@ -142,7 +195,7 @@ export class ApplicationComponent {
       }
 
     } else {
-      console.log('field is invalid');
+      this.dialogService.showMessageDlg('Ошибка валидации', this.validationError);
     }
     //localStorage.setItem('application', JSON.stringify(this.data));
   }

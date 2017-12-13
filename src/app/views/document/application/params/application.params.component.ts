@@ -3,6 +3,7 @@ import { StringService } from '../../../../services/string.service';
 import { TaxonomyService } from '../../../../services/taxonomy.service';
 import { MatSelect, MatSelectChange, MatOption } from '@angular/material';
 import { MainService } from '../../../../services/main.service';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'application-params',
@@ -14,6 +15,8 @@ export class ApplicationParamsComponent {
   @ViewChild('resDocuments') resDocuments : MatSelect;
   @ViewChildren('resOptions') resOptions : QueryList<MatOption>;
   options = [];
+  docControl : FormControl;
+  resControl : FormControl;
   researchType = [
     // {
     //   id: 3,
@@ -65,6 +68,8 @@ export class ApplicationParamsComponent {
   }
 
   ngOnInit() {
+    this.docControl = new FormControl('', [Validators.required]);
+    this.resControl = new FormControl('', [Validators.required]);
     if (this.data.targetDocuments) {
       this.data.targetDocuments.forEach(item => {
         this.stateTargetDocuments.push(+item.id);

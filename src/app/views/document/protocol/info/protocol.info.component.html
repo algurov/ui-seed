@@ -2,14 +2,16 @@
   <div class="group__content" style="padding-top: 20px;">
     <div class="group__content-first-column">
       <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-error>Обязательное поле</mat-error>
         <mat-placeholder class="group__placeholder">Номер протокола</mat-placeholder>
-        <input matInput [(ngModel)]="data.protocolNumber"/>
+        <input required matInput [(ngModel)]="data.protocolNumber"/>
       </mat-form-field>
     </div>
     <div class ="group__content-second-column">
       <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-error>Обязательное поле</mat-error>
         <mat-placeholder class="group__placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
-        <input matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
+        <input required matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
         <mat-datepicker #myDatepicker></mat-datepicker>
       </mat-form-field>

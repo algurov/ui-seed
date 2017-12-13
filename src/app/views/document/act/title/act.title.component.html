@@ -4,14 +4,16 @@
     <div class="group__content-first-column">
       <div class="group__content-first-column">
         <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{stringService.get('NEW_ACT_TITLE')}}</mat-placeholder>
-          <input matInput [(ngModel)]="data.sampleNumber"/>
+          <input required matInput [(ngModel)]="data.sampleNumber"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
         <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
-          <input matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
+          <input required matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
           <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #myDatepicker></mat-datepicker>
         </mat-form-field>
@@ -19,8 +21,9 @@
     </div>
     <div class="group__content-second-column">
       <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-error>Обязательное поле</mat-error>
         <mat-placeholder class="group__placeholder">{{stringService.get('APPLICATION_LAB_TITLE')}}</mat-placeholder>
-        <input matInput [(ngModel)]="data.samplingLaboratory"/>
+        <input required matInput [(ngModel)]="data.samplingLaboratory"/>
       </mat-form-field>
       <!-- <seed-select-field code="laboratory" (change)="onLaboratoryChange($event)" [data]="data.laboratory" placeholder="{{stringService.get('APPLICATION_LAB_TITLE')}}"></seed-select-field> -->
     </div>

@@ -1,6 +1,6 @@
 <div class="product">
   <div class="product__column">
-    <seed-select-field code="product" placeholder="{{stringService.get('APPLICATION_PRODUCT_TITLE')}}" [data]="data.goods" (change)="selectProduct($event)"></seed-select-field>
+    <seed-select-field required="true" code="product" placeholder="{{stringService.get('APPLICATION_PRODUCT_TITLE')}}" [data]="data.goods" (change)="selectProduct($event)"></seed-select-field>
     <mat-form-field class="product__column-field-100" floatPlaceholder="always">
       <mat-placeholder class="product__column-place">{{stringService.get('APPLICATION_PRODUCT_NAME')}}</mat-placeholder>
       <input matInput [(ngModel)]="data.goodsName"/>
@@ -23,8 +23,9 @@
       </div>
       <div class="product__column-40" style="float:right;">
         <mat-form-field class="product__column-field" floatPlaceholder="always">
+            <mat-error>Обязательное поле</mat-error>
             <mat-placeholder class="product__column-place">{{stringService.get('APPLICATION_GROUP_WEIGHT')}}</mat-placeholder>
-          <input matInput [(ngModel)]="data.goodsWeight"/>
+          <input matInput required [formControl]="weightControl" [(ngModel)]="data.goodsWeight"/>
         </mat-form-field>
       </div>
     </div>

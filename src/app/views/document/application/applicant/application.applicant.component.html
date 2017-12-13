@@ -24,7 +24,8 @@
   <div class="applicant__left-100">
     <mat-form-field floatPlaceholder="always" class="applicant__list-grow">
       <mat-placeholder class="applicant__place">{{stringService.get('APPLICATION_APPLICANT_PERSON_NAME')}}</mat-placeholder>
-      <input matInput [(ngModel)]="data.applicantName"/>
+      <input matInput [(ngModel)]="data.applicantName" required/>
+      <mat-error *ngIf="nameControl.invalid">Обязательное поле</mat-error>
     </mat-form-field>
   </div>
     <!-- <div class="applicant__left">

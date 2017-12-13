@@ -13,7 +13,7 @@ import { FlowResponse } from '../../models/flow.response';
 import { UserService } from '../../services/user.service';
 import { RoleService } from '../../services/role.service';
 import { PartnerService } from '../../services/partner.service';
-
+import { Partner } from '../../models/partner';
 @Component({
   selector: 'user-edit',
   styleUrls: ['./user.edit.component.scss'],
@@ -87,6 +87,7 @@ export class UserEditComponent implements OnInit {
     this.userForm.get('address').setValue(user.getAddress());
     this.userForm.get('phoneNumber').setValue(user.getPhones());
     this.userForm.get('email').setValue(user.email);
+    this.partner = user.partner;
     //TODO branchOffice fillForm
     //this.userForm.get('branchOffice').setValue(user.branchOffice);
     this.userForm.get('position').setValue(user.getPositions());
@@ -203,7 +204,7 @@ export class UserEditComponent implements OnInit {
       this.currentUser.userSecondName = this.userForm.get('userSecondName').value;
       this.currentUser.positions = this.collectPositionsDataFromChip(this.userForm.get('position').value);
       this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
-
+      this.currentUser.partner = new Partner().deserialize(this.partner);
       let address = this.userForm.get('address').value;
       let phoneNumber = this.collectDataFromChip(this.userForm.get('phoneNumber').value);
 
@@ -232,13 +233,13 @@ export class UserEditComponent implements OnInit {
         this.usrService.updateUser(this.currentUser.toSend()).subscribe(res => {
            this.dlgService.hideBlocker();
            this.currentUser = new User().deserialize(res);
-           if (this.partner) {
-             let found = this.partner.users.find(item => item.id == this.currentUser.id);
-             if (!found) {
-               this.partner.users.push(this.currentUser);
-               this.partnerService.updatePartner(this.partner).subscribe(res => {});
-             }
-           }
+           // if (this.partner) {
+           //   let found = this.partner.users.find(item => item.id == this.currentUser.id);
+           //   if (!found) {
+           //     this.partner.users.push(this.currentUser);
+           //     this.partnerService.updatePartner(this.partner).subscribe(res => {});
+           //   }
+           // }
            this.dlgService.showNotification('Пользователь обновлен') });
       } else {
         this.flow.sendNewUser(new UserToSend().buildFromUser(this.currentUser), this.partner);
