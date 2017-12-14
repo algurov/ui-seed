@@ -15,8 +15,12 @@ export class ActTitleComponent {
   constructor(private stringService: StringService, private mainService: MainService,
     private dataService: DataService) {
     this.subscription = this.mainService.actLoaded.subscribe(item => {
+      this.data = item;
       if (item.actDate) {
         this.date = new Date(item.actDate);
+      } else {
+        this.date = new Date();
+        this.data.actDate = this.date.getTime();
       }
     });
   }

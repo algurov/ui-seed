@@ -14,8 +14,12 @@ export class DirectionTitleComponent {
   constructor(private stringService: StringService, private mainService: MainService,
     private dataService: DataService) {
     this.subscription = this.mainService.directionLoaded.subscribe(item => {
+      this.data = item;
       if (item.date) {
         this.date = new Date(item.date);
+      } else {
+        this.date = new Date();
+        this.data.date = this.date.getTime();
       }
     });
   }
@@ -36,7 +40,7 @@ export class DirectionTitleComponent {
 
   onDateChange(event) {
     this.date = this.dataService.dateOffset(event.value);
-    this.data.date = this.data.getTime();
+    this.data.date = this.date.getTime();
   }
 
   getApplicationTitle() {

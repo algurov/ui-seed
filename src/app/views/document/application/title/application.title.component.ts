@@ -18,8 +18,12 @@ export class ApplicationTitleComponent {
   constructor(private stringService: StringService, private mainService: MainService,
     private dataService: DataService) {
     this.subscription = this.mainService.applicationLoaded.subscribe(item => {
+      this.data = item;
       if (item.creationDate) {
         this.date = new Date(item.creationDate);
+      } else {
+        this.date = new Date();
+        this.data.creationDate = this.date.getTime();
       }
     });
   }
@@ -31,6 +35,9 @@ export class ApplicationTitleComponent {
   ngOnInit() {
       if(this.data.creationDate) {
         this.date = new Date(this.data.creationDate);
+      } else {
+        this.date = new Date();
+        this.data.creationDate = this.date.getTime();
       }
   }
 

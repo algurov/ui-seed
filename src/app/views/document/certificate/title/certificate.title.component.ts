@@ -18,6 +18,9 @@ export class CertificateTitleComponent {
       this.data = item;
       if (item.createDate) {
         this.date = new Date(item.createDate);
+      } else {
+        this.date = new Date();
+        this.data.createDate = this.date.getTime();
       }
     });
   }

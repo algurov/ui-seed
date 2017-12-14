@@ -19,9 +19,13 @@ export class ProtocolInfoComponent {
   constructor(private stringService: StringService, private mainService: MainService,
     private dataService: DataService) {
     this.subscription = this.mainService.protocolLoaded.subscribe(item => {
+      this.data = item;
       this.resultsTo = item.researchFor;
       if (item.date) {
         this.date = new Date(item.date);
+      } else {
+        this.date = new Date();
+        this.data.date = this.date.getTime();
       }
     });
   }
@@ -38,6 +42,9 @@ export class ProtocolInfoComponent {
   ngOnInit() {
       if(this.data.date) {
         this.date = new Date(this.data.date);
+      } else {
+        this.date = new Date();
+        this.data.date = this.date.getTime();
       }
   }
 
