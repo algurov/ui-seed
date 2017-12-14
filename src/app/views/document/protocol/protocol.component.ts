@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MainService } from '../../../services/main.service';
 import { SettingsService } from '../../../services/settings.service';
 import { PartnerService } from '../../../services/partner.service';
 import { DialogService } from '../../../services/dialog.service';
 import { DocumentService } from '../../../services/document.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { ProtocolParamsComponent } from './params/protocol.params.component';
 @Component({
   selector: 'protocol',
   templateUrl: './protocol.component.html',
@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProtocolComponent {
   id: number;
+  @ViewChild(ProtocolParamsComponent) params: ProtocolParamsComponent;
   actId: number;
   act: any;
   application: any;
@@ -137,7 +138,7 @@ export class ProtocolComponent {
     });
   } else {
     console.log(this.data);
-    if (this.data.researchProtocolItems) {
+    if (this.params.preview) {
     this.documentService.createProtocol(this.act.id, this.data).subscribe(res => {
       this.documentService.getApplicationByActId(this.act.id).subscribe(r => {
         this.dialogService.hideBlocker();

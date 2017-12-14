@@ -50,9 +50,9 @@ export class GoodsCategoryDialog {
     }
     for (i = 0; i < list.length; i += 1) {
       node = list[i];
-      if (node.parent != null) {
+      if (node.parentId != null) {
         // if you have dangling branches check that map[node.parentId] exists
-        list[map[node.parent.id]].children.push(node);
+        list[map[node.parentId]].children.push(node);
       } else {
         roots.push(node);
       }
@@ -99,6 +99,7 @@ export class GoodsCategoryDialog {
               sub.checked = false;
             });
             item.children = this.processData_2(item.goodsCategoryAttributes);
+            //item.children = item.goodsCategoryAttributes;
           });
           this.listToView = this.list;
           console.log(this.listToView);

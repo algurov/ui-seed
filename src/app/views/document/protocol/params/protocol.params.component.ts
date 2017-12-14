@@ -37,6 +37,7 @@ export class ProtocolParamsComponent {
     private documentService: DocumentService, private dialog: MatDialog,
     private dialogService: DialogService) {
       this.mainService.protocolLoaded.subscribe(item => {
+        // this.data = item;
         this.preview = item.researchProtocolItems;
         this.preparePreviewData();
       });
