@@ -138,7 +138,8 @@ export class ApplicationPreviewComponent {
 
   createPdfReport(act) {
       this.documentService.createPdfReport(act).subscribe(res => {
-        const pdfUrl = (window.URL || window['webkitURL']).createObjectURL(new Blob([res], { type: 'application/pdf' }));
+        console.log(res);
+        const pdfUrl = (window.URL || window['webkitURL']).createObjectURL(new Blob([res._body], { type: 'application/pdf' }));
 const anchor = document.createElement('a');
 anchor.href = pdfUrl;
 anchor.setAttribute("download", 'samplingAct'+ act.id +'.pdf');
