@@ -24,6 +24,11 @@ export class TaxonomyAllListComponent {
   openProperty() {
     this.router.navigate(['/main/settings/taxonomy/property-list']);
   }
+
+  openUnit() {
+    this.router.navigate(['/main/settings/taxonomy/unit-list']);
+  }
+
   openStandard() {
     this.router.navigate(['/main/settings/taxonomy/standard-list']);
   }

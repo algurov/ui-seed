@@ -1,0 +1,10 @@
+
+<div>
+  <mat-form-field>
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilter(nameFilter.value)" />
+  </mat-form-field>
+    <div class="list-item" *ngFor="let item of list" (click)="selectItem(item)">
+      {{item.nameRu}}, {{item.descriptionRu}}
+    </div>
+</div>

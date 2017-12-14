@@ -145,6 +145,9 @@ export const Messages = {
   "SAVE_CERTIFICATE": "СОХРАНИТЬ",
   "SAVE_PROPERTY": "СОХРАНИТЬ",
   "ADD_PROPERTY": "Новый показатель",
-  "REMOVE_PROPERTY": "УДАЛИТЬ"
+  "REMOVE_PROPERTY": "УДАЛИТЬ",
+  "SAVE_UNIT": "СОХРАНИТЬ",
+  "ADD_UNIT": "Новая ед. измерения",
+  "REMOVE_UNIT": "УДАЛИТЬ"
 
 };

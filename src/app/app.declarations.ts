@@ -100,6 +100,8 @@ import { CertificateTypeDialog } from './views/document/certificate/type.dialog/
 import { CertificateParamsComponent } from './views/document/certificate/params/certificate.params.component';
 import { PropertyListComponent } from './views/taxonomy/property/property.list.component';
 import { GenaralPropertyEditComponent } from './views/taxonomy/property/general.property.edit.component';
+import { UnitListComponent } from './views/taxonomy/unit/unit.list.component';
+import { UnitEditComponent } from './views/taxonomy/unit/unit.edit.component';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -207,5 +209,7 @@ export const APP_DECLARATIONS = [
   CertificateTypeDialog,
   CertificateParamsComponent,
   PropertyListComponent,
-  GenaralPropertyEditComponent
+  GenaralPropertyEditComponent,
+  UnitEditComponent,
+  UnitListComponent
 ];

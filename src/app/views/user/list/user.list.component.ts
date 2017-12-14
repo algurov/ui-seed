@@ -44,6 +44,9 @@ export class UserListComponent {
       this.dataSource = new UserDataSource(this.userDb);
       //this.users.push(new User().deserialize({id: 33, userName: 'login'}));
   }
+  ngOnInit() {
+      this.main.menuChange.emit({name: 'EMPTY', state: false});
+  }
   ngAfterInit() {
 
   }

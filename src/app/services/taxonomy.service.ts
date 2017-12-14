@@ -125,4 +125,28 @@ export class TaxonomyService extends RequestBase {
     return this.http.get(`${SEED_BASE_URL}/seed/property?nameRu=`+name, this.options).map(res => res.json());
   }
 
+  getUnitById(id): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/unit/` + id, this.options).map(res => res.json());
+  }
+
+  getUnitList(): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/unit`, this.options).map(res => res.json());
+  }
+
+  createUnit(unit): Observable<any> {
+    return this.http.post(`${SEED_BASE_URL}/seed/unit`, unit, this.options).map(res => res.json());
+  }
+
+  updateUnit(unit): Observable<any> {
+    return this.http.put(`${SEED_BASE_URL}/seed/unit`, unit, this.options).map(res => res.json());
+  }
+
+  deleteUnit(unit): Observable<any> {
+    return this.http.delete(`${SEED_BASE_URL}/seed/unit/` + unit.id, this.options).map(res => res.json());
+  }
+
+  searchUnitByName(name) : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/unit?nameRu=`+name, this.options).map(res => res.json());
+  }
+
 }

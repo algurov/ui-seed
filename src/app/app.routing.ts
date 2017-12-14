@@ -32,6 +32,8 @@ import { StandardListComponent } from './views/taxonomy/standard/standard.list.c
 import { CertificateComponent } from './views/document/certificate/certificate.component';
 import { PropertyListComponent } from './views/taxonomy/property/property.list.component';
 import { GenaralPropertyEditComponent } from './views/taxonomy/property/general.property.edit.component';
+import { UnitListComponent } from './views/taxonomy/unit/unit.list.component';
+import { UnitEditComponent } from './views/taxonomy/unit/unit.edit.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -55,6 +57,9 @@ export const routes: Routes = [
       { path: 'settings/taxonomy/property-list', component: PropertyListComponent},
       { path: 'settings/taxonomy/general-property', component: GenaralPropertyEditComponent},
       { path: 'settings/taxonomy/general-property/:id', component: GenaralPropertyEditComponent},
+      { path: 'settings/taxonomy/unit-list', component: UnitListComponent},
+      { path: 'settings/taxonomy/unit', component: UnitEditComponent},
+      { path: 'settings/taxonomy/unit/:id', component: UnitEditComponent},
       { path: 'document', component: DocumentListComponent, data: {breadcrumb: 'Документы'}},
       { path: 'document/application', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}},
       { path: 'document/application/:id', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}},

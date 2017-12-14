@@ -53,9 +53,13 @@ export class GenaralPropertyEditComponent {
 
   remove() {
     if (this.id) {
-      this.taxonomyService.deleteProperty(this.data).subscribe(res => {
-        this.router.navigate(['main/settings/taxonomy/property-list']);
-        this.dialogService.showNotification('Показатель удален');
+      this.dialogService.showConfirm('Подтвердите удаление', 'Подтвердите удаление показателя').subscribe(res => {
+        if (res) {
+          this.taxonomyService.deleteProperty(this.data).subscribe(res => {
+            this.router.navigate(['main/settings/taxonomy/property-list']);
+            this.dialogService.showNotification('Показатель удален');
+          });
+        }
       });
     }
   }

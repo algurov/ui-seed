@@ -158,5 +158,27 @@ export const menuActions =
       type: 'button',
       state: false
     }
+  ],
+  'UNIT_LIST' : [
+    {
+      name: 'ADD_UNIT',
+      action: 'ADD_UNIT',
+      type: 'link',
+      state: true
+    },
+  ],
+  'UNIT_EDIT': [
+    {
+      name: 'SAVE_UNIT',
+      action: 'SAVE_UNIT',
+      type: 'button',
+      state: true
+    },
+    {
+      name: 'REMOVE_UNIT',
+      action: 'REMOVE_UNIT',
+      type: 'button',
+      state: false
+    }
   ]
   };
