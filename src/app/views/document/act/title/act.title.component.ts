@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { MainService } from '../../../../services/main.service';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
   selector: 'act-title',
@@ -11,7 +12,8 @@ export class ActTitleComponent {
   @Input() data: any;
   date: any;
   subscription: any;
-  constructor(private stringService: StringService, private mainService: MainService) {
+  constructor(private stringService: StringService, private mainService: MainService,
+    private dataService: DataService) {
     this.subscription = this.mainService.actLoaded.subscribe(item => {
       if (item.actDate) {
         this.date = new Date(item.actDate);
@@ -34,7 +36,7 @@ export class ActTitleComponent {
   }
 
   onDateChange(event) {
-    this.date = event.value;
-    this.data.actDate = event.value.getTime();
+    this.date = this.dataService.dateOffset(event.value);;
+    this.data.actDate = this.date.getTime();
   }
 }

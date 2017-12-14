@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MainService } from '../../../../services/main.service';
 import { TaxonomyService } from '../../../../services/taxonomy.service';
-
+import { DataService } from '../../../../services/data.service';
 @Component({
   selector: 'act-transportation',
   templateUrl: './act.transportation.component.html',
@@ -14,7 +14,8 @@ export class ActTransportationComponent {
   sender: any;
   storageOptions: Array<any>;
   selectedStorage: any;
-  constructor(private mainService: MainService, private taxonomyService: TaxonomyService) {
+  constructor(private mainService: MainService, private taxonomyService: TaxonomyService,
+    private dataService: DataService) {
     this.taxonomyService.searchTaxonomyDataByParams('Storage', [{field:'isTransport', value: true}]).subscribe(res => {
       this.storageOptions = res.content;
     });
@@ -32,8 +33,8 @@ export class ActTransportationComponent {
   }
 
   onDateChange(event) {
-    this.date = event.value;
-    this.data.receiptDate = event.value.getTime();
+    this.date = this.dataService.dateOffset(event.value);
+    this.data.receiptDate = this.date.getTime();
   }
 
   ngOnDestroy() {

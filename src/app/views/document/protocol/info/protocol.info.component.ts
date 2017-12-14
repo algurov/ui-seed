@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { MainService } from '../../../../services/main.service';
-
+import { DataService } from '../../../../services/data.service';
 @Component({
   selector: 'protocol-info',
   templateUrl: './protocol.info.component.html',
@@ -16,7 +16,8 @@ export class ProtocolInfoComponent {
   goodsVisible: boolean = false;
   resultsTo : any = 'SAMPLE';
   resultToOptions = [{name: 'Пробу', value: 'SAMPLE'}, {name: 'Партию', value: 'PART'}];
-  constructor(private stringService: StringService, private mainService: MainService) {
+  constructor(private stringService: StringService, private mainService: MainService,
+    private dataService: DataService) {
     this.subscription = this.mainService.protocolLoaded.subscribe(item => {
       this.resultsTo = item.researchFor;
       if (item.date) {
@@ -41,8 +42,8 @@ export class ProtocolInfoComponent {
   }
 
   onDateChange(event) {
-    this.date = event.value;
-    this.data.date = event.value.getTime();
+    this.date = this.dataService.dateOffset(event.value);
+    this.data.date = this.date.getTime();
   }
 
 }

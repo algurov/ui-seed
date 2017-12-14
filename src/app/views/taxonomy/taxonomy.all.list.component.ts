@@ -21,6 +21,9 @@ export class TaxonomyAllListComponent {
     });
   }
 
+  openProperty() {
+    this.router.navigate(['/main/settings/taxonomy/property-list']);
+  }
   openStandard() {
     this.router.navigate(['/main/settings/taxonomy/standard-list']);
   }

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { MainService } from '../../../../services/main.service';
 import {FormControl, Validators} from '@angular/forms';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
   selector: 'application-title',
@@ -10,11 +11,12 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class ApplicationTitleComponent {
   @Input() data: any;
-  date: any;
+  date: Date;
   subscription: any;
   numberControl = new FormControl('', [Validators.required]);
   dateControl = new FormControl('', [Validators.required]);
-  constructor(private stringService: StringService, private mainService: MainService) {
+  constructor(private stringService: StringService, private mainService: MainService,
+    private dataService: DataService) {
     this.subscription = this.mainService.applicationLoaded.subscribe(item => {
       if (item.creationDate) {
         this.date = new Date(item.creationDate);
@@ -37,7 +39,7 @@ export class ApplicationTitleComponent {
   }
 
   onDateChange(event) {
-    this.date = event.value;
-    this.data.creationDate = event.value.getTime();
+    this.date = this.dataService.dateOffset(event.value);
+    this.data.creationDate = this.date.getTime();
   }
 }

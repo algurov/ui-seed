@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { MainService } from '../../../../services/main.service';
-
+import { DataService } from '../../../../services/data.service';
 @Component({
   selector: 'direction-document',
   templateUrl: './direction.document.component.html',
@@ -11,7 +11,8 @@ export class DirectionDocumentComponent {
   @Input() data: any;
   date: any;
   subscription: any;
-  constructor(private stringService: StringService, private mainService: MainService) {
+  constructor(private stringService: StringService, private mainService: MainService,
+    private dataService: DataService) {
     this.subscription = this.mainService.directionLoaded.subscribe(item => {
       if (item.date) {
         this.date = new Date(item.date);
@@ -34,7 +35,7 @@ export class DirectionDocumentComponent {
   }
 
   onDateChange(event) {
-    this.date = event.value;
-    this.data.date = event.value.getTime();
+    this.date = this.dataService.dateOffset(event.value);
+    this.data.date = this.date.getTime();
   }
 }

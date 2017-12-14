@@ -6,6 +6,7 @@ export class Role implements Serializable<Role>{
   id: number;
   users: User[];
   version: number;
+  humanReadableRoleName: string;
 
   constructor() {}
 
@@ -15,6 +16,7 @@ export class Role implements Serializable<Role>{
     this.id = input.id;
     this.roleName = input.roleName;
     this.version = input.version;
+    this.humanReadableRoleName = input.humanReadableRoleName;
     if (input.users) {
       input.users.forEach(item => {
         let user = new User().deserialize(item);

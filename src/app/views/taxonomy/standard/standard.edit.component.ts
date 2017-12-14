@@ -15,6 +15,7 @@ import { MainService } from '../../../services/main.service';
 })
 export class StandardEditComponent {
   parent: any;
+  validationError = '';
   startDate: any;
   data: any = {};
   stopDate: any;
@@ -116,7 +117,21 @@ export class StandardEditComponent {
       }
     }
   }
+  checkValidation() {
+    let valid = true;
+    this.validationError = '';
+    if (!this.data.fullName) {
+      valid = false;
+      this.validationError += 'Полное наименование должно быть указано. '
+    }
+    if (!this.data.shortName) {
+      valid = false;
+      this.validationError += 'Краткое наименование должно быть указано. '
+    }
+    return valid;
+  }
   save() {
+    if (this.checkValidation()) {
     this.beforeSave();
     console.log(this.data);
     if (this.id) {
@@ -130,5 +145,8 @@ export class StandardEditComponent {
         this.dialogService.showNotification('Стандарт сохранен');
       });
     }
+  } else {
+    this.dialogService.showMessageDlg('Ошибка валидации', this.validationError);
   }
+}
 }

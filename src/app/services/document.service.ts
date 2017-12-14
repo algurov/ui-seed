@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { SEED_BASE_URL } from '../services/constants';
 import { RequestBase } from '../services/request.base';
@@ -181,5 +181,10 @@ export class DocumentService extends RequestBase {
 
   updateCertificate(certificate): Observable<any> {
     return this.http.put(`${SEED_BASE_URL}/seed/certificate`, certificate ,this.options).map(res => res.json());
+  }
+
+  createPdfReport(act): Observable<any> {
+    this.pdfOptions.responseType = ResponseContentType.Blob;
+    return this.http.get(`${SEED_BASE_URL}/seed/report/sampling_act/` + act.id + '/default/pdf', this.pdfOptions);
   }
 }

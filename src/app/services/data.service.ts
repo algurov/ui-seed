@@ -47,6 +47,13 @@ export class DataService {
   return newDate;
   }
 
+  dateOffset(date) {
+    let result = new Date();
+    let offset = date.getTimezoneOffset() * 60 * 1000;
+    result.setTime(date.getTime() - offset);
+    return result;
+  }
+
   getMenuActionsByScreen(screen:string, state: boolean) {
     let result = menuActions[screen];
     if (state) {

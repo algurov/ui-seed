@@ -1,0 +1,40 @@
+<div class="standard">
+  <div class="standard-title">Показатель</div>
+  <div class="group__content">
+    <div class="group__content-first-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-error>Обязательное поле</mat-error>
+        <mat-placeholder class="group__placeholder">Наименование</mat-placeholder>
+        <input required matInput [(ngModel)]="data.nameRu"/>
+      </mat-form-field>
+    </div>
+    <div class="group__content-second-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Наименование (англ.)</mat-placeholder>
+        <input matInput [(ngModel)]="data.nameEng"/>
+      </mat-form-field>
+    </div>
+    <div class="group__content-full-width">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Описание</mat-placeholder>
+        <textarea matInput [(ngModel)]="data.description"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="group__content-first-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-placeholder class="group__placeholder">Точность</mat-placeholder>
+        <input matInput type="number" [(ngModel)]="data.precision"/>
+      </mat-form-field>
+    </div>
+    <div class="group__content-second-column">
+      <seed-multiselect-field placeholder="Единицы измерения"
+        [data]="data.units"
+        (change)="onUnitsChange($event)"
+        [taxonomyParams]="taxonomyParams"
+        taxonomy="Units"
+        nameField="nameRu"
+        dialogTitle="Выбор единиц измерения"
+        nameFieldToView="nameRu"></seed-multiselect-field>
+    </div>
+  </div>
+</div>

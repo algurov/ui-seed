@@ -98,6 +98,8 @@ import { CertificateComponent } from './views/document/certificate/certificate.c
 import { CertificateTitleComponent } from './views/document/certificate/title/certificate.title.component';
 import { CertificateTypeDialog } from './views/document/certificate/type.dialog/type.dialog';
 import { CertificateParamsComponent } from './views/document/certificate/params/certificate.params.component';
+import { PropertyListComponent } from './views/taxonomy/property/property.list.component';
+import { GenaralPropertyEditComponent } from './views/taxonomy/property/general.property.edit.component';
 
 export const APP_DECLARATIONS = [
   MainViewComponent,
@@ -203,5 +205,7 @@ export const APP_DECLARATIONS = [
   CertificateComponent,
   CertificateTitleComponent,
   CertificateTypeDialog,
-  CertificateParamsComponent
+  CertificateParamsComponent,
+  PropertyListComponent,
+  GenaralPropertyEditComponent
 ];

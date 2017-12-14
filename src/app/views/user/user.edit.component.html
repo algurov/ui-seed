@@ -64,7 +64,7 @@
           </mat-form-field>
         </div>
         <div class="content__line">
-          <seed-select-field code="partner" [placeholderType]="false" (change)="changePartner($event)" [enabled]="true" placeholder="Контрагент" [data]="partner"></seed-select-field>
+          <seed-select-field [required]="isPartnerRequired()" code="partner" [placeholderType]="false" (change)="changePartner($event)" [enabled]="true" placeholder="Контрагент" [data]="partner"></seed-select-field>
         </div>
         <div class="content__line">
           <tag-input class="pad-bot content__line-100" (onRemove)="updateUserProfessions($event)" (onAdd)="updateUserProfessions($event)" addOnBlur="true" formControlName="position" placeholder="{{stringService.get('ADD_PROFESSION')}}" secondaryPlaceholder="{{stringService.get('ADD_PROFESSION')}}"></tag-input>

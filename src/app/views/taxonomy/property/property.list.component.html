@@ -1,0 +1,16 @@
+
+<div>
+  <mat-form-field>
+    <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilter(nameFilter.value)" />
+  </mat-form-field>
+  <!-- <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner> -->
+  <!-- <div *ngIf="loaded">
+    <div class="list-item" *ngFor="let item of list" (click)="selectItem(item)">
+      {{item.fullName}}
+    </div>
+  </div> -->
+    <div class="list-item" *ngFor="let item of list" (click)="selectItem(item)">
+      {{item.nameRu}}
+    </div>
+</div>

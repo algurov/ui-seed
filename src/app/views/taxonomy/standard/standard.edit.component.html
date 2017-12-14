@@ -30,8 +30,9 @@
     </div>
     <div class="group__content-first-column">
       <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-error>Обязательное поле</mat-error>
         <mat-placeholder class="group__placeholder">Полное наименование</mat-placeholder>
-        <input matInput [ngModel]="fullName" (keyup)="fullNameChange($event)">
+        <input required matInput [ngModel]="fullName" (keyup)="fullNameChange($event)">
       </mat-form-field>
     </div>
     <div class="group__content-second-column">

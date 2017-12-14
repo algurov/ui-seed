@@ -6,6 +6,7 @@ import { DialogService } from '../../../../services/dialog.service';
 import { DocumentService } from '../../../../services/document.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'application-preview',
@@ -29,7 +30,7 @@ export class ApplicationPreviewComponent {
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router, private sanitizer: DomSanitizer) {
       this.subscriptions.push(this.mainService.menuActionPerformed.subscribe(action => {
         if (action == 'ADD_ACT') {
           this.addAct();
@@ -133,6 +134,18 @@ export class ApplicationPreviewComponent {
 
   openCertificate(id) {
     this.router.navigate(['main/document/certificate/'+ id]);
+  }
+
+  createPdfReport(act) {
+      this.documentService.createPdfReport(act).subscribe(res => {
+        const pdfUrl = (window.URL || window['webkitURL']).createObjectURL(new Blob([res], { type: 'application/pdf' }));
+const anchor = document.createElement('a');
+anchor.href = pdfUrl;
+anchor.setAttribute("download", 'samplingAct'+ act.id +'.pdf');
+anchor.click();
+        // let url = window.URL.createObjectURL(new Blob([res], {type: 'application/pdf'}));
+        // this.sanitizer.bypassSecurityTrustUrl(url);
+      });
   }
 
   addCertificate(act) {

@@ -1,5 +1,5 @@
 <mat-form-field class="field">
-  <input [readonly]="!edit" [ngModel]="role.roleName" matInput #field />
+  <input [readonly]="!edit" [ngModel]="role.humanReadableRoleName" matInput #field />
   <mat-icon matSuffix *ngIf="!edit" (click)="enterEditMode()">edit</mat-icon>
   <mat-icon matSuffix *ngIf="!edit" (click)="removeAction()">delete</mat-icon>
   <mat-icon matSuffix *ngIf="edit" (click)="saveAction()">done</mat-icon>

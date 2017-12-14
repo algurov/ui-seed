@@ -193,7 +193,10 @@ export class UserEditComponent implements OnInit {
   }
 
   submitAction() {
-
+    if (this.isPartnerRequired() && this.partner == null) {
+      this.dlgService.showMessageDlg('Ошибка валидации', 'Укажите контрагента');
+      return;
+    }
     if (this.userForm.valid) {
       this.currentUser.contacts = new Array<Contact>();
 
@@ -231,16 +234,17 @@ export class UserEditComponent implements OnInit {
         //this.dlgService.showMessageDlg('Not implemented', 'Update action');
         this.dlgService.showBlocker();
         this.usrService.updateUser(this.currentUser.toSend()).subscribe(res => {
-           this.dlgService.hideBlocker();
-           this.currentUser = new User().deserialize(res);
-           // if (this.partner) {
-           //   let found = this.partner.users.find(item => item.id == this.currentUser.id);
-           //   if (!found) {
-           //     this.partner.users.push(this.currentUser);
-           //     this.partnerService.updatePartner(this.partner).subscribe(res => {});
-           //   }
-           // }
-           this.dlgService.showNotification('Пользователь обновлен') });
+          this.dlgService.hideBlocker();
+          this.currentUser = new User().deserialize(res);
+          // if (this.partner) {
+          //   let found = this.partner.users.find(item => item.id == this.currentUser.id);
+          //   if (!found) {
+          //     this.partner.users.push(this.currentUser);
+          //     this.partnerService.updatePartner(this.partner).subscribe(res => {});
+          //   }
+          // }
+          this.dlgService.showNotification('Пользователь обновлен')
+        });
       } else {
         this.flow.sendNewUser(new UserToSend().buildFromUser(this.currentUser), this.partner);
       }
@@ -259,13 +263,18 @@ export class UserEditComponent implements OnInit {
   removeUser(id) {
     this.dlgService.showConfirm('Удаление пользователя', 'Вы уверены, что хотите удалить пользователя?')
       .subscribe(res => {
-if (res) {
+        if (res) {
           this.usrService.deleteUserById(this.currentUser.id);
-}
+        }
       });
-
   }
 
+  isPartnerRequired() {
+    if (this.selectedRoles.find(it => (it == 9)||(it == 10))) {
+      return true;
+    }
+    return false;
+  }
 }
 
 export class UserToSend {

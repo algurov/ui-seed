@@ -100,4 +100,29 @@ export class TaxonomyService extends RequestBase {
   updatePropertiesPatch(properties) : Observable<any> {
     return this.http.patch(`${SEED_BASE_URL}/seed/goodsCategoryProperty`, properties, this.options).map(res => res.json());
   }
+
+  getPropertyById(id): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/property/` + id, this.options).map(res => res.json());
+  }
+
+  getPropertyList(): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/property`, this.options).map(res => res.json());
+  }
+
+  createProperty(property): Observable<any> {
+    return this.http.post(`${SEED_BASE_URL}/seed/property`, property, this.options).map(res => res.json());
+  }
+
+  updateProperty(property): Observable<any> {
+    return this.http.put(`${SEED_BASE_URL}/seed/property`, property, this.options).map(res => res.json());
+  }
+
+  deleteProperty(property): Observable<any> {
+    return this.http.delete(`${SEED_BASE_URL}/seed/property/` + property.id, this.options).map(res => res.json());
+  }
+
+  searchPropertyByNameRu(name) : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/property?nameRu=`+name, this.options).map(res => res.json());
+  }
+
 }

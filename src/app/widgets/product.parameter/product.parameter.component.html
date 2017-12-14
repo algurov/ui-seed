@@ -8,10 +8,10 @@
   <div class="units">{{getPropertyUnit()}}</div>
   <ng-container *ngIf="isValue()">
     <mat-form-field class="short-field-extra">
-      <input matInput placeholder="не менее" [(ngModel)]="config.data.minValue"/>
+      <input matInput type="number" placeholder="не менее" [(ngModel)]="config.data.minValue"/>
     </mat-form-field>
     <mat-form-field class="short-field-extra" >
-      <input matInput placeholder="не более" [(ngModel)]="config.data.maxValue"/>
+      <input matInput type="number" placeholder="не более" [(ngModel)]="config.data.maxValue"/>
     </mat-form-field>
   </ng-container>
   <mat-form-field class="text-field-extra">

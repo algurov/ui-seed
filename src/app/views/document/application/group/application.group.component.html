@@ -13,7 +13,7 @@
     <div class="group__item-50-second">
       <mat-form-field class="group__item-field" floatPlaceholder="always">
         <mat-placeholder class="group__item-placeholder">{{stringService.get('APPLICATION_GROUP_QUANTITY')}}</mat-placeholder>
-        <input matInput [(ngModel)]="data.productStorageCount"/>
+        <input matInput type="number" [(ngModel)]="data.productStorageCount"/>
       </mat-form-field>
     </div>
     <div class="group__item-100">

@@ -8,6 +8,13 @@ export const taxonomy = [
     ]
   },
   {
+    title: 'Единицы измерения',
+    name: 'Units',
+    api: 'unit',
+    columns: [
+    ]
+  },
+  {
     title: 'Место хранения',
     name: 'Storage',
     api: 'productStorage',

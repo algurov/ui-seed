@@ -15,6 +15,7 @@ import { Observable } from 'rxjs';
 })
 export class SeedMutiselectField {
   @Input() taxonomy: string;
+  @Input() dialogTitle: string;
   @Input() taxonomyParams: Array<any>;
   selectedData: Array<any> = new Array<any>();
   @Input() placeholder;
@@ -79,7 +80,8 @@ export class SeedMutiselectField {
           taxonomy: this.taxonomy,
           taxonomyParams: this.taxonomyParams,
           nameField: this.nameField,
-          selectedData: this.selectedData
+          selectedData: this.selectedData,
+          title: this.dialogTitle? this.dialogTitle: 'Выбор контрагента'
         }
       });
       dialogRef.componentInstance.change.subscribe(res => {
@@ -110,6 +112,7 @@ export class SelectDialogMultiple {
   taxonomy: string;
   taxonomyParams: Array<any>;
   nameField: string;
+  title: string;
   checkedArray: any = {};
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
@@ -123,11 +126,12 @@ export class SelectDialogMultiple {
     this.taxonomyParams = data.taxonomyParams;
     this.nameField = data.nameField;
     this.selectedData = data.selectedData;
+    this.title = data.title;
    }
 
    addNameFilter(name) {
      name = name.trim();
-     let param = [{field:'fullName', value: name}];
+     let param = [{field:this.nameField, value: name}];
      this.loaded = false;
      this.taxonomyService.searchTaxonomyDataByParams(this.taxonomy, param.concat(this.taxonomyParams)).subscribe(res => {
        this.list = res.content;

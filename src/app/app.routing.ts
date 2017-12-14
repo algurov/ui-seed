@@ -30,6 +30,9 @@ import { StandardEditComponent } from './views/taxonomy/standard/standard.edit.c
 import { PropertyEditComponent } from './views/taxonomy/standard/property.edit.component';
 import { StandardListComponent } from './views/taxonomy/standard/standard.list.component';
 import { CertificateComponent } from './views/document/certificate/certificate.component';
+import { PropertyListComponent } from './views/taxonomy/property/property.list.component';
+import { GenaralPropertyEditComponent } from './views/taxonomy/property/general.property.edit.component';
+
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
 
@@ -49,6 +52,9 @@ export const routes: Routes = [
         { path: 'settings/taxonomy/standard/:id', component: StandardEditComponent},
         { path: 'settings/taxonomy/standard/:id/property', component: PropertyEditComponent},
           { path: 'settings/taxonomy/standard', component: StandardEditComponent},
+      { path: 'settings/taxonomy/property-list', component: PropertyListComponent},
+      { path: 'settings/taxonomy/general-property', component: GenaralPropertyEditComponent},
+      { path: 'settings/taxonomy/general-property/:id', component: GenaralPropertyEditComponent},
       { path: 'document', component: DocumentListComponent, data: {breadcrumb: 'Документы'}},
       { path: 'document/application', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}},
       { path: 'document/application/:id', component: ApplicationComponent, data: {breadcrumb: 'Заявка'}},

@@ -25,7 +25,7 @@
   <div class="text-title">Список актов отбора проб</div>
   <ng-container *ngFor="let act of actList">
     <div style=" cursor: pointer; padding: 20px 20px; border-bottom: 1px solid #aaa;">
-      <div style="float:left; width:87%;" (click)="openAct(act.id)">
+      <div style="float:left; width:80%;" (click)="openAct(act.id)">
         {{act.sampleNumber}}
       </div>
 
@@ -43,6 +43,9 @@
       </div>
       <div style="float:right;">
         <mat-icon matTooltip="Добавить сертификат" matTooltipPosition="above" (click)="addCertificate(act)">assignment</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon matTooltip="Сгенерировать PDF" matTooltipPosition="above" (click)="createPdfReport(act)">assignment_returned</mat-icon>
       </div>
       <div *ngIf="actSign[act.id] && actSign[act.id].length > 0">
         <div>Подписан:</div>

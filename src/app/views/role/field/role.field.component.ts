@@ -24,12 +24,12 @@ export class RoleFieldComponent {
 
   saveAction() {
     this.edit = false;
-    this.role.roleName = this.field.nativeElement.value;
+    this.role.humanReadableRoleName = this.field.nativeElement.value;
     this.update.emit(this.role);
   }
 
   discardAction() {
-    this.field.nativeElement.value = this.role.roleName;
+    this.field.nativeElement.value = this.role.humanReadableRoleName;
     this.edit = false;
   }
 }

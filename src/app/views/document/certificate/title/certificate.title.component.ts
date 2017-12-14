@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StringService } from '../../../../services/string.service';
 import { MainService } from '../../../../services/main.service';
-
+import { DataService } from '../../../../services/data.service';
 @Component({
   selector: 'certificate-title',
   templateUrl: './certificate.title.component.html',
@@ -12,7 +12,8 @@ export class CertificateTitleComponent {
   date: any;
   subscription: any;
   laboratoryVisible = true;
-  constructor(private stringService: StringService, private mainService: MainService) {
+  constructor(private stringService: StringService, private mainService: MainService,
+    private dataService: DataService) {
     this.subscription = this.mainService.certificateLoaded.subscribe(item => {
       this.data = item;
       if (item.createDate) {
@@ -42,8 +43,8 @@ export class CertificateTitleComponent {
   }
 
   onDateChange(event) {
-    this.date = event.value;
-    this.data.createDate = event.value.getTime();
+    this.date = this.dataService.dateOffset(event.value);
+    this.data.createDate = this.date.getTime();
   }
 
   getLaboratoryName() {

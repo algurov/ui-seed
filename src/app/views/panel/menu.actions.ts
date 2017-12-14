@@ -137,4 +137,26 @@ export const menuActions =
         state: true
       }
   ],
+  'PROPERTY_LIST' : [
+    {
+      name: 'ADD_PROPERTY',
+      action: 'ADD_PROPERTY',
+      type: 'link',
+      state: true
+    },
+  ],
+  'PROPERTY_EDIT': [
+    {
+      name: 'SAVE_PROPERTY',
+      action: 'SAVE_PROPERTY',
+      type: 'button',
+      state: true
+    },
+    {
+      name: 'REMOVE_PROPERTY',
+      action: 'REMOVE_PROPERTY',
+      type: 'button',
+      state: false
+    }
+  ]
   };

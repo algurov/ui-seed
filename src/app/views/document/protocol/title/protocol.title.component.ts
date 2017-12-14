@@ -99,40 +99,40 @@ export class ProtocolTitleComponent {
 
   getLaboratoryName() {
     if (this.data.act) {
-      return this.data.act.laboratory.name;
+      return this.data.act.analyzingLaboratory.name;
     }
     if (this.act) {
-        return this.act.laboratory.name;
+        return this.act.analyzingLaboratory.name;
     }
     return '';
   }
 
   getLaboratoryCertificateNumber() {
     if (this.data.act) {
-      return this.data.act.laboratory.numberCertificateAccreditation;
+      return this.data.act.analyzingLaboratory.numberCertificateAccreditation;
     }
     if (this.act) {
-        return this.act.laboratory.numberCertificateAccreditation;
+        return this.act.analyzingLaboratory.numberCertificateAccreditation;
     }
     return '';
   }
 
   getLaboratoryRegistrationNumber() {
     if (this.data.act) {
-      return this.data.act.laboratory.registrationNumber;
+      return this.data.act.analyzingLaboratory.registrationNumber;
     }
     if (this.act) {
-        return this.act.laboratory.registrationNumber;
+        return this.act.analyzingLaboratory.registrationNumber;
     }
     return '';
   }
 
   getLaboratoryContact() {
     if (this.data.act) {
-      return this.data.act.laboratory.contact;
+      return this.data.act.analyzingLaboratory.contact;
     }
     if (this.act) {
-        return this.act.laboratory.contact;
+        return this.act.analyzingLaboratory.contact;
     }
     return '';
   }
