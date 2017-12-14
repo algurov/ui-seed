@@ -24,7 +24,7 @@ export class RequestBase {
     this.headers.append('Authorization', 'Bearer ' + Cookie.get('at'));
     this.noPreFlightHeaders.append('Content-Type', 'text/plain');
 
-    this.pdfHeaders.append('Content-Type', 'application/json');
+    //this.pdfHeaders.append('Content-Type', 'application/json');
     this.pdfHeaders.append('Authorization', 'Bearer ' + Cookie.get('at'));
     //this.pdfHeaders.append('Accept', 'application/pdf');
   }

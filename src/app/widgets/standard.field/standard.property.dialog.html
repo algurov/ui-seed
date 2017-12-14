@@ -6,7 +6,7 @@
         <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
         <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup)="addNameFilterTree(nameFilter.value)" />
       </mat-form-field>
-      <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+      <mat-spinner style="margin: 0 auto;" *ngIf="!loadedAll"></mat-spinner>
       <div *ngIf="loaded && loadedAll">
         <!-- <ng-container *ngFor="let item of listToView">
           <div class="list-item" (click)="selectGoodsCategoryProperty(item)">
@@ -30,7 +30,7 @@
         <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
         <input matInput #nameFilter2 placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilterAll(nameFilter2.value)" />
       </mat-form-field>
-      <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+      <mat-spinner style="margin: 0 auto;" *ngIf="!loadedAll"></mat-spinner>
       <div *ngIf="loaded && loadedAll">
         <div class="list-item" *ngFor="let item of allList" (click)="selectProperty(item)">
           {{item.nameRu}}
@@ -43,7 +43,7 @@
       <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
       <input matInput #nameFilter2 placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilterAll(nameFilter2.value)" />
     </mat-form-field>
-    <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+    <mat-spinner style="margin: 0 auto;" *ngIf="!loadedAll"></mat-spinner>
     <div *ngIf="loadedAll">
       <div class="list-item" *ngFor="let item of allList" (click)="selectProperty(item)">
         {{item.nameRu}}

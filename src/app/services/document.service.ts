@@ -184,7 +184,7 @@ export class DocumentService extends RequestBase {
   }
 
   createPdfReport(act): Observable<any> {
-    this.pdfOptions.responseType = ResponseContentType.Blob;
+    //this.pdfOptions.responseType = ResponseContentType.Blob;
     return this.http.get(`${SEED_BASE_URL}/seed/report/sampling_act/` + act.id + '/default/pdf', this.pdfOptions);
   }
 }
