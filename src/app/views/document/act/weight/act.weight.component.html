@@ -14,18 +14,18 @@
         </mat-form-field>
       </div>
       <div class="group__content-full-width" style="padding-bottom:20px;">
-        <mat-checkbox class="cbox" color="primary" [(ngModel)]="data.isProductInTare">продукция в таре</mat-checkbox>
+        <mat-checkbox class="cbox" color="primary" (change)="onTareChange($event)" [ngModel]="data.isProductInTare">продукция в таре</mat-checkbox>
       </div>
       <div class="group__content-first-column">
         <mat-form-field floatPlaceholder="always" class="group__field">
           <mat-placeholder class="group__placeholder">Вес упаковочной единицы, кг.</mat-placeholder>
-          <input matInput [(ngModel)]="data.itemWeight" type="number"/>
+          <input matInput [disabled]="!data.isProductInTare" [(ngModel)]="data.itemWeight" type="number"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
         <mat-form-field floatPlaceholder="always" class="group__field">
           <mat-placeholder class="group__placeholder">Количество мест</mat-placeholder>
-          <input matInput [(ngModel)]="data.itemCount" type="number"/>
+          <input matInput [disabled]="!data.isProductInTare" [(ngModel)]="data.itemCount" type="number"/>
         </mat-form-field>
       </div>
     <div style="clear: both;"></div>

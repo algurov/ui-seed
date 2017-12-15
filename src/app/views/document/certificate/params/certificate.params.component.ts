@@ -372,10 +372,14 @@ export class CertificateParamsComponent {
     } else {
       if (this.isRus) {
           result = param.goodsCategoryProperty.property.nameRu;
-          result += ', ' + param.goodsCategoryProperty.unit.nameRu;
+          if (param.goodsCategoryProperty.unit) {
+            result += ', ' + param.goodsCategoryProperty.unit.nameRu;
+          }
       } else {
           result = param.goodsCategoryProperty.property.nameEng;
-          result += ', ' + param.goodsCategoryProperty.unit.nameEng;
+          if (param.goodsCategoryProperty.unit) {
+            result += ', ' + param.goodsCategoryProperty.unit.nameEng;
+          }
       }
       if (param.parentGoodsCategoryProperty) {
         result = 'в т.ч. ' + result;

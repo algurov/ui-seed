@@ -35,7 +35,8 @@ export class ParamNode {
   }
 
   onStandardChanged(standard) {
-    this.config.data.value.standard = standard;
+    //this.config.data.value.standard = standard;
+    this.selectStandardForChildren(this.config, standard);
     this.standardChange.emit({standard: standard, value: this.config});
   }
 
@@ -46,6 +47,15 @@ export class ParamNode {
       this.deselectAllChildren(this.config);
     }
     this.stateChange.emit({checked: event.checked, value: this.config});
+  }
+
+  selectStandardForChildren(node, standard) {
+    node.data.value.standard = standard;
+    if (node.children) {
+      node.children.forEach(child => {
+        this.selectStandardForChildren(child, standard);
+      });
+    }
   }
 
   selectTillRoot(node) {

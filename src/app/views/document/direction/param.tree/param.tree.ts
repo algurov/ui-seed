@@ -125,10 +125,19 @@ export class ParamTree {
       }
       if (found) {
         found.standard = event.standard;
+        this.standardAllChildren(found, event.standard);
       }
     }
   }
 
+  standardAllChildren(assignmentResearch, standard) {
+    assignmentResearch.children.forEach(child => {
+      child.standard = standard;
+      if (child.children.length > 0) {
+        this.standardAllChildren(child, standard);
+      }
+    });
+  }
   onNodeValueChange(event) {
     let found = null;
     if (event.value.data.value.uid) {
