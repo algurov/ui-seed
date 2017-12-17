@@ -95,6 +95,13 @@ export class ApplicationComponent {
 
   removeUuid(applicationResearch) {
     delete applicationResearch.uuid;
+    if (applicationResearch.goodsCategoryProperty) {
+      console.log(1);
+      delete applicationResearch.goodsCategoryProperty.uuid;
+    }
+    if (applicationResearch.property) {
+      delete applicationResearch.property.uuid;
+    }
     if (applicationResearch.children.length > 0) {
       applicationResearch.children.forEach(item => {
         this.removeUuid(item);

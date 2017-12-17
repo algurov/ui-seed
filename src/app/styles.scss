@@ -305,6 +305,9 @@ ul, ol {
 .eng-field .mat-form-field-underline {
   top: 15px;
 }
+
+mat-spinner.spinner svg { width: 50px !important; height: 50px !important; }
+mat-spinner.spinner svg circle { stroke-width:2px !important; }
  // .tree-wrapper {
  //    overflow: auto;
  //  }

@@ -14,7 +14,7 @@ import { MatChipsModule } from '@angular/material';
 import { MatIconModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material';
-import { MatProgressSpinnerModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatPaginatorModule } from '@angular/material';
 import { MatProgressBarModule } from '@angular/material';
 import { MatRadioModule } from '@angular/material';
 import { MatRippleModule } from '@angular/material';
@@ -58,7 +58,8 @@ const MATERIAL_MODULES = [
   MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatPaginatorModule
 ];
 
 
