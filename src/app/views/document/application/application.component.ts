@@ -58,9 +58,6 @@ export class ApplicationComponent {
            }
            this.mainService.applicationLoaded.emit(this.data);
             this.dialogService.block = false;
-           console.log('read');
-           console.log(this.data);
-           //console.log(JSON.stringify(this.data));
          });
        } else {
          //this.dialogService.block = false;
@@ -72,10 +69,6 @@ export class ApplicationComponent {
   }
   ngOnInit() {
 
-    // if (localStorage.getItem('application')) {
-    // this.data = JSON.parse(localStorage.getItem('application'));
-    // console.log(this.data);
-    // }
     this.mainService.menuChange.emit({name: 'APPLICATION_EDIT', state: this.id? true:false});
     if (!this.data.id){
     if (this.settingsService.settings.selectedPartnerId) {
@@ -96,7 +89,6 @@ export class ApplicationComponent {
   removeUuid(applicationResearch) {
     delete applicationResearch.uuid;
     if (applicationResearch.goodsCategoryProperty) {
-      console.log(1);
       delete applicationResearch.goodsCategoryProperty.uuid;
     }
     if (applicationResearch.property) {
@@ -181,21 +173,15 @@ export class ApplicationComponent {
       //this.data.id = 1;
       if (this.checkValidation()){
       this.clearData();
-      console.log('write');
-      console.log(this.data);
-      console.log(JSON.stringify(this.data));
       this.dialogService.showBlocker();
       if(!this.data.id) {
         this.documentService.createApplication(this.data).subscribe(res => {
-          console.log(res);
           this.dialogService.hideBlocker();
           this.router.navigate(['main/document']);
           this.dialogService.showNotification('Заявка ' + res.number + ' сохранена');
         });
       } else {
         this.documentService.updateApplication(this.data).subscribe(res => {
-          console.log(res);
-          console.log(JSON.stringify(res));
           this.dialogService.hideBlocker();
           this.router.navigate(['main/document']);
           this.dialogService.showNotification('Заявка ' + res.number + ' сохранена')});
@@ -204,6 +190,5 @@ export class ApplicationComponent {
     } else {
       this.dialogService.showMessageDlg('Ошибка валидации', this.validationError);
     }
-    //localStorage.setItem('application', JSON.stringify(this.data));
   }
 }
