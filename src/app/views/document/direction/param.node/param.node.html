@@ -9,11 +9,11 @@
   <div class="units">{{getPropertyUnit()}}</div>
 
     <mat-form-field class="short-field-extra">
-      <input matInput placeholder="значение" [ngModel]="config.data.value.value" (keyup)="onValueChanged($event)"/>
+      <input type="number" matInput placeholder="значение" [ngModel]="config.data.value.value" (keyup)="onValueChanged($event)"/>
     </mat-form-field>
     <select-field class="short-field-extra" placeholder="ГОСТ" [data]="config.data.value.standard" (change)="onStandardChanged($event)" taxonomy="Standard" [taxonomyParams]="taxonomyParams" nameField="fullName" nameFieldToView="shortName"></select-field>
     <mat-form-field class="short-field-extra" >
-      <input matInput placeholder="текст" [ngModel]="config.data.value.textValue" (keyup)="onTextValueChanged($event)"/>
+      <input matInput type="text" placeholder="текст" [ngModel]="config.data.value.textValue" (keyup)="onTextValueChanged($event)"/>
     </mat-form-field>
 
   <mat-icon *ngIf="false" class="close-icon" (click)="removeItem()">close</mat-icon>

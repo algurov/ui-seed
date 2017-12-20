@@ -48,5 +48,11 @@
     <mat-header-row *matHeaderRowDef="cols"></mat-header-row>
     <mat-row class="table-row" *matRowDef="let row; columns: cols;"></mat-row>
   </mat-table>
-  <div class="total">Всего записей: {{dataSource.getDataCount()}}</div>
+  <!-- <div class="total">Всего записей: {{dataSource.getDataCount()}}</div> -->
+  <mat-paginator #paginator
+                [length]="dataSource.getDataCount()"
+                [pageIndex]="0"
+                [pageSize]="25"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="paginatorChange($event)"></mat-paginator>
 </div>

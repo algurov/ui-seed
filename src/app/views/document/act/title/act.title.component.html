@@ -22,7 +22,7 @@
     <div class="group__content-second-column">
       <mat-form-field class="group__field" floatPlaceholder="always">
         <mat-error>Обязательное поле</mat-error>
-        <mat-placeholder class="group__placeholder">{{stringService.get('APPLICATION_LAB_TITLE')}}</mat-placeholder>
+        <mat-placeholder class="group__placeholder">Организация выдавшая документ</mat-placeholder>
         <input required matInput [(ngModel)]="data.samplingLaboratory"/>
       </mat-form-field>
       <!-- <seed-select-field code="laboratory" (change)="onLaboratoryChange($event)" [data]="data.laboratory" placeholder="{{stringService.get('APPLICATION_LAB_TITLE')}}"></seed-select-field> -->

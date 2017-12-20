@@ -82,7 +82,11 @@ export class ParamNode {
         return '';
       }
     } else {
-      return this.config.data.value.property.units[0].nameRu;
+      if (this.config.data.value.property.units[0]) {
+        if (this.config.data.value.property.units[0].nameRu) {
+          return this.config.data.value.property.units[0].nameRu;
+        }
+      }
     }
   }
 

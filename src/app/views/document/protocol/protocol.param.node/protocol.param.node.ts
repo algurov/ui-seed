@@ -20,7 +20,11 @@ export class ProtocolParamNode {
         return '';
       }
     } else {
-      return this.config.data.property.units[0].nameRu;
+      if (this.config.data.property.units[0]) {
+        return this.config.data.property.units[0].nameRu;
+      } else {
+        return '';
+      }
     }
   }
 

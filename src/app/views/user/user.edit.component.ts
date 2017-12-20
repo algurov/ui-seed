@@ -44,7 +44,7 @@ export class UserEditComponent implements OnInit {
           console.log(res);
           this.currentUser = new User().deserialize(res);
           this.roleService.getRoleList().subscribe(res => {
-            res.forEach(item => {
+            res.content.forEach(item => {
               this.roles.push(new Role().deserialize(item));
               this.fillForm(this.currentUser);
             });
@@ -52,7 +52,7 @@ export class UserEditComponent implements OnInit {
         });
       } else {
         this.roleService.getRoleList().subscribe(res => {
-          res.forEach(item => {
+          res.content.forEach(item => {
             this.roles.push(new Role().deserialize(item));
           });
         });
@@ -207,7 +207,9 @@ export class UserEditComponent implements OnInit {
       this.currentUser.userSecondName = this.userForm.get('userSecondName').value;
       this.currentUser.positions = this.collectPositionsDataFromChip(this.userForm.get('position').value);
       this.currentUser.branchOffice = this.userForm.get('branchOffice').value;
-      this.currentUser.partner = new Partner().deserialize(this.partner);
+      if (this.partner) {
+          this.currentUser.partner = new Partner().deserialize(this.partner);
+      }
       let address = this.userForm.get('address').value;
       let phoneNumber = this.collectDataFromChip(this.userForm.get('phoneNumber').value);
 

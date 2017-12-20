@@ -65,18 +65,14 @@ export class StandardField {
       }
     });
     dialogRef.componentInstance.propertySelected.subscribe(item => {
-      //delete item.uuid;
-      //delete item.children;
       this.addProperty(item);
-      this.dialogService.showNotification('Параметр "' +
-        (item.name ? item.name : item.nameRu) + '" добавлен');
+      // this.dialogService.showNotification('Параметр "' +
+      //   (item.name ? item.name : item.nameRu) + '" добавлен');
     });
     dialogRef.componentInstance.goodsCategoryPropertySelected.subscribe(item => {
-      // delete item.uuid;
-      // delete item.children;
       this.addGoodsCategoryProperty(item);
-      this.dialogService.showNotification('Параметр "' +
-        (item.name ? item.name : item.nameRu) + '" добавлен');
+      // this.dialogService.showNotification('Параметр "' +
+      //   (item.name ? item.name : item.nameRu) + '" добавлен');
     });
     dialogRef.afterClosed().subscribe(result => {
       this.lastSelectedNode = null;
@@ -145,7 +141,20 @@ onClickOutside(ev) {
       if (!this.applicationStandartResearch.applicationResearches) {
         this.applicationStandartResearch.applicationResearches = [];
       }
-      this.applicationStandartResearch.applicationResearches.push(item);
+      let f = this.applicationStandartResearch.applicationResearches.find(it => {
+        let property = it.goodsCategoryProperty? it.goodsCategoryProperty.property: it.property;
+        let dataToFind = item.goodsCategoryProperty? item.goodsCategoryProperty.property: item.property;
+        if (property.id == dataToFind.id) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      if (!f) {
+        this.applicationStandartResearch.applicationResearches.push(item);
+        this.dialogService.showNotification('Параметр "' +
+          (item.goodsCategoryProperty? item.goodsCategoryProperty.name : item.property.nameRu) + '" добавлен');
+      }
     }
     this.tree.treeModel.update();
     if (this.wrap) {
@@ -179,7 +188,21 @@ onClickOutside(ev) {
       if (!arr[found].children) {
         arr[found].children = [];
       }
-      arr[found].children.push(data);
+      let f = arr[found].children.find(it => {
+        let property = it.goodsCategoryProperty? it.goodsCategoryProperty.property: it.property;
+        let dataToFind = data.goodsCategoryProperty? data.goodsCategoryProperty.property: data.property;
+        if (property.id == dataToFind.id) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      if (!f) {
+        arr[found].children.push(data);
+        this.dialogService.showNotification('Параметр "' +
+          (data.name ? data.name : data.nameRu) + '" добавлен');
+      }
+
     }
   }
 

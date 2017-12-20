@@ -128,15 +128,33 @@ export class PartnerListComponent {
     this.dlgService.showEditAgentDialog(partner);
     console.log(partner);
   }
+
+  onPaginatorEvent(event) {
+    let page = this.filterParams.find(it => it.field == 'page');
+    if (page) {
+      page.value = event.pageIndex;
+    } else {
+      this.filterParams.push({field: 'page', value: event.pageIndex});
+    }
+    let pageSize = this.filterParams.find(it => it.field == 'size');
+    if (pageSize) {
+      pageSize.value = event.pageSize;
+    } else {
+      this.filterParams.push({field: 'size', value: event.pageSize});
+    }
+    this.partnerDb.changeSearch(this.filterParams)
+  }
 }
+
 
 export class PartnerDataBase {
   dataChange: BehaviorSubject<Partner[]> = new BehaviorSubject<Partner[]>([]);
   get data(): Partner[] { return this.dataChange.value; }
-
+  total: number;
   constructor(public partnerService, public dlgService : DialogService) {
     dlgService.block = true;
     partnerService.getPartnerList().subscribe(res => {
+      this.total = res.totalElements;
       res.content.forEach(item => {
         this.addPartner(item);
       });
@@ -148,6 +166,7 @@ export class PartnerDataBase {
     this.dataChange.next([]);
     this.dlgService.block = true;
     this.partnerService.searchPartnersByParams(params).subscribe(res => {
+      this.total = res.totalElements;
       res.content.forEach(item => {
         this.addPartner(item);
       });
@@ -190,7 +209,7 @@ export class PartnerDataSource extends DataSource<any> {
     super();
   }
   getDataCount() {
-    return this.partnerDb.data.length;
+    return this.partnerDb.total;
   }
   connect(): Observable<Partner[]> {
     //return this.data;

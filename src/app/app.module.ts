@@ -28,6 +28,8 @@ import { AppComponent } from './app.component';
 import { AppState } from './reducers';
 import { SeedMaterialModule } from './seed.material.module';
 import { TagInputModule } from 'ngx-chips';
+import { MatPaginatorModule, MatPaginatorIntl} from '@angular/material';
+import { PaginatorRu } from './paginator.ru';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,7 @@ import { TagInputModule } from 'ngx-chips';
   ],
   bootstrap: [AppComponent],
   exports: [AppComponent],
-  providers: [APP_PROVIDERS,{provide: MAT_DATE_LOCALE, useValue: 'ru-RU'}, {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}]
+  providers: [APP_PROVIDERS,{provide: MAT_DATE_LOCALE, useValue: 'ru-RU'}, {provide: MATERIAL_COMPATIBILITY_MODE, useValue: true}, { provide: MatPaginatorIntl, useClass: PaginatorRu}]
 })
 
 export class AppModule {

@@ -6,7 +6,7 @@
     <div>
       Список пользователей
     </div>
-    <table style="width: 100%;" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [edit]="editUser">
+    <table style="width: 100%;" (pageChange)="onPaginatorEvent($event)" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [edit]="editUser">
     </table>
   </div>
 </div>

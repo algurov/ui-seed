@@ -58,19 +58,35 @@ export class UserListComponent {
     this.router.navigate(['/main/settings/user/edit', user.id]);
   }
 
+  onPaginatorEvent(event) {
+    this.userDb.refresh(event);
+  }
 }
 
 export class UserDataBase {
   dataChange: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
   get data(): User[] { return this.dataChange.value; }
-
+  total: number;
   constructor(public userService, public dlgService : DialogService) {
     dlgService.block = true;
     userService.getAllUsers().subscribe(res => {
-      res.forEach(item => {
+      this.total = res.totalElements;
+      res.content.forEach(item => {
         this.addUser(item);
       });
       dlgService.block = false;
+    });
+  }
+
+  refresh(params) {
+    this.dataChange.next([]);
+    this.dlgService.block = true;
+    this.userService.getAllUsers(params.pageIndex, params.pageSize).subscribe(res => {
+      this.total = res.totalElements;
+      res.content.forEach(item => {
+        this.addUser(item);
+      });
+      this.dlgService.block = false;
     });
   }
 
@@ -79,6 +95,8 @@ export class UserDataBase {
     copiedData.push(new User().deserialize(item));
     this.dataChange.next(copiedData);
   }
+
+
 }
 
 export class UserDataSource extends DataSource<any> {
@@ -89,7 +107,7 @@ export class UserDataSource extends DataSource<any> {
     super();
   }
   getDataCount() {
-    return this.userDb.data.length;
+    return this.userDb.total;
   }
   connect(): Observable<User[]> {
     //return this.data;

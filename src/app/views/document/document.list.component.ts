@@ -38,6 +38,10 @@ export class DocumentListComponent {
     this.dataSource = new DocumentDataSource(this.documentDb);
   }
 
+  onPaginatorEvent(event) {
+      this.documentDb.changeSearch(event.pageIndex, event.pageSize);
+  }
+
   editApplication(application) {
     this.router.navigate(['main/document/application/' + application.id]);
   }
@@ -84,10 +88,11 @@ export class DocumentListComponent {
 export class DocumentDataBase {
   dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   get data(): any[] { return this.dataChange.value; }
-
+  total: number;
   constructor(public router, public documentService, public dlgService : DialogService) {
     dlgService.block = true;
     documentService.getApplicationList().subscribe(res => {
+      this.total = res.totalElements;
       res.content.forEach(item => {
         this.addApplication(item);
       });
@@ -99,10 +104,11 @@ export class DocumentDataBase {
     // this.addApplication({type: 'Заявка', id: 4, number:'Номер 4', applicant: {name: 'ЗАО "Крупица"'}, created:'10/10/2012'});
   }
 
-  changeSearch(params) {
+  changeSearch(page, pageSize) {
     this.dataChange.next([]);
     this.dlgService.block = true;
-    this.documentService.searchPartnersByParams(params).subscribe(res => {
+    this.documentService.getApplicationList(page, pageSize).subscribe(res => {
+      this.total = res.totalElements;
       res.content.forEach(item => {
         this.addApplication(item);
       });
@@ -133,7 +139,7 @@ export class DocumentDataSource extends DataSource<any> {
     super();
   }
   getDataCount() {
-    return this.documentDb.data.length;
+    return this.documentDb.total;
   }
   connect(): Observable<any[]> {
     //return this.data;

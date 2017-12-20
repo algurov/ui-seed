@@ -102,7 +102,9 @@ import { PropertyListComponent } from './views/taxonomy/property/property.list.c
 import { GenaralPropertyEditComponent } from './views/taxonomy/property/general.property.edit.component';
 import { UnitListComponent } from './views/taxonomy/unit/unit.list.component';
 import { UnitEditComponent } from './views/taxonomy/unit/unit.edit.component';
-
+import { AnalysisTypeDialog } from './views/document/analysis/type.dialog/analysis.type.dialog';
+import { AnalysisCardComponent } from './views/document/analysis/card/analysis.card.component';
+import { MixCardComponent } from './views/document/analysis/mix/mix.card.component';
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -211,5 +213,8 @@ export const APP_DECLARATIONS = [
   PropertyListComponent,
   GenaralPropertyEditComponent,
   UnitEditComponent,
-  UnitListComponent
+  UnitListComponent,
+  AnalysisTypeDialog,
+  AnalysisCardComponent,
+  MixCardComponent
 ];

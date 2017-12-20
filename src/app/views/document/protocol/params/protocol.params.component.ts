@@ -63,13 +63,14 @@ export class ProtocolParamsComponent {
     this.qualityTree = [];
     this.preview.forEach(item => {
         item.isExpanded = true;
+        if(item.propertyType) {
         if (item.propertyType.id == 1) {
           this.qualityTree.push(item);
         } else {
           this.securityTree.push(item);
         }
+      }
     });
-    console.log(this.qualityTree);
   }
 
   createParams() {

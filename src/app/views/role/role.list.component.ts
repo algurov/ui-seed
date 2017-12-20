@@ -17,7 +17,7 @@ export class RoleListComponent {
     private dialog: MatDialog) {
       this.dialogService.showBlocker();
       this.roleService.getRoleList().subscribe(res => {
-        res.forEach(item => {
+        res.content.forEach(item => {
           this.roleList.push(new Role().deserialize(item));
         });
         this.dialogService.hideBlocker();

@@ -18,8 +18,12 @@ export class DocumentService extends RequestBase {
       .map(res => res.json());
   }
 
-  getApplicationList(): Observable<any> {
-    return this.http.get(`${SEED_BASE_URL}/seed/application`, this.options)
+  getApplicationList(page: number, pageSize : number): Observable<any> {
+    let url = `${SEED_BASE_URL}/seed/application`;
+    if (page != null && pageSize != null) {
+      url += '?page=' + page + '&size=' + pageSize;
+    }
+    return this.http.get(url, this.options)
     .map(res => res.json());
   }
 
@@ -186,5 +190,29 @@ export class DocumentService extends RequestBase {
   createPdfReport(act): Observable<any> {
     this.pdfOptions.responseType = ResponseContentType.Blob;
     return this.http.get(`${SEED_BASE_URL}/seed/report/sampling_act/` + act.id + '/default/pdf', this.pdfOptions);
+  }
+
+  getAnalysisCardTypeList(): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/analysisCardType`, this.options).map(res => res.json());
+  }
+
+  createAnalysisCard(assignmentId, analysisTypeId): Observable<any> {
+    return this.http.post(`${SEED_BASE_URL}/seed/analysisCard`, {assignmentId: assignmentId, analysisCardTypeEnum: analysisTypeId}, this.options).map(res => res.json());
+  }
+
+  getAnalysisCardById(id): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/analysisCard/`+id, this.options).map(res => res.json());
+  }
+
+  getAnalysisCardListByApplicationId(id): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/analysisCard?assignment.application.id=` + id, this.options).map(res => res.json());
+  }
+
+  deleteAnalysisCard(analysisCard): Observable<any> {
+    return this.http.delete(`${SEED_BASE_URL}/seed/analysisCard/` + analysisCard.id, this.options).map(res => res.json());
+  }
+
+  updateAnalysisCard(analysisCard): Observable<any> {
+    return this.http.put(`${SEED_BASE_URL}/seed/analysisCard`, analysisCard, this.options).map(res=> res.json());
   }
 }

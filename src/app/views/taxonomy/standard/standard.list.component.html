@@ -2,7 +2,7 @@
 <div>
   <mat-form-field>
     <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
-    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup)="addNameFilter(nameFilter.value)" />
+    <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}"  />
   </mat-form-field>
   <!-- <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner> -->
   <!-- <div *ngIf="loaded">

@@ -1,6 +1,6 @@
 <div class="document">
   <div class="document__table">
-    <table style="width: 100%;" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [remove]="removeApplication" [view]="viewApplication" [edit]="editApplication">
+    <table style="width: 100%;" [dataSource]="dataSource" (pageChange)="onPaginatorEvent($event)" [displayedColumns]="displayedColumns" [remove]="removeApplication" [view]="viewApplication" [edit]="editApplication">
     </table>
   </div>
 </div>

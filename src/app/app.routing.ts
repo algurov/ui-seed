@@ -34,6 +34,7 @@ import { PropertyListComponent } from './views/taxonomy/property/property.list.c
 import { GenaralPropertyEditComponent } from './views/taxonomy/property/general.property.edit.component';
 import { UnitListComponent } from './views/taxonomy/unit/unit.list.component';
 import { UnitEditComponent } from './views/taxonomy/unit/unit.edit.component';
+import { AnalysisCardComponent } from './views/document/analysis/card/analysis.card.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'main'},
@@ -71,7 +72,8 @@ export const routes: Routes = [
       { path: 'document/assignment/:id', component: DirectionComponent, data: {breadcrumb: 'Направление'}},
       { path: 'document/assignment', component: DirectionComponent, data: {breadcrumb: 'Направление'}},
       { path: 'document/protocol/:id', component: ProtocolComponent, data: {breadcrumb: 'Протокол'}},
-      { path: 'document/protocol', component: ProtocolComponent, data: {breadcrumb: 'Протокол'}}
+      { path: 'document/protocol', component: ProtocolComponent, data: {breadcrumb: 'Протокол'}},
+      { path: 'document/analysis-card/:id', component: AnalysisCardComponent}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

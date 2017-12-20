@@ -20,6 +20,7 @@ export class ApplicationPreviewComponent {
   actList: Array<any> = new Array<any>();
   protocolList: Array<any> = new Array<any>();
   certificateList: Array<any> = new Array<any>();
+  analysisCardList: Array<any> = new Array<any>();
   observableGroup: Observable<any> = new Observable<any>();
   subscriptions = [];
   signList = [];
@@ -27,6 +28,7 @@ export class ApplicationPreviewComponent {
   certificateSign = {};
   protocolSign = {};
   assignmentSign = {};
+  analysisCardSign = {};
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
@@ -110,6 +112,19 @@ export class ApplicationPreviewComponent {
       }
     });
   }
+
+  removeAnalysisCard(analysisCard) {
+    this.dialogService.showConfirm('Удаление карточки анализа', 'Подтвердиде удаление карточки анализа').subscribe(res => {
+      if (res) {
+        this.dialogService.showBlocker();
+        this.documentService.deleteAnalysisCard(analysisCard).subscribe(res => {
+        this.analysisCardList.splice(this.analysisCardList.findIndex(item => item.id == analysisCard.id), 1);
+        this.dialogService.hideBlocker();
+        });
+      }
+    });
+  }
+
   openProtocol(id) {
       this.router.navigate(['main/document/protocol/'+ id]);
   }
@@ -132,13 +147,20 @@ export class ApplicationPreviewComponent {
     this.router.navigate(['main/document/assignment/' + id]);
   }
 
+  openAnalysisCard(id) {
+    this.router.navigate(['main/document/analysis-card/' + id]);
+  }
+
   openCertificate(id) {
     this.router.navigate(['main/document/certificate/'+ id]);
   }
 
   createPdfReport(act) {
       this.documentService.createPdfReport(act).subscribe(res => {
-        console.log(res);
+    //     var blob = new Blob([res._body], { type: 'application/pdf'});
+    // var url= window.URL.createObjectURL(blob);
+    // window.open(url);
+//         console.log(res);
         const pdfUrl = (window.URL || window['webkitURL']).createObjectURL(new Blob([res._body], { type: 'application/pdf' }));
 const anchor = document.createElement('a');
 anchor.href = pdfUrl;
@@ -160,6 +182,19 @@ anchor.click();
       }
     });
   }
+
+  addAnalysisCard(assignment) {
+    this.dialogService.showAnalysisCardType().subscribe(res => {
+      if (res) {
+        this.dialogService.showBlocker();
+        this.documentService.createAnalysisCard(assignment.id, res).subscribe(created => {
+          this.dialogService.hideBlocker();
+          this.router.navigate(['main/document/analysis-card/', created.id]);
+        });
+      }
+    });
+  }
+
   ngOnDestroy() {
     this.subscriptions.forEach(item => item.unsubscribe());
   }
@@ -179,6 +214,14 @@ anchor.click();
       this.assignmentList.forEach(ass => {
         this.documentService.getSignListByDocumentId(ass.id).subscribe(signs => {
           this.assignmentSign[ass.id] = signs.content;
+        });
+      });
+    });
+    this.documentService.getAnalysisCardListByApplicationId(this.id).subscribe(res => {
+      this.analysisCardList = res.content;
+      this.analysisCardList.forEach(ass => {
+        this.documentService.getSignListByDocumentId(ass.id).subscribe(signs => {
+          this.analysisCardSign[ass.id] = signs.content;
         });
       });
     });

@@ -1,5 +1,5 @@
 
-import { Component, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { User } from '../../models/user';
 import { StringService } from '../../services/string.service';
 import { UserService } from '../../services/user.service';
@@ -12,6 +12,7 @@ import { PartnerService } from '../../services/partner.service';
 import { MainService } from '../../services/main.service';
 import { DataService } from '../../services/data.service';
 import { DocumentService } from '../../services/document.service';
+import { MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'table',
@@ -30,6 +31,11 @@ export class TableComponent {
   @Input() edit;
   @Input() remove;
   @Input() view;
+  @Output() pageChange: EventEmitter<any> = new EventEmitter<any>();
+
+  paginatorChange(event) {
+    this.pageChange.emit(event);
+  }
 
    editRow(row){
      this.edit(row);

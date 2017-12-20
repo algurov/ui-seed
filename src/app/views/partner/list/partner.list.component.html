@@ -10,7 +10,7 @@
     </mat-form-field>
   </div>
   <div class="partner__table">
-    <table style="width: 100%;" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [remove]="deletePartner" [edit]="editPartner">
+    <table style="width: 100%;" (pageChange)="onPaginatorEvent($event)" [dataSource]="dataSource" [displayedColumns]="displayedColumns" [remove]="deletePartner" [edit]="editPartner">
     </table>
   </div>
 </div>

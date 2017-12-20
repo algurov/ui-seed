@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, NgZone, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TaxonomyService } from '../../../services/taxonomy.service';
 import { DataSource } from '@angular/cdk/collections';
@@ -8,7 +8,7 @@ import { DialogService } from '../../../services/dialog.service';
 import { StringService } from '../../../services/string.service';
 import { MainService } from '../../../services/main.service';
 import { TreeComponent } from 'angular2-tree-component';
-
+import 'rxjs/add/operator/debounceTime';
 @Component({
   selector: 'standard-list',
   templateUrl: './standard.list.component.html',
@@ -18,13 +18,16 @@ export class StandardListComponent {
   list: Array<any>;
   selectedItem: any;
   loaded = false;
+  @ViewChild('nameFilter') filter: ElementRef;
   @ViewChild(TreeComponent) tree: TreeComponent;
   constructor(
     private stringService: StringService,
     private taxonomyService: TaxonomyService,
     private router: Router,
     private mainService: MainService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private ngzone: NgZone,
+    private cdref: ChangeDetectorRef
     ) {
       this.dialogService.showBlocker();
       this.taxonomyService.getStandardList().subscribe(res => {
@@ -36,6 +39,16 @@ export class StandardListComponent {
         if (action == 'ADD_STANDARD') {
           this.router.navigate(['main/settings/taxonomy/standard']);
         }
+      });
+   }
+   ngAfterViewInit() {
+     this.ngzone.runOutsideAngular( () => {
+      Observable.fromEvent(this.filter.nativeElement, 'keyup')
+        .debounceTime(1000)
+        .subscribe((evt:any) => {
+         this.addNameFilter(evt.target.value);
+          this.cdref.detectChanges();
+        });
       });
    }
 
@@ -61,12 +74,31 @@ export class StandardListComponent {
    addNameFilter(name) {
      name = name.trim();
      this.tree.treeModel.filterNodes((node) => {
-       if (node.data.fullName.toLowerCase().search(name) >= 0) {
+       if (node.data.fullName.toLowerCase().search(name.toLowerCase()) >= 0) {
          return true;
+       } else {
+         if (node.parent) {
+           return this.checkParentName(node.parent, name);
+         } else {
+           return false;
+         }
+       }
+     });
+   }
+
+   checkParentName(node, name) {
+     if (!node.data.virtual) {
+     if(node.data.fullName.toLowerCase().search(name.toLowerCase()) >= 0) {
+       return true;
+     } else {
+       if (node.parent.parent) {
+         return this.checkParentName(node.parent, name);
        } else {
          return false;
        }
-     });
+
+     }
+   }
    }
 
    selectItem(item) {

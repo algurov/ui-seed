@@ -64,6 +64,9 @@
       </div>
 
       <div style="float:right;">
+        <mat-icon matTooltip="Добавить карточку анализа" matTooltipPosition="above" (click)="addAnalysisCard(assignment)">assignment</mat-icon>
+      </div>
+      <div style="float:right;">
         <mat-icon matTooltip="Удалить" matTooltipPosition="above"  (click)="removeAssignment(assignment)">delete</mat-icon>
       </div>
       <div style="float:right;">
@@ -114,6 +117,27 @@
       <div *ngIf="certificateSign[certificate.id] && certificateSign[certificate.id].length > 0">
         <div>Подписан:</div>
         <div style="padding-left: 20px;" *ngFor="let sign of certificateSign[certificate.id]">{{sign.signerName}}</div>
+      </div>
+    </div>
+
+  </ng-container>
+
+  <div class="text-title">Список карточек анализа</div>
+  <ng-container *ngFor="let analysisCard of analysisCardList">
+    <div style=" cursor: pointer; padding: 20px 20px; border-bottom: 1px solid #aaa;">
+      <div style="float:left; width:90%;" (click)="openAnalysisCard(analysisCard.id)">
+        {{analysisCard.id}}
+      </div>
+
+      <div style="float:right;">
+        <mat-icon matTooltip="Удалить" matTooltipPosition="above"  (click)="removeAnalysisCard(analysisCard)">delete</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon  matTooltip="Редактировать" matTooltipPosition="above" (click)="openAnalysisCard(analysisCard.id)">edit</mat-icon>
+      </div>
+      <div *ngIf="analysisCardSign[analysisCard.id] && analysisCardSign[analysisCard.id].length > 0">
+        <div>Подписан:</div>
+        <div style="padding-left: 20px;" *ngFor="let sign of analysisCardSign[analysisCard.id]">{{sign.signerName}}</div>
       </div>
     </div>
 

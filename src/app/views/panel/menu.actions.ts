@@ -180,5 +180,18 @@ export const menuActions =
       type: 'button',
       state: false
     }
-  ]
+  ],
+  'ANALYSIS_CARD_EDIT': [
+    {
+      name: 'SIGN_ANALYSIS_CARD',
+      action: 'SIGN_ANALYSIS_CARD',
+      type: 'button',
+      state: false
+    },
+    {
+      name: 'SAVE_ANALYSIS_CARD',
+      action: 'SAVE_ANALYSIS_CARD',
+      type: 'button',
+      state: true
+    }]
   };

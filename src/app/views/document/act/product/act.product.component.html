@@ -17,7 +17,7 @@
         </mat-form-field>
       </div>
     <div class="group__content-first-column">
-      <seed-multiselect-field placeholder="В соответствии с ГОСТ" [data]="data.standard" (change)="onStandardChange($event)" taxonomy="Standard" [taxonomyParams]="taxonomyParams" nameField="fullName" nameFieldToView="shortName"></seed-multiselect-field>
+      <seed-multiselect-field dialogTitle="Выберите стандарт по отбору проб" placeholder="В соответствии с ГОСТ" [data]="data.standard" (change)="onStandardChange($event)" taxonomy="Standard" [taxonomyParams]="taxonomyParams" nameField="fullName" nameFieldToView="shortName"></seed-multiselect-field>
       <!-- <seed-select-field code="partner" placeholder="В соответствии с ГОСТ" [data]="data.standard" (change)="onGhostsChange($event)"></seed-select-field> -->
       <!-- <mat-form-field floatPlaceholder="always" class="group__field">
         <mat-placeholder class="group__placeholder">В соответствии с ГОСТ</mat-placeholder>

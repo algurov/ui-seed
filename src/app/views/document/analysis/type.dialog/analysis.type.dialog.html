@@ -1,0 +1,11 @@
+<h2 matDialogTitle>Выберите тип карточки анализа</h2>
+
+
+<mat-dialog-content style="min-width: 400px;">
+  <div class="message">
+    <button class="one-item" type="button" mat-raised-button color="primary" *ngFor="let type of types" (click)="dialogRef.close(type.code)">{{type.name}}</button>
+  </div>
+  <div class="action-panel">
+    <button type="button" color="primary" mat-button (click)="dialogRef.close()">Отмена</button>
+  </div>
+</mat-dialog-content>
