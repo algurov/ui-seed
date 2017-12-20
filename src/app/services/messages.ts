@@ -148,6 +148,8 @@ export const Messages = {
   "REMOVE_PROPERTY": "УДАЛИТЬ",
   "SAVE_UNIT": "СОХРАНИТЬ",
   "ADD_UNIT": "Новая ед. измерения",
-  "REMOVE_UNIT": "УДАЛИТЬ"
+  "REMOVE_UNIT": "УДАЛИТЬ",
+  "SAVE_ANALYSIS_CARD": "СОХРАНИТЬ",
+  "SIGN_ANALYSIS_CARD": "ПОДПИСАТЬ"
 
 };

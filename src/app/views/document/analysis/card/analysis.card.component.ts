@@ -31,6 +31,9 @@ export class AnalysisCardComponent {
       if (action == 'SAVE_ANALYSIS_CARD') {
         this.save();
       }
+      if (action == 'SIGN_ANALYSIS_CARD') {
+        this.dialogService.showSignDialog(this.id, 'ANALYSIS_CARDS');
+      }
     });
   }
 
@@ -40,6 +43,10 @@ export class AnalysisCardComponent {
 
   isMixCard() {
     return this.data? this.data.analysisCardType.code == 'MIX_ANALYSIS_CARD' : false;
+  }
+
+  isGrainCard() {
+    return this.data? this.data.analysisCardType.code == 'GRAIN_ANALYSIS_CARD' : false;
   }
 
   onDataChange(event) {

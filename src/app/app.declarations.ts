@@ -105,6 +105,7 @@ import { UnitEditComponent } from './views/taxonomy/unit/unit.edit.component';
 import { AnalysisTypeDialog } from './views/document/analysis/type.dialog/analysis.type.dialog';
 import { AnalysisCardComponent } from './views/document/analysis/card/analysis.card.component';
 import { MixCardComponent } from './views/document/analysis/mix/mix.card.component';
+import { GrainCardComponent } from './views/document/analysis/grain/grain.card.component';
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -216,5 +217,6 @@ export const APP_DECLARATIONS = [
   UnitListComponent,
   AnalysisTypeDialog,
   AnalysisCardComponent,
-  MixCardComponent
+  MixCardComponent,
+  GrainCardComponent
 ];
