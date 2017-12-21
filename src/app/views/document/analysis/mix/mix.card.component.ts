@@ -18,12 +18,12 @@ export class MixCardComponent {
   color: string = '';
   smell: string = '';
   moisture: number = null;
-  passSieves: string = '';
+  passSieves: number = null;
   passSievesNumber: number = null;
-  passSievesAdditional: number = null;
-  remainderOnSieve: string = '';
+  passSievesAdditional: string = '';
+  remainderOnSieve: number = null;
   remainderOnSieveNumber: number = null;
-  remainderOnSieveAdditional: number = null;
+  remainderOnSieveAdditional: string = '';
   protein: number = null;
   wetFiber: number = null;
   rawFat: number = null;
@@ -37,6 +37,7 @@ export class MixCardComponent {
   insectInfestation: number = null;
   insectInfestationText: string = '';
   metabolizedEnergyContent100: number = null;
+  recipe: string = '';
   constructor(private route: ActivatedRoute, private router: Router, private dialogService: DialogService,
     private documentService: DocumentService, private dataService: DataService) {
 
@@ -64,16 +65,17 @@ export class MixCardComponent {
     } else {
       this.date = new Date();
     }
+    this.recipe = this.data.recipe;
     this.outwardAppearance = this.getStringValueByCode('OutwardAppearance');
     this.color = this.getStringValueByCode('Colour');
     this.smell = this.getStringValueByCode('Smell');
     this.moisture = this.getDoubleValueByCode('Moisture');
-    this.passSieves = this.getStringValueByCode('PassSieves');
-    this.passSievesNumber = this.getDoubleValueByCode('PassSieves');
-    this.passSievesAdditional = this.getAdditionalDoubleValueByCode('PassSieves', 'NUMBER');
-    this.remainderOnSieve = this.getStringValueByCode('RemainderOnSieve');
-    this.remainderOnSieveNumber = this.getDoubleValueByCode('RemainderOnSieve');
-    this.remainderOnSieveAdditional = this.getAdditionalDoubleValueByCode('RemainderOnSieve', 'NUMBER');
+    this.passSieves = this.getDoubleValueByCode('PassSieves');
+    this.passSievesNumber = this.getAdditionalDoubleValueByCode('PassSieves', 'NUMBER');
+    this.passSievesAdditional = this.getAdditionalStringValueByCode('PassSieves', 'TEXT');
+    this.remainderOnSieve = this.getDoubleValueByCode('RemainderOnSieve');
+    this.remainderOnSieveNumber = this.getAdditionalDoubleValueByCode('RemainderOnSieve', 'NUMBER');
+    this.remainderOnSieveAdditional = this.getAdditionalStringValueByCode('RemainderOnSieve', 'TEXT');
     this.protein = this.getDoubleValueByCode('Protein');
     this.wetFiber = this.getDoubleValueByCode('WetFiber');
     this.rawFat = this.getDoubleValueByCode('RawFat');
@@ -87,6 +89,12 @@ export class MixCardComponent {
     this.insectInfestation = this.getDoubleValueByCode('InsectInfestation');
     this.insectInfestationText = this.getAdditionalStringValueByCode('InsectInfestation', 'TEXT');
     this.metabolizedEnergyContent100 = this.getDoubleValueByCode('MetabolizedEnergyContent100');
+  }
+
+  onRecipeChange(event) {
+    this.recipe = event.target.value;
+    this.data.recipe = this.recipe;
+    this.dataChange.emit({data: this.data});
   }
 
   onNumberChange(event) {
@@ -123,32 +131,32 @@ export class MixCardComponent {
 
   onPassSievesChange(event) {
     this.passSieves = event.target.value;
-    this.setStringValueByCode('PassSieves', this.passSieves);
+    this.setDoubleValueByCode('PassSieves', this.passSieves);
   }
 
   onPassSievesNumberChange(event) {
     this.passSievesNumber = event.target.value;
-    this.setDoubleValueByCode('PassSieves', this.passSievesNumber);
+    this.setAdditionalDoubleValueByCode('PassSieves','NUMBER', this.passSievesNumber);
   }
 
   onPassSievesAdditionalChange(event) {
     this.passSievesAdditional = event.target.value;
-    this.setAdditionalDoubleValueByCode('PassSieves','NUMBER', this.passSievesAdditional);
+    this.setAdditionalStringValueByCode('PassSieves','TEXT', this.passSievesAdditional);
   }
 
   onRemainderOnSieveChange(event) {
     this.remainderOnSieve= event.target.value;
-    this.setStringValueByCode('RemainderOnSieve', this.remainderOnSieve);
+    this.setDoubleValueByCode('RemainderOnSieve', this.remainderOnSieve);
   }
 
   onRemainderOnSieveNumberChange(event) {
     this.remainderOnSieveNumber = event.target.value;
-    this.setDoubleValueByCode('RemainderOnSieve', this.remainderOnSieveNumber);
+    this.setAdditionalDoubleValueByCode('RemainderOnSieve', 'NUMBER', this.remainderOnSieveNumber);
   }
 
   onRemainderOnSieveAdditionalChange(event) {
     this.remainderOnSieveAdditional = event.target.value;
-    this.setAdditionalDoubleValueByCode('RemainderOnSieve','NUMBER', this.remainderOnSieveAdditional);
+    this.setAdditionalStringValueByCode('RemainderOnSieve','TEXT', this.remainderOnSieveAdditional);
   }
 
 

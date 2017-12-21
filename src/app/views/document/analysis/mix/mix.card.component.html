@@ -18,7 +18,7 @@
             <mat-datepicker #myDatepicker></mat-datepicker>
           </mat-form-field>
         </div>
-      
+
     <div class="group__content-first-column">
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
@@ -39,7 +39,7 @@
           <mat-form-field class="group__field" floatPlaceholder="always">
             <mat-error>Обязательное поле</mat-error>
             <mat-placeholder class="group__placeholder">Рецепт</mat-placeholder>
-            <input matInput />
+            <input matInput [ngModel]="recipe" (keyup)="onRecipeChange($event)"/>
           </mat-form-field>
       </div>
 
@@ -82,7 +82,7 @@
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('PassSieves')}}</mat-placeholder>
-          <input matInput [ngModel]="passSieves" (keyup)="onPassSievesChange($event)"/>
+          <input matInput [ngModel]="passSievesAdditional" (keyup)="onPassSievesAdditionalChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
@@ -90,7 +90,7 @@
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder"></mat-placeholder>
           <span matSuffix>{{getPropertyUnitByCode('PassSieves')}}</span>
-          <input matInput [ngModel]="passSievesNumber" (keyup)="onPassSievesNumberChange($event)"/>
+          <input matInput [ngModel]="passSieves" (keyup)="onPassSievesChange($event)"/>
         </mat-form-field>
       </div>
       </div>
@@ -98,7 +98,7 @@
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('PassSieves', 'NUMBER')}}</mat-placeholder>
-          <input matInput [ngModel]="passSievesAdditional" (keyup)="onPassSievesAdditionalChange($event)"/>
+          <input matInput [ngModel]="passSievesNumber" (keyup)="onPassSievesNumberChange($event)"/>
         </mat-form-field>
       </div>
     </div>
@@ -109,7 +109,7 @@
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('RemainderOnSieve')}}</mat-placeholder>
-          <input matInput [ngModel]="remainderOnSieve" (keyup)="onRemainderOnSieveChange($event)"/>
+          <input matInput [ngModel]="remainderOnSieveAdditional" (keyup)="onRemainderOnSieveAdditionalChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
@@ -117,7 +117,7 @@
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder"></mat-placeholder>
           <span matSuffix>{{getPropertyUnitByCode('RemainderOnSieve')}}</span>
-          <input matInput [ngModel]="remainderOnSieveNumber" (keyup)="onRemainderOnSieveNumberChange($event)"/>
+          <input matInput [ngModel]="remainderOnSieve" (keyup)="onRemainderOnSieveChange($event)"/>
         </mat-form-field>
       </div>
       </div>
@@ -125,7 +125,7 @@
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('RemainderOnSieve', 'NUMBER')}}</mat-placeholder>
-          <input matInput [ngModel]="remainderOnSieveAdditional" (keyup)="onRemainderOnSieveAdditionalChange($event)"/>
+          <input matInput [ngModel]="remainderOnSieveNumber" (keyup)="onRemainderOnSieveNumberChange($event)"/>
         </mat-form-field>
       </div>
     </div>

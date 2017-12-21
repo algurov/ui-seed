@@ -204,8 +204,12 @@ export class DocumentService extends RequestBase {
     return this.http.get(`${SEED_BASE_URL}/seed/analysisCard/`+id, this.options).map(res => res.json());
   }
 
+  getAnalysisCardList(): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/analysisCard`, this.options).map(res => res.json());
+  }
+
   getAnalysisCardListByApplicationId(id): Observable<any> {
-    return this.http.get(`${SEED_BASE_URL}/seed/analysisCard?assignment.application.id=` + id, this.options).map(res => res.json());
+    return this.http.get(`${SEED_BASE_URL}/seed/analysisCard?application.id=` + id, this.options).map(res => res.json());
   }
 
   deleteAnalysisCard(analysisCard): Observable<any> {

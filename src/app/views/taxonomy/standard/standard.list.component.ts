@@ -42,14 +42,13 @@ export class StandardListComponent {
       });
    }
    ngAfterViewInit() {
-     this.ngzone.runOutsideAngular( () => {
+
       Observable.fromEvent(this.filter.nativeElement, 'keyup')
         .debounceTime(1000)
         .subscribe((evt:any) => {
          this.addNameFilter(evt.target.value);
-          this.cdref.detectChanges();
         });
-      });
+
    }
 
    processData(list) {

@@ -63,14 +63,15 @@
         {{assignment.number}}
       </div>
 
-      <div style="float:right;">
-        <mat-icon matTooltip="Добавить карточку анализа" matTooltipPosition="above" (click)="addAnalysisCard(assignment)">assignment</mat-icon>
-      </div>
+
       <div style="float:right;">
         <mat-icon matTooltip="Удалить" matTooltipPosition="above"  (click)="removeAssignment(assignment)">delete</mat-icon>
       </div>
       <div style="float:right;">
         <mat-icon  matTooltip="Редактировать" matTooltipPosition="above" (click)="openAssignment(assignment.id)">edit</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon matTooltip="Добавить карточку анализа" matTooltipPosition="above" (click)="addAnalysisCard(assignment)">assignment</mat-icon>
       </div>
       <div *ngIf="assignmentSign[assignment.id] && assignmentSign[assignment.id].length > 0">
         <div>Подписан:</div>
@@ -126,7 +127,7 @@
   <ng-container *ngFor="let analysisCard of analysisCardList">
     <div style=" cursor: pointer; padding: 20px 20px; border-bottom: 1px solid #aaa;">
       <div style="float:left; width:90%;" (click)="openAnalysisCard(analysisCard.id)">
-        {{analysisCard.id}}
+        {{analysisCard.docNumber}}
       </div>
 
       <div style="float:right;">
