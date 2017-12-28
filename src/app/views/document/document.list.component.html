@@ -1,6 +1,5 @@
 <div class="document">
   <div class="document__table">
-    <button (click)="ref()">Refresh</button>
     <table style="width: 100%;" [dataSource]="dataSource" (pageChange)="onPaginatorEvent($event)" [displayedColumns]="displayedColumns" [remove]="removeApplication" [view]="viewApplication" [edit]="editApplication">
     </table>
   </div>
