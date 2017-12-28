@@ -89,10 +89,12 @@ export class ApplicationComponent {
   removeUuid(applicationResearch) {
     delete applicationResearch.uuid;
     if (applicationResearch.goodsCategoryProperty) {
+    //  applicationResearch.goodsCategoryProperty = {id: applicationResearch.goodsCategoryProperty.id, version: applicationResearch.goodsCategoryProperty.version};
       delete applicationResearch.goodsCategoryProperty.uuid;
     }
     if (applicationResearch.property) {
       delete applicationResearch.property.uuid;
+      //applicationResearch.property = {id: applicationResearch.property.id, version: applicationResearch.property.version};
     }
     if (applicationResearch.children.length > 0) {
       applicationResearch.children.forEach(item => {
@@ -114,7 +116,6 @@ export class ApplicationComponent {
         item.applicationResearches.forEach(it => {
           this.removeUuid(it);
         });
-
       });
     }
   }
@@ -175,6 +176,10 @@ export class ApplicationComponent {
       this.clearData();
       this.dialogService.showBlocker();
       if(!this.data.id) {
+        // this.data.applicationStandardResearches.forEach(item => {
+        //   item.standard = {id: item.standard.id, version: item.standard.version};
+        // });
+        // console.log(this.data);
         this.documentService.createApplication(this.data).subscribe(res => {
           this.dialogService.hideBlocker();
           this.router.navigate(['main/document']);

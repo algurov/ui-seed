@@ -1,2 +1,4 @@
 <mix-card *ngIf="isMixCard()" [data]="data" (dataChange)="onDataChange($event)"></mix-card>
 <grain-card *ngIf="isGrainCard()" [data]="data" (dataChange)="onDataChange($event)"></grain-card>
+<flour-card *ngIf="isFlourCard()" [data]="data" (dataChange)="onDataChange($event)"></flour-card>
+<cereals-card *ngIf="isCerealsCard()" [data]="data" (dataChange)="onDataChange($event)"></cereals-card>

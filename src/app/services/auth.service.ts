@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { RequestBase } from './request.base';
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular2-oauth2/oauth-service';
-import { API_BASE_URL, AUTH_SERVER_URL, AUTH_CONSUMER_URL, AUTH_SERVER_BASE_URL, SEED_BASE_URL} from './constants';
+import { API_BASE_URL, AUTH_SERVER_URL, AUTH_CONSUMER_URL, AUTH_SERVER_BASE_URL, SEED_BASE_URL, AUTH_CONSUMER_BASE_URL} from './constants';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Injectable()
@@ -40,6 +40,18 @@ export class AuthService extends RequestBase {
     let at = Cookie.get('at');
     Cookie.deleteAll();
      return this.http.post(AUTH_SERVER_BASE_URL +'/auth-server/oauth/token/revokeById/' + at, {}, options);
+  }
+
+  refresh() {
+    let headers = new Headers();
+    headers.append('Cookie', 'reft=' + Cookie.get('reft'));
+    let options = new RequestOptions({
+      headers: headers,
+      withCredentials: true
+    });
+
+     return this.http.post(AUTH_CONSUMER_BASE_URL +'/oauth2-consumer/refresh?client_id=client_seed', {}, options);
+
   }
 
   me(at) {

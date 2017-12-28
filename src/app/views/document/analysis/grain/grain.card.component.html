@@ -18,11 +18,12 @@
             <mat-datepicker #myDatepicker></mat-datepicker>
           </mat-form-field>
         </div>
-
+        <div style="clear: both;"></div>
+    <div class="sub-group sub-group__back">
     <div class="group__content-first-column">
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
-          <mat-placeholder class="group__placeholder">Наименование</mat-placeholder>
+          <mat-placeholder class="group__placeholder">Род зерна</mat-placeholder>
           <input readonly="true" matInput [(ngModel)]="data.goods.fullNameRu"/>
         </mat-form-field>
     </div>
@@ -35,11 +36,11 @@
         </mat-form-field>
       </div>
 
-      <div *ngIf="false" class="group__content-first-column">
-          <seed-select-field placeholder="Тип"></seed-select-field>
+      <div class="group__content-first-column">
+          <seed-select-field placeholder="Тип" code="goodsCategory" [standards]="data.standards" type="2" [data]="typeGoodsCategory" (change)="onTypeGoodsCategoryChange($event)"></seed-select-field>
       </div>
 
-      <div class="group__content-first-column">
+      <div class="group__content-second-column">
           <mat-form-field class="group__field" floatPlaceholder="always">
             <mat-error>Обязательное поле</mat-error>
             <mat-placeholder class="group__placeholder">Подтип</mat-placeholder>
@@ -47,32 +48,37 @@
           </mat-form-field>
       </div>
 
-      <div *ngIf="false" class="group__content-first-column">
-          <seed-select-field placeholder="Класс"></seed-select-field>
+      <div class="group__content-first-column">
+          <seed-select-field placeholder="Класс" code="goodsCategory" [standards]="data.standards" type="1" [data]="classGoodsCategory" (change)="onClassGoodsCategoryChange($event)"></seed-select-field>
       </div>
+      <div style="clear: both;"></div>
+    </div>
 
+    <div class="sub-group">
       <div class="group__content-full-width">
         <div class="group__content-first-column">
           <mat-form-field class="group__field" floatPlaceholder="always">
             <mat-error>Обязательное поле</mat-error>
             <span matSuffix>{{getPropertyUnitByCode('TestWeight')}}</span>
             <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('TestWeight')}}</mat-placeholder>
-            <input matInput readonly="true" [ngModel]="testWeight" (keyup)="onTestWeightChange($event)"/>
+            <input matInput type="number" readonly="true" [ngModel]="testWeight | number: getPropertyPrecisionByCode('TestWeight')" (change)="onTestWeightChange($event)"/>
           </mat-form-field>
         </div>
         <div class="group__content-second-column">
           <div class="group__content-first-column">
             <mat-form-field class="group__field" floatPlaceholder="always">
               <mat-error>Обязательное поле</mat-error>
+              <span matSuffix>{{getPropertyUnitByCode('TestWeight')}}</span>
               <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('TestWeight', 'FIRST_DEFINITION')}}</mat-placeholder>
-              <input matInput [ngModel]="testWeightFirst" (keyup)="onTestWeightFirstChange($event)"/>
+              <input matInput type="number" [ngModel]="testWeightFirst | number: getPropertyPrecisionByCode('TestWeight')" (change)="onTestWeightFirstChange($event)"/>
             </mat-form-field>
           </div>
           <div class="group__content-second-column">
             <mat-form-field class="group__field" floatPlaceholder="always">
               <mat-error>Обязательное поле</mat-error>
+              <span matSuffix>{{getPropertyUnitByCode('TestWeight')}}</span>
               <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('TestWeight', 'SECOND_DEFINITION')}}</mat-placeholder>
-              <input matInput [ngModel]="testWeightSecond" (keyup)="onTestWeightSecondChange($event)"/>
+              <input matInput type="number" [ngModel]="testWeightSecond | number: getPropertyPrecisionByCode('TestWeight')" (change)="onTestWeightSecondChange($event)"/>
             </mat-form-field>
           </div>
         </div>
@@ -85,22 +91,24 @@
             <mat-error>Обязательное поле</mat-error>
             <span matSuffix>{{getPropertyUnitByCode('FallingNumber')}}</span>
             <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('FallingNumber')}}</mat-placeholder>
-            <input matInput readonly="true" [ngModel]="fallingNumber" (keyup)="onFallingNumberChange($event)"/>
+            <input matInput readonly="true" [ngModel]="fallingNumber | number: getPropertyPrecisionByCode('FallingNumber')" (change)="onFallingNumberChange($event)"/>
           </mat-form-field>
         </div>
         <div class="group__content-second-column">
           <div class="group__content-first-column">
             <mat-form-field class="group__field" floatPlaceholder="always">
               <mat-error>Обязательное поле</mat-error>
+              <span matSuffix>{{getPropertyUnitByCode('FallingNumber')}}</span>
               <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('FallingNumber', 'FIRST_DEFINITION')}}</mat-placeholder>
-              <input matInput [ngModel]="fallingNumberFirst" (keyup)="onFallingNumberFirstChange($event)"/>
+              <input matInput type="number" [ngModel]="fallingNumberFirst | number: getPropertyPrecisionByCode('FallingNumber')" (change)="onFallingNumberFirstChange($event)"/>
             </mat-form-field>
           </div>
           <div class="group__content-second-column">
             <mat-form-field class="group__field" floatPlaceholder="always">
               <mat-error>Обязательное поле</mat-error>
+              <span matSuffix>{{getPropertyUnitByCode('FallingNumber')}}</span>
               <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('FallingNumber', 'SECOND_DEFINITION')}}</mat-placeholder>
-              <input matInput [ngModel]="fallingNumberSecond" (keyup)="onFallingNumberSecondChange($event)"/>
+              <input matInput type="number" [ngModel]="fallingNumberSecond | number: getPropertyPrecisionByCode('FallingNumber')" (change)="onFallingNumberSecondChange($event)"/>
             </mat-form-field>
           </div>
         </div>
@@ -127,7 +135,7 @@
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('Moisture')}}</mat-placeholder>
-          <input matInput [ngModel]="moisture" (keyup)="onMoistureChange($event)"/>
+          <input matInput type="number" [ngModel]="moisture | number: getPropertyPrecisionByCode('Moisture')" (change)="onMoistureChange($event)"/>
           <span matSuffix>{{getPropertyUnitByCode('Moisture')}}</span>
         </mat-form-field>
     </div>
@@ -136,11 +144,30 @@
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">Масса навески</mat-placeholder>
-          <input matInput [ngModel]="portionWeight" (keyup)="onPortionWeightChange($event)"/>
+          <input matInput type="number" [ngModel]="portionWeight | number:'1.2-2'" (change)="onPortionWeightChange($event)"/>
           <span matSuffix>г</span>
         </mat-form-field>
     </div>
+    <div style="clear: both;"></div>
+  </div>
 
+  <div class="group__content-full-width" *ngIf="agrestalAdmixture">
+    <analysis-property-tree [portion]="portionWeight" [data]="agrestalAdmixture" (dataChange)="onAgrestalAdmixtureChange($event)"></analysis-property-tree>
+  </div>
+
+  <div class="group__content-full-width" *ngIf="grainAdmixture">
+    <analysis-property-tree [portion]="portionWeight" [data]="grainAdmixture" (dataChange)="onGrainAdmixtureChange($event)"></analysis-property-tree>
+  </div>
+
+  <div class="group__content-full-width" *ngIf="cultivatedGrain">
+    <analysis-property-tree [portion]="portionWeight" [data]="cultivatedGrain" (dataChange)="onCultivatedGrainChange($event)"></analysis-property-tree>
+  </div>
+
+  <div class="group__content-full-width" *ngIf="insectInfestation">
+    <analysis-property-tree [isInsect]="true" [portion]="portionWeight" [data]="insectInfestation" (dataChange)="onInsectInfestationChange($event)"></analysis-property-tree>
+  </div>
+  <div style="clear:both;"></div>
+  <div class="sub-group sub-group__back">
     <div class="group__content-full-width">
       <div class="group__content-first-column">
         <div class="group__content-first-column">
@@ -153,9 +180,9 @@
       <div class="group__content-second-column">
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
-          <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('PassSieves', 'NUMBER')}}</mat-placeholder>
-          <span matSuffix></span>
-          <input matInput [ngModel]="passSievesNumber" (keyup)="onPassSievesNumberChange($event)"/>
+          <mat-placeholder class="group__placeholder"></mat-placeholder>
+          <span matSuffix>г</span>
+          <input matInput type="number" [ngModel]="passSievesNumber | number: getPropertyPrecisionByCode('PassSieves')" (change)="onPassSievesNumberChange($event)"/>
         </mat-form-field>
       </div>
       </div>
@@ -180,7 +207,7 @@
           <mat-error>Обязательное поле</mat-error>
           <span matSuffix>{{getPropertyUnitByCode('Vitreousness')}}</span>
           <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('Vitreousness')}}</mat-placeholder>
-          <input matInput [ngModel]="vitreousness" (keyup)="onVitreousnessChange($event)"/>
+          <input matInput readonly="true" type="number" [ngModel]="vitreousness | number: getPropertyPrecisionByCode('Vitreousness')" (change)="onVitreousnessChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
@@ -188,7 +215,7 @@
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('Vitreousness', 'VITREOUS')}}</mat-placeholder>
-          <input matInput [ngModel]="vitreousnessFirst" (keyup)="onVitreousnessFirstChange($event)"/>
+          <input matInput type="number" [ngModel]="vitreousnessFirst | number: getPropertyPrecisionByCode('Vitreousness')" (change)="onVitreousnessFirstChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
@@ -196,7 +223,7 @@
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('Vitreousness', 'POWDERY')}}</mat-placeholder>
           <span matSuffix></span>
-          <input matInput [ngModel]="vitreousnessSecond" (keyup)="onVitreousnessSecondChange($event)"/>
+          <input matInput type="number" [ngModel]="vitreousnessSecond | number: getPropertyPrecisionByCode('Vitreousness')" (change)="onVitreousnessSecondChange($event)"/>
         </mat-form-field>
       </div>
       </div>
@@ -205,16 +232,17 @@
     <div class="group__content-first-column">
       <mat-form-field class="group__field" floatPlaceholder="always">
         <mat-error>Обязательное поле</mat-error>
-        <span matSuffix>{{getPropertyUnitByCode('Giuten')}}</span>
+        <span matSuffix>г</span>
         <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('Giuten')}}</mat-placeholder>
-        <input matInput [ngModel]="giutenNumber" (keyup)="onGiutenNumberChange($event)"/>
+        <input matInput type="number" [ngModel]="giutenNumber | number: getPropertyPrecisionByCode('Giuten')" (change)="onGiutenNumberChange($event)"/>
       </mat-form-field>
     </div>
     <div class="group__content-second-column">
       <mat-form-field class="group__field" floatPlaceholder="always">
         <mat-error>Обязательное поле</mat-error>
+        <span matSuffix>{{getPropertyUnitByCode('Giuten')}}</span>
         <mat-placeholder class="group__placeholder"></mat-placeholder>
-        <input matInput readonly="true" [ngModel]="giuten" (keyup)="onGiutenChange($event)"/>
+        <input matInput readonly="true" [ngModel]="giuten| number: getPropertyPrecisionByCode('Giuten')" (change)="onGiutenChange($event)"/>
       </mat-form-field>
     </div>
 
@@ -239,23 +267,24 @@
           <mat-error>Обязательное поле</mat-error>
             <span matSuffix>{{getPropertyUnitByCode('Scarious')}}</span>
           <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('Scarious')}}</mat-placeholder>
-          <input matInput readonly="true" [ngModel]="scarious" (keyup)="onScariousChange($event)"/>
+          <input matInput readonly="true" [ngModel]="scarious| number: getPropertyPrecisionByCode('Scarious')" (change)="onScariousChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
         <div class="group__content-first-column">
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
+            <span matSuffix>г</span>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('Scarious', 'PORTION_WEIGHT')}}</mat-placeholder>
-          <input matInput [ngModel]="scariousFirst" (keyup)="onScariousFirstChange($event)"/>
+          <input matInput type="number" [ngModel]="scariousFirst | number: getPropertyPrecisionByCode('Scarious')" (change)="onScariousFirstChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('Scarious', 'SKIN_WEIGHT')}}</mat-placeholder>
-          <span matSuffix></span>
-          <input matInput [ngModel]="scariousSecond" (keyup)="onScariousSecondChange($event)"/>
+          <span matSuffix>г</span>
+          <input matInput type="number" [ngModel]="scariousSecond| number:getPropertyPrecisionByCode('Scarious')" (change)="onScariousSecondChange($event)"/>
         </mat-form-field>
       </div>
       </div>
@@ -266,7 +295,7 @@
         <mat-error>Обязательное поле</mat-error>
         <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('ContentOfKernel')}}</mat-placeholder>
         <span matSuffix>{{getPropertyUnitByCode('ContentOfKernel')}}</span>
-        <input matInput [ngModel]="contentOfKernel" (keyup)="onContentOfKernelChange($event)"/>
+        <input matInput type="number" [ngModel]="contentOfKernel| number: getPropertyPrecisionByCode('ContentOfKernel')" (change)="onContentOfKernelChange($event)"/>
       </mat-form-field>
     </div>
 
@@ -276,7 +305,7 @@
           <mat-error>Обязательное поле</mat-error>
             <span matSuffix>{{getPropertyUnitByCode('CornBug')}}</span>
           <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('CornBug')}}</mat-placeholder>
-          <input matInput readonly="true" [ngModel]="cornBug" (keyup)="onCornBugChange($event)"/>
+          <input matInput readonly="true" [ngModel]="cornBug| number:getPropertyPrecisionByCode('CornBug')" (change)="onCornBugChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
@@ -284,7 +313,7 @@
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('CornBug', 'FIRST_DEFINITION')}}</mat-placeholder>
-          <input matInput [ngModel]="cornBugFirst" (keyup)="onCornBugFirstChange($event)"/>
+          <input matInput type="number" [ngModel]="cornBugFirst| number: getPropertyPrecisionByCode('CornBug')" (change)="onCornBugFirstChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
@@ -292,7 +321,7 @@
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('CornBug', 'SECOND_DEFINITION')}}</mat-placeholder>
           <span matSuffix></span>
-          <input matInput [ngModel]="cornBugSecond" (keyup)="onCornBugSecondChange($event)"/>
+          <input matInput type="number" [ngModel]="cornBugSecond| number: getPropertyPrecisionByCode('CornBug')" (change)="onCornBugSecondChange($event)"/>
         </mat-form-field>
       </div>
       </div>
@@ -304,7 +333,7 @@
           <mat-error>Обязательное поле</mat-error>
             <span matSuffix>{{getPropertyUnitByCode('SeedGrainWithWeevilCaterpillar')}}</span>
           <mat-placeholder class="group__placeholder">{{getPropertyTitleByCode('SeedGrainWithWeevilCaterpillar')}}</mat-placeholder>
-          <input matInput readonly="true" [ngModel]="seedGrainWithWeevilCaterpillar" (keyup)="onSeedGrainWithWeevilCaterpillarChange($event)"/>
+          <input matInput readonly="true" [ngModel]="seedGrainWithWeevilCaterpillar| number:getPropertyPrecisionByCode('SeedGrainWithWeevilCaterpillar')" (change)="onSeedGrainWithWeevilCaterpillarChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
@@ -312,7 +341,7 @@
         <mat-form-field class="group__field" floatPlaceholder="always">
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('SeedGrainWithWeevilCaterpillar', 'PORTION_WEIGHT')}}</mat-placeholder>
-          <input matInput [ngModel]="seedGrainWithWeevilCaterpillarFirst" (keyup)="onSeedGrainWithWeevilCaterpillarFirstChange($event)"/>
+          <input matInput type="number" [ngModel]="seedGrainWithWeevilCaterpillarFirst| number: getPropertyPrecisionByCode('SeedGrainWithWeevilCaterpillar')" (change)="onSeedGrainWithWeevilCaterpillarFirstChange($event)"/>
         </mat-form-field>
       </div>
       <div class="group__content-second-column">
@@ -320,11 +349,14 @@
           <mat-error>Обязательное поле</mat-error>
           <mat-placeholder class="group__placeholder">{{getAdditionalPropertyTitleByCode('SeedGrainWithWeevilCaterpillar', 'WEIGHT_DAMAGED_SEEDS')}}</mat-placeholder>
           <span matSuffix></span>
-          <input matInput [ngModel]="seedGrainWithWeevilCaterpillarSecond" (keyup)="onSeedGrainWithWeevilCaterpillarSecondChange($event)"/>
+          <input matInput type="number" [ngModel]="seedGrainWithWeevilCaterpillarSecond | number: getPropertyPrecisionByCode('SeedGrainWithWeevilCaterpillar')" (change)="onSeedGrainWithWeevilCaterpillarSecondChange($event)"/>
         </mat-form-field>
       </div>
       </div>
     </div>
+    <div style="clear:both;"></div>
+  </div>
+
 
 
 </div>

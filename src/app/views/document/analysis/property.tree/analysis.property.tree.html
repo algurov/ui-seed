@@ -1,0 +1,14 @@
+<div style="padding: 20px 0;">
+  <button style="float:right;" mat-mini-fab color="primary" (click)="selectProperty()">
+    <mat-icon aria-label="Добавить параметр">add</mat-icon>
+  </button>
+<div click-outside (clickOutside)="onClickOutside($event)" #wrap class="wrapper-tree-analysis">
+  <tree-root [options]="options" [nodes]="nodes">
+    <ng-template #treeNodeTemplate let-node let-index="index">
+      <analysis-property-node *ngIf="!isKernel" [isInsect]="isInsect" [tree]="tree" [portion]="portion" [config]="node" (onRemove)="onNodeRemove($event)" (dataChange)="onNodeDataChange($event)"></analysis-property-node>
+      <kernel-node *ngIf="isKernel" [tree]="tree" [portion]="portion" [config]="node" (onRemove)="onNodeRemove($event)" (dataChange)="onNodeDataChange($event)"></kernel-node>
+    </ng-template>
+  </tree-root>
+</div>
+
+</div>

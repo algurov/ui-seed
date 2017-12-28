@@ -278,6 +278,14 @@ ul, ol {
 .wrapper-tree-custom .node-content-wrapper {
   width: 100%;
 }
+
+.wrapper-tree-analysis tree-node-expander {
+  padding-top: 20px;
+}
+.wrapper-tree-analysis .node-content-wrapper {
+  width: 90%;
+}
+
 .cbox .mat-checkbox-inner-container {
   height: 15px;
   width: 15px;

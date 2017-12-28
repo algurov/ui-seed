@@ -1,0 +1,17 @@
+<h2 matDialogTitle>{{stringService.get('SELECT_PROPERTY_DIALOG_TITLE')}}</h2>
+<mat-dialog-content style="min-width: 600px; height: 600px;">
+  <mat-tab-group>
+    <mat-tab label="Все параметры">
+      <mat-form-field>
+        <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
+        <input matInput #nameFilter2 placeholder="{{stringService.get('FILTER_NAME')}}" (keyup.enter)="addNameFilterAll(nameFilter2.value)" />
+      </mat-form-field>
+      <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+      <div *ngIf="loaded">
+        <div class="list-item" *ngFor="let item of allList" (click)="selectProperty(item)">
+          {{item.nameRu}}
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-dialog-content>

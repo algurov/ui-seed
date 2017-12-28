@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '../../../../services/dialog.service';
 import { DocumentService } from '../../../../services/document.service';
 import { MainService } from '../../../../services/main.service';
+import { CerealsCardComponent } from '../cereals/cereals.card.component';
 
 @Component({
   selector: 'analysis-card',
@@ -12,6 +13,7 @@ import { MainService } from '../../../../services/main.service';
 export class AnalysisCardComponent {
   id: number;
   data: any;
+  @ViewChild(CerealsCardComponent) cereals : CerealsCardComponent;
   constructor(private route: ActivatedRoute, private router: Router, private dialogService: DialogService,
     private documentService: DocumentService, private mainService: MainService) {
     this.dialogService.showBlocker();
@@ -49,14 +51,46 @@ export class AnalysisCardComponent {
     return this.data? this.data.analysisCardType.code == 'GRAIN_ANALYSIS_CARD' : false;
   }
 
+  isFlourCard() {
+    return this.data? this.data.analysisCardType.code == 'FLOUR_ANALYSIS_CARD' : false;
+  }
+
+  isCerealsCard() {
+    return this.data? this.data.analysisCardType.code == 'CEREALS_ANALYSIS_CARD' : false;
+  }
+
+
   onDataChange(event) {
-    console.log('data changed!');
     this.data = event.data;
   }
 
+  removeUuid(item) {
+    delete item.uuid;
+    if (item.children) {
+      item.children.forEach(it => this.removeUuid(it));
+    }
+  }
+
+  removeChildren(item) {
+    if (item.children) {
+      item.children.forEach(it => this.removeChildren(it));
+    }
+    delete item.children;
+  }
+
+  clearData() {
+      this.data.analysisCardPropertyValues.forEach(item => this.removeUuid(item));
+      this.data.goodsCategories.forEach(item => this.removeChildren(item));
+  }
+
   save() {
+    this.clearData();
     console.log('SAVE');
     console.log(this.data);
+    console.log(JSON.stringify(this.data));
+    if (this.isCerealsCard()) {
+      this.cereals.prepareToSave();
+    }
     this.documentService.updateAnalysisCard(this.data).subscribe(res => {
       this.dialogService.showNotification('saved');
     });

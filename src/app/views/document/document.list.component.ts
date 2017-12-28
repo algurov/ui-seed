@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DialogService } from '../../services/dialog.service';
 import { StringService } from '../../services/string.service';
-
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'document-list',
@@ -22,7 +22,7 @@ export class DocumentListComponent {
   applicationList : Array<any> = new Array<any>();
 
   constructor(public mainService: MainService, public router: Router, private documentService: DocumentService,
-    private dlgService: DialogService) {
+    private dlgService: DialogService, private authService: AuthService) {
     this.subscription.push(this.mainService.menuActionPerformed.subscribe(item => {
       if (item == 'ADD_APPLICATION') {
         this.newOrder();
@@ -49,6 +49,7 @@ export class DocumentListComponent {
   viewApplication(application) {
       this.router.navigate(['main/document/application/' + application.id +'/view']);
   }
+
 
   removeApplication(application) {
     this.dlgService.showConfirm('Удаление заявки', 'Подтвердите удаление заявки').subscribe(res => {
@@ -83,6 +84,12 @@ export class DocumentListComponent {
     this.router.navigate(['main/document/application/' + id]);
   }
 
+  ref() {
+    this.authService.refresh().subscribe(res => {
+      console.log(res);
+      alert(res);
+    });
+  }
 }
 
 export class DocumentDataBase {

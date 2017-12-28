@@ -1,14 +1,18 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { TaxonomyService } from './taxonomy.service';
+import { DocumentService } from './document.service';
 import { menuActions } from '../views/panel/menu.actions';
 
 
 
 @Injectable()
 export class DataService {
-  constructor(private taxonomyService: TaxonomyService) {
+  constructor(private taxonomyService: TaxonomyService, private documentService: DocumentService) {
     this.taxonomyService.loadTaxonomyData('PropertyType').subscribe(res => {
       this.propertyType = res.content;
+    });
+    this.documentService.getInfectionCoefficient().subscribe(res => {
+      this.infectionCoefficient = res;
     });
   }
   partnerTypes = [{title: 'Юридическое лицо', value: 'ORGANIZATION'}, {title: 'Физическое лицо', value: 'PERSON'}];
@@ -18,6 +22,7 @@ export class DataService {
     'PARTNER_DOC_TYPE': this.partnerDocumentTypes
   };
   propertyType: Array<any>;
+  infectionCoefficient: Array<any>;
 
   ngOnInit() {
 

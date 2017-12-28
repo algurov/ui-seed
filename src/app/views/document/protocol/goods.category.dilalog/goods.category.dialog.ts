@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { StringService } from '../../../../services/string.service';
 import { DocumentService } from '../../../../services/document.service';
 import { ITreeOptions, TreeComponent } from 'angular2-tree-component';
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'goods-category-dlg',
   templateUrl: './goods.category.dialog.html',
@@ -104,7 +105,7 @@ export class GoodsCategoryDialog {
           this.listToView = this.list;
           console.log(this.listToView);
           this.loaded = true;
-  });
+        });
 }
 
   onNodeStateChange(event) {

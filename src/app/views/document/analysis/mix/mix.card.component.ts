@@ -315,6 +315,19 @@ export class MixCardComponent {
     }
   }
 
+  getPropertyPrecisionByCode(code) {
+    let found = this.data.analysisCardPropertyValues.find(item => item.property.description == code);
+    if (found) {
+      if (found.property.precision) {
+        return '1.' + found.property.precision + '-' + found.property.precision;
+
+      }
+      if (found.property.units[0].precision) {
+        return '1.' + found.property.units[0].precision + '-' + found.property.units[0].precision;
+      }
+    }
+  }
+
   getAdditionalPropertyTitleByCode(code, additional) {
     let found = this.data.analysisCardPropertyValues.find(item => item.property.description == code);
     if (found) {

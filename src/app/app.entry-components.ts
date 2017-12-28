@@ -19,7 +19,7 @@ import { SelectGoodsCategoryDialog } from './widgets/seed.select.field/seed.sele
 import { PropertyTreeDialog } from './views/taxonomy/standard/property.tree/property.tree';
 import { CertificateTypeDialog } from './views/document/certificate/type.dialog/type.dialog';
 import { AnalysisTypeDialog } from './views/document/analysis/type.dialog/analysis.type.dialog';
-
+import { AnalysisPropertyTreeDialog } from './views/document/analysis/property.tree/analysis.property.tree';
 export const APP_ENTRY_COMPONENTS = [
   MessageDialogComponent,
   ConfirmDialog,
@@ -44,5 +44,6 @@ export const APP_ENTRY_COMPONENTS = [
   SelectGoodsCategoryDialog,
   PropertyTreeDialog,
   CertificateTypeDialog,
-  AnalysisTypeDialog
+  AnalysisTypeDialog,
+  AnalysisPropertyTreeDialog
 ];

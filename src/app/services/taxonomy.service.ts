@@ -105,6 +105,10 @@ export class TaxonomyService extends RequestBase {
     return this.http.get(`${SEED_BASE_URL}/seed/property/` + id, this.options).map(res => res.json());
   }
 
+  getPropertyByDescription(desc): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/property?description=` + desc, this.options).map(res => res.json());
+  }
+
   getPropertyList(): Observable<any> {
     return this.http.get(`${SEED_BASE_URL}/seed/property`, this.options).map(res => res.json());
   }

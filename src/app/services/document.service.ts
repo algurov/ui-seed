@@ -147,6 +147,10 @@ export class DocumentService extends RequestBase {
     return this.http.get(`${SEED_BASE_URL}/seed/goodsCategory/byAct/` + actId, this.options).map(res => res.json());
   }
 
+  getGoodsCategoryListByTypeAndStandard(type, standard): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/goodsCategory?goodsCategoryType.id=` + type + '&standard.id=' + standard.id, this.options).map(res => res.json());
+  }
+
   signDocument(signData): Observable<any> {
     return this.http.post(`${SEED_BASE_URL}/seed/sign`, signData, this.options).map(res => res.json());
   }
@@ -218,5 +222,9 @@ export class DocumentService extends RequestBase {
 
   updateAnalysisCard(analysisCard): Observable<any> {
     return this.http.put(`${SEED_BASE_URL}/seed/analysisCard`, analysisCard, this.options).map(res=> res.json());
+  }
+
+  getInfectionCoefficient(): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/infectionCoefficient`, this.options).map(res => res.json());
   }
 }

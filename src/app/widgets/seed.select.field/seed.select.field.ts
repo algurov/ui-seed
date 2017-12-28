@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { SelectStandardDialog } from '../../views/document/application/standard/application.standard.component';
 import { TreeComponent } from 'angular2-tree-component';
 import { FormControl, Validators } from '@angular/forms';
+import { DocumentService } from '../../services/document.service';
 @Component({
   selector: 'seed-select-field',
   templateUrl: './seed.select.field.html',
@@ -19,6 +20,8 @@ export class SeedSelectField {
   selectControl = new FormControl('', [Validators.required]);
   @Input() selectDataRequest: Observable<any>;
   selectData: any;
+  @Input() standards: Array<any>;
+  @Input() type: any;
   @Input() placeholder;
   @Input() required: boolean = false;
   @Input() placeholderType: boolean = true;
@@ -117,7 +120,9 @@ export class SeedSelectField {
     if (this.code == 'goodsCategory') {
        dialogRef = this.dialog.open(SelectGoodsCategoryDialog, {
         data: {
-          code: this.code
+          code: this.code,
+          standards: this.standards,
+          type: this.type
         }
       });
     }
@@ -298,14 +303,19 @@ export class SelectGoodsCategoryDialog {
   dialog: MatDialogRef<SelectGoodsCategoryDialog>;
   list: Array<any>;
   selectedItem: any;
+  standards: Array<any>;
+  type: any;
   @ViewChild(TreeComponent) tree: TreeComponent;
   loaded = false;
   constructor(
+    private documentService: DocumentService,
     private stringService: StringService,
     private taxonomyService: TaxonomyService,
     public dialogRef: MatDialogRef<SelectGoodsCategoryDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     this.dialog = dialogRef;
+    this.standards = data.standards;
+    this.type = data.type;
    }
 
    processData(list) {
@@ -348,10 +358,34 @@ export class SelectGoodsCategoryDialog {
    }
 
    ngOnInit() {
+     if (this.standards && this.type) {
+       let requests = [];
+       this.standards.forEach(standard => {
+         requests.push(this.documentService.getGoodsCategoryListByTypeAndStandard(this.type, standard));
+       });
+       Observable.forkJoin(requests).subscribe(res => {
+         let resList = [];
+         res.forEach((result: any) => {
+           resList = resList.concat(result.content);
+         });
+         // resList.forEach(item => {
+         //   item.name = item.standardName;
+         //   item.goodsCategoryAttributes.forEach(sub => {
+         //     sub.name = sub.shortName;
+         //     sub.checked = false;
+         //   });
+         //   item.children = this.processData(item.goodsCategoryAttributes);
+         //   //item.children = item.goodsCategoryAttributes;
+         // });
+         this.list = this.processData(resList);
+         this.loaded = true;
+       });
+     } else {
      this.taxonomyService.getGoodsCategoryList().subscribe(res => {
        this.list = this.processData(res.content);
        this.loaded = true;
-     })
+     });
+    }
    }
 
   onNoClick(): void {

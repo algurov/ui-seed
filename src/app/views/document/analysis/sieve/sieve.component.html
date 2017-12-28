@@ -1,0 +1,20 @@
+<div class="field">
+  <mat-form-field class="short-field">
+    <mat-placeholder>{{getPropertyName()}}</mat-placeholder>
+    <input matInput [ngModel]="additionalText" (keyup)="onTextChange($event)"/>
+  </mat-form-field>
+
+    <div class="units">{{getPropertyUnit()}}</div>
+
+      <mat-form-field class="short-field-extra">
+        <input type="number" readonly="true" matInput placeholder="" [ngModel]="data.doubleValue|number:'1.2-2'" (change)="onValueChanged($event)"/>
+      </mat-form-field>
+      <mat-form-field class="short-field-extra">
+        <input type="number" matInput placeholder="Значение" [ngModel]="additionalFirst|number:'1.2-2'" (change)="onFirstValueChanged($event)"/>
+      </mat-form-field>
+      <mat-form-field class="short-field-extra">
+        <input type="number" matInput placeholder="Навеска" [ngModel]="additionalSecond|number:'1.2-2'" (change)="onSecondValueChanged($event)"/>
+      </mat-form-field>
+
+  <mat-icon class="close-icon" (click)="removeItem()">close</mat-icon>
+</div>

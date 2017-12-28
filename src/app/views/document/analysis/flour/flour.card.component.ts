@@ -5,11 +5,11 @@ import { DocumentService } from '../../../../services/document.service';
 import { DataService } from '../../../../services/data.service';
 import { AnalysisPropertyTree } from '../property.tree/analysis.property.tree';
 @Component({
-  selector: 'grain-card',
-  templateUrl: './grain.card.component.html',
-  styleUrls: ['./grain.card.component.scss']
+  selector: 'flour-card',
+  templateUrl: './flour.card.component.html',
+  styleUrls: ['./flour.card.component.scss']
 })
-export class GrainCardComponent {
+export class FlourCardComponent {
   @ViewChild(AnalysisPropertyTree) tree : AnalysisPropertyTree;
   @Input() data;
   @Output() dataChange: EventEmitter<any> = new EventEmitter<any>();
@@ -27,15 +27,26 @@ export class GrainCardComponent {
   color: string = '';
   smell: string = '';
   moisture: number = null;
+
   passSieves: number = null;
   passSievesNumber: number = null;
   passSievesAdditional: string = '';
-  passSievesBool: boolean = null;
+  passSievesPortion: number = null;
+
+  remainderOnSieve: number = null;
+  remainderOnSieveNumber: number = null;
+  remainderOnSieveAdditional: string = '';
+  remainderOnSievePortion: number = null;
+
+  metallicImpurity: number = null;
+  metallicImpuritySize: number = null;
+
   vitreousness: number = null;
   vitreousnessFirst: number = null;
   vitreousnessSecond: number = null;
   giuten: number = null;
   giutenNumber: number = null;
+  giutenPortion: number = null;
   giutenGroup: string = '';
   giutenIndex: string = '';
   scarious: number = null;
@@ -54,7 +65,13 @@ export class GrainCardComponent {
   grainAdmixture: any;
   typeGoodsCategory: any;
   classGoodsCategory: any;
-  insectInfestation: any;
+
+
+  taste: string = '';
+  crunch: string = '';
+  ashInsoluble: number = null;
+  whiteness: number = null;
+
 
   protein: number = null;
   wetFiber: number = null;
@@ -65,9 +82,10 @@ export class GrainCardComponent {
   phosphorus: number = null;
   lysine: number = null;
   methionineCystine: number = null;
-  metallicImpurity: number = null;
-  // insectInfestation: number = null;
+  insectInfestation: number = null;
   insectInfestationText: string = '';
+  deadInsectInfestation: number = null;
+  deadInsectInfestationText: string = '';
   metabolizedEnergyContent100: number = null;
   constructor(private route: ActivatedRoute, private router: Router, private dialogService: DialogService,
     private documentService: DocumentService, private dataService: DataService) {
@@ -102,16 +120,23 @@ export class GrainCardComponent {
     } else {
       this.date = new Date();
     }
+    this.crunch = this.getStringValueByCode('Сrunch');
+    this.taste = this.getStringValueByCode('Taste');
+    this.ashInsoluble = this.getDoubleValueByCode('AshInsoluble');
+    this.whiteness = this.getDoubleValueByCode('Whiteness');
+
+    this.metallicImpurity = this.getDoubleValueByCode('MetallicImpurity');
+    this.metallicImpuritySize = this.getAdditionalDoubleValueByCode('MetallicImpurity', 'SIZE');
 
     this.agrestalAdmixture = this.getAnalysisCardPropertyValueByCode('AgrestalAdmixture');
     this.cultivatedGrain = this.getAnalysisCardPropertyValueByCode('CultivatedGrain');
     this.grainAdmixture = this.getAnalysisCardPropertyValueByCode('GrainAdmixture');
-    this.insectInfestation = this.getAnalysisCardPropertyValueByCode('InsectInfestation');
+    this.insectInfestation = this.getDoubleValueByCode('InsectInfestation');
+    this.insectInfestationText = this.getAdditionalStringValueByCode('InsectInfestation', 'TEXT');
+    this.deadInsectInfestation = this.getDoubleValueByCode('DeadInsectInfestation');
+    this.deadInsectInfestationText = this.getAdditionalStringValueByCode('DeadInsectInfestation', 'TEXT');
 
     this.portionWeight = this.data.portionWeight;
-    if (!this.portionWeight) {
-      this.portionWeight = 50;
-    }
     this.subType = this.data.subType;
     this.testWeight = this.getDoubleValueByCode('TestWeight');
     this.testWeightFirst = this.getAdditionalDoubleValueByCode('TestWeight', 'FIRST_DEFINITION');
@@ -125,16 +150,23 @@ export class GrainCardComponent {
     this.moisture = this.getDoubleValueByCode('Moisture');
 
     this.passSieves = this.getDoubleValueByCode('PassSieves');
-    this.passSievesNumber = this.getAdditionalDoubleValueByCode('PassSieves', 'NUMBER');
+    this.passSievesNumber = this.getAdditionalDoubleValueByCode('PassSieves', 'WEIGHT');
     this.passSievesAdditional = this.getAdditionalStringValueByCode('PassSieves', 'TEXT');
-    this.passSievesBool = this.getAdditionalBooleanValueByCode('PassSieves', 'CONSIDER_BROKEN');
+    this.passSievesPortion = this.getAdditionalDoubleValueByCode('PassSieves', 'PORTION_WEIGHT');
+
+    this.remainderOnSieve = this.getDoubleValueByCode('RemainderOnSieve');
+    this.remainderOnSieveNumber = this.getAdditionalDoubleValueByCode('RemainderOnSieve', 'WEIGHT');
+    this.remainderOnSieveAdditional = this.getAdditionalStringValueByCode('RemainderOnSieve', 'TEXT');
+    this.remainderOnSievePortion = this.getAdditionalDoubleValueByCode('RemainderOnSieve', 'PORTION_WEIGHT');
+
 
     this.vitreousness = this.getDoubleValueByCode('Vitreousness');
     this.vitreousnessFirst = this.getAdditionalDoubleValueByCode('Vitreousness', 'VITREOUS');
     this.vitreousnessSecond = this.getAdditionalDoubleValueByCode('Vitreousness', 'POWDERY');
 
     this.giuten = this.getDoubleValueByCode('Giuten');
-    this.giutenNumber = this.getAdditionalDoubleValueByCode('Giuten', 'NUMBER');
+    this.giutenNumber = this.getAdditionalDoubleValueByCode('Giuten', 'WEIGHT');
+    this.giutenPortion = this.getAdditionalDoubleValueByCode('Giuten', 'PORTION');
 
     this.giutenGroup = this.getStringValueByCode('GiutenGroup');
     this.giutenIndex = this.getStringValueByCode('GiutenIndex');
@@ -162,10 +194,29 @@ export class GrainCardComponent {
     this.phosphorus = this.getDoubleValueByCode('Phosphorus');
     this.lysine = this.getDoubleValueByCode('Lysine');
     this.methionineCystine = this.getDoubleValueByCode('MethionineCystine');
-    this.metallicImpurity = this.getDoubleValueByCode('MetallicImpurity');
+
     // this.insectInfestation = this.getDoubleValueByCode('InsectInfestation');
-    // this.insectInfestationText = this.getAdditionalStringValueByCode('InsectInfestation', 'TEXT');
+
     this.metabolizedEnergyContent100 = this.getDoubleValueByCode('MetabolizedEnergyContent100');
+  }
+
+  onWhitenessChange(event) {
+    this.whiteness = event.target.value;
+    this.setDoubleValueByCode('Whiteness', this.whiteness);
+  }
+
+  onAshInsolubleChange(event) {
+    this.ashInsoluble = event.target.value;
+    this.setDoubleValueByCode('AshInsoluble', this.ashInsoluble);
+  }
+  onTasteChange(event) {
+    this.taste = event.target.value;
+    this.setStringValueByCode('Taste', this.taste);
+  }
+
+  onRunchChange(event) {
+    this.crunch = event.target.value;
+    this.setStringValueByCode('Сrunch', this.crunch);
   }
 
   onTypeGoodsCategoryChange(event) {
@@ -189,8 +240,13 @@ export class GrainCardComponent {
   }
 
   updatePortionDependency() {
-    this.passSieves = (+this.passSievesNumber/+this.portionWeight) * 100;
+    this.passSieves = (+this.passSievesNumber/+this.passSievesPortion) * 100;
     this.setDoubleValueByCode('PassSieves', this.passSieves);
+  }
+
+  updateRemainderPortionDependency() {
+    this.remainderOnSieve = (+this.remainderOnSieveNumber/+this.remainderOnSievePortion) * 100;
+    this.setDoubleValueByCode('RemainderOnSieve', this.remainderOnSieve);
   }
 
   onPortionWeightChange(event) {
@@ -230,8 +286,23 @@ export class GrainCardComponent {
   }
 
   onInsectInfestationChange(event) {
-    this.insectInfestation = event[0];
-    this.setAnalysisCardPropertyValueByCode('InsectInfestation', this.insectInfestation);
+    this.insectInfestation = event.target.value;
+    this.setDoubleValueByCode('InsectInfestation', this.insectInfestation);
+  }
+
+  onInsectInfestationTextChange(event) {
+    this.insectInfestationText = event.target.value;
+    this.setAdditionalStringValueByCode('InsectInfestation', 'TEXT', this.insectInfestationText);
+  }
+
+  onDeadInsectInfestationChange(event) {
+    this.deadInsectInfestation = event.target.value;
+    this.setDoubleValueByCode('DeadInsectInfestation', this.deadInsectInfestation);
+  }
+
+  onDeadInsectInfestationTextChange(event) {
+    this.deadInsectInfestationText = event.target.value;
+    this.setAdditionalStringValueByCode('DeadInsectInfestation', 'TEXT', this.deadInsectInfestationText);
   }
 
   onGrainAdmixtureChange(event) {
@@ -330,6 +401,11 @@ export class GrainCardComponent {
     this.setAdditionalDoubleValueByCode('Vitreousness', 'POWDERY', this.vitreousnessSecond);
   }
 
+  calculateGiuten() {
+    this.giuten = (+this.giutenNumber/+this.giutenPortion) * 100;
+    this.setDoubleValueByCode('Giuten', this.giuten);
+  }
+
   onGiutenChange(event) {
     this.giuten = event.target.value;
     this.setDoubleValueByCode('Giuten', this.giuten);
@@ -337,9 +413,16 @@ export class GrainCardComponent {
 
   onGiutenNumberChange(event) {
     this.giutenNumber = event.target.value;
-    this.giuten = this.giutenNumber * 4;
-    this.setDoubleValueByCode('Giuten', this.giuten);
-    this.setAdditionalDoubleValueByCode('Giuten', 'NUMBER', this.giutenNumber);
+
+  this.calculateGiuten();
+    this.setAdditionalDoubleValueByCode('Giuten', 'WEIGHT', this.giutenNumber);
+  }
+
+  onGiutenPortionChange(event) {
+    this.giutenPortion = event.target.value;
+
+    this.calculateGiuten();
+    this.setAdditionalDoubleValueByCode('Giuten', 'PORTION', this.giutenPortion);
   }
 
   onGiutenGroupChange(event) {
@@ -467,18 +550,44 @@ export class GrainCardComponent {
   onPassSievesNumberChange(event) {
     this.passSievesNumber = event.target.value;
     this.updatePortionDependency();
-    this.setAdditionalDoubleValueByCode('PassSieves', 'NUMBER', this.passSievesNumber);
+    this.setAdditionalDoubleValueByCode('PassSieves', 'WEIGHT', this.passSievesNumber);
   }
 
-  onPassSievesBoolChange(event) {
-    this.passSievesBool = event.checked;
-    this.setAdditionalBooleanValueByCode('PassSieves','CONSIDER_BROKEN', this.passSievesBool);
+  onPassSievesPortionChange(event) {
+    this.passSievesPortion = event.target.value;
+    this.updatePortionDependency();
+    this.setAdditionalDoubleValueByCode('PassSieves','PORTION_WEIGHT', this.passSievesPortion);
   }
 
   onPassSievesAdditionalChange(event) {
     this.passSievesAdditional = event.target.value;
     this.setAdditionalStringValueByCode('PassSieves','TEXT', this.passSievesAdditional);
   }
+
+
+  onRemainderOnSieveChange(event) {
+    this.remainderOnSieve = event.target.value;
+    this.setDoubleValueByCode('RemainderOnSieve', this.remainderOnSieve);
+  }
+
+  onRemainderOnSieveNumberChange(event) {
+    this.remainderOnSieveNumber = event.target.value;
+    this.updateRemainderPortionDependency();
+    this.setAdditionalDoubleValueByCode('RemainderOnSieve', 'WEIGHT', this.remainderOnSieveNumber);
+  }
+
+  onRemainderOnSievePortionChange(event) {
+    this.remainderOnSievePortion = event.target.value;
+    this.updateRemainderPortionDependency();
+    this.setAdditionalDoubleValueByCode('RemainderOnSieve','PORTION_WEIGHT', this.remainderOnSievePortion);
+  }
+
+  onRemainderOnSieveAdditionalChange(event) {
+    this.remainderOnSieveAdditional = event.target.value;
+    this.setAdditionalStringValueByCode('RemainderOnSieve','TEXT', this.remainderOnSieveAdditional);
+  }
+
+
 
   getStringValueByCode(code) {
     let found = this.data.analysisCardPropertyValues.find(item => item.property.description == code);
@@ -537,15 +646,17 @@ export class GrainCardComponent {
     this.setDoubleValueByCode('MetallicImpurity', this.metallicImpurity);
   }
 
+  onMetallicImpuritySizeChange(event) {
+    this.metallicImpuritySize = event.target.value;
+    this.setAdditionalDoubleValueByCode('MetallicImpurity', 'SIZE', this.metallicImpuritySize);
+  }
+
   // onInsectInfestationChange(event) {
   //   this.insectInfestation = event.target.value;
   //   this.setDoubleValueByCode('InsectInfestation', this.insectInfestation);
   // }
 
-  // onInsectInfestationTextChange(event) {
-  //   this.insectInfestationText = event.target.value;
-  //   this.setAdditionalStringValueByCode('InsectInfestation', 'TEXT', this.insectInfestationText);
-  // }
+
 
   onMetabolizedEnergyContent100Change(event) {
     this.metabolizedEnergyContent100 = event.target.value;
@@ -681,6 +792,15 @@ export class GrainCardComponent {
     }
   }
 
+  getAdditionalPropertyTitleByCode(code, additional) {
+    let found = this.data.analysisCardPropertyValues.find(item => item.property.description == code);
+    if (found) {
+      let sub = found.additionalAnalysisCardPropertyValues.find(it => it.additionalAnalysisCardProperty.descriptor == additional);
+      if (sub) {
+        return sub.additionalAnalysisCardProperty.name;
+      }
+    }
+  }
   getPropertyPrecisionByCode(code) {
     let found = this.data.analysisCardPropertyValues.find(item => item.property.description == code);
     if (found) {
@@ -690,16 +810,6 @@ export class GrainCardComponent {
       }
       if (found.property.units[0].precision) {
         return '1.' + found.property.units[0].precision + '-' + found.property.units[0].precision;
-      }
-    }
-  }
-
-  getAdditionalPropertyTitleByCode(code, additional) {
-    let found = this.data.analysisCardPropertyValues.find(item => item.property.description == code);
-    if (found) {
-      let sub = found.additionalAnalysisCardPropertyValues.find(it => it.additionalAnalysisCardProperty.descriptor == additional);
-      if (sub) {
-        return sub.additionalAnalysisCardProperty.name;
       }
     }
   }

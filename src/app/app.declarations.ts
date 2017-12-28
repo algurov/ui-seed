@@ -106,6 +106,12 @@ import { AnalysisTypeDialog } from './views/document/analysis/type.dialog/analys
 import { AnalysisCardComponent } from './views/document/analysis/card/analysis.card.component';
 import { MixCardComponent } from './views/document/analysis/mix/mix.card.component';
 import { GrainCardComponent } from './views/document/analysis/grain/grain.card.component';
+import { FlourCardComponent } from './views/document/analysis/flour/flour.card.component';
+import { CerealsCardComponent } from './views/document/analysis/cereals/cereals.card.component';
+import { AnalysisPropertyTree, AnalysisPropertyTreeDialog } from './views/document/analysis/property.tree/analysis.property.tree';
+import { AnalysisPropertyNode } from './views/document/analysis/property.node/analysis.property.node';
+import { KernelNode } from './views/document/analysis/kernel.node/kernel.node';
+import { SieveComponent } from './views/document/analysis/sieve/sieve.component';
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -218,5 +224,12 @@ export const APP_DECLARATIONS = [
   AnalysisTypeDialog,
   AnalysisCardComponent,
   MixCardComponent,
-  GrainCardComponent
+  GrainCardComponent,
+  AnalysisPropertyTree,
+  AnalysisPropertyTreeDialog,
+  AnalysisPropertyNode,
+  FlourCardComponent,
+  CerealsCardComponent,
+  KernelNode,
+  SieveComponent
 ];
