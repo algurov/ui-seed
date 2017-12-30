@@ -41,6 +41,7 @@ interface GlobalEnvironment {
   HOST;
   PORT;
   STORE_DEV_TOOLS;
+  DEV_SERVER_HOST;
   SystemJS: SystemJS;
   System: SystemJS;
 }
