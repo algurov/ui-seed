@@ -215,8 +215,10 @@ export class CerealsCardComponent {
     this.type = this.getStringValueByCode('Pr_904');
     this.taste = this.getStringValueByCode('Taste');
     this.soundKernels = this.getAnalysisCardPropertyValueByCode('SoundKernels');
+    if (this.soundKernels) {
     if (this.soundKernels.doubleValue == 0) {
-      this.soundKernels.doubleValue = 100;
+        this.soundKernels.doubleValue = 100;
+      }
     }
     this.agrestalAdmixture = this.getAnalysisCardPropertyValueByCode('AgrestalAdmixture');
     this.cultivatedGrain = this.getAnalysisCardPropertyValueByCode('CultivatedGrain');

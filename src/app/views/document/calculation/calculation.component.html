@@ -1,0 +1,24 @@
+<div class="group">
+  <div class="title-text">Калькуляция</div>
+  <div class="group__content" style="padding-top: 20px;">
+
+      <div class="group__content-first-column">
+        <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-error>Обязательное поле</mat-error>
+          <mat-placeholder class="group__placeholder">{{stringService.get('NEW_ACT_TITLE')}}</mat-placeholder>
+          <input required matInput [(ngModel)]="data.sampleNumber"/>
+        </mat-form-field>
+      </div>
+      <div class="group__content-second-column">
+        <mat-form-field class="group__field" floatPlaceholder="always">
+          <mat-error>Обязательное поле</mat-error>
+          <mat-placeholder class="group__placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
+          <input required matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    
+</div>
+<div style="clear:both;"></div>
+</div>

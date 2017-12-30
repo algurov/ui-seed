@@ -112,6 +112,8 @@ import { AnalysisPropertyTree, AnalysisPropertyTreeDialog } from './views/docume
 import { AnalysisPropertyNode } from './views/document/analysis/property.node/analysis.property.node';
 import { KernelNode } from './views/document/analysis/kernel.node/kernel.node';
 import { SieveComponent } from './views/document/analysis/sieve/sieve.component';
+import { CalculationComponent } from './views/document/calculation/calculation.component';
+
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -231,5 +233,6 @@ export const APP_DECLARATIONS = [
   FlourCardComponent,
   CerealsCardComponent,
   KernelNode,
-  SieveComponent
+  SieveComponent,
+  CalculationComponent
 ];

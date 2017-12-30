@@ -13,32 +13,37 @@ import { CerealsCardComponent } from '../cereals/cereals.card.component';
 export class AnalysisCardComponent {
   id: number;
   data: any;
+  subscriptions: Array<any> = new Array<any>();
   @ViewChild(CerealsCardComponent) cereals : CerealsCardComponent;
   constructor(private route: ActivatedRoute, private router: Router, private dialogService: DialogService,
     private documentService: DocumentService, private mainService: MainService) {
     this.dialogService.showBlocker();
-    this.route.params.subscribe(params => {
+    this.subscriptions.push(this.route.params.subscribe(params => {
       if (params['id']) {
           this.dialogService.block = true;
         this.id = +params['id'];
        this.documentService.getAnalysisCardById(this.id).subscribe(res=> {
          this.data = res;
          console.log(this.data);
+         console.log(JSON.stringify(this.data));
          //this.mainService.actLoaded.emit(this.data);
          this.dialogService.block = false;
        });
      }
-    });
-    this.mainService.menuActionPerformed.subscribe(action => {
+   }));
+    this.subscriptions.push(this.mainService.menuActionPerformed.subscribe(action => {
       if (action == 'SAVE_ANALYSIS_CARD') {
         this.save();
       }
       if (action == 'SIGN_ANALYSIS_CARD') {
         this.dialogService.showSignDialog(this.id, 'ANALYSIS_CARDS');
       }
-    });
+    }));
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(item => item.unsubscribe());
+  }
   ngOnInit() {
     this.mainService.menuChange.emit({name:'ANALYSIS_CARD_EDIT', state: this.id? true: false});
   }
@@ -93,6 +98,8 @@ export class AnalysisCardComponent {
     }
     this.documentService.updateAnalysisCard(this.data).subscribe(res => {
       this.dialogService.showNotification('saved');
+      console.log('answer');
+      console.log(JSON.stringify(res));
     });
   }
 }
