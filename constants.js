@@ -8,7 +8,7 @@ var isProd = (process.env.npm_lifecycle_event || '').includes('prod');
 exports.DEV_SERVER_HOST = 'localhost';
 exports.HOST = '82.202.236.172';
 exports.DEV_PORT = 3000;
-exports.E2E_PORT = 4201;
+exports.E2E_PORT = 3000;
 exports.PROD_PORT = 3000;
 
 /**
