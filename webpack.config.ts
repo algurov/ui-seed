@@ -7,7 +7,7 @@ import 'ts-helpers';
 const path = require('path');
 
 import {
-  DEV_PORT, PROD_PORT, EXCLUDE_SOURCE_MAPS, HOST,
+  DEV_PORT, PROD_PORT, EXCLUDE_SOURCE_MAPS, HOST, DEV_SERVER_HOST,
   USE_DEV_SERVER_PROXY, DEV_SERVER_PROXY_CONFIG, DEV_SERVER_WATCH_OPTIONS,
   DEV_SOURCE_MAPS, PROD_SOURCE_MAPS, STORE_DEV_TOOLS,
   MY_COPY_FOLDERS, MY_POLYFILL_DLLS, MY_VENDOR_DLLS, MY_CLIENT_PLUGINS,
@@ -56,7 +56,7 @@ console.log('PRODUCTION BUILD: ', PROD);
 console.log('AOT: ', AOT);
 if (DEV_SERVER) {
   testDll();
-  console.log(`Starting dev server on: http://${HOST}:${PORT}`);
+  console.log(`Starting dev server on: http://${DEV_SERVER_HOST}:${PORT}`);
 }
 
 const CONSTANTS = {
