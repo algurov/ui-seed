@@ -5,6 +5,7 @@ path = require('path');
 
 const E2E_PORT = require('./constants').E2E_PORT;
 const HOST = require('./constants').HOST;
+const DEV_SERVER_HOST = require('./constants').DEV_SERVER_HOST;
 const PROD_PORT = require('./constants').PROD_PORT;
 const API_BASE_URL = `http://${HOST}:${PROD_PORT}`;
 const app = express();
@@ -33,6 +34,7 @@ app.get('/login-main', function (req, res) {
   console.log('login-main');
   callProperties(res, loginPropertiesCallbackMain);
 });
+
 app.get('/*', renderIndex);
 
 
@@ -42,7 +44,7 @@ if (ENV === 'e2e:server') { e2e = E2E_PORT };
 const PORT = e2e || PROD_PORT;
 
 app.listen(PORT, () => {
-  console.log(`Listening on: http://${HOST}:${PORT}`);
+  console.log(`Listening on: http://${DEV_SERVER_HOST}:${PORT}`);
 });
 
 function callProperties(res, callbackFunc) {
