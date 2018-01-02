@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Seed frontend",
   "scripts": {
-    "deploy:stage": "npm run build && scp ./dist/client/* root@iseed.pw:/var/www/ui/dist/client",
+    "deploy:stage": "scp ./dist/client/* root@iseed.pw:/var/www/ui/dist/client",
     "postinstall": "npm run sass && npm run build:dll",
     "rimraf": "rimraf",
     "webdev": "webpack-dev-server",
