@@ -84,8 +84,6 @@ export class CertificateParamsComponent {
         }
       });
       this.listToView = this.processData_2(list);
-      console.log(this.listToView);
-      console.log(propertyListId);
     }
 
     // TODO: decide if properties are important here
@@ -189,8 +187,7 @@ export class CertificateParamsComponent {
   getDocument() {
     let result = '';
 
-    console.log(this.data);
-    if (this.data.appcliation) {
+    if (this.data.application) {
       if (this.data.application.applicationStandardResearches) {
 
         this.data.application.applicationStandardResearches.forEach(item => {
