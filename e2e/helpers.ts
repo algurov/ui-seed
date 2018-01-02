@@ -104,13 +104,9 @@ export namespace TestHelper {
 
             this.browser.get(routePath);
 
-            // expect(element(by.css('.breadcrumb__item-content')).isPresent()).toBe(true);
-
             if ('data' in routeItem) {
                 // this.expectBreadcrumbsHasText(routeItem.data.breadcrumb);
             }
-
-            expect(element(by.css('.breadcrumb')).isPresent()).toBe(true);
         }
 
         expectBreadcrumbsHasText(text: string) {
