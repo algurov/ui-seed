@@ -87,14 +87,21 @@ export class CertificateParamsComponent {
       console.log(this.listToView);
       console.log(propertyListId);
     }
-    this.data.certificateType.properties.forEach(item => {
-      if (!propertyListId.find(it => it == item.id)) {
-        this.listToView.push({property: item});
-        if (initTranslation) {
-          this.translationParams[item.id] = '';
+
+    // TODO: decide if properties are important here
+    if ('properties' in this.data.certificateType) {
+
+      this.data.certificateType.properties.forEach(item => {
+
+        if (!propertyListId.find(it => it == item.id)) {
+          this.listToView.push({property: item});
+          if (initTranslation) {
+            this.translationParams[item.id] = '';
+          }
         }
-      }
-    });
+      });
+    }
+
   }
 
   processData_2(list) {
@@ -181,16 +188,24 @@ export class CertificateParamsComponent {
 
   getDocument() {
     let result = '';
-    if (this.data.applicationStandardResearches) {
-      this.data.applicationStandardResearches.forEach(item => {
-        if (item.customContract) {
-          result += item.customContract.name + ', ';
-        } else {
-          result += item.standard.shortName + ', ';
+
+    console.log(this.data);
+    if (this.data.appcliation) {
+      if (this.data.application.applicationStandardResearches) {
+
+        this.data.application.applicationStandardResearches.forEach(item => {
+
+          if (item.customContract) {
+            result += item.customContract.name + ', ';
+          }
+          else {
+            result += item.standard.shortName + ', ';
+          }
+        });
+
+        if (result.length > 0) {
+          result = result.substr(0, result.length - 2);
         }
-      });
-      if (result.length > 0) {
-        result = result.substr(0, result.length - 2);
       }
     }
     return result;
