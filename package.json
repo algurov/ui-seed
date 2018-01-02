@@ -133,7 +133,7 @@
     "karma-webpack": "2.0.3",
     "node-sass": "~4.5.2",
     "npm-run-all": "~4.0.2",
-    "protractor": "~4.0.8",
+    "protractor": "~5.0.8",
     "raw-loader": "~0.5.1",
     "rimraf": "~2.6.1",
     "sass-loader": "^6.0.5",

@@ -9,8 +9,10 @@ describe('Application create form', () => {
 
   it('should have a title', () => {
 
-      let menu = new TestHelper.Menu(browser);
-      menu.go(TestHelper.Menu.DOCUMENTS_ITEM);
-  });
+      // browser.get('/main/document/application');
+      let nav = new TestHelper.Navigator(browser);
+      // nav.menu(TestHelper.Navigator.DOCUMENTS_ITEM);
+
+      nav.route('/main/document/application');  });
 
 });
