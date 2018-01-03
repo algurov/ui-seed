@@ -83,13 +83,6 @@ export class DocumentListComponent {
   openApplication(id) {
     this.router.navigate(['main/document/application/' + id]);
   }
-
-  ref() {
-    this.authService.refresh().subscribe(res => {
-      console.log(res);
-      alert(res);
-    });
-  }
 }
 
 export class DocumentDataBase {

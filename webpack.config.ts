@@ -28,7 +28,7 @@ const { CheckerPlugin } = require('awesome-typescript-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = null; //require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const WebpackMd5Hash = require('webpack-md5-hash');
 const { getAotPlugin } = require('./webpack.aot');
 
@@ -193,7 +193,8 @@ const clientConfig = function webpackConfig(): WebpackConfig {
       }),
       ...MY_CLIENT_PRODUCTION_PLUGINS,
     );
-    if (!E2E && !WATCH) {
+
+    if (BundleAnalyzerPlugin && !E2E && !WATCH) {
       config.plugins.push(
         new BundleAnalyzerPlugin({ analyzerPort: 5000 })
       );

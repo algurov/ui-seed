@@ -6,7 +6,7 @@ var isProd = (process.env.npm_lifecycle_event || '').includes('prod');
 
 // It's better to get server ip from current server ip
 exports.DEV_SERVER_HOST = 'localhost';
-exports.HOST = '82.202.236.172';
+exports.HOST = 'iseed.pw';
 exports.DEV_PORT = 3000;
 exports.E2E_PORT = 3000;
 exports.PROD_PORT = 3000;
