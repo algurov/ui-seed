@@ -34,13 +34,14 @@ export class AuthRefresh {
      */
     public run() {
 
+        this.getOrCreateTokenExpiresAt();
+
         Observable.interval(this.TOKEN_REFRESH_INTERVAL)
-            .takeWhile(this.isRunStillRequired)
+            .takeWhile(this.isRunStillRequired.bind(this))
             .subscribe(() => {
+
                 console.debug('---------------------------------------');
                 console.debug('Checking if token requires refreshment.');
-
-                this.getOrCreateTokenExpiresAt();
 
                 if (this.isRefreshmentRequired()) {
                     this.refresh();
@@ -50,7 +51,11 @@ export class AuthRefresh {
     }
 
     private isRunStillRequired(v, n) {
-        return this.isTokenExist() && this.getTokenExpiresLifetime() > 0;
+
+        let isRunRequired = this.isTokenExist() && this.getTokenExpiresLifetime() > 0;
+        this.debug('Do :state continue to refresh since token does :state exist.', isRunRequired);
+
+        return isRunRequired;
     }
 
     private getOrCreateTokenExpiresAt() {
@@ -70,15 +75,12 @@ export class AuthRefresh {
     private setTokenExpiresAt() {
 
         this._tokenExpiresAt = this.now + this.TOKEN_LIFETIME;
-        Cookie.set(this.TOKEN_EXPIRED_COOKIE_NAME, this._tokenExpiresAt.toString(), 1);
-
-        this.debug('A new tokenExpiresAt cookie created.');
+        // cookie must expires with token
+        let expires = (this.TOKEN_LIFETIME / 1000) / (3600 * 24);
+        Cookie.set(this.TOKEN_EXPIRED_COOKIE_NAME, this._tokenExpiresAt.toString(), expires);
+        this.debug('A new tokenExpiresAt cookie was created.');
 
         return this._tokenExpiresAt;
-    }
-
-    private deleteTokenExpiredAt() {
-        Cookie.delete(this.TOKEN_EXPIRED_COOKIE_NAME);
     }
 
     private getTokenExpiresLifetime() {
@@ -107,10 +109,7 @@ export class AuthRefresh {
 
     private isTokenExist(): boolean {
 
-        const tokenExists = [Cookie.get('at'), Cookie.get('reft')].every(isString);
-        this.debug('Do :state continue to refresh since token does :state exist.', tokenExists);
-
-        return tokenExists;
+        return [Cookie.get('at'), Cookie.get('reft')].every(isString);
     }
 
     /**
@@ -132,7 +131,7 @@ export class AuthRefresh {
         return this.http.post(url, {}, options)
             .finally(() => {
                 Cookie.delete(this.TOKEN_EXPIRED_COOKIE_NAME + '_processing');
-                this.debug('Toking processing cookie was removed.');
+                this.debug('Token processing cookie was removed.');
             })
             .subscribe(
                 res => {

@@ -22,7 +22,7 @@
     "e2e:live": "npm run e2e -- --elementExplorer",
     "e2e:server": "node prodserver",
     "pretest": "npm run lint && npm run sass",
-    "pretest:once": "npm run lint && npm run sass
+    "pretest:once": "npm run lint && npm run sass",
     "pretest:once:ci": "npm run lint",
     "test:once": "karma start",
     "test:once:ci": "karma start",
