@@ -35,18 +35,22 @@ export class AuthRefresh {
     public run() {
 
         Observable.interval(this.TOKEN_REFRESH_INTERVAL)
-            .takeWhile((v, n) => this.isTokenExist())
+            .takeWhile(this.isRunStillRequired)
             .subscribe(() => {
+                console.debug('---------------------------------------');
+                console.debug('Checking if token requires refreshment.');
 
-            console.debug('---------------------------------------');
-            console.debug('Checking if token requires refreshment.');
+                this.getOrCreateTokenExpiresAt();
 
-            this.getOrCreateTokenExpiresAt();
+                if (this.isRefreshmentRequired()) {
+                    this.refresh();
+                }
+            })
+        ;
+    }
 
-            if (this.isRefreshmentRequired()) {
-                this.refresh();
-            }
-        });
+    private isRunStillRequired(v, n) {
+        return this.isTokenExist() && this.getTokenExpiresLifetime() > 0;
     }
 
     private getOrCreateTokenExpiresAt() {
@@ -73,14 +77,18 @@ export class AuthRefresh {
         return this._tokenExpiresAt;
     }
 
-    private getTokenExpiresLifeime() {
+    private deleteTokenExpiredAt() {
+        Cookie.delete(this.TOKEN_EXPIRED_COOKIE_NAME);
+    }
+
+    private getTokenExpiresLifetime() {
         return (this.getTokenExpiresAt() - (new Date).getTime());
     }
 
     private isRefreshmentRequired() {
 
         // if token expired more than 10 minutes
-        let isCloseToExpired = this.getTokenExpiresLifeime() < this.TOKEN_LIFETIME_LIMIT;
+        let isCloseToExpired = this.getTokenExpiresLifetime() < this.TOKEN_LIFETIME_LIMIT;
         let isRequestedAlready = !!Cookie.get(this.TOKEN_EXPIRED_COOKIE_NAME + '_processing');
         let isRefreshmentRequired = isCloseToExpired && !isRequestedAlready;
 
@@ -89,7 +97,7 @@ export class AuthRefresh {
             + (this.getTokenExpiresAt() - this.TOKEN_LIFETIME_LIMIT).toString()
         );
         this.debug('Next token refresh at '
-            + (this.getTokenExpiresLifeime() / 1000).toString() + ' seconds.'
+            + (this.getTokenExpiresLifetime() / 1000).toString() + ' seconds.'
         );
         this.debug('The tokens do :state requested already.', isRequestedAlready);
         this.debug('Token does :state requires refreshment.', isRefreshmentRequired, 'info');
