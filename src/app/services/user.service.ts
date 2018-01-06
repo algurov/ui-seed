@@ -20,7 +20,7 @@ export class UserService extends RequestBase {
         login: userLogin,
         password: userPassword
       });
-      return this.http.post(`${API_BASE_URL}/login`, data, this.options)
+      return this.http.post(`${API_BASE_URL}/login`, data, this.getOptions(this.OPT.AUTH_JSON))
       .map(res => res.text());
   }
 
@@ -28,20 +28,20 @@ export class UserService extends RequestBase {
     let data = JSON.stringify({
       login: userLogin
     });
-    return this.http.post(`${API_BASE_URL}/logout`, data, this.options)
+    return this.http.post(`${API_BASE_URL}/logout`, data, this.getOptions(this.OPT.AUTH_JSON))
       .map(res => res.text());
   }
 
   setPassword(user, password): Observable<string> {
     var hash = bcryptjs.hashSync(user.password, 8);
     console.log(hash);
-    return this.http.post(`${API_BASE_URL}/setpassword`, this.options)
+    return this.http.post(`${API_BASE_URL}/setpassword`, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.text());
   }
 
   registration(user): Observable<string> {
       return this.http.post(`${API_BASE_URL}/user-provisioning/user`,
-         JSON.stringify(user), this.options)
+         JSON.stringify(user), this.getOptions(this.OPT.AUTH_JSON))
       .map(res => res.json());
   }
 
@@ -61,18 +61,18 @@ export class UserService extends RequestBase {
     if (page != null && size != null) {
       url += '?page=' + page + '&size=' + size;
     }
-    return this.http.get(url, this.options)
+    return this.http.get(url, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post(`${API_BASE_URL}/user-provisioning/user`, JSON.stringify(user), this.options)
+    return this.http.post(`${API_BASE_URL}/user-provisioning/user`, JSON.stringify(user), this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
   updateUser(user): Observable<User> {
     console.log(user);
-    return this.http.put(`${PROVISIONING_BASE_URL}/user-provisioning/user`, JSON.stringify(user), this.options)
+    return this.http.put(`${PROVISIONING_BASE_URL}/user-provisioning/user`, JSON.stringify(user), this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
