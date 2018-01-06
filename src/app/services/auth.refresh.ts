@@ -13,16 +13,14 @@ export class AuthRefresh {
     // time in milliseconds, when tokens expires
     readonly TOKEN_LIFETIME: number = 3600 * 1000;
     // time limit in milliseconds, when tokens must be refreshed
-    readonly TOKEN_LIFETIME_LIMIT = 300 * 1000;
+    readonly TOKEN_LIFETIME_LIMIT = 600 * 1000;
     // interval in milliseconds
-    readonly TOKEN_REFRESH_INTERVAL = 60000 * 5;
+    readonly TOKEN_REFRESH_INTERVAL = 60000 * 2;
 
-    now: number = 0;
     _tokenExpiresAt = null; // class cached timestamp, when token expires
 
     constructor(public http: Http) {
         this.http = http;
-        this.now = (new Date).getTime();
     }
 
 
@@ -35,17 +33,16 @@ export class AuthRefresh {
     public run() {
 
         this.getOrCreateTokenExpiresAt();
+        this.refresh();
 
         Observable.interval(this.TOKEN_REFRESH_INTERVAL)
             .takeWhile(this.isRunStillRequired.bind(this))
             .subscribe(() => {
 
-                console.debug('---------------------------------------');
-                console.debug('Checking if token requires refreshment.');
+                this.debug('---------------------------------------');
+                this.debug('Checking if token requires refreshment.');
 
-                if (this.isRefreshmentRequired()) {
-                    this.refresh();
-                }
+                this.refresh();
             })
         ;
     }
@@ -74,7 +71,7 @@ export class AuthRefresh {
 
     private setTokenExpiresAt() {
 
-        this._tokenExpiresAt = this.now + this.TOKEN_LIFETIME;
+        this._tokenExpiresAt = (new Date).getTime() + this.TOKEN_LIFETIME;
         // cookie must expires with token
         let expires = (this.TOKEN_LIFETIME / 1000) / (3600 * 24);
         Cookie.set(this.TOKEN_EXPIRED_COOKIE_NAME, this._tokenExpiresAt.toString(), expires);
@@ -118,7 +115,11 @@ export class AuthRefresh {
      * Request must be send to same domain with current app.
      * @returns {Observable<Response>}
      */
-    private refresh() {
+    private refresh(force: boolean = false) {
+
+        if (!force && !this.isRefreshmentRequired()) {
+            return;
+        }
 
         Cookie.set(this.TOKEN_EXPIRED_COOKIE_NAME + '_processing', 'true');
         this.debug('Token processing cookie was created.');
@@ -127,6 +128,9 @@ export class AuthRefresh {
         let options = new RequestOptions({
             withCredentials: true
         });
+
+        this.debug('Current token at ' + Cookie.get('at'));
+        this.debug('Current token reft ' + Cookie.get('reft'));
 
         return this.http.post(url, {}, options)
             .finally(() => {
@@ -140,6 +144,8 @@ export class AuthRefresh {
                         'User token successfully was successfully refreshed.',
                         res.statusText
                     );
+                    this.debug('Current token at ' + Cookie.get('at'));
+                    this.debug('Current token reft ' + Cookie.get('reft'));
                 },
                 (err: HttpErrorResponse) => {
                     if (err.error instanceof Error) {
