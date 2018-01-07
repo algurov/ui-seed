@@ -13,12 +13,12 @@ export class BranchOfficeService extends RequestBase {
   }
 
   createBranchOffice(branch): Observable<any> {
-      return this.http.post(`${SEED_BASE_URL}/seed/branchOffice`, branch, this.options)
+      return this.http.post(`${SEED_BASE_URL}/seed/branchOffice`, branch, this.getOptions(this.OPT.AUTH_JSON))
       .map(res => res.json());
   }
 
   getBranchOfficeList(): Observable<any> {
-    return this.http.get(`${SEED_BASE_URL}/seed/branchOffice`, this.options)
+    return this.http.get(`${SEED_BASE_URL}/seed/branchOffice`, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
@@ -30,21 +30,21 @@ export class BranchOfficeService extends RequestBase {
       if (paramString.length > 0) {
         paramString = paramString.substring(0, paramString.length - 1);
       }
-      return this.http.get(`${SEED_BASE_URL}/seed/branchOffice?` + paramString, this.options).map(res => res.json());
+      return this.http.get(`${SEED_BASE_URL}/seed/branchOffice?` + paramString, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
   }
 
   updateBranchOffice(branch): Observable<any> {
-    return this.http.put(`${SEED_BASE_URL}/seed/branchOffice`, branch, this.options)
+    return this.http.put(`${SEED_BASE_URL}/seed/branchOffice`, branch, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
   getBranchOfficeById(id): Observable<any> {
-    return this.http.get(`${SEED_BASE_URL}/seed/branchOffice/` + id , this.options)
+    return this.http.get(`${SEED_BASE_URL}/seed/branchOffice/` + id , this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
   deleteBranchOffice(branch) : Observable<any> {
-    return this.http.delete(`${SEED_BASE_URL}/seed/branchOffice/` + branch.id, this.options)
+    return this.http.delete(`${SEED_BASE_URL}/seed/branchOffice/` + branch.id, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 }

@@ -14,17 +14,17 @@ export class PartnerService extends RequestBase {
   }
 
   createPartner(partner: Partner): Observable<Partner> {
-      return this.http.post(`${SEED_BASE_URL}/seed/partner`, partner, this.options)
+      return this.http.post(`${SEED_BASE_URL}/seed/partner`, partner, this.getOptions(this.OPT.AUTH_JSON))
       .map(res => res.json());
   }
 
   getPartnerList(): Observable<any> {
-    return this.http.get(`${SEED_BASE_URL}/seed/partner`, this.options)
+    return this.http.get(`${SEED_BASE_URL}/seed/partner`, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
   getPartnerByDocumentNumber(number): Observable<any> {
-    return this.http.get(`${SEED_BASE_URL}/seed/partner?documentNumber=` + number, this.options)
+    return this.http.get(`${SEED_BASE_URL}/seed/partner?documentNumber=` + number, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
@@ -36,21 +36,21 @@ export class PartnerService extends RequestBase {
       if (paramString.length > 0) {
         paramString = paramString.substring(0, paramString.length - 1);
       }
-      return this.http.get(`${SEED_BASE_URL}/seed/partner?` + paramString, this.options).map(res => res.json());
+      return this.http.get(`${SEED_BASE_URL}/seed/partner?` + paramString, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
   }
 
   updatePartner(partner: Partner): Observable<Partner> {
-    return this.http.put(`${SEED_BASE_URL}/seed/partner`, partner, this.options)
+    return this.http.put(`${SEED_BASE_URL}/seed/partner`, partner, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
   getPartnerById(id): Observable<Partner> {
-    return this.http.get(`${SEED_BASE_URL}/seed/partner/` + id , this.options)
+    return this.http.get(`${SEED_BASE_URL}/seed/partner/` + id , this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
   deletePartner(partner) : Observable<Partner> {
-    return this.http.delete(`${SEED_BASE_URL}/seed/partner/` + partner.id, this.options)
+    return this.http.delete(`${SEED_BASE_URL}/seed/partner/` + partner.id, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 }

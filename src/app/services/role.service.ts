@@ -14,17 +14,17 @@ export class RoleService extends RequestBase {
   }
 
   createRole(role: Role): Observable<Role> {
-      return this.http.post(`${PROVISIONING_BASE_URL}/user-provisioning/role`, role, this.options)
+      return this.http.post(`${PROVISIONING_BASE_URL}/user-provisioning/role`, role, this.getOptions(this.OPT.AUTH_JSON))
       .map(res => res.json());
   }
 
   getRoleList(): Observable<any> {
-    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role`, this.options)
+    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role`, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
   getRoleById(id: number) : Observable<Role> {
-    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role/` + id, this.options)
+    return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role/` + id, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
@@ -36,16 +36,16 @@ export class RoleService extends RequestBase {
       if (paramString.length > 0) {
         paramString = paramString.substring(0, paramString.length - 1);
       }
-      return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role?` + paramString, this.options).map(res => res.json());
+      return this.http.get(`${PROVISIONING_BASE_URL}/user-provisioning/role?` + paramString, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
   }
 
   updateRole(role: Role): Observable<Role> {
-    return this.http.put(`${PROVISIONING_BASE_URL}/user-provisioning/role`, role, this.options)
+    return this.http.put(`${PROVISIONING_BASE_URL}/user-provisioning/role`, role, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 
   deleteRole(role: Role) : Observable<Role> {
-    return this.http.delete(`${PROVISIONING_BASE_URL}/user-provisioning/role/` + role.id, this.options)
+    return this.http.delete(`${PROVISIONING_BASE_URL}/user-provisioning/role/` + role.id, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());
   }
 }
