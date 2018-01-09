@@ -4,7 +4,8 @@
 @import 'variables';
 
 @import '@angular/material/theming';
-// @import '~angular-tree-component/dist/angular-tree-component.css';
+
+// @import '~angular2-tree-component/dist/angular2-tree-component.css';
 // Plus imports for other components in your app.
 
 // Include the base styles for Angular Material core. We include this here so that you only
@@ -256,7 +257,7 @@ ul, ol {
   tree-viewport {
     overflow: visible!important;
   }
-.wrapper-tree .angular-tree-component {
+.wrapper-tree .angular2-tree-component {
   height: 200px;
   width: 100%;
   overflow: auto;
@@ -319,6 +320,6 @@ mat-spinner.spinner svg circle { stroke-width:2px !important; }
  // .tree-wrapper {
  //    overflow: auto;
  //  }
- //  .angular-tree-component {
+ //  .angular2-tree-component {
  //    height: 200px;
  //  }

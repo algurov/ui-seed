@@ -1,0 +1,19 @@
+<div>
+  <div class="cell-10">{{number}}</div>
+  <div class="cell-35">{{data.pricelistItem.name}}</div>
+  <div class="cell-10">{{data.pricelistItem.calcStrategy}}</div>
+  <div class="cell-10-no-padding">
+    <mat-form-field  style="width: 100%;">
+      <input matInput class="cell-field" [ngModel]="data.amount" (change)="onCountChange($event)"/>
+    </mat-form-field>
+  </div>
+  <div class="cell-10">{{data.price | number:'1.2-2'}}</div>
+  <div class="cell-10-no-padding">
+    <mat-form-field style="width: 100%;">
+      <input matInput class="cell-field" [ngModel]="data.coefficient | number: '1.2-2'" (change)="onCoeffChange($event)"/>
+    </mat-form-field>
+  </div>
+  <div class="cell-10">{{data.orderPrice | number: '1.2-2'}}</div>
+  <div class="cell-5"><mat-icon (click)="remove()">close</mat-icon></div>
+  <div style="clear: both;"></div>
+</div>

@@ -10,7 +10,19 @@
   padding: 20px 0;
   font-size: 30px;
 }
+.laboratory__data {
+  padding-left: 18px;
+}
+.collapsible-title {
+  padding-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
+.collapsible-contnet {
+  padding-bottom: 20px;
+}
 
 .group {
   clear:both;
@@ -44,6 +56,28 @@
   }
   &__field {
     width: 100%;
+    &-title {
+      padding-top: 2px;
+      line-height: 18px;
+      font-weight: bold;
+      font-size: 18px;
+      float: left;
+      width: 20%;
+    }
+
+    &-divider {
+      height: 10px;
+      float: left;
+      width: 70%;
+      border-bottom: 1px solid #aaa;
+    }
+
+    &-icon {
+      float: left;
+        color: #3696D7;
+      width: 5%;
+      line-height: 18px;
+    }
   }
   &__placeholder {
       color: #3696D7;
@@ -57,5 +91,35 @@
     width: 2%;
     padding-top: 5px;
     cursor:pointer;
+  }
+}
+
+.cell-field {
+  text-align: center;
+}
+.cell {
+  &-10 {
+    float:left; width: 10%; text-align: center; padding-top: 18px;
+  }
+
+  &-10-no-padding {
+    float:left; width: 10%; text-align: center;
+  }
+
+  &-40 {
+    float:left; width: 40%; text-align: center; padding-top: 18px;
+  }
+  &-35 {
+    float:left; width: 35%; text-align: center; padding-top: 18px;
+  }
+  &-65 {
+    float:left; width: 65%; text-align: center; padding-top: 18px;
+  }
+  &-5 {
+    float:left; width: 5%; text-align: center; padding-top: 18px;
+  }
+
+  &-70 {
+    float:left; width: 70%; text-align: center; padding-top: 18px;
   }
 }

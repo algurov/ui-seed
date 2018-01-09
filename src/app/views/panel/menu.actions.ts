@@ -35,6 +35,12 @@ export const menuActions =
         action: 'ADD_ACT',
         type: 'link',
         state: true
+      },
+      {
+        name: 'ADD_CALCULATION',
+        action: 'ADD_CALCULATION',
+        type: 'link',
+        state: true
       }
     ],
     'ACT_EDIT': [
@@ -193,5 +199,24 @@ export const menuActions =
       action: 'SAVE_ANALYSIS_CARD',
       type: 'button',
       state: true
-    }]
+    }],
+    'CALCULATION_EDIT': [
+      {
+        name: 'SIGN_CALCULATION',
+        action: 'SIGN_CALCULATION',
+        type: 'button',
+        state: false
+      },
+      {
+        name: 'SAVE_CALCULATION',
+        action: 'SAVE_CALCULATION',
+        type: 'button',
+        state: true
+      },
+      {
+        name: 'CANCEL_CALCULATION',
+        action: 'CANCEL_CALCULATION',
+        type: 'button',
+        state: true
+      }]
   };

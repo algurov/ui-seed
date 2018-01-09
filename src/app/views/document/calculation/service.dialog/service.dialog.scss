@@ -1,0 +1,21 @@
+.list-item {
+  border-bottom: 1px solid  #aaa;
+  padding: 10px 10px;
+  cursor: pointer;
+}
+.list-item:hover {
+  background-color: #aaa;
+}
+.tree-node-wrapper {
+  width: 100%;
+}
+.action-panel {
+  width: 100%;
+  text-align: right;
+}
+.wrapper {
+  overflow: auto;
+  height: 300px;
+  width: 100%;
+  display: inline-block;
+}

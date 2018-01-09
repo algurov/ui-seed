@@ -150,6 +150,10 @@ export const Messages = {
   "ADD_UNIT": "Новая ед. измерения",
   "REMOVE_UNIT": "УДАЛИТЬ",
   "SAVE_ANALYSIS_CARD": "СОХРАНИТЬ",
-  "SIGN_ANALYSIS_CARD": "ПОДПИСАТЬ"
+  "SIGN_ANALYSIS_CARD": "ПОДПИСАТЬ",
+  "ADD_CALCULATION": "Новая калькуляция",
+  "SAVE_CALCULATION": "СОХРАНИТЬ",
+  "SIGN_CALCULATION": "ПОДПИСАТЬ",
+  "CANCEL_CALCULATION": "ОТМЕНА"
 
 };

@@ -24,6 +24,8 @@ export class StandardField {
   @ViewChild('wrap') wrap: any;
   @ViewChild('wrap2') wrap2: any;
   standard: any;
+  standardSubTitle = '';
+  isSubTitle = false;
   customStandard = false;
   researches: any;
   @Input() data: any;
@@ -36,6 +38,7 @@ export class StandardField {
     private dataService: DataService) { }
 
   ngOnInit() {
+
     if (!this.applicationStandartResearch.standard) {
       this.customStandard = true;
       // this.data.customContract.standard = {};
@@ -43,7 +46,24 @@ export class StandardField {
       // this.standard = this.data.customContract.standard;
       // this.researches = this.data.customContract.researches;
       console.log(this.standard);
+    } else {
+      if (this.applicationStandartResearch.standard.parent) {
+        this.getStanardSubTitle(this.applicationStandartResearch.standard.parent);
+      }
+      if (this.standardSubTitle.length > 0) {
+        this.standardSubTitle = this.standardSubTitle.substring(0, this.standardSubTitle.length - 2);
+        this.isSubTitle = true;
+      }
+
     }
+  }
+
+  getStanardSubTitle(standard) {
+    this.standardSubTitle += standard.shortName + ', ';
+    if (standard.parent) {
+      this.getStanardSubTitle(standard.parent);
+    }
+
   }
 
   updateCustomContractName(name) {

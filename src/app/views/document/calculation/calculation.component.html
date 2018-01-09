@@ -2,23 +2,220 @@
   <div class="title-text">Калькуляция</div>
   <div class="group__content" style="padding-top: 20px;">
 
-      <div class="group__content-first-column">
-        <mat-form-field class="group__field" floatPlaceholder="always">
-          <mat-error>Обязательное поле</mat-error>
-          <mat-placeholder class="group__placeholder">{{stringService.get('NEW_ACT_TITLE')}}</mat-placeholder>
-          <input required matInput [(ngModel)]="data.sampleNumber"/>
+    <div class="group__content-first-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-error>Обязательное поле</mat-error>
+        <mat-placeholder class="group__placeholder">Номер документа</mat-placeholder>
+        <input required matInput [(ngModel)]="data.calculationNumber" />
+      </mat-form-field>
+    </div>
+    <div class="group__content-second-column">
+      <mat-form-field class="group__field" floatPlaceholder="always">
+        <mat-error>Обязательное поле</mat-error>
+        <mat-placeholder class="group__placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
+        <input required matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div *ngIf="branchOffice" class="group__content-full-width">
+      <div class="collapsible">
+        <div class="collapsible-title">
+          Получатель платежа
+        </div>
+        <div class="collapsible-contnet">
+          <div class="laboratory__data">
+            <div>Организация: {{branchOffice? branchOffice.fullName: ''}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="group__content-full-width">
+      <mat-form-field *ngIf="branchOffice" floatPlaceholder="always" class="group__field">
+        <mat-placeholder class="group__placeholder">Банковские реквизиты</mat-placeholder>
+        <mat-select [ngModel]="branchBankDetails" (change)="onBranchBankDetailsChange($event)">
+          <mat-option *ngFor="let opt of branchOffice.bankAccountDetails" [value]="opt">{{opt.detailsName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="branchBankDetails" class="group__content-full-width">
+      <div class="collapsible">
+        <div class="collapsible-contnet">
+          <div class="laboratory__data">
+            <div>КПП: {{branchBankDetails? branchBankDetails.correspondentAccount: ''}} </div>
+            <div>Счет: {{branchBankDetails? branchBankDetails.checkingAccount: ''}}</div>
+            <div>Банк получателя: {{branchBankDetails? branchBankDetails.bankName: ''}} </div>
+            <div>БИК: {{branchBankDetails? branchBankDetails.bic : ''}} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group__content-full-width">
+      <mat-form-field *ngIf="branchBankDetails" floatPlaceholder="always" class="group__field">
+        <mat-placeholder class="group__placeholder">Лицевой счет</mat-placeholder>
+        <mat-select [ngModel]="branchAccount" (change)="onBranchAccountChange($event)">
+          <mat-option *ngFor="let opt of branchOffice.bankAccountDetails.personalAccounts" [value]="opt">{{opt.number}} ({{opt.name}})</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="applicant" class="group__content-full-width">
+      <div class="collapsible">
+        <div class="collapsible-title">
+          Плательщик
+        </div>
+        <div class="collapsible-contnet">
+          <div class="laboratory__data">
+            <div>ФИО: {{application? application.applicantName: ''}} </div>
+            <div>Организация: {{applicant? applicant.name: ''}}</div>
+            <div>ИНН: {{applicant? applicant.documentNumber: ''}} </div>
+            <div>юридический адрес: {{applicant? applicant.address: ''}}</div>
+            <div>Телефон: {{applicant? applicant.contactPhones: ''}}</div>
+            <div>Факс: {{applicant? applicant.fax: '-'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group__content-full-width">
+      <mat-form-field *ngIf="applicant" floatPlaceholder="always" class="group__field">
+        <mat-placeholder class="group__placeholder">Банковские реквизиты</mat-placeholder>
+        <mat-select [ngModel]="applicantBankDetails" (change)="onApplicantBankDetailsChange($event)">
+          <mat-option *ngFor="let opt of applicant.bankAccountDetails" [value]="opt">{{opt.detailsName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="applicantBankDetails" class="group__content-full-width">
+      <div class="collapsible">
+        <div class="collapsible-contnet">
+          <div class="laboratory__data">
+            <div>КПП: {{applicantBankDetails? applicantBankDetails.correspondentAccount: ''}} </div>
+            <div>Счет: {{applicantBankDetails? applicantBankDetails.checkingAccount: ''}}</div>
+            <div>Банк получателя: {{applicantBankDetails? applicantBankDetails.bankName: ''}} </div>
+            <div>БИК: {{applicantBankDetails? applicantBankDetails.bic : ''}} </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group__content-full-width">
+      <mat-form-field *ngIf="applicantBankDetails" floatPlaceholder="always" class="group__field">
+        <mat-placeholder class="group__placeholder">Лицевой счет</mat-placeholder>
+        <mat-select [ngModel]="applicantAccount" (change)="onApplicantAccountChange($event)">
+          <mat-option *ngFor="let opt of applicant.bankAccountDetails.personalAccounts" [value]="opt">{{opt.number}} ({{opt.name}})</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="group__content-full-width">
+      <div class="collapsible">
+        <div class="collapsible-title">
+          Заказчик
+        </div>
+        <div class="collapsible-contnet">
+          <div class="laboratory__data">
+            <div>Организация: {{application? application.applicant.name: ''}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="group__content-full-width">
+      <mat-form-field floatPlaceholder="always" class="group__field">
+        <mat-placeholder class="group__placeholder">Назначение платежа</mat-placeholder>
+        <textarea matInput [(ngModel)]="data.paymentPurpose"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="false" class="group__content-full-width">
+      <div class="collapsible">
+        <div class="collapsible-title">
+          Детализация
+        </div>
+      </div>
+    </div>
+
+    <div class="group__content-full-width" style="padding-bottom: 80px; padding-top: 40px;">
+      <div>
+        <div class="group__field-title">
+          Товары и услуги
+        </div>
+        <mat-icon class="group__field-icon" (click)="selectService()">search</mat-icon>
+        <div class="group__field-divider"></div>
+        <div style="clear:both;"></div>
+      </div>
+      <div>
+        <div>
+          <div class="cell-10">№</div>
+          <div class="cell-35">Наименование</div>
+          <div class="cell-10">Ед.изм.</div>
+          <div class="cell-10">Кол-во</div>
+          <div class="cell-10">Цена</div>
+          <div class="cell-10">Коэфф.</div>
+          <div class="cell-10">Сумма</div>
+          <div class="cell-5"></div>
+          <div style="clear: both;"></div>
+        </div>
+        <ng-container *ngFor="let service of servicesList; let i = index;">
+          <service [data]="service" [number]="i" (dataChange)="onServiceDataChange($event)" (onDelete)="onServiceDataRemoved($event)"></service>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="group__content-full-width" style="padding-bottom: 40px;">
+      <div>
+        <div class="group__field-title">
+          Дополнительные коэффициенты
+        </div>
+        <mat-icon class="group__field-icon" (click)="selectCoeff()">search</mat-icon>
+        <div class="group__field-divider"></div>
+        <div style="clear:both;"></div>
+      </div>
+      <div>
+        <div>
+          <div class="cell-10">№</div>
+          <div class="cell-65">Наименование</div>
+          <div class="cell-10">Не менее</div>
+          <div class="cell-10">Коэфф.</div>
+          <div class="cell-5"></div>
+          <div style="clear: both;"></div>
+        </div>
+        <ng-container *ngFor="let coeff of coeffList; let i = index;">
+          <coeff [data]="coeff" [number]="i" (dataChange)="onCoeffDataChange($event)" (onDelete)="onCoeffDataRemoved($event)"></coeff>
+        </ng-container>
+        <!-- <div *ngFor="let coeff of coeffList; let i = index;">
+          <div class="cell-10">{{i}}</div>
+          <div class="cell-65">{{coeff.coefName}}</div>
+          <div class="cell-10">{{coeff.coefficient}}</div>
+          <div class="cell-10-no-padding">
+            <mat-form-field style="width: 100%;">
+              <input matInput class="cell-field" [ngModel]=coeffValue[i]/>
+            </mat-form-field>
+          </div>
+          <div class="cell-5"></div>
+          <div style="clear: both;"></div>
+        </div> -->
+      </div>
+    </div>
+
+    <div class="group__content-full-width">
+      <div style="float: right; width:30%;">
+        <mat-form-field style="width: 100%;" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">Стоимость услуг</mat-placeholder>
+          <input matInput [ngModel]="data.subTotalPrice | number: '1.2-2'"/>
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">НДС</mat-placeholder>
+          <input matInput [ngModel]="data.vatSum | number: '1.2-2'"/>
+        </mat-form-field>
+        <mat-form-field style="width: 100%;" floatPlaceholder="always">
+          <mat-placeholder class="group__placeholder">Итого к оплате</mat-placeholder>
+          <input matInput [ngModel]="data.totalPrice | number: '1.2-2'"/>
         </mat-form-field>
       </div>
-      <div class="group__content-second-column">
-        <mat-form-field class="group__field" floatPlaceholder="always">
-          <mat-error>Обязательное поле</mat-error>
-          <mat-placeholder class="group__placeholder">{{stringService.get('NEW_APPLICATION_TITLE_DATE')}}</mat-placeholder>
-          <input required matInput [matDatepicker]="myDatepicker" [ngModel]="date" (dateChange)="onDateChange($event)">
-          <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-          <mat-datepicker #myDatepicker></mat-datepicker>
-        </mat-form-field>
-      </div>
-    
-</div>
-<div style="clear:both;"></div>
+    </div>
+
 </div>

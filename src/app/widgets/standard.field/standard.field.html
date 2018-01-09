@@ -2,7 +2,12 @@
   <div>
     <div *ngIf="!customStandard">
       <div  class="standard-field__title">
+        <div>
         <i (click)="toggleVisible()" class="arrow" [ngClass]="{'right': !visible, 'down': visible}"></i>{{applicationStandartResearch.standard.shortName}}
+        </div>
+        <div *ngIf="isSubTitle" class="standard-field__subtitle">
+          {{standardSubTitle}}
+        </div>
       </div>
       <mat-icon class="standard-field__icon" (click)="selectProperty()">search</mat-icon>
       <div class="standard-field__divider"></div>

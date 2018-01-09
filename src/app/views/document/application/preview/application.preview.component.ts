@@ -37,6 +37,9 @@ export class ApplicationPreviewComponent {
         if (action == 'ADD_ACT') {
           this.addAct();
         }
+        if (action == 'ADD_CALCULATION') {
+          this.addCalculation();
+        }
       }));
       this.dialogService.showBlocker();
       this.route.params.subscribe(params => {
@@ -60,6 +63,10 @@ export class ApplicationPreviewComponent {
     this.documentService.createAct(this.id).subscribe(res => {
       this.router.navigate(['main/document/act/' + res.id]);
     });
+  }
+
+  addCalculation() {
+    this.router.navigate(['main/document/calculation'], { queryParams: { applicationId: this.id } });
   }
 
   removeAct(act) {

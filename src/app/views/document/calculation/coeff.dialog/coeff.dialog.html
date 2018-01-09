@@ -1,0 +1,9 @@
+<h2 matDialogTitle>Коэффициент</h2>
+<mat-dialog-content style="min-width: 600px; height: 600px;">
+      <mat-spinner style="margin: 0 auto;" *ngIf="!loaded"></mat-spinner>
+        <div *ngIf="loaded" class="wrapper">
+          <div class="list-item" *ngFor="let coeff of list" (click)="select(coeff)">
+            {{coeff.coefName}}
+          </div>
+        </div>
+</mat-dialog-content>

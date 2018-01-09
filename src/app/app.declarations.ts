@@ -113,7 +113,10 @@ import { AnalysisPropertyNode } from './views/document/analysis/property.node/an
 import { KernelNode } from './views/document/analysis/kernel.node/kernel.node';
 import { SieveComponent } from './views/document/analysis/sieve/sieve.component';
 import { CalculationComponent } from './views/document/calculation/calculation.component';
-
+import { ServiceDialog } from './views/document/calculation/service.dialog/service.dialog';
+import { CoeffDialog } from './views/document/calculation/coeff.dialog/coeff.dialog';
+import { ServiceComponent } from './views/document/calculation/service.component/service.component';
+import { CoeffComponent } from './views/document/calculation/coeff.component/coeff.component';
 export const APP_DECLARATIONS = [
   MainViewComponent,
   PasswordViewComponent,
@@ -234,5 +237,9 @@ export const APP_DECLARATIONS = [
   CerealsCardComponent,
   KernelNode,
   SieveComponent,
-  CalculationComponent
+  CalculationComponent,
+  ServiceDialog,
+  CoeffDialog,
+  ServiceComponent,
+  CoeffComponent
 ];

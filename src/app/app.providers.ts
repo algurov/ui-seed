@@ -13,6 +13,7 @@ import { DocumentService } from './services/document.service';
 import { DataService } from './services/data.service';
 import { RoleService } from './services/role.service';
 import { BranchOfficeService } from './services/branch.service';
+import { CalculationService } from './services/calculation.service';
 
 export const APP_PROVIDERS = [
   UserService,
@@ -29,5 +30,6 @@ export const APP_PROVIDERS = [
   DocumentService,
   DataService,
   RoleService,
-  BranchOfficeService
+  BranchOfficeService,
+  CalculationService
 ];

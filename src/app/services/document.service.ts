@@ -212,7 +212,7 @@ export class DocumentService extends RequestBase {
   }
 
   getAnalysisCardListByApplicationId(id): Observable<any> {
-    return this.http.get(`${SEED_BASE_URL}/seed/analysisCard?application.id=` + id, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
+    return this.http.get(`${SEED_BASE_URL}/seed/analysisCard?assignment.application.id=` + id, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
   }
 
   deleteAnalysisCard(analysisCard): Observable<any> {
@@ -225,5 +225,9 @@ export class DocumentService extends RequestBase {
 
   getInfectionCoefficient(): Observable<any> {
     return this.http.get(`${SEED_BASE_URL}/seed/infectionCoefficient`, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
+  }
+
+  getAdditionalAnalysisCardPropertyList(): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/additionalAnalysisCardProperty`, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
   }
 }

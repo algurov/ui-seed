@@ -196,33 +196,29 @@ getKernelValueForNode(node) {
         children: children,
         additionalAnalysisCardPropertyValues: [
           {
-            additionalAnalysisCardProperty: {
-              descriptor: "NUMBER",
-              id:1,
-              name:"Число"
-            },
+            // additionalAnalysisCardProperty: {
+            //   descriptor: "NUMBER",
+            //   id:1,
+            //   name:"Число"
+            // },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('NUMBER'),
             booleanValue: false,
             doubleValue: 0,
             textValue: ''
           },
           {
-            additionalAnalysisCardProperty: {
-              descriptor: "NORM_BEFORE",
-              id:17,
-              name:"Норма до"
-            },
+            // additionalAnalysisCardProperty: {
+            //   descriptor: "NORM_BEFORE",
+            //   id:17,
+            //   name:"Норма до"
+            // },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('NORM_BEFORE'),
             booleanValue: false,
             doubleValue: 0,
             textValue: ''
           }
       ],
-        property: {
-          id: item.id,
-          nameRu: item.nameRu,
-          description: item.description,
-          units: item.units,
-          precision: item.precision
-        } ,
+        property: item ,
         textValue: null,
         doubleValue: null
       }
@@ -232,33 +228,29 @@ getKernelValueForNode(node) {
       children: children,
         additionalAnalysisCardPropertyValues: [
           {
-            additionalAnalysisCardProperty: {
-              descriptor: "NUMBER",
-              id:1,
-              name:"Число"
-            },
+            // additionalAnalysisCardProperty: {
+            //   descriptor: "NUMBER",
+            //   id:1,
+            //   name:"Число"
+            // },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('NUMBER'),
             booleanValue: false,
             doubleValue: 0,
             textValue: ''
           },
           {
-            additionalAnalysisCardProperty: {
-              descriptor: "PORTION",
-              id:8,
-              name:"Навеска"
-            },
+            // additionalAnalysisCardProperty: {
+            //   descriptor: "PORTION",
+            //   id:8,
+            //   name:"Навеска"
+            // },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('PORTION'),
             booleanValue: false,
             doubleValue: 0,
             textValue: ''
           }
       ],
-        property: {
-          id: item.id,
-          nameRu: item.nameRu,
-          description: item.description,
-          units: item.units,
-          precision: item.precision
-        } ,
+        property: item,
         textValue: null,
         doubleValue: null
     }
@@ -267,43 +259,40 @@ getKernelValueForNode(node) {
       children: children,
         additionalAnalysisCardPropertyValues: [
           {
-            additionalAnalysisCardProperty: {
-              descriptor: "COEFFICIENT",
-              id:14,
-              name:"Коэффициент"
-            },
+            // additionalAnalysisCardProperty: {
+            //   descriptor: "COEFFICIENT",
+            //   id:14,
+            //   name:"Коэффициент"
+            // },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('COEFFICIENT'),
             booleanValue: false,
             doubleValue: 0,
             textValue: ''
           },
           {
-            additionalAnalysisCardProperty: {
-              descriptor: "EKZ_KG",
-              id:15,
-              name:"Экз\кг"
-            },
+            // additionalAnalysisCardProperty: {
+            //   descriptor: "EKZ_KG",
+            //   id:15,
+            //   name:"Экз\кг"
+            // },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('EKZ_KG'),
             booleanValue: false,
             doubleValue: 0,
             textValue: ''
           },
           {
-            additionalAnalysisCardProperty: {
-              descriptor: "SPZ_PEST",
-              id:16,
-              name:"СПЗ вредителя"
-            },
+            // additionalAnalysisCardProperty: {
+            //   descriptor: "SPZ_PEST",
+            //   id:16,
+            //   name:"СПЗ вредителя"
+            // },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('SPZ_PEST'),
             booleanValue: false,
             doubleValue: 0,
             textValue: ''
           }
       ],
-        property: {
-          id: item.id,
-          nameRu: item.nameRu,
-          description: item.description,
-          units: item.units,
-          precision: item.precision
-        } ,
+        property: item,
         textValue: null,
         doubleValue: null
     }

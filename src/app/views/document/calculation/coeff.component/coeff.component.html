@@ -1,0 +1,13 @@
+<div>
+  <div class="cell-10">{{number}}</div>
+  <div class="cell-65">{{data.coefName}}</div>
+  <div class="cell-10">{{data.coefficient}}</div>
+  <div class="cell-10-no-padding">
+    <mat-form-field style="width: 100%;">
+      <mat-error *ngIf="right">Не верный коэффициент</mat-error>
+      <input matInput class="cell-field" [ngModel]="coeff" (change)="onCoeffChange($event)"/>
+    </mat-form-field>
+  </div>
+  <div class="cell-5"><mat-icon (click)="remove()">close</mat-icon></div>
+  <div style="clear: both;"></div>
+</div>

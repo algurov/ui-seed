@@ -12,7 +12,10 @@ export class DataService {
       this.propertyType = res.content;
     });
     this.documentService.getInfectionCoefficient().subscribe(res => {
-      this.infectionCoefficient = res;
+      this.infectionCoefficient = res.content;
+    });
+    this.documentService.getAdditionalAnalysisCardPropertyList().subscribe(res => {
+      this.additionalAnalysisCardProperty = res.content;
     });
   }
   partnerTypes = [{title: 'Юридическое лицо', value: 'ORGANIZATION'}, {title: 'Физическое лицо', value: 'PERSON'}];
@@ -23,6 +26,7 @@ export class DataService {
   };
   propertyType: Array<any>;
   infectionCoefficient: Array<any>;
+  additionalAnalysisCardProperty: Array<any>;
 
   ngOnInit() {
 
@@ -34,6 +38,10 @@ export class DataService {
 
   getPartnerDocumentTypes() {
     return this.partnerDocumentTypes;
+  }
+
+  getAdditionalAnalysisCardPropertyByDescriptor(descriptor) {
+      return this.additionalAnalysisCardProperty.find(item => item.descriptor == descriptor);
   }
 
   getPartnerDocumentTypeNameByValue(value: string) : string {

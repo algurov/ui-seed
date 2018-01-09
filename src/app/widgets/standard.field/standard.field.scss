@@ -18,7 +18,12 @@
       width: 20%;
     }
   }
-
+  &__subtitle {
+    line-height: 10px;
+    font-weight: normal;
+    font-size: 10px;
+    padding-left: 18px;
+  }
   &__icon {
     float: left;
       color: #3696D7;

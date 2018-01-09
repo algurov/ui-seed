@@ -89,28 +89,28 @@ export class ApplicationParamsComponent {
   }
 
   onTartgetDocumentsChange(event : MatSelectChange) {
-    let parentFound = false;
-    let childFound = false;
-    event.value.forEach(item => {
-      if (item == 2) {
-        parentFound = true;
-      }
-      if (item == 1) {
-        childFound = true;
-      }
-    });
+    // let parentFound = false;
+    // let childFound = false;
+    // event.value.forEach(item => {
+    //   if (item == 2) {
+    //     parentFound = true;
+    //   }
+    //   if (item == 1) {
+    //     childFound = true;
+    //   }
+    // });
     this.data.targetDocuments = this.findResultingDocumentsById(event.value);
     this.stateTargetDocuments = event.value;
-    if (parentFound && !childFound) {
-
-      this.stateTargetDocuments.push(1);
-      this.data.targetDocuments =this.findResultingDocumentsById(this.stateTargetDocuments);
-      event.source.options.forEach(op => {
-        if (op.value == 1) {
-            op.select();
-        }
-      });
-    }
+    // if (parentFound && !childFound) {
+    //
+    //   this.stateTargetDocuments.push(1);
+    //   this.data.targetDocuments =this.findResultingDocumentsById(this.stateTargetDocuments);
+    //   event.source.options.forEach(op => {
+    //     if (op.value == 1) {
+    //         op.select();
+    //     }
+    //   });
+    // }
   }
 
   findResultingDocumentsById(ids: Array<number>){
