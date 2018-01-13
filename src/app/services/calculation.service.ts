@@ -15,8 +15,18 @@ export class CalculationService extends RequestBase {
     return this.http.post(`${SEED_BASE_URL}/seed/calculation`, calculation, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
   }
 
+  updateCalculation(patch, id): Observable<any> {
+    return this.http.patch(`${SEED_BASE_URL}/seed/calculation/` + id, patch, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
+  }
+
+  getCalculationList() : Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/calculation`, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
+  }
+  deleteCalculation(calc): Observable<any> {
+    return this.http.delete(`${SEED_BASE_URL}/seed/calculation/` + calc.id, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
+  }
   getCalculationById(id): Observable<any> {
-    return this.http.get(`${SEED_BASE_URL}/seed/calculation` + id, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
+    return this.http.get(`${SEED_BASE_URL}/seed/calculation/` + id, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
   }
 
   getPricelistItemList(): Observable<any> {

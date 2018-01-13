@@ -12,12 +12,13 @@ export class DataService {
       this.propertyType = res.content;
     });
     this.documentService.getInfectionCoefficient().subscribe(res => {
-      this.infectionCoefficient = res.content;
+      this.infectionCoefficient = res;
     });
     this.documentService.getAdditionalAnalysisCardPropertyList().subscribe(res => {
       this.additionalAnalysisCardProperty = res.content;
     });
   }
+  calcStrategy = [{title: 'Проба', value: 'SAMPLE'}, {title: 'Партия', value: 'WEIGHT'}, {title: 'Раб.час' , value: 'WORKINH_HOUR'}, {title: 'Партия', value: 'LINE'}];
   partnerTypes = [{title: 'Юридическое лицо', value: 'ORGANIZATION'}, {title: 'Физическое лицо', value: 'PERSON'}];
   partnerDocumentTypes = [{title: 'ИНН', value: 'INN'}, {title: 'Паспорт', value: 'PASSPORT'}];
   dataMap = {
@@ -42,6 +43,10 @@ export class DataService {
 
   getAdditionalAnalysisCardPropertyByDescriptor(descriptor) {
       return this.additionalAnalysisCardProperty.find(item => item.descriptor == descriptor);
+  }
+
+  getCalcStrategyTitleByValue(value) {
+    return this.calcStrategy.find(item => item.value == value).title;
   }
 
   getPartnerDocumentTypeNameByValue(value: string) : string {

@@ -94,6 +94,11 @@ export class StandardField {
       // this.dialogService.showNotification('Параметр "' +
       //   (item.name ? item.name : item.nameRu) + '" добавлен');
     });
+    dialogRef.componentInstance.allGoodsCategoryProperties.subscribe(item => {
+      item.forEach(it => {
+        this.addGoodsCategoryProperty(it);
+      });
+    });
     dialogRef.afterClosed().subscribe(result => {
       this.lastSelectedNode = null;
     });
@@ -267,6 +272,7 @@ export class StandardPropertyDialog {
   param = { placeholder: 'Текст' };
   @Output() propertySelected: EventEmitter<any> = new EventEmitter<any>();
   @Output() goodsCategoryPropertySelected: EventEmitter<any> = new EventEmitter<any>();
+  @Output() allGoodsCategoryProperties: EventEmitter<any> = new EventEmitter<any>();
   constructor(
     private stringService: StringService,
     private taxonmyService: TaxonomyService,
@@ -378,20 +384,11 @@ export class StandardPropertyDialog {
 
   ngOnInit() {
     if (!this.customStandard) {
-      // let params = [{ field: 'standard.id', value: this.standard.id }, { field: 'goodsCategory.goods.id', value: this.data.goodId }];
-      // this.taxonmyService.searchTaxonomyDataByParams('GoodsCategoryProperty', params).subscribe(res => {
-      //
-      //   this.list = res.content;
-      //     console.log(this.list);
-      //   this.listToView = this.processData_2(this.list);
-      //   console.log(this.listToView);
-      //   this.loaded = true;
-      // });
       this.taxonmyService.customQuery('goodsCategoryProperty/tree?standardId='+ this.standard.id + '&goodsId=' + this.goodId)
         .subscribe(res => {
           this.list = res;
           //console.log(res);
-          this.listToView = this.processData_2(this.list);
+          this.listToView = this.list;
           console.log(this.listToView);
           this.loaded = true;
         });
@@ -401,6 +398,14 @@ export class StandardPropertyDialog {
       this.loadedAll = true;
       //this.loaded = true;
     });
+  }
+
+  addAll() {
+    this.addAllGoodsCategoryProperties();
+  }
+
+  addAllGoodsCategoryProperties() {
+    this.allGoodsCategoryProperties.emit(this.listToView);
   }
 
   onNoClick(): void {

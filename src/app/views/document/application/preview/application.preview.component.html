@@ -144,4 +144,25 @@
 
   </ng-container>
 
+  <div class="text-title">Список калькуляций</div>
+  <ng-container *ngFor="let calc of calculationList">
+    <div style=" cursor: pointer; padding: 20px 20px; border-bottom: 1px solid #aaa;">
+      <div style="float:left; width:90%;" (click)="openACalculation(calc.id)">
+        {{calc.calculationNumber}}
+      </div>
+
+      <div style="float:right;">
+        <mat-icon matTooltip="Удалить" matTooltipPosition="above"  (click)="removeCalculation(calc)">delete</mat-icon>
+      </div>
+      <div style="float:right;">
+        <mat-icon  matTooltip="Редактировать" matTooltipPosition="above" (click)="openCalculation(calc.id)">edit</mat-icon>
+      </div>
+      <div *ngIf="calculationSign[calc.id] && calculationSign[calc.id].length > 0">
+        <div>Подписан:</div>
+        <div style="padding-left: 20px;" *ngFor="let sign of calculationSign[calc.id]">{{sign.signerName}}</div>
+      </div>
+    </div>
+
+  </ng-container>
+
 </div>

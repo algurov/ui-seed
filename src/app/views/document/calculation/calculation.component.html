@@ -27,19 +27,25 @@
           <div class="laboratory__data">
             <div>Организация: {{branchOffice? branchOffice.fullName: ''}}</div>
           </div>
+          <div *ngIf="branchBankDetails" class="laboratory__data">
+            <div>КПП: {{branchBankDetails? branchBankDetails.correspondentAccount: ''}} </div>
+            <div>Счет: {{branchBankDetails? branchBankDetails.checkingAccount: ''}}</div>
+            <div>Банк получателя: {{branchBankDetails? branchBankDetails.bankName: ''}} </div>
+            <div>БИК: {{branchBankDetails? branchBankDetails.bic : ''}} </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="group__content-full-width">
+    <!-- <div class="group__content-full-width">
       <mat-form-field *ngIf="branchOffice" floatPlaceholder="always" class="group__field">
         <mat-placeholder class="group__placeholder">Банковские реквизиты</mat-placeholder>
         <mat-select [ngModel]="branchBankDetails" (change)="onBranchBankDetailsChange($event)">
           <mat-option *ngFor="let opt of branchOffice.bankAccountDetails" [value]="opt">{{opt.detailsName}}</mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
+    </div> -->
 
-    <div *ngIf="branchBankDetails" class="group__content-full-width">
+    <!-- <div *ngIf="branchBankDetails" class="group__content-full-width">
       <div class="collapsible">
         <div class="collapsible-contnet">
           <div class="laboratory__data">
@@ -50,16 +56,16 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <div class="group__content-full-width">
+    <!-- <div class="group__content-full-width">
       <mat-form-field *ngIf="branchBankDetails" floatPlaceholder="always" class="group__field">
         <mat-placeholder class="group__placeholder">Лицевой счет</mat-placeholder>
         <mat-select [ngModel]="branchAccount" (change)="onBranchAccountChange($event)">
           <mat-option *ngFor="let opt of branchOffice.bankAccountDetails.personalAccounts" [value]="opt">{{opt.number}} ({{opt.name}})</mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
+    </div> -->
 
     <div *ngIf="applicant" class="group__content-full-width">
       <div class="collapsible">
@@ -82,8 +88,8 @@
     <div class="group__content-full-width">
       <mat-form-field *ngIf="applicant" floatPlaceholder="always" class="group__field">
         <mat-placeholder class="group__placeholder">Банковские реквизиты</mat-placeholder>
-        <mat-select [ngModel]="applicantBankDetails" (change)="onApplicantBankDetailsChange($event)">
-          <mat-option *ngFor="let opt of applicant.bankAccountDetails" [value]="opt">{{opt.detailsName}}</mat-option>
+        <mat-select [ngModel]="applicantBankDetailsId" (change)="onApplicantBankDetailsChange($event)">
+          <mat-option *ngFor="let opt of applicant.bankAccountDetails" [value]="opt.id">{{opt.detailsName}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -104,8 +110,8 @@
     <div class="group__content-full-width">
       <mat-form-field *ngIf="applicantBankDetails" floatPlaceholder="always" class="group__field">
         <mat-placeholder class="group__placeholder">Лицевой счет</mat-placeholder>
-        <mat-select [ngModel]="applicantAccount" (change)="onApplicantAccountChange($event)">
-          <mat-option *ngFor="let opt of applicant.bankAccountDetails.personalAccounts" [value]="opt">{{opt.number}} ({{opt.name}})</mat-option>
+        <mat-select [ngModel]="applicantAccountId" (change)="onApplicantAccountChange($event)">
+          <mat-option *ngFor="let opt of applicantBankDetails.personalAccounts" [value]="opt.id">{{opt.number}} ({{opt.name}})</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

@@ -75,7 +75,8 @@ export const routes: Routes = [
       { path: 'document/protocol/:id', component: ProtocolComponent, data: {breadcrumb: 'Протокол'}},
       { path: 'document/protocol', component: ProtocolComponent, data: {breadcrumb: 'Протокол'}},
       { path: 'document/analysis-card/:id', component: AnalysisCardComponent},
-      { path: 'document/calculation', component: CalculationComponent}
+      { path: 'document/calculation', component: CalculationComponent},
+      { path: 'document/calculation/:id', component: CalculationComponent}
   ]
   },
   { path: 'registrationCompletionByLink', component: LoadingComponent},

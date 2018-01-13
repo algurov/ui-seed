@@ -1,7 +1,7 @@
 <div>
   <div class="cell-10">{{number}}</div>
   <div class="cell-35">{{data.pricelistItem.name}}</div>
-  <div class="cell-10">{{data.pricelistItem.calcStrategy}}</div>
+  <div class="cell-10">{{dataService.getCalcStrategyTitleByValue(data.pricelistItem.calcStrategy)}}</div>
   <div class="cell-10-no-padding">
     <mat-form-field  style="width: 100%;">
       <input matInput class="cell-field" [ngModel]="data.amount" (change)="onCountChange($event)"/>

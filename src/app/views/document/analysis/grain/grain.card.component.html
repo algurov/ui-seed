@@ -37,7 +37,13 @@
       </div>
 
       <div class="group__content-first-column">
-          <seed-select-field placeholder="Тип" code="goodsCategory" [standards]="data.standards" type="2" [data]="typeGoodsCategory" (change)="onTypeGoodsCategoryChange($event)"></seed-select-field>
+        <mat-form-field class="group__field">
+          <mat-placeholder class="group__placeholder">Тип</mat-placeholder>
+          <mat-select [ngModel]="typeGoodsCategoryId" (change)="onTypeGoodsCategoryChange($event)">
+            <mat-option *ngFor="let type of types" [value]="type.id">{{type.fullName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+          <!-- <seed-select-field placeholder="Тип" code="goodsCategory" [standards]="data.standards" type="2" [data]="typeGoodsCategory" (change)="onTypeGoodsCategoryChange($event)"></seed-select-field> -->
       </div>
 
       <div class="group__content-second-column">
@@ -49,7 +55,13 @@
       </div>
 
       <div class="group__content-first-column">
-          <seed-select-field placeholder="Класс" code="goodsCategory" [standards]="data.standards" type="1" [data]="classGoodsCategory" (change)="onClassGoodsCategoryChange($event)"></seed-select-field>
+        <mat-form-field class="group__field">
+          <mat-placeholder class="group__placeholder">Класс</mat-placeholder>
+          <mat-select [ngModel]="classGoodsCategoryId" (change)="onClassGoodsCategoryChange($event)">
+            <mat-option *ngFor="let clas of classes" [value]="clas.id">{{clas.fullName}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+          <!-- <seed-select-field placeholder="Класс" code="goodsCategory" [standards]="data.standards" type="1" [data]="classGoodsCategory" (change)="onClassGoodsCategoryChange($event)"></seed-select-field> -->
       </div>
       <div style="clear: both;"></div>
     </div>

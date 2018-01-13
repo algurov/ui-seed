@@ -7,7 +7,7 @@ import { DocumentService } from '../../../../services/document.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-
+import { CalculationService } from '../../../../services/calculation.service';
 @Component({
   selector: 'application-preview',
   templateUrl: './application.preview.component.html',
@@ -18,6 +18,7 @@ export class ApplicationPreviewComponent {
   data: any = {};
   assignmentList: Array<any> = new Array<any>();
   actList: Array<any> = new Array<any>();
+  calculationList: Array<any> = new Array<any>();
   protocolList: Array<any> = new Array<any>();
   certificateList: Array<any> = new Array<any>();
   analysisCardList: Array<any> = new Array<any>();
@@ -29,10 +30,11 @@ export class ApplicationPreviewComponent {
   protocolSign = {};
   assignmentSign = {};
   analysisCardSign = {};
+  calculationSign = {};
   constructor(private mainService: MainService, private settingsService: SettingsService,
     private partnerService: PartnerService, private dialogService: DialogService,
     private documentService: DocumentService, private route: ActivatedRoute,
-    private router: Router, private sanitizer: DomSanitizer) {
+    private router: Router, private sanitizer: DomSanitizer, private calculationService: CalculationService) {
       this.subscriptions.push(this.mainService.menuActionPerformed.subscribe(action => {
         if (action == 'ADD_ACT') {
           this.addAct();
@@ -67,6 +69,23 @@ export class ApplicationPreviewComponent {
 
   addCalculation() {
     this.router.navigate(['main/document/calculation'], { queryParams: { applicationId: this.id } });
+  }
+
+  openCalculation(id) {
+    this.router.navigate(['main/document/calculation/' + id]);
+  }
+
+  removeCalculation(calc) {
+    this.dialogService.showConfirm('Удаление калькуляции', 'Подтвердиде удаление калькуляции').subscribe(res => {
+      if (res) {
+        this.dialogService.showBlocker();
+        this.calculationService.deleteCalculation(calc).subscribe(res => {
+
+        this.calculationList.splice(this.calculationList.findIndex(item => item.id == calc.id), 1);
+        this.dialogService.hideBlocker();
+        });
+      }
+    });
   }
 
   removeAct(act) {
@@ -250,6 +269,17 @@ anchor.click();
       });
       this.dialogService.hideBlocker();
     });
+
+    this.calculationService.getCalculationList().subscribe(res => {
+      this.calculationList = res.content;
+      this.calculationList.forEach(calc => {
+        this.documentService.getSignListByDocumentId(calc.id).subscribe(signs => {
+          this.calculationSign[calc.id] = signs.content;
+        });
+      });
+      this.dialogService.hideBlocker();
+    });
+
   }
 
 }

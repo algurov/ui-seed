@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
   selector: 'service',
@@ -6,6 +7,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./service.component.scss']
 })
 export class ServiceComponent {
+
+  constructor(private dataService: DataService) {}
   @Input() data;
   @Input() number;
   @Output() dataChange: EventEmitter<any> = new EventEmitter<any>();
@@ -17,7 +20,7 @@ export class ServiceComponent {
   remove() {
     this.onDelete.emit(this.data);
   }
-  
+
   onCoeffChange(event) {
     this.data.coefficient = +event.target.value;
     this.calculateTotal();

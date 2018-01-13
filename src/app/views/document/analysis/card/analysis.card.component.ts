@@ -80,12 +80,28 @@ export class AnalysisCardComponent {
     if (item.children) {
       item.children.forEach(it => this.removeChildren(it));
     }
+
     delete item.children;
+  }
+
+  unwrapGoodsCategories() {
+      let res = [];
+      this.data.goodsCategories.forEach(item => res.push({id: item.id, version: item.version}));
+      this.data.goodsCategories = res;
+      let cutGoods = {id: this.data.goods.id, version: this.data.goods.version};
+      this.data.goods = cutGoods;
+      let cutAssignment = {id: this.data.assignment.id, version: this.data.assignment.version};
+      this.data.assignment = cutAssignment;
+      let res1 = [];
+      this.data.standards.forEach(item => res1.push({id: item.id, version: item.version}));
+      this.data.standards = res1;
+
   }
 
   clearData() {
       this.data.analysisCardPropertyValues.forEach(item => this.removeUuid(item));
       this.data.goodsCategories.forEach(item => this.removeChildren(item));
+      this.unwrapGoodsCategories();
   }
 
   save() {
@@ -96,8 +112,11 @@ export class AnalysisCardComponent {
     if (this.isCerealsCard()) {
       this.cereals.prepareToSave();
     }
+    this.dialogService.showBlocker();
     this.documentService.updateAnalysisCard(this.data).subscribe(res => {
-      this.dialogService.showNotification('saved');
+      this.dialogService.hideBlocker();
+      this.router.navigate(['main/document/application/' + this.data.applicationId + '/view']);
+      this.dialogService.showNotification('Карточка анализа сохранена');
       console.log('answer');
       console.log(JSON.stringify(res));
     });

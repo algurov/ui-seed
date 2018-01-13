@@ -6,6 +6,7 @@
         <mat-error>{{stringService.get('REQUIRED_FIELD_ERROR')}}</mat-error>
         <input matInput #nameFilter placeholder="{{stringService.get('FILTER_NAME')}}" (keyup)="addNameFilterTree(nameFilter.value)" />
       </mat-form-field>
+      <button *ngIf="loaded && loadedAll" mat-raised-button color="primary" (click)="addAll()">Добавить все</button>
       <mat-spinner style="margin: 0 auto;" *ngIf="!loadedAll"></mat-spinner>
       <div *ngIf="loaded && loadedAll">
         <!-- <ng-container *ngFor="let item of listToView">

@@ -4,6 +4,7 @@ import { DialogService } from '../../../../services/dialog.service';
 import { DocumentService } from '../../../../services/document.service';
 import { DataService } from '../../../../services/data.service';
 import { AnalysisPropertyTree } from '../property.tree/analysis.property.tree';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'grain-card',
   templateUrl: './grain.card.component.html',
@@ -54,6 +55,8 @@ export class GrainCardComponent {
   grainAdmixture: any;
   typeGoodsCategory: any;
   classGoodsCategory: any;
+  typeGoodsCategoryId: any;
+  classGoodsCategoryId: any;
   insectInfestation: any;
 
   protein: number = null;
@@ -69,6 +72,9 @@ export class GrainCardComponent {
   // insectInfestation: number = null;
   insectInfestationText: string = '';
   metabolizedEnergyContent100: number = null;
+  types: Array<any> = new Array<any>();
+  classes: Array<any> = new Array<any>();
+  subscriptions: Array<any> = new Array<any>();
   constructor(private route: ActivatedRoute, private router: Router, private dialogService: DialogService,
     private documentService: DocumentService, private dataService: DataService) {
 
@@ -78,11 +84,46 @@ export class GrainCardComponent {
     this.collectGoodsCategories();
     this.collectStandardNames();
     this.collectData();
+    let requests = [];
+    this.data.standards.forEach(standard => {
+      requests.push(this.documentService.getGoodsCategoryListByTypeAndStandard(2, standard));
+    });
+    this.subscriptions.push(Observable.forkJoin(requests).subscribe(res => {
+      let resList = [];
+      res.forEach((result: any) => {
+        resList = resList.concat(result.content);
+      });
+      this.types = resList;
+      this.types.sort((n1, n2) => n1.fullName > n2.fullName? 1: -1);
+    }));
+
+    let requests1 = [];
+    this.data.standards.forEach(standard => {
+      requests1.push(this.documentService.getGoodsCategoryListByTypeAndStandard(1, standard));
+    });
+    this.subscriptions.push(Observable.forkJoin(requests1).subscribe(res => {
+      let resList = [];
+      res.forEach((result: any) => {
+        resList = resList.concat(result.content);
+      });
+      this.classes = resList;
+      this.classes.sort((n1, n2) => n1.fullName > n2.fullName? 1: -1);
+    }));
+  }
+
+  ngOnDestroy() {
+      this.subscriptions.forEach(item => item.unsubscribe());
   }
 
   collectGoodsCategories() {
-      this.typeGoodsCategory = this.data.goodsCategories.find(item => item.goodsCategoryType.id == 1);
-      this.classGoodsCategory = this.data.goodsCategories.find(item => item.goodsCategoryType.id == 2);
+      this.typeGoodsCategory = this.data.goodsCategories.find(item => item.goodsCategoryType.id == 2);
+      if (this.typeGoodsCategory) {
+        this.typeGoodsCategoryId = this.typeGoodsCategory.id;
+      }
+      this.classGoodsCategory = this.data.goodsCategories.find(item => item.goodsCategoryType.id == 1);
+      if (this.classGoodsCategory) {
+        this.classGoodsCategoryId = this.classGoodsCategory.id;
+      }
   }
 
   collectStandardNames() {
@@ -169,8 +210,9 @@ export class GrainCardComponent {
   }
 
   onTypeGoodsCategoryChange(event) {
-    this.typeGoodsCategory = event;
-    let index = this.data.goodsCategories.findIndex(it => it.goodsCategoryType.id == 1);
+    this.typeGoodsCategoryId = event.value;
+    this.typeGoodsCategory = this.types.find(it => it.id == this.typeGoodsCategoryId);
+    let index = this.data.goodsCategories.findIndex(it => it.goodsCategoryType.id == 2);
     if (index >= 0) {
       this.data.goodsCategories[index] = this.typeGoodsCategory;
     } else {
@@ -179,8 +221,9 @@ export class GrainCardComponent {
   }
 
   onClassGoodsCategoryChange(event) {
-    this.classGoodsCategory = event;
-    let index = this.data.goodsCategories.findIndex(it => it.goodsCategoryType.id == 2);
+    this.classGoodsCategoryId = event.value;
+    this.classGoodsCategory = this.classes.find(it => it.id == this.classGoodsCategoryId);
+    let index = this.data.goodsCategories.findIndex(it => it.goodsCategoryType.id == 1);
     if (index >= 0) {
       this.data.goodsCategories[index] = this.classGoodsCategory;
     } else {
@@ -222,10 +265,10 @@ export class GrainCardComponent {
       return (+this.testWeightFirst + +this.testWeightSecond)/2;
     }
     if (this.testWeightFirst && !this.testWeightSecond) {
-      return +this.testWeightFirst/2;
+      return +this.testWeightFirst;
     }
     if (!this.testWeightFirst && this.testWeightSecond) {
-      return +this.testWeightSecond/2;
+      return +this.testWeightSecond;
     }
   }
 
@@ -273,10 +316,10 @@ export class GrainCardComponent {
       return (+this.fallingNumberFirst + +this.fallingNumberSecond)/2;
     }
     if (this.fallingNumberFirst && !this.fallingNumberSecond) {
-      return +this.fallingNumberFirst/2;
+      return +this.fallingNumberFirst;
     }
     if (!this.fallingNumberFirst && this.fallingNumberSecond) {
-      return +this.fallingNumberSecond/2;
+      return +this.fallingNumberSecond;
     }
   }
 
