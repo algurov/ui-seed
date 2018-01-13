@@ -32,12 +32,13 @@ export class AuthService extends RequestBase {
 
     login(): void {
       let goTo = API_BASE_URL + '/main';
-      goTo = encodeURI(goTo);
+      goTo = encodeURIComponent(goTo);
       let goOnFail = API_BASE_URL + '/login';
-      goOnFail = encodeURI(goOnFail);
+      goOnFail = encodeURIComponent(goOnFail);
       let str = 'client_id=client_seed&goto=' + goTo + '&gotoOnFail=' + goOnFail;
-      str = encodeURI(str);
-      window.location.href = AUTH_SERVER_URL + '?response_type=code&client_id=client_seed&state='+str+'&redirect_uri='+AUTH_CONSUMER_URL;
+      str = encodeURIComponent(str);
+    //  console.log(AUTH_SERVER_URL + '?response_type=code&client_id=client_seed&state='+str+'&redirect_uri='+AUTH_CONSUMER_URL);
+    window.location.href = AUTH_SERVER_URL + '?response_type=code&client_id=client_seed&state='+str+'&redirect_uri='+AUTH_CONSUMER_URL;
         // this.http
         //     .get(API_BASE_URL + '/api/v1/login/url')
         //     .subscribe(res => window.location.href = res.text());
