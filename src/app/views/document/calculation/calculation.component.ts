@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Route } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { StringService } from '../../../services/string.service';
 import { DocumentService } from '../../../services/document.service';
 import { DialogService } from '../../../services/dialog.service';
@@ -19,6 +19,7 @@ import { PartnerService } from '../../../services/partner.service';
   styleUrls: ['./calculation.component.scss']
 })
 export class CalculationComponent {
+  validationError = '';
   id: number;
   observer: any;
   applicationId: any;
@@ -43,7 +44,7 @@ export class CalculationComponent {
     private documentService: DocumentService, private dialogService: DialogService,
     private branchOfficeService: BranchOfficeService, private settingsService: SettingsService,
     private dialog: MatDialog, private mainService: MainService, private dataService: DataService,
-    private calculationService: CalculationService, private partnerService: PartnerService) {
+    private calculationService: CalculationService, private partnerService: PartnerService, private router: Router) {
     this.subscribes.push(this.mainService.menuActionPerformed.subscribe(action => {
       if (action == 'SAVE_CALCULATION') {
         this.save();
@@ -62,6 +63,7 @@ export class CalculationComponent {
             this.application = application;
             this.partnerService.getPartnerById(this.application.applicant.id).subscribe(partner => {
               this.applicant = partner;
+              this.data.paymentSender = this.applicant;
             });
             // this.applicant = this.application.applicant;
             this.branchOffice = this.application.branchOffice;
@@ -69,7 +71,7 @@ export class CalculationComponent {
             this.branchAccount = this.branchBankDetails.personalAccounts[0];
             this.data.paymentReceiver = this.branchOffice;
             this.data.paymentReceiverAccount = this.branchBankDetails;
-            this.data.paymentSender = this.application.applicant;
+
             this.data.paymentPurpose = this.defaultPaymentDescription;
             console.log(this.application);
             this.dialogService.hideBlocker();
@@ -93,7 +95,9 @@ export class CalculationComponent {
 
   initModel() {
     this.application = this.data.application;
-    this.applicant = this.data.paymentSender
+    this.partnerService.getPartnerById(this.data.paymentSender.id).subscribe(partner => {
+      this.applicant = partner;
+    });
     this.branchOffice = this.data.paymentReceiver;
     this.branchBankDetails = this.data.paymentReceiverDetails;
     this.branchAccount = this.branchBankDetails.personalAccounts[0];
@@ -104,6 +108,7 @@ export class CalculationComponent {
     this.applicantBankDetailsId = this.applicantBankDetails.id;
     this.servicesList = this.data.orderItems;
     this.coeffList = this.data.priceCoefficients;
+    console.log(this.applicant);
   }
 
   onBranchAccountChange(event) {
@@ -141,7 +146,11 @@ export class CalculationComponent {
     if (index >= 0) {
       this.coeffList.splice(index, 1);
     }
-    //this.recalculate();
+    this.recalculate();
+  }
+
+  onCoeffDataChange(event) {
+    this.recalculate();
   }
 
   onServiceDataChange(event) {
@@ -149,10 +158,14 @@ export class CalculationComponent {
 
   }
 
+
   recalculate() {
     let subTotal = 0;
     this.servicesList.forEach(item => {
       subTotal += item.orderPrice;
+    });
+    this.coeffList.forEach(item => {
+      subTotal *= item.coefficient;
     });
     this.data.subTotalPrice = subTotal;
     this.data.vatSum = subTotal * 0.12;
@@ -166,7 +179,7 @@ export class CalculationComponent {
         this.coeffList.push(item);
         this.coeffValue.push(item.coefficient);
         this.dialogService.showNotification(item.coefName + ' добавлен');
-        //this.recalculate();
+        this.recalculate();
       }
 
     });
@@ -210,7 +223,18 @@ export class CalculationComponent {
 
   beforeSave() {
     if (this.id) {
+      this.servicesList.forEach(item => {
+
+        delete item.uuid;
+        delete item.pricelistItem.uuid;
+        if (!item.id) {
+          let obj = {id: item.pricelistItem.id, name: item.pricelistItem.name, amount: item.pricelistItem.amount, calcStrategy: item.pricelistItem.calcStrategy, version: item.pricelistItem.version};
+          item.pricelistItem = obj;
+        }
+
+      });
     } else {
+      this.data.application = {id: this.application.id, version: this.application.version};
       this.data.paymentReceiver = {id: this.branchOffice.id, version: this.branchOffice.version };
       this.data.paymentReceiverDetails = {id: this.branchBankDetails.id, version: this.branchBankDetails.version};
       this.data.paymentReceiverAccount = {id: this.branchAccount.id, version: this.branchAccount.version};
@@ -220,7 +244,7 @@ export class CalculationComponent {
       this.servicesList.forEach(item => {
         delete item.uuid;
         delete item.pricelistItem.uuid;
-        let obj = {id: item.pricelistItem.id, version: item.pricelistItem.version};
+        let obj = {id: item.pricelistItem.id, name: item.pricelistItem.name, amount: item.pricelistItem.amount, calcStrategy: item.pricelistItem.calcStrategy, version: item.pricelistItem.version};
         item.pricelistItem = obj;
       });
       this.data.priceCoefficients = this.coeffList;
@@ -229,22 +253,68 @@ export class CalculationComponent {
       this.data.version = null;
     }
   }
+
+  checkValidation() {
+    let error = true;
+    this.validationError = '';
+    if (!this.data.calculationNumber) {
+      this.validationError += 'Номер калькуляции должен быть заполнен. ';
+      error = false;
+    }
+    if (!this.data.creationDate) {
+      this.validationError += 'Дата должна быть заполнена. ';
+      error = false;
+    }
+    if (!this.branchOffice) {
+      this.validationError += 'Филиал должен быть заполнен. ';
+      error = false;
+    }
+    if (!this.branchBankDetails) {
+      this.validationError += 'Банковские реквизиты получателя должны быть заполнены. ';
+      error = false;
+    }
+    if (!this.branchAccount) {
+      this.validationError += 'Счет получателя должен быть заполнен. ';
+      error = false;
+    }
+    if (!this.applicantBankDetails) {
+      this.validationError += 'Банковские реквизиты плательщика должны быть заполнены. ';
+      error = false;
+    }
+    if (!this.applicantAccount) {
+      this.validationError += 'Счет плательщика должен быть заполнен. ';
+      error = false;
+    }
+
+    if (this.servicesList.length <= 0) {
+      this.validationError += 'Услуги должны быть заполнены. ';
+      error = false;
+    }
+    return error;
+  }
+
   save() {
+    if(this.checkValidation()) {
     this.beforeSave();
     if (this.id) {
       let patch = generate(this.observer);
       console.log(patch);
       this.calculationService.updateCalculation(patch, this.id).subscribe(res => {
-        this.dialogService.showNotification('updated');
+        this.dialogService.showNotification('Калькуляция сохранена');
+        this.router.navigate(['main/document/application/' + this.data.application.id + '/view']);
       });
     } else {
       console.log(this.data);
       console.log(JSON.stringify(this.data));
       this.calculationService.createCalculation(this.data).subscribe(res => {
-        this.dialogService.showNotification('saved');
+        this.dialogService.showNotification('Калькуляция сохранена');
+        this.router.navigate(['main/document/application/' + this.applicationId + '/view']);
         console.log(res);
       });
     }
+  } else {
+    this.dialogService.showMessageDlg('Ошибка валидации', this.validationError);
   }
+}
 
 }

@@ -169,7 +169,9 @@ export class FlowService extends RequestBase {
     body.set('branchOffices', '');
     this.getParameter('positions', user, body);
     body.set('contacts', user.contact);
-    body.set('partnerId', partner.id)
+    if(partner) {
+      body.set('partnerId', partner.id)
+    }
 
     console.log(body);
     console.log(body.toString());

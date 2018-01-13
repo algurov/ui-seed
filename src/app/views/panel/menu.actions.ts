@@ -201,12 +201,12 @@ export const menuActions =
       state: true
     }],
     'CALCULATION_EDIT': [
-      {
-        name: 'SIGN_CALCULATION',
-        action: 'SIGN_CALCULATION',
-        type: 'button',
-        state: false
-      },
+      // {
+      //   name: 'SIGN_CALCULATION',
+      //   action: 'SIGN_CALCULATION',
+      //   type: 'button',
+      //   state: false
+      // },
       {
         name: 'SAVE_CALCULATION',
         action: 'SAVE_CALCULATION',

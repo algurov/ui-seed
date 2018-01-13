@@ -29,6 +29,9 @@ export class CalculationService extends RequestBase {
     return this.http.get(`${SEED_BASE_URL}/seed/calculation/` + id, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
   }
 
+  getCalcuLationByApplicationId(id): Observable<any> {
+    return this.http.get(`${SEED_BASE_URL}/seed/calculation?application.id=` + id, this.getOptions(this.OPT.AUTH_JSON)).map(res => res.json());
+  }
   getPricelistItemList(): Observable<any> {
     return this.http.get(`${SEED_BASE_URL}/seed/pricelistItem`, this.getOptions(this.OPT.AUTH_JSON))
     .map(res => res.json());

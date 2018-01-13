@@ -34,6 +34,7 @@ export class CoeffComponent {
     }
     console.log(this.coeff);
     this.isRight();
+    this.dataChange.emit({value: true});
   }
 
 }

@@ -93,7 +93,6 @@ export class AuthService extends RequestBase {
             })
             .subscribe(res => {
                 this.loggedIn = res;
-                console.log(this.loggedIn);
             });
     }
 

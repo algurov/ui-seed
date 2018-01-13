@@ -270,7 +270,7 @@ anchor.click();
       this.dialogService.hideBlocker();
     });
 
-    this.calculationService.getCalculationList().subscribe(res => {
+    this.calculationService.getCalcuLationByApplicationId(this.id).subscribe(res => {
       this.calculationList = res.content;
       this.calculationList.forEach(calc => {
         this.documentService.getSignListByDocumentId(calc.id).subscribe(signs => {
