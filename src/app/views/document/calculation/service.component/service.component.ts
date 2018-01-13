@@ -24,11 +24,13 @@ export class ServiceComponent {
   onCoeffChange(event) {
     this.data.coefficient = +event.target.value;
     this.calculateTotal();
+    this.dataChange.emit({value: true});
   }
 
   onCountChange(event) {
     this.data.amount = +event.target.value;
     this.calculateTotal();
+    this.dataChange.emit({value: true});
   }
 
   calculateTotal() {

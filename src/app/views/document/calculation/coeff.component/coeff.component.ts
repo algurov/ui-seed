@@ -26,19 +26,14 @@ export class CoeffComponent {
   }
 
   onCoeffChange(event) {
-    this.coeff = +event.target.value;
+    if (+event.target.value < this.data.coefficient) {
+      this.coeff = this.data.coefficient;
+      event.target.value = this.data.coefficient;
+    } else {
+      this.coeff = +event.target.value;
+    }
     console.log(this.coeff);
-    //this.calculateTotal();
     this.isRight();
-  }
-
-  onCountChange(event) {
-    this.data.amount = +event.target.value;
-    this.calculateTotal();
-  }
-
-  calculateTotal() {
-    this.data.orderPrice = this.data.amount * this.data.price * this.data.coefficient;
   }
 
 }

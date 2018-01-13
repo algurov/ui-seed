@@ -146,6 +146,7 @@ export class CalculationComponent {
 
   onServiceDataChange(event) {
     this.recalculate();
+
   }
 
   recalculate() {
@@ -165,6 +166,7 @@ export class CalculationComponent {
         this.coeffList.push(item);
         this.coeffValue.push(item.coefficient);
         this.dialogService.showNotification(item.coefName + ' добавлен');
+        //this.recalculate();
       }
 
     });
