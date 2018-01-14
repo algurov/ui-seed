@@ -132,36 +132,41 @@ export class CerealsCardComponent {
     this.taxonomyService.getPropertyByDescription(description).subscribe(res => {
       let obj = {
         uid: Math.random(),
+        id: null,
+        version: null,
         doubleValue: null,
         textValue: null,
         property: res.content[0],
         additionalAnalysisCardPropertyValues: [
           {
-            additionalAnalysisCardProperty: {
-              descriptor: 'PORTION_WEIGHT',
-              id: 9,
-              name: 'Масса навески'
-            },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('PORTION_WEIGHT'),
+            // additionalAnalysisCardProperty: {
+            //   descriptor: 'PORTION_WEIGHT',
+            //   id: 9,
+            //   name: 'Масса навески'
+            // },
             booleanValue: false,
             doubleValue: 0,
             textValue: ''
           },
           {
-            additionalAnalysisCardProperty: {
-              descriptor: 'WEIGHT',
-              id: 13,
-              name: 'Вес'
-            },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('WEIGHT'),
+            // additionalAnalysisCardProperty: {
+            //   descriptor: 'WEIGHT',
+            //   id: 13,
+            //   name: 'Вес'
+            // },
             booleanValue: false,
             doubleValue: 0,
             textValue: ''
           },
           {
-            additionalAnalysisCardProperty: {
-              descriptor: 'TEXT',
-              id: 2,
-              name: 'Текст'
-            },
+            additionalAnalysisCardProperty: this.dataService.getAdditionalAnalysisCardPropertyByDescriptor('TEXT'),
+            // additionalAnalysisCardProperty: {
+            //   descriptor: 'TEXT',
+            //   id: 2,
+            //   name: 'Текст'
+            // },
             booleanValue: false,
             doubleValue: 0,
             textValue: ''

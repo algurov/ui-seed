@@ -68,7 +68,19 @@ export class ApplicationPreviewComponent {
   }
 
   addCalculation() {
-    this.router.navigate(['main/document/calculation'], { queryParams: { applicationId: this.id } });
+    if (this.calculationList.length > 0) {
+      this.dialogService.showMessageDlg('Калькуляция существует', 'Заявка уже содержит калькуляцию');
+      return;
+    }
+    if (this.data.branchOffice) {
+      if (this.data.branchOffice.bankAccountDetails && this.data.branchOffice.bankAccountDetails.length > 0) {
+            this.router.navigate(['main/document/calculation'], { queryParams: { applicationId: this.id } });
+      } else {
+          this.dialogService.showMessageDlg('Ошибка валидации', 'У филиала отсутствуют банковские реквизиты');
+      }
+    } else {
+      this.dialogService.showMessageDlg('Ошибка валидации', 'В заявке не указан филиал');
+    }
   }
 
   openCalculation(id) {
