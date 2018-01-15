@@ -72,7 +72,7 @@ export class CertificateComponent {
     this.documentService.updateCertificate(this.data).subscribe(res => {
       this.dialogService.hideBlocker();
       this.dialogService.showNotification('Сертификат сохранен');
-      this.router.navigate(['main/document/application/'+ this.data.applicationId +'/view']);
+      this.router.navigate(['main/document/application/'+ this.data.application.id +'/view']);
     });
   }
 }

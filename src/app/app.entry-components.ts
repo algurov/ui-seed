@@ -18,7 +18,7 @@ import { SignDialog } from './views/sign/sign.dialog';
 import { SelectGoodsCategoryDialog } from './widgets/seed.select.field/seed.select.field';
 import { PropertyTreeDialog } from './views/taxonomy/standard/property.tree/property.tree';
 import { CertificateTypeDialog } from './views/document/certificate/type.dialog/type.dialog';
-import { AnalysisTypeDialog } from './views/document/analysis/type.dialog/analysis.type.dialog';
+import { AnalysisTypeDialog } from './views/document/analysis/analysis.type.dialog/analysis.type.dialog';
 import { AnalysisPropertyTreeDialog } from './views/document/analysis/property.tree/analysis.property.tree';
 import { ServiceDialog } from './views/document/calculation/service.dialog/service.dialog';
 import { CoeffDialog } from './views/document/calculation/coeff.dialog/coeff.dialog';

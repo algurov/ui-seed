@@ -10,7 +10,7 @@ import { SelectTaxonomyDialog } from '../views/taxonomy/select/select.taxonomy.d
 import { SelectBranchDialog } from '../views/main/select.branch.dialog/select.branch.dialog';
 import { SignDialog } from '../views/sign/sign.dialog';
 import { CertificateTypeDialog } from '../views/document/certificate/type.dialog/type.dialog';
-import { AnalysisTypeDialog } from '../views/document/analysis/type.dialog/analysis.type.dialog';
+import { AnalysisTypeDialog } from '../views/document/analysis/analysis.type.dialog/analysis.type.dialog';
 @Injectable()
 export class DialogService {
   block: boolean = false;

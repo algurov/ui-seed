@@ -8,17 +8,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class CoeffComponent {
   @Input() data;
   @Input() number;
-  right: boolean;
   coeff: any;
   @Output() dataChange: EventEmitter<any> = new EventEmitter<any>();
   @Output() onDelete: EventEmitter<any> = new EventEmitter<any>();
   ngOnInit() {
     console.log(this.data);
     this.coeff = this.data.coefficient;
-  }
-
-  isRight() {
-      this.right = true;
   }
 
   remove() {
@@ -33,7 +28,7 @@ export class CoeffComponent {
       this.coeff = +event.target.value;
     }
     console.log(this.coeff);
-    this.isRight();
+
     this.dataChange.emit({value: true});
   }
 

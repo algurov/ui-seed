@@ -102,7 +102,7 @@ import { PropertyListComponent } from './views/taxonomy/property/property.list.c
 import { GenaralPropertyEditComponent } from './views/taxonomy/property/general.property.edit.component';
 import { UnitListComponent } from './views/taxonomy/unit/unit.list.component';
 import { UnitEditComponent } from './views/taxonomy/unit/unit.edit.component';
-import { AnalysisTypeDialog } from './views/document/analysis/type.dialog/analysis.type.dialog';
+import { AnalysisTypeDialog } from './views/document/analysis/analysis.type.dialog/analysis.type.dialog';
 import { AnalysisCardComponent } from './views/document/analysis/card/analysis.card.component';
 import { MixCardComponent } from './views/document/analysis/mix/mix.card.component';
 import { GrainCardComponent } from './views/document/analysis/grain/grain.card.component';
